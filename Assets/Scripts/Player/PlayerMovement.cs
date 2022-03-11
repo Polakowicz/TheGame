@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		rb.velocity = input.normalized * speed;
+		Vector2 direction = input;
+		if(input.magnitude > 1) {
+			direction = input.normalized;
+		}
+			rb.velocity = direction * speed;
 	}
 }
