@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-		input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 	}
 
 	void FixedUpdate()
@@ -28,6 +28,6 @@ public class PlayerMovement : MonoBehaviour
 		if(input.magnitude > 1) {
 			direction = input.normalized;
 		}
-			rb.velocity = direction * speed;
+		rb.velocity = direction * speed;
 	}
 }
