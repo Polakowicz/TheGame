@@ -7,6 +7,14 @@ public class PlayerAttack : MonoBehaviour
 {
 	//Components
 	PlayerInput playerInput;
+	Rigidbody2D rb;
+
+	//Input actions
+	InputAction aimAction;
+
+	//Parameters
+	[SerializeField] GameObject crosshair;
+	[SerializeField] float crosshairDistanc = 2f;
 
 	//Internal variables
 	bool gamepad;
@@ -14,7 +22,9 @@ public class PlayerAttack : MonoBehaviour
 	void Start()
 	{
 		playerInput = GetComponent<PlayerInput>();
+		rb = GetComponent<Rigidbody2D>();
 
+		aimAction = playerInput.actions["Aim"];
 		//playerInput.onControlsChanged += OnControlsChanged;
 	}
 
@@ -31,15 +41,20 @@ public class PlayerAttack : MonoBehaviour
 	private void UpdateCrosshairPosition()
 	{
 		if (gamepad) {
-			Debug.Log("Gamepad controlls");
+			var aimDirection = aimAction.ReadValue<Vector2>();
+			if (aimDirection == Vector2.zero) {
+				return;
+			}
+			crosshair.transform.localPosition = aimDirection.normalized * crosshairDistanc;	
 		} else {
-			Debug.Log("Keyboard controlls");
+			var mousePos = aimAction.ReadValue<Vector2>();
+			crosshair.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
 		}
 	}
 
 	public void OnControlsChanged(PlayerInput input)
 	{
 		gamepad = input.currentControlScheme.Equals("Gamepad");
-		//TODO it is public and made throw the inspector because onControlsChange does not work
+		//TODO it is public and made through the inspector because onControlsChange does not work
 	}
 }
