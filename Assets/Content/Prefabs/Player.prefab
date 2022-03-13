@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2450417306244985892}
   - component: {fileID: 26263311}
   - component: {fileID: 2450417306244985915}
+  - component: {fileID: 7103406659258910725}
   - component: {fileID: 261990362948199148}
   m_Layer: 15
   m_Name: Player
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!114 &7103406659258910725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450417306244985914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad631ab91cb09ed43b06861eb18227ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &261990362948199148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +172,19 @@ MonoBehaviour:
       m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7103406659258910725}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: OnControlsChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls: []
