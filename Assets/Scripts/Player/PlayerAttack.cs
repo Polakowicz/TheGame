@@ -14,6 +14,10 @@ public class PlayerAttack : MonoBehaviour
 	//Parameters
 	[SerializeField] GameObject crosshair;
 	[SerializeField] float crosshairDistanc = 2f;
+	[SerializeField] float gunDistance = 1f;
+
+	//Properties
+	public Vector2 GunPosition { get; private set; }
 
 	//Internal variables
 	bool gamepad;
@@ -34,6 +38,7 @@ public class PlayerAttack : MonoBehaviour
 	void Update()
 	{
 		UpdateCrosshairPosition();
+		Debug.DrawLine((Vector2)transform.position, GunPosition, Color.green);
 	}
 
 	private void UpdateCrosshairPosition()
@@ -43,10 +48,14 @@ public class PlayerAttack : MonoBehaviour
 			if (aimDirection == Vector2.zero) {
 				return;
 			}
-			crosshair.transform.localPosition = aimDirection.normalized * crosshairDistanc;	
+			crosshair.transform.localPosition = aimDirection.normalized * crosshairDistanc;
+
+			GunPosition = (Vector2)transform.position + aimDirection.normalized * gunDistance;
 		} else {
 			var mousePos = aimAction.ReadValue<Vector2>();
 			crosshair.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
+
+			GunPosition = transform.position + crosshair.transform.localPosition.normalized * gunDistance;
 		}
 	}
 
