@@ -1,33 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
 	//Components
 	Rigidbody2D rb;
+	PlayerInput playerInput;
 
-	Vector2 input;
+	//Input actions
+	InputAction moveAction;
 
+	//Parameters
 	[SerializeField] float speed = 5f;
+
+	//Internal varaibles
+	Vector2 input;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		playerInput = GetComponent<PlayerInput>();
+
+		moveAction = playerInput.actions["Move"];
 	}
 
 	void Update()
 	{
-		input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+		input = moveAction.ReadValue<Vector2>();
 	}
 
 	void FixedUpdate()
 	{
-		Vector2 direction = input;
-		if(input.magnitude > 1) {
-			direction = input.normalized;
-		}
-		rb.velocity = direction * speed;
+		rb.velocity = input * speed;
 	}
 }
