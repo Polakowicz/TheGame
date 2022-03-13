@@ -7,7 +7,6 @@ public class PlayerAttack : MonoBehaviour
 {
 	//Components
 	PlayerInput playerInput;
-	Rigidbody2D rb;
 
 	//Input actions
 	InputAction aimAction;
