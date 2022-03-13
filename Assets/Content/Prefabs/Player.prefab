@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 26263311}
   - component: {fileID: 2450417306244985915}
   - component: {fileID: 7103406659258910725}
+  - component: {fileID: 3872597091727949763}
   - component: {fileID: 261990362948199148}
   m_Layer: 15
   m_Name: Player
@@ -234,6 +235,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshair: {fileID: 908694358}
   crosshairDistanc: 2
+  gunDistance: 1
+--- !u!114 &3872597091727949763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450417306244985914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae8f66735c523e4fa58929d45a62791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &261990362948199148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +293,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1b605746-9854-4323-863c-d228df6a878c
     m_ActionName: Gameplay/Aim[/Mouse/position,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cda0815d-6898-4a14-a9bd-a2e4280fe073
+    m_ActionName: Gameplay/Fire[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
