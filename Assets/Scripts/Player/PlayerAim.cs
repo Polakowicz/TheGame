@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAim : MonoBehaviour
 {
 	//Components
 	PlayerInput playerInput;
@@ -37,12 +37,6 @@ public class PlayerAttack : MonoBehaviour
 
 	void Update()
 	{
-		UpdateCrosshairPosition();
-		Debug.DrawLine((Vector2)transform.position, GunPosition, Color.green);
-	}
-
-	private void UpdateCrosshairPosition()
-	{
 		if (gamepad) {
 			var aimDirection = aimAction.ReadValue<Vector2>();
 			if (aimDirection == Vector2.zero) {
@@ -62,6 +56,6 @@ public class PlayerAttack : MonoBehaviour
 	public void OnControlsChanged(PlayerInput input)
 	{
 		gamepad = input.currentControlScheme.Equals("Gamepad");
-		//TODO it is public and made through the inspector because onControlsChange does not work
+		//To change in future. It is public and made through the inspector because onControlsChange does not work
 	}
 }
