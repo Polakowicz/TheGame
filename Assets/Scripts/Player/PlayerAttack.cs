@@ -11,32 +11,48 @@ public class PlayerAttack : MonoBehaviour
 	PlayerAim playerAim;
 
 	//Input actions
-	InputAction fire;
+	InputAction fireAction;
+
+	//Parameter
+	[SerializeField] GameObject bullet;
+	[SerializeField] float fireRate = 0.2f;
+
+	//Internal variables
+	Coroutine fireCoroutine;
+	
 
 	void Start()
 	{
 		playerInput = GetComponent<PlayerInput>();
 		playerAim = GetComponent<PlayerAim>();
 
-		fire = playerInput.actions["Fire"];
-		fire.started += OnWeaponStarFire;
-		fire.canceled += OnWeaponEndFire;
+		fireAction = playerInput.actions["Fire"];
+		fireAction.started += OnWeaponStarFire;
+		fireAction.canceled += OnWeaponEndFire;
 	}
 
 	private void OnDestroy()
 	{
-		fire.started -= OnWeaponStarFire;
-		fire.canceled -= OnWeaponEndFire;
+		fireAction.started -= OnWeaponStarFire;
+		fireAction.canceled -= OnWeaponEndFire;
 	}
 
 	void OnWeaponStarFire(InputAction.CallbackContext context)
 	{
-		Debug.Log("Start fire");
+		fireCoroutine = StartCoroutine(Shoot());
 	}
 
 	void OnWeaponEndFire(InputAction.CallbackContext context)
 	{
-		Debug.Log("End fire");
+		StopCoroutine(fireCoroutine);
+	}
+
+	IEnumerator Shoot()
+	{
+		while (true) {
+			Debug.Log("Fire");
+			yield return new WaitForSeconds(fireRate);
+		}
 	}
 
 }
