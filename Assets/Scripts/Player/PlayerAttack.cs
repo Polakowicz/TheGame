@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
 	IEnumerator Shoot()
 	{
 		while (true) {
-			Debug.Log("Fire");
+			Instantiate(bullet, playerAim.GunPosition, Quaternion.identity);
 			yield return new WaitForSeconds(fireRate);
 		}
 	}

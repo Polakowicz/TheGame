@@ -16,6 +16,7 @@ public class PlayerAim : MonoBehaviour
 
 	//Properties
 	public Vector2 GunPosition { get; private set; }
+	public Quaternion BulletRotation { get; private set; }
 
 	//Internal variables
 	bool gamepad;
