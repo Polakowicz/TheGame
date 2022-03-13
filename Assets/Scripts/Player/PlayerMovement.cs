@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,27 +8,30 @@ public class PlayerMovement : MonoBehaviour
 	Rigidbody2D rb;
 	PlayerInput playerInput;
 
-	Vector2 input;
+	//Input actions
+	InputAction moveAction;
 
+	//Parameters
 	[SerializeField] float speed = 5f;
+
+	//Internal varaibles
+	Vector2 input;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		playerInput = GetComponent<PlayerInput>();
+
+		moveAction = playerInput.actions["Move"];
 	}
 
 	void Update()
 	{
-		input = playerInput.actions["Movement"].ReadValue<Vector2>();
+		input = moveAction.ReadValue<Vector2>();
 	}
 
 	void FixedUpdate()
 	{
-		//Vector2 direction = input;
-		//if(input.magnitude > 1) {
-		//	direction = input.normalized;
-		//}
 		rb.velocity = input * speed;
 	}
 }
