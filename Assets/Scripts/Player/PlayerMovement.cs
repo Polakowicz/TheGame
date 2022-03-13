@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
 	//Components
 	Rigidbody2D rb;
+	PlayerInput playerInput;
 
 	Vector2 input;
 
@@ -15,19 +17,20 @@ public class PlayerMovement : MonoBehaviour
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		playerInput = GetComponent<PlayerInput>();
 	}
 
 	void Update()
 	{
-		input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+		input = playerInput.actions["Movement"].ReadValue<Vector2>();
 	}
 
 	void FixedUpdate()
 	{
-		Vector2 direction = input;
-		if(input.magnitude > 1) {
-			direction = input.normalized;
-		}
-		rb.velocity = direction * speed;
+		//Vector2 direction = input;
+		//if(input.magnitude > 1) {
+		//	direction = input.normalized;
+		//}
+		rb.velocity = input * speed;
 	}
 }
