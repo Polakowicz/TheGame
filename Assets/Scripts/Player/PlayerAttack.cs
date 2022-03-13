@@ -21,7 +21,6 @@ public class PlayerAttack : MonoBehaviour
 	void Start()
 	{
 		playerInput = GetComponent<PlayerInput>();
-		rb = GetComponent<Rigidbody2D>();
 
 		aimAction = playerInput.actions["Aim"];
 		//playerInput.onControlsChanged += OnControlsChanged;
