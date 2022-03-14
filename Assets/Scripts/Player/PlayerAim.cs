@@ -11,11 +11,9 @@ public class PlayerAim : MonoBehaviour
 	//Input actions
 	InputAction aimAction;
 
-	//Parameters
-	[SerializeField] float gamepadCrosshariDistance = 1f;
-
 	//Internal variables
 	bool gamepad;
+	float gamepadCrosshariDistance;
 
 	void Start()
 	{
@@ -23,6 +21,8 @@ public class PlayerAim : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		aimAction = playerInput.actions["Aim"];
 		//playerInput.onControlsChanged += OnControlsChanged;
+
+		gamepadCrosshariDistance = ((Vector2)crosshair.position - rb.position).magnitude;
 	}
 
 	void OnDestroy()

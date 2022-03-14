@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleBullet : MonoBehaviour
@@ -8,7 +6,7 @@ public class SimpleBullet : MonoBehaviour
     Rigidbody2D rb;
 
     //Parameters
-    [SerializeField] float speed = 5f;
+    [SerializeField] float speed = 10f;
 
     void Start()
     {
