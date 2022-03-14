@@ -49,7 +49,10 @@ public class PlayerAim : MonoBehaviour
 
 	public void OnControlsChanged(PlayerInput input)
 	{
-		gamepad = input.currentControlScheme.Equals("Gamepad");
 		//To change in future. It is public and made through the inspector because onControlsChange does not work
+		gamepad = input.currentControlScheme.Equals("Gamepad");
+		if (gamepad) {
+			crosshair.localPosition = (Vector2)crosshair.localPosition.normalized * gamepadCrosshariDistance;
+		}
 	}
 }
