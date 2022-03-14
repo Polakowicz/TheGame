@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908694358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.46, y: 0.13335587, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 2450417306244985894}
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 26263311}
   - component: {fileID: 2450417306244985915}
   - component: {fileID: 7103406659258910725}
+  - component: {fileID: 3872597091727949763}
   - component: {fileID: 261990362948199148}
   m_Layer: 15
   m_Name: Player
@@ -116,6 +117,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 908694360}
+  - {fileID: 5524975563062344346}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -232,8 +234,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad631ab91cb09ed43b06861eb18227ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 908694358}
-  crosshairDistanc: 2
+  crosshair: {fileID: 908694360}
+  gamepadCrosshariDistance: 1
+--- !u!114 &3872597091727949763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2450417306244985914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae8f66735c523e4fa58929d45a62791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 5524975563062344346}
+  bullet: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
+  fireRate: 0.2
 --- !u!114 &261990362948199148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,8 +296,42 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 1b605746-9854-4323-863c-d228df6a878c
     m_ActionName: Gameplay/Aim[/Mouse/position,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cda0815d-6898-4a14-a9bd-a2e4280fe073
+    m_ActionName: Gameplay/Attack[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &4044750077900917103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5524975563062344346}
+  m_Layer: 15
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5524975563062344346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4044750077900917103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2450417306244985894}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

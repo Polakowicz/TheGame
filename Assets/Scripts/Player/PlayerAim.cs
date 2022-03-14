@@ -5,27 +5,24 @@ public class PlayerAim : MonoBehaviour
 {
 	//Components
 	PlayerInput playerInput;
+	Rigidbody2D rb;
+	[SerializeField] Transform crosshair;
 
 	//Input actions
 	InputAction aimAction;
 
-	//Parameters
-	[SerializeField] GameObject crosshair;
-	[SerializeField] float crosshairDistanc = 2f;
-	[SerializeField] float gunDistance = 1f;
-
-	//Properties
-	public Vector2 GunPosition { get; private set; }
-
 	//Internal variables
 	bool gamepad;
+	float gamepadCrosshariDistance;
 
 	void Start()
 	{
 		playerInput = GetComponent<PlayerInput>();
-
+		rb = GetComponent<Rigidbody2D>();
 		aimAction = playerInput.actions["Aim"];
 		//playerInput.onControlsChanged += OnControlsChanged;
+
+		gamepadCrosshariDistance = ((Vector2)crosshair.position - rb.position).magnitude;
 	}
 
 	void OnDestroy()
@@ -35,25 +32,27 @@ public class PlayerAim : MonoBehaviour
 
 	void Update()
 	{
+		Vector2 lookDirection;
 		if (gamepad) {
-			var aimDirection = aimAction.ReadValue<Vector2>();
-			if (aimDirection == Vector2.zero) {
+			lookDirection = aimAction.ReadValue<Vector2>();
+			if (lookDirection == Vector2.zero) {
 				return;
 			}
-			crosshair.transform.localPosition = aimDirection.normalized * crosshairDistanc;
-
-			GunPosition = (Vector2)transform.position + aimDirection.normalized * gunDistance;
+			crosshair.transform.localPosition = Vector2.up * gamepadCrosshariDistance;
 		} else {
-			var mousePos = aimAction.ReadValue<Vector2>();
-			crosshair.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
-
-			GunPosition = transform.position + crosshair.transform.localPosition.normalized * gunDistance;
+			var mousePos = (Vector2)Camera.main.ScreenToWorldPoint(aimAction.ReadValue<Vector2>());
+			crosshair.transform.position = mousePos;
+			lookDirection = mousePos - (Vector2)transform.position;
 		}
+		rb.rotation = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
 	}
 
 	public void OnControlsChanged(PlayerInput input)
 	{
-		gamepad = input.currentControlScheme.Equals("Gamepad");
 		//To change in future. It is public and made through the inspector because onControlsChange does not work
+		gamepad = input.currentControlScheme.Equals("Gamepad");
+		if (gamepad) {
+			crosshair.localPosition = (Vector2)crosshair.localPosition.normalized * gamepadCrosshariDistance;
+		}
 	}
 }
