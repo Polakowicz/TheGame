@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
 {
 	//Components
 	PlayerInput playerInput;
-	PlayerAim playerAim;
+	Rigidbody2D rb;
 
 	//Input actions
 	InputAction fireAction;
@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
 	void Start()
 	{
 		playerInput = GetComponent<PlayerInput>();
-		playerAim = GetComponent<PlayerAim>();
+		rb = GetComponent<Rigidbody2D>();
 
 		fireAction = playerInput.actions["Fire"];
 		fireAction.started += OnWeaponStarFire;
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
 	IEnumerator Shoot()
 	{
 		while (true) {
-			Instantiate(bullet, playerAim.GunPosition, Quaternion.identity);
+			Instantiate(bullet, rb.position, rb.transform.rotation);
 			yield return new WaitForSeconds(fireRate);
 		}
 	}

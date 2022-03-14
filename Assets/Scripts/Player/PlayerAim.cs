@@ -5,12 +5,13 @@ public class PlayerAim : MonoBehaviour
 {
 	//Components
 	PlayerInput playerInput;
+	Rigidbody2D rb;
+	[SerializeField] GameObject crosshair;
 
 	//Input actions
-	InputAction aimAction;
 
+	InputAction aimAction;
 	//Parameters
-	[SerializeField] GameObject crosshair;
 	[SerializeField] float crosshairDistanc = 2f;
 	[SerializeField] float gunDistance = 1f;
 
@@ -24,7 +25,7 @@ public class PlayerAim : MonoBehaviour
 	void Start()
 	{
 		playerInput = GetComponent<PlayerInput>();
-
+		rb = GetComponent<Rigidbody2D>();
 		aimAction = playerInput.actions["Aim"];
 		//playerInput.onControlsChanged += OnControlsChanged;
 	}
@@ -36,20 +37,28 @@ public class PlayerAim : MonoBehaviour
 
 	void Update()
 	{
+		Vector2 lookDirection;
 		if (gamepad) {
-			var aimDirection = aimAction.ReadValue<Vector2>();
-			if (aimDirection == Vector2.zero) {
-				return;
-			}
-			crosshair.transform.localPosition = aimDirection.normalized * crosshairDistanc;
+			lookDirection = aimAction.ReadValue<Vector2>();
+			//var aimDirection = aimAction.ReadValue<Vector2>();
+			//if (aimDirection == Vector2.zero) {
+			//	return;
+			//}
+			//crosshair.transform.localPosition = aimDirection.normalized * crosshairDistanc;
 
-			GunPosition = (Vector2)transform.position + aimDirection.normalized * gunDistance;
+			//GunPosition = (Vector2)transform.position + aimDirection.normalized * gunDistance;
 		} else {
 			var mousePos = aimAction.ReadValue<Vector2>();
-			crosshair.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
+			lookDirection = (Vector2)Camera.main.ScreenToWorldPoint(mousePos) - (Vector2)transform.position;
+			//crosshair.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
 
-			GunPosition = transform.position + crosshair.transform.localPosition.normalized * gunDistance;
+			//GunPosition = transform.position + crosshair.transform.localPosition.normalized * gunDistance;
 		}
+		float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+		rb.rotation = angle;
+		GunPosition = crosshair.transform.position;
+
+
 	}
 
 	public void OnControlsChanged(PlayerInput input)
