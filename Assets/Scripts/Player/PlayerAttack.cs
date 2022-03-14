@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
 	//Components
 	PlayerInput playerInput;
 	Rigidbody2D rb;
+	[SerializeField] Transform gun;
 
 	//Input actions
 	InputAction fireAction;
@@ -19,7 +20,6 @@ public class PlayerAttack : MonoBehaviour
 
 	//Internal variables
 	Coroutine fireCoroutine;
-	
 
 	void Start()
 	{
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
 	IEnumerator Shoot()
 	{
 		while (true) {
-			Instantiate(bullet, rb.position, rb.transform.rotation);
+			Instantiate(bullet, gun.position, gun.rotation);
 			yield return new WaitForSeconds(fireRate);
 		}
 	}

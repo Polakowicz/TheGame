@@ -6,18 +6,13 @@ public class PlayerAim : MonoBehaviour
 	//Components
 	PlayerInput playerInput;
 	Rigidbody2D rb;
-	[SerializeField] GameObject crosshair;
+	[SerializeField] Transform crosshair;
 
 	//Input actions
-
 	InputAction aimAction;
-	//Parameters
-	[SerializeField] float crosshairDistanc = 2f;
-	[SerializeField] float gunDistance = 1f;
 
-	//Properties
-	public Vector2 GunPosition { get; private set; }
-	public Quaternion BulletRotation { get; private set; }
+	//Parameters
+	[SerializeField] float gamepadCrosshariDistance = 1f;
 
 	//Internal variables
 	bool gamepad;
@@ -40,25 +35,16 @@ public class PlayerAim : MonoBehaviour
 		Vector2 lookDirection;
 		if (gamepad) {
 			lookDirection = aimAction.ReadValue<Vector2>();
-			//var aimDirection = aimAction.ReadValue<Vector2>();
-			//if (aimDirection == Vector2.zero) {
-			//	return;
-			//}
-			//crosshair.transform.localPosition = aimDirection.normalized * crosshairDistanc;
-
-			//GunPosition = (Vector2)transform.position + aimDirection.normalized * gunDistance;
+			if (lookDirection == Vector2.zero) {
+				return;
+			}
+			crosshair.transform.localPosition = Vector2.up * gamepadCrosshariDistance;
 		} else {
-			var mousePos = aimAction.ReadValue<Vector2>();
-			lookDirection = (Vector2)Camera.main.ScreenToWorldPoint(mousePos) - (Vector2)transform.position;
-			//crosshair.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(mousePos);
-
-			//GunPosition = transform.position + crosshair.transform.localPosition.normalized * gunDistance;
+			var mousePos = (Vector2)Camera.main.ScreenToWorldPoint(aimAction.ReadValue<Vector2>());
+			crosshair.transform.position = mousePos;
+			lookDirection = mousePos - (Vector2)transform.position;
 		}
-		float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-		rb.rotation = angle;
-		GunPosition = crosshair.transform.position;
-
-
+		rb.rotation = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
 	}
 
 	public void OnControlsChanged(PlayerInput input)
