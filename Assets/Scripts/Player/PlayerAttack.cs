@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
 	PlayerInput playerInput;
 	Rigidbody2D rb;
 	[SerializeField] Transform gun;
+	[SerializeField] Transform sword;
 
 	//Input actions
 	InputAction fireAction;
@@ -61,7 +62,10 @@ public class PlayerAttack : MonoBehaviour
 
 	void OnMeleeAttackPerformed(InputAction.CallbackContext context)
 	{
-		Debug.Log("Melee attack");
+		Collider2D[] hits = Physics2D.OverlapBoxAll(sword.position, new Vector2(1,0.25f), rb.rotation);
+		foreach (var hit in hits) {
+			Debug.Log(hit);
+		}
 	}
 
 }
