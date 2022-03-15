@@ -21,5 +21,6 @@ public class SimpleBullet : MonoBehaviour
 
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         enemy.OnGetHit(damage);
+        Destroy(gameObject);
 	}
 }
