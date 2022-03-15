@@ -18,6 +18,7 @@ public class PlayerAttack : MonoBehaviour
 	//Parameter
 	[SerializeField] GameObject bullet;
 	[SerializeField] float fireRate = 0.2f;
+	[SerializeField] LayerMask meleeAttackLayerMask;
 
 	//Internal variables
 	Coroutine fireCoroutine;
@@ -62,7 +63,7 @@ public class PlayerAttack : MonoBehaviour
 
 	void OnMeleeAttackPerformed(InputAction.CallbackContext context)
 	{
-		Collider2D[] hits = Physics2D.OverlapBoxAll(sword.position, new Vector2(1,0.25f), rb.rotation);
+		Collider2D[] hits = Physics2D.OverlapBoxAll(sword.position, new Vector2(1,0.25f), rb.rotation, meleeAttackLayerMask);
 		foreach (var hit in hits) {
 			Debug.Log(hit);
 		}
