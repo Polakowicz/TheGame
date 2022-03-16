@@ -5,7 +5,6 @@ public class PlayerAim : MonoBehaviour
 {
 	//Components
 	PlayerInput playerInput;
-	//Rigidbody2D rb;
 	[SerializeField] Transform crosshair;
 
 	//Input actions
@@ -18,16 +17,9 @@ public class PlayerAim : MonoBehaviour
 	void Start()
 	{
 		playerInput = GetComponent<PlayerInput>();
-		//rb = GetComponent<Rigidbody2D>();
 		aimAction = playerInput.actions["Aim"];
-		//playerInput.onControlsChanged += OnControlsChanged;
 
-		//gamepadCrosshariDistance = ((Vector2)crosshair.position - rb.position).magnitude;
-	}
-
-	void OnDestroy()
-	{
-		//playerInput.onControlsChanged -= OnControlsChanged;
+		gamepadCrosshariDistance = (crosshair.position - transform.position).magnitude;
 	}
 
 	void Update()
@@ -45,7 +37,6 @@ public class PlayerAim : MonoBehaviour
 			lookDirection = mousePos - (Vector2)transform.position;
 		}
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90));
-		//rb.rotation = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
 	}
 
 	public void OnControlsChanged(PlayerInput input)
