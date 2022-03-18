@@ -10,7 +10,7 @@ public class PlayerInputController : MonoBehaviour
 
     //InputActions
     InputAction switchWeaponAction;
-    InputAction performBasicAttackActino;
+    InputAction performBasicAttackActinon;
 
     //Parameters
     [SerializeField] MeleeWeapon meleeWeapon;
@@ -18,12 +18,49 @@ public class PlayerInputController : MonoBehaviour
 
     //Internal Variables
     Weapon equippedWeapon;
+    bool equipedMeleeWeapon = true;
 
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        equippedWeapon = meleeWeapon;
 
-        switchWeaponAction = playerInput.actions["Switch weapon"];
-        performBasicAttackActino = playerInput.actions["Basic attack"];
+        creatActionInputs();
+        SubscribeToEvents();
     }
+
+    void creatActionInputs()
+	{
+        switchWeaponAction = playerInput.actions["Switch weapon"];
+        performBasicAttackActinon = playerInput.actions["Basic attack"];
+    }
+
+    void SubscribeToEvents()
+	{
+        switchWeaponAction.performed += SwitchWeapon;
+        performBasicAttackActinon.performed += PerformeBasicAttack;
+	}
+
+	void OnDestroy()
+	{
+        switchWeaponAction.performed += SwitchWeapon;
+        performBasicAttackActinon.performed -= PerformeBasicAttack;
+    }
+
+    void SwitchWeapon(InputAction.CallbackContext context)
+	{
+		if (equipedMeleeWeapon) {
+            equippedWeapon = rangedWeapon;
+            equipedMeleeWeapon = false;
+		} else {
+            equippedWeapon = meleeWeapon;
+            equipedMeleeWeapon = true;
+        }
+        Debug.Log("Switch weapon");
+	}
+
+	void PerformeBasicAttack(InputAction.CallbackContext context)
+	{
+        equippedWeapon.PerformeBasicAttack();
+	}
 }

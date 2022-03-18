@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 2896284850258396948}
   - component: {fileID: 2896284850258396945}
   - component: {fileID: 2896284850258396950}
+  - component: {fileID: 619834540}
   m_Layer: 15
   m_Name: Rotatable
   m_TagString: Untagged
@@ -447,3 +448,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshair: {fileID: 2896284849141417200}
+--- !u!114 &619834540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850258396949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d075d448ee530a440a4c1bd695b22ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeWeapon:
+    damage: 0
+  rangedWeapon:
+    damage: 0
