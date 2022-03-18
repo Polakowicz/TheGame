@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	//Parameters
 	[SerializeField] float speed = 5f;
 
-	//Internal varaibles
+	//Internal variables
 	Vector2 input;
 
 	void Start()
