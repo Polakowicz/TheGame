@@ -134,7 +134,7 @@
                 {
                     "name": "",
                     "id": "9e4abf40-027b-4718-8c56-6b0207e013d4",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -160,6 +160,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
+                    "action": "Basic attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd63a81f-0d61-489b-8f3c-7401bca6f58e",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Basic attack",
                     "isComposite": false,
                     "isPartOfComposite": false
