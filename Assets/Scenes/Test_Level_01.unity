@@ -312,22 +312,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 619834540, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
-      propertyPath: meleeWeapon.damage
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 619834540, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
-      propertyPath: rangedWeapon.damage
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 619834540, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
-      propertyPath: rangedWeapon.bulletPrefab
-      value: 
-      objectReference: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
-    - target: {fileID: 619834540, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
-      propertyPath: rangedWeapon.gunTransform
-      value: 
-      objectReference: {fileID: 1496994019}
     - target: {fileID: 2896284850009964024, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Player
@@ -623,11 +607,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1496994019 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2896284848948219050, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
-  m_PrefabInstance: {fileID: 501705793}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577604185
 GameObject:
   m_ObjectHideFlags: 0
