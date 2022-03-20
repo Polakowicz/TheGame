@@ -5,8 +5,12 @@ using UnityEngine;
 [Serializable]
 public class RangedWeapon : Weapon
 {
+	//Components
+	[SerializeField] Transform gunTransform;
+	[SerializeField] GameObject bulletPrefab;
+
 	public override void PerformeBasicAttack()
 	{
-		Debug.Log("Range basic attack");
+		UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
 	}
 }

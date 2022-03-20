@@ -444,6 +444,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2896284850009964027}
   meleeWeapon:
-    damage: 0
+    damage: 7
   rangedWeapon:
-    damage: 0
+    damage: 5
+    gunTransform: {fileID: 2896284848948219050}
+    bulletPrefab: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
