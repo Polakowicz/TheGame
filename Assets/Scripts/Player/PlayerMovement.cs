@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	//Components
 	Rigidbody2D rb;
-	PlayerInput playerInput;
+	[SerializeField] PlayerInput playerInput;
 
 	//Input actions
 	InputAction moveAction;
@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		playerInput = GetComponent<PlayerInput>();
 
 		moveAction = playerInput.actions["Move"];
 	}

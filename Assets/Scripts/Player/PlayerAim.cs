@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerAim : MonoBehaviour
 {
 	//Components
-	PlayerInput playerInput;
+	[SerializeField] PlayerInput playerInput;
 	[SerializeField] Transform crosshair;
 
 	//Input actions
@@ -16,7 +16,6 @@ public class PlayerAim : MonoBehaviour
 
 	void Start()
 	{
-		playerInput = GetComponent<PlayerInput>();
 		aimAction = playerInput.actions["Aim"];
 
 		gamepadCrosshariDistance = (crosshair.position - transform.position).magnitude;

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour
 {
     //Components
-    PlayerInput playerInput;
+    [SerializeField] PlayerInput playerInput;
 
     //InputActions
     InputAction switchWeaponAction;
@@ -22,7 +22,6 @@ public class PlayerInputController : MonoBehaviour
 
     void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
         equippedWeapon = meleeWeapon;
 
         creatActionInputs();
