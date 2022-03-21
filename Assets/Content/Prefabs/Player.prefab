@@ -445,6 +445,10 @@ MonoBehaviour:
   playerInput: {fileID: 2896284850009964027}
   meleeWeapon:
     damage: 7
+    meleeRange: {fileID: 1436956163}
+    melleWeaponLayerMask:
+      serializedVersion: 2
+      m_Bits: 65536
   rangedWeapon:
     damage: 5
     gunTransform: {fileID: 2896284848948219050}
