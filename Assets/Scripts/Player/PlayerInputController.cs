@@ -11,6 +11,7 @@ public class PlayerInputController : MonoBehaviour
     //InputActions
     InputAction switchWeaponAction;
     InputAction performBasicAttackActinon;
+    InputAction performStrongerAttackAction;
 
     //Parameters
     [SerializeField] MeleeWeapon meleeWeapon;
@@ -32,13 +33,14 @@ public class PlayerInputController : MonoBehaviour
 	{
         switchWeaponAction = playerInput.actions["Switch weapon"];
         performBasicAttackActinon = playerInput.actions["Basic attack"];
+        performStrongerAttackAction = playerInput.actions["Stronger attack"];
     }
 
     void SubscribeToEvents()
 	{
         switchWeaponAction.performed += SwitchWeapon;
         performBasicAttackActinon.performed += PerformeBasicAttack;
-	}
+    }
 
 	void OnDestroy()
 	{
@@ -60,6 +62,6 @@ public class PlayerInputController : MonoBehaviour
 
 	void PerformeBasicAttack(InputAction.CallbackContext context)
 	{
-        equippedWeapon.PerformeBasicAttack();
+        equippedWeapon.PerformBasicAttack();
 	}
 }

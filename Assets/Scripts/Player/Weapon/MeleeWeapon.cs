@@ -19,7 +19,12 @@ public class MeleeWeapon : Weapon
 		};
 	}
 
-	public override void PerformeBasicAttack()
+	public override void PerformAlternativeAttack()
+	{
+		throw new NotImplementedException();
+	}
+
+	public override void PerformBasicAttack()
 	{
 		List<Collider2D> hits = new List<Collider2D>();
 		meleeRange.OverlapCollider(contactFilter, hits);
@@ -28,5 +33,10 @@ public class MeleeWeapon : Weapon
 				hit.GetComponent<Enemy>().OnGetHit(damage);
 			}
 		}
+	}
+
+	public override void PerformStrongerAttack()
+	{
+		throw new NotImplementedException();
 	}
 }
