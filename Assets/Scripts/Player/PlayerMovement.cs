@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
 	//Components
 	Rigidbody2D rb;
-	PlayerInput playerInput;
+	[SerializeField] PlayerInput playerInput;
 
 	//Input actions
 	InputAction moveAction;
@@ -14,13 +13,12 @@ public class PlayerMovement : MonoBehaviour
 	//Parameters
 	[SerializeField] float speed = 5f;
 
-	//Internal varaibles
+	//Internal variables
 	Vector2 input;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		playerInput = GetComponent<PlayerInput>();
 
 		moveAction = playerInput.actions["Move"];
 	}
