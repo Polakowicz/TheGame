@@ -7,6 +7,8 @@ public abstract class Weapon
     [SerializeField] protected int damage;
 
     public abstract void PerformBasicAttack();
+    public abstract void StartStrongerAttack();
     public abstract void PerformStrongerAttack();
+    public abstract void CancelStrongerAttack();
     public abstract void PerformAlternativeAttack();
 }
