@@ -42,7 +42,6 @@ public class PlayerInputController : MonoBehaviour
 	{
         switchWeaponAction.performed += SwitchWeapon;
         basicAttackActinon.performed += PerformeBasicAttack;
-        //strongerAttackAction.started += StartStrongerAttack;
         strongerAttackAction.canceled += CancelStrongerAttack;
         strongerAttackAction.performed += PerformStrongerAttack;
     }
@@ -51,7 +50,6 @@ public class PlayerInputController : MonoBehaviour
 	{
         switchWeaponAction.performed -= SwitchWeapon;
         basicAttackActinon.performed -= PerformeBasicAttack;
-        //strongerAttackAction.started -= StartStrongerAttack;
         strongerAttackAction.canceled -= CancelStrongerAttack;
         strongerAttackAction.performed -= PerformStrongerAttack;
     }
@@ -75,10 +73,6 @@ public class PlayerInputController : MonoBehaviour
         equippedWeapon.PerformBasicAttack();
 	}
 
-    void StartStrongerAttack(InputAction.CallbackContext context)
-	{
-        equippedWeapon.StartStrongerAttack();
-	}
     void CancelStrongerAttack(InputAction.CallbackContext context)
 	{
         equippedWeapon.CancelStrongerAttack();
