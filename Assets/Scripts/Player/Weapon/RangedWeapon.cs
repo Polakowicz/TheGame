@@ -15,9 +15,14 @@ public class RangedWeapon : Weapon
 	[SerializeField] float maxFireRate;
 	[SerializeField] float differenceFireRat;
 
+	[SerializeField] float startAccuracy;
+	[SerializeField] float endAccuracy;
+	[SerializeField] float differenceAccuracy;
+
 	//Internal variables
 	Coroutine autoFireCoroutine;
 	float fireRate;
+	float accuracy;
 
 	public override void PerformBasicAttack()
 	{
@@ -38,16 +43,27 @@ public class RangedWeapon : Weapon
 		Debug.Log("Range aalternative attack");
 	}
 
-	public IEnumerator AutoFire()
+	IEnumerator AutoFire()
 	{
 		fireRate = startFireRate;
+		accuracy = startAccuracy;
 		while (true) {
-			Debug.Log("shoot");
-			PerformBasicAttack();
+			UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
 			yield return new WaitForSeconds(fireRate);
+			if (accuracy < endAccuracy) {
+				accuracy += differenceAccuracy;
+			}
 			if (fireRate > maxFireRate) {
 				fireRate -= differenceFireRat;
 			}
+			Debug.Log(fireRate);
 		}
+	}
+
+	Quaternion GetRandomisedAccuracy()
+	{
+		var rotation = gunTransform.rotation.eulerAngles.z;
+		float newRotation = UnityEngine.Random.Range(rotation - accuracy, rotation + accuracy);
+		return Quaternion.Euler(0,0,newRotation);
 	}
 }
