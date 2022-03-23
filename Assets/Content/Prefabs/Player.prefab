@@ -464,7 +464,7 @@ MonoBehaviour:
     player: {fileID: 619834540}
     startFireRate: 0.4
     maxFireRate: 0.1
-    fireRateDifference: 0.05
+    fireRatePercentageIncrease: 0.1
     startDispersion: 0
     maxDispersion: 30
-    dispersionDifference: 5
+    dispersinPercentageIncrease: 0.1

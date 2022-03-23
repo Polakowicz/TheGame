@@ -13,11 +13,11 @@ public class RangedWeapon : Weapon
 	//Parameters
 	[SerializeField] float startFireRate;
 	[SerializeField] float maxFireRate;
-	[SerializeField] float fireRateDifference;
+	[SerializeField] float fireRatePercentageIncrease;
 
 	[SerializeField] float startDispersion;
 	[SerializeField] float maxDispersion;
-	[SerializeField] float dispersionDifference;
+	[SerializeField] float dispersinPercentageIncrease;
 
 	//Internal variables
 	Coroutine autoFireCoroutine;
@@ -51,10 +51,10 @@ public class RangedWeapon : Weapon
 			UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
 			yield return new WaitForSeconds(fireRate);
 			if (dispersion < maxDispersion) {
-				dispersion += dispersionDifference;
+				dispersion += dispersinPercentageIncrease * Mathf.Abs(maxDispersion - dispersion);
 			}
 			if (fireRate > maxFireRate) {
-				fireRate -= fireRateDifference;
+				fireRate -= fireRatePercentageIncrease * Mathf.Abs(maxFireRate - fireRate);
 			}
 		}
 	}
