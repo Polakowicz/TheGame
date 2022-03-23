@@ -336,6 +336,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bddb30b7-fe92-4742-83a0-1cfad79c340e
     m_ActionName: Gameplay/Melee attack[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ce9afd7c-6fe1-4cc4-bb1f-4e311eb9e264
+    m_ActionName: Gameplay/Stronger attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: edf08fb5-5b10-41c4-a48d-a98658b66e61
+    m_ActionName: Gameplay/Alternative attack[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -453,3 +461,7 @@ MonoBehaviour:
     damage: 5
     gunTransform: {fileID: 2896284848948219050}
     bulletPrefab: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
+    player: {fileID: 619834540}
+    startFireRate: 0.4
+    maxFireRate: 0.1
+    differenceFireRat: 0.05
