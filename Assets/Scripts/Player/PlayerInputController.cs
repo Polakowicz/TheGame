@@ -35,7 +35,7 @@ public class PlayerInputController : MonoBehaviour
         switchWeaponAction = playerInput.actions["Switch weapon"];
         basicAttackActinon = playerInput.actions["Basic attack"];
         strongerAttackAction = playerInput.actions["Stronger attack"];
-        //alternativeAttackAction = playerInput.actions["Alternative attack"];
+        alternativeAttackAction = playerInput.actions["Alternative attack"];
     }
 
     void SubscribeToEvents()
@@ -44,6 +44,7 @@ public class PlayerInputController : MonoBehaviour
         basicAttackActinon.performed += PerformeBasicAttack;
         strongerAttackAction.canceled += CancelStrongerAttack;
         strongerAttackAction.performed += PerformStrongerAttack;
+        alternativeAttackAction.performed += PerformAlternativeAttack;
     }
 
 	void OnDestroy()
@@ -52,6 +53,7 @@ public class PlayerInputController : MonoBehaviour
         basicAttackActinon.performed -= PerformeBasicAttack;
         strongerAttackAction.canceled -= CancelStrongerAttack;
         strongerAttackAction.performed -= PerformStrongerAttack;
+        alternativeAttackAction.performed -= PerformAlternativeAttack;
     }
 
     void SwitchWeapon(InputAction.CallbackContext context)
