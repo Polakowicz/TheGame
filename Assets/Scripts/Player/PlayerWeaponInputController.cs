@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputController : MonoBehaviour
+public class PlayerWeaponInputController : MonoBehaviour
 {
     //Components
     [SerializeField] PlayerInput playerInput;
