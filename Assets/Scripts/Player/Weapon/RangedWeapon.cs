@@ -16,16 +16,15 @@ public class RangedWeapon : Weapon
 
 	public override void StartStrongerAttack()
 	{
-		Debug.Log("Range stronger attack start");
+		return;
 	}
 	public override void CancelStrongerAttack()
 	{
-		Debug.Log("Range stronger attack start");
+		Debug.Log("Range stronger attack end");
 	}
 	public override void PerformStrongerAttack() 
 	{
-		//this weapon has start and cancel stronger attack
-		return;
+		Debug.Log("Range stronger attack start");
 	}
 
 	public override void PerformAlternativeAttack()
