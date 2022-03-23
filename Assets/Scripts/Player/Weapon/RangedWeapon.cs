@@ -9,8 +9,22 @@ public class RangedWeapon : Weapon
 	[SerializeField] Transform gunTransform;
 	[SerializeField] GameObject bulletPrefab;
 
-	public override void PerformeBasicAttack()
+	public override void PerformBasicAttack()
 	{
 		UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
+	}
+
+	public override void PerformStrongerAttack() 
+	{
+		Debug.Log("Range stronger attack start");
+	}
+	public override void CancelStrongerAttack()
+	{
+		Debug.Log("Range stronger attack end");
+	}
+
+	public override void PerformAlternativeAttack()
+	{
+		Debug.Log("Range aalternative attack");
 	}
 }

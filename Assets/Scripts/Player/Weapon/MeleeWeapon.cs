@@ -10,6 +10,7 @@ public class MeleeWeapon : Weapon
 	[SerializeField] Collider2D meleeRange;
 	[SerializeField] LayerMask melleWeaponLayerMask;
 
+	//Internal variables
 	ContactFilter2D contactFilter;
 
 	public MeleeWeapon()
@@ -19,14 +20,29 @@ public class MeleeWeapon : Weapon
 		};
 	}
 
-	public override void PerformeBasicAttack()
+	public override void PerformBasicAttack()
 	{
 		List<Collider2D> hits = new List<Collider2D>();
 		meleeRange.OverlapCollider(contactFilter, hits);
 		foreach (Collider2D hit in hits) {
-			if(hit.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+			if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
 				hit.GetComponent<Enemy>().OnGetHit(damage);
 			}
 		}
+	}
+	
+	public override void PerformStrongerAttack()
+	{
+		Debug.Log("Melee stronger attack");
+	}
+	public override void CancelStrongerAttack()
+	{
+		//this weapon has only perfomr stronger attack
+		return;
+	}
+
+	public override void PerformAlternativeAttack()
+	{
+		Debug.Log("Melee alternative attack");
 	}
 }
