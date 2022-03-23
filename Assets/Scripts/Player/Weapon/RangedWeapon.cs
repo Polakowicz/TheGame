@@ -13,16 +13,16 @@ public class RangedWeapon : Weapon
 	//Parameters
 	[SerializeField] float startFireRate;
 	[SerializeField] float maxFireRate;
-	[SerializeField] float differenceFireRat;
+	[SerializeField] float fireRateDifference;
 
-	[SerializeField] float startAccuracy;
-	[SerializeField] float endAccuracy;
-	[SerializeField] float differenceAccuracy;
+	[SerializeField] float startDispersion;
+	[SerializeField] float maxDispersion;
+	[SerializeField] float dispersionDifference;
 
 	//Internal variables
 	Coroutine autoFireCoroutine;
 	float fireRate;
-	float accuracy;
+	float dispersion;
 
 	public override void PerformBasicAttack()
 	{
@@ -46,24 +46,23 @@ public class RangedWeapon : Weapon
 	IEnumerator AutoFire()
 	{
 		fireRate = startFireRate;
-		accuracy = startAccuracy;
+		dispersion = startDispersion;
 		while (true) {
 			UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
 			yield return new WaitForSeconds(fireRate);
-			if (accuracy < endAccuracy) {
-				accuracy += differenceAccuracy;
+			if (dispersion < maxDispersion) {
+				dispersion += dispersionDifference;
 			}
 			if (fireRate > maxFireRate) {
-				fireRate -= differenceFireRat;
+				fireRate -= fireRateDifference;
 			}
-			Debug.Log(fireRate);
 		}
 	}
 
 	Quaternion GetRandomisedAccuracy()
 	{
 		var rotation = gunTransform.rotation.eulerAngles.z;
-		float newRotation = UnityEngine.Random.Range(rotation - accuracy, rotation + accuracy);
+		float newRotation = UnityEngine.Random.Range(rotation - dispersion, rotation + dispersion);
 		return Quaternion.Euler(0,0,newRotation);
 	}
 }
