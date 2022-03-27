@@ -35,7 +35,9 @@ public class RangedWeapon : Weapon
 	}
 	public override void CancelStrongerAttack()
 	{
-		player.StopCoroutine(autoFireCoroutine);
+		if(autoFireCoroutine != null) {
+			player.StopCoroutine(autoFireCoroutine);
+		}
 	}
 
 	public override void PerformAlternativeAttack()
