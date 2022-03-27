@@ -41,13 +41,18 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-		if(!isInDash)
+		if (!isInDash) {
 			input = moveAction.ReadValue<Vector2>();
+		}
 	}
 
 	void FixedUpdate()
 	{
-		rb.velocity = input * realSpeed;
+		if (isInDash) {
+			rb.velocity = input.normalized * realSpeed;
+		} else {
+			rb.velocity = input * realSpeed;
+		}
 	}
 
 	void PerformDash(InputAction.CallbackContext context)
