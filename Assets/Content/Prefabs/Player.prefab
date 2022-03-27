@@ -344,6 +344,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: edf08fb5-5b10-41c4-a48d-a98658b66e61
     m_ActionName: Gameplay/Alternative attack[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9f78a94e-a93d-4596-b808-d0875d6b1d86
+    m_ActionName: Gameplay/Dash[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -362,7 +366,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2896284850009964027}
-  speed: 5
+  normalSpeed: 5
+  dashSpeed: 30
+  dashTime: 0.1
 --- !u!61 &4652231911992384287
 BoxCollider2D:
   m_ObjectHideFlags: 0
