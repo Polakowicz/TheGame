@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
 	//Input actions
 	InputAction moveAction;
+	InputAction dashAction;
 
 	//Parameters
 	[SerializeField] float speed = 5f;
@@ -21,6 +22,14 @@ public class PlayerMovement : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 
 		moveAction = playerInput.actions["Move"];
+		dashAction = playerInput.actions["Dash"];
+
+		dashAction.performed += PerformDash;
+	}
+
+	private void OnDestroy()
+	{
+		dashAction.performed -= PerformDash;
 	}
 
 	void Update()
@@ -31,5 +40,10 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		rb.velocity = input * speed;
+	}
+
+	void PerformDash(InputAction.CallbackContext context)
+	{
+		Debug.Log("Dash");
 	}
 }
