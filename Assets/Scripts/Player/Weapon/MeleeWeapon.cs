@@ -33,25 +33,11 @@ public class MeleeWeapon : Weapon
 	
 	public override void PerformStrongerAttack()
 	{
-		Debug.Log("Melee stronger attack");
+		Debug.Log("Performed Melee stronger attack");
 	}
 	
-	public override void StartAlternativeAttack()
-	{
-		return;
-	}
 	public override void PerformAlternativeAttack()
 	{
 		Debug.Log("Melee alternative attack");
-	}
-	public override void CancelAlternativeAttack()
-	{
-		return;
-	}
-	
-	//Not implemented methods
-	public override void CancelStrongerAttack()
-	{
-		return;
 	}
 }

@@ -6,12 +6,14 @@ public abstract class Weapon
 { 
     [SerializeField] protected int damage;
 
-    public abstract void PerformBasicAttack();
+    public virtual void PerformBasicAttack() { }
 
-    public abstract void PerformStrongerAttack();
-    public abstract void CancelStrongerAttack();
+    public virtual void PerformStrongerAttack() { }
+    public virtual void CancelStrongerAttack() { }
 
-    public abstract void StartAlternativeAttack();
-    public abstract void PerformAlternativeAttack();
-    public abstract void CancelAlternativeAttack();
+    public virtual void StartAlternativeAttack() { }
+    public virtual void PerformAlternativeAttack() { }
+    public virtual void CancelAlternativeAttack() { }
+
+    public virtual void PerformBeamPullAction(float input) { }
 }

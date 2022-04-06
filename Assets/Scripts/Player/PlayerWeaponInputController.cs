@@ -13,6 +13,7 @@ public class PlayerWeaponInputController : MonoBehaviour
     InputAction basicAttackActinon;
     InputAction strongerAttackAction;
     InputAction alternativeAttackAction;
+    InputAction scrollAction;
 
     //Parameters
     [SerializeField] MeleeWeapon meleeWeapon;
@@ -36,6 +37,7 @@ public class PlayerWeaponInputController : MonoBehaviour
         basicAttackActinon = playerInput.actions["Basic attack"];
         strongerAttackAction = playerInput.actions["Stronger attack"];
         alternativeAttackAction = playerInput.actions["Alternative attack"];
+        scrollAction = playerInput.actions["Scroll"];
     }
 
     void SubscribeToEvents()
@@ -66,7 +68,15 @@ public class PlayerWeaponInputController : MonoBehaviour
         alternativeAttackAction.canceled -= CancelAlternativeAttack;
     }
 
-    void SwitchWeapon(InputAction.CallbackContext context)
+	void Update()
+	{
+        var scrollInputValue = scrollAction.ReadValue<float>();
+        if (scrollInputValue != 0) {
+            equippedWeapon.PerformBeamPullAction(scrollInputValue);
+		}
+	}
+
+	void SwitchWeapon(InputAction.CallbackContext context)
 	{
 		if (equipedMeleeWeapon) {
             equippedWeapon = rangedWeapon;

@@ -78,9 +78,24 @@ public class RangedWeapon : Weapon
 		beamHit = null;
 	}
 
-	//Not implemented methods
-	public override void PerformAlternativeAttack()
+	public override void PerformBeamPullAction(float input)
 	{
-		return;
+		if (beamHit == null) {
+			return;
+		}
+
+		if (input > 0) {
+			PullPlayerTowardsTarget();
+		} else if (input < 0) {
+			PullTargetTowardsPlayer();
+		}
+	}
+	private void PullPlayerTowardsTarget()
+	{
+		Debug.Log("Pull player towards target");
+	}
+	private void PullTargetTowardsPlayer()
+	{
+		Debug.Log("Pull target towards player");
 	}
 }
