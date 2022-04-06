@@ -41,19 +41,29 @@ public class PlayerWeaponInputController : MonoBehaviour
     void SubscribeToEvents()
 	{
         switchWeaponAction.performed += SwitchWeapon;
+
         basicAttackActinon.performed += PerformeBasicAttack;
+
         strongerAttackAction.canceled += CancelStrongerAttack;
         strongerAttackAction.performed += PerformStrongerAttack;
+
+        alternativeAttackAction.started += StartAlternativeAttack;
         alternativeAttackAction.performed += PerformAlternativeAttack;
+        alternativeAttackAction.canceled += CancelAlternativeAttack;
     }
 
 	void OnDestroy()
 	{
         switchWeaponAction.performed -= SwitchWeapon;
+
         basicAttackActinon.performed -= PerformeBasicAttack;
+
         strongerAttackAction.canceled -= CancelStrongerAttack;
         strongerAttackAction.performed -= PerformStrongerAttack;
+
+        alternativeAttackAction.started -= StartAlternativeAttack;
         alternativeAttackAction.performed -= PerformAlternativeAttack;
+        alternativeAttackAction.canceled -= CancelAlternativeAttack;
     }
 
     void SwitchWeapon(InputAction.CallbackContext context)
@@ -65,7 +75,6 @@ public class PlayerWeaponInputController : MonoBehaviour
             equippedWeapon = meleeWeapon;
             equipedMeleeWeapon = true;
         }
-        Debug.Log("Switch weapon");
 	}
 
     //Weapons attakcs
@@ -84,8 +93,16 @@ public class PlayerWeaponInputController : MonoBehaviour
         equippedWeapon.PerformStrongerAttack();
 	}
 
+    void StartAlternativeAttack(InputAction.CallbackContext context)
+	{
+        equippedWeapon.StartAlternativeAttack();
+	}
     void PerformAlternativeAttack(InputAction.CallbackContext context)
 	{
         equippedWeapon.PerformAlternativeAttack();
+	}
+    void CancelAlternativeAttack(InputAction.CallbackContext context)
+	{
+        equippedWeapon.CancelAlternativeAttack();
 	}
 }

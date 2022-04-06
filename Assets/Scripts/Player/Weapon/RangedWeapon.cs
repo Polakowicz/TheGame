@@ -19,7 +19,11 @@ public class RangedWeapon : Weapon
 	[SerializeField] float maxDispersion;
 	[SerializeField] float dispersinPercentageIncrease;
 
+	[SerializeField] LayerMask beamHitLayerMask;
+	[SerializeField] float beamDistance = 10f;
+
 	//Internal variables
+	GameObject beamHit;
 	Coroutine autoFireCoroutine;
 	float fireRate;
 	float dispersion;
@@ -39,12 +43,6 @@ public class RangedWeapon : Weapon
 			player.StopCoroutine(autoFireCoroutine);
 		}
 	}
-
-	public override void PerformAlternativeAttack()
-	{
-		Debug.Log("Range aalternative attack");
-	}
-
 	IEnumerator AutoFire()
 	{
 		fireRate = startFireRate;
@@ -60,11 +58,29 @@ public class RangedWeapon : Weapon
 			}
 		}
 	}
-
 	Quaternion GetRandomisedAccuracy()
 	{
 		var rotation = gunTransform.rotation.eulerAngles.z;
 		float newRotation = UnityEngine.Random.Range(rotation - dispersion, rotation + dispersion);
 		return Quaternion.Euler(0,0,newRotation);
+	}
+
+	public override void StartAlternativeAttack()
+	{
+		var hit = Physics2D.Raycast(gunTransform.position, gunTransform.up, beamDistance, beamHitLayerMask);
+		Debug.DrawRay(gunTransform.position, gunTransform.up * beamDistance, Color.red, 0.5f);
+		if (hit.collider != null) {
+			beamHit = hit.collider.gameObject;
+		}
+	}
+	public override void CancelAlternativeAttack()
+	{
+		beamHit = null;
+	}
+
+	//Not implemented methods
+	public override void PerformAlternativeAttack()
+	{
+		return;
 	}
 }
