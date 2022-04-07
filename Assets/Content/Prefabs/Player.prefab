@@ -510,8 +510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2896284850009964027}
-  meleeWeapon: {fileID: 0}
-  rangedWeapon: {fileID: 0}
+  meleeWeapon: {fileID: 134073437048459800}
+  rangedWeapon: {fileID: 6573227749687704276}
 --- !u!1 &3653687993516305986
 GameObject:
   m_ObjectHideFlags: 0
