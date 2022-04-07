@@ -382,6 +382,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0601e5cdd3ee3624ea5ab031dbad4452, type: 3}
+--- !u!114 &381230453 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+  m_PrefabInstance: {fileID: 1279179722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455109904c2044e41a69bc81c95e68b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &521776698
 GameObject:
   m_ObjectHideFlags: 0
@@ -5001,6 +5012,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 619834540, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: meleeWeapon
+      value: 
+      objectReference: {fileID: 1828837522}
+    - target: {fileID: 619834540, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: rangedWeapon
+      value: 
+      objectReference: {fileID: 381230453}
     - target: {fileID: 2896284850009964024, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5051,3 +5070,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+--- !u!114 &1828837522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+  m_PrefabInstance: {fileID: 1279179722}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cfca45c6d269d46b3a519d1f3ccb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
