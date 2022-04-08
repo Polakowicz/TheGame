@@ -33,14 +33,9 @@ public class MeleeWeapon : Weapon
 	
 	public override void PerformStrongerAttack()
 	{
-		Debug.Log("Melee stronger attack");
+		Debug.Log("Performed Melee stronger attack");
 	}
-	public override void CancelStrongerAttack()
-	{
-		//this weapon has only perfomr stronger attack
-		return;
-	}
-
+	
 	public override void PerformAlternativeAttack()
 	{
 		Debug.Log("Melee alternative attack");

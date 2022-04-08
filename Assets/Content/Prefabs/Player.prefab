@@ -28,8 +28,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2896284850258396948}
-  m_RootOrder: 2
+  m_Father: {fileID: 4135934037195639935}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1436956163
 PolygonCollider2D:
@@ -63,6 +63,55 @@ PolygonCollider2D:
       - {x: -0.1, y: 0}
       - {x: 0.1, y: 0}
       - {x: 0.45, y: 0.5}
+--- !u!1 &913683281467424584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4135934037195639935}
+  - component: {fileID: 134073437048459800}
+  m_Layer: 15
+  m_Name: Melee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4135934037195639935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913683281467424584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1436956162}
+  m_Father: {fileID: 2896284850258396948}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &134073437048459800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913683281467424584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cfca45c6d269d46b3a519d1f3ccb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  meleeRange: {fileID: 1436956163}
+  melleWeaponLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
 --- !u!1 &2896284848948219051
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,12 +135,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2896284848948219051}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2896284850258396948}
-  m_RootOrder: 1
+  m_Father: {fileID: 6809897908705690059}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2896284849141417201
 GameObject:
@@ -348,6 +397,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9f78a94e-a93d-4596-b808-d0875d6b1d86
     m_ActionName: Gameplay/Dash[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 10bdbdb1-5500-483a-8229-ea0ea8679cbd
+    m_ActionName: Gameplay/Scroll[/Mouse/scroll/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -425,8 +478,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2896284849141417200}
-  - {fileID: 2896284848948219050}
-  - {fileID: 1436956162}
+  - {fileID: 4135934037195639935}
+  - {fileID: 6809897908705690059}
   m_Father: {fileID: 2896284850009964026}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -457,20 +510,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2896284850009964027}
-  meleeWeapon:
-    damage: 7
-    meleeRange: {fileID: 1436956163}
-    melleWeaponLayerMask:
-      serializedVersion: 2
-      m_Bits: 65536
-  rangedWeapon:
-    damage: 5
-    gunTransform: {fileID: 2896284848948219050}
-    bulletPrefab: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
-    player: {fileID: 619834540}
-    startFireRate: 0.4
-    maxFireRate: 0.1
-    fireRatePercentageIncrease: 0.1
-    startDispersion: 0
-    maxDispersion: 30
-    dispersinPercentageIncrease: 0.1
+  meleeWeapon: {fileID: 134073437048459800}
+  rangedWeapon: {fileID: 6573227749687704276}
+--- !u!1 &3653687993516305986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6809897908705690059}
+  - component: {fileID: 6573227749687704276}
+  m_Layer: 15
+  m_Name: Range
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6809897908705690059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653687993516305986}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2896284848948219050}
+  m_Father: {fileID: 2896284850258396948}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6573227749687704276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653687993516305986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455109904c2044e41a69bc81c95e68b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  gunTransform: {fileID: 2896284848948219050}
+  bulletPrefab: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
+  player: {fileID: 2896284850258396950}
+  startFireRate: 0.4
+  maxFireRate: 0.1
+  fireRatePercentageIncrease: 0.1
+  startDispersion: 0
+  maxDispersion: 30
+  dispersinPercentageIncrease: 0.1
+  beamHitLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
+  beamDistance: 7

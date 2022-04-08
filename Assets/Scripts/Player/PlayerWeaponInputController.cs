@@ -13,6 +13,7 @@ public class PlayerWeaponInputController : MonoBehaviour
     InputAction basicAttackActinon;
     InputAction strongerAttackAction;
     InputAction alternativeAttackAction;
+    InputAction scrollAction;
 
     //Parameters
     [SerializeField] MeleeWeapon meleeWeapon;
@@ -36,27 +37,46 @@ public class PlayerWeaponInputController : MonoBehaviour
         basicAttackActinon = playerInput.actions["Basic attack"];
         strongerAttackAction = playerInput.actions["Stronger attack"];
         alternativeAttackAction = playerInput.actions["Alternative attack"];
+        scrollAction = playerInput.actions["Scroll"];
     }
 
     void SubscribeToEvents()
 	{
         switchWeaponAction.performed += SwitchWeapon;
+
         basicAttackActinon.performed += PerformeBasicAttack;
+
         strongerAttackAction.canceled += CancelStrongerAttack;
         strongerAttackAction.performed += PerformStrongerAttack;
+
+        alternativeAttackAction.started += StartAlternativeAttack;
         alternativeAttackAction.performed += PerformAlternativeAttack;
+        alternativeAttackAction.canceled += CancelAlternativeAttack;
     }
 
 	void OnDestroy()
 	{
         switchWeaponAction.performed -= SwitchWeapon;
+
         basicAttackActinon.performed -= PerformeBasicAttack;
+
         strongerAttackAction.canceled -= CancelStrongerAttack;
         strongerAttackAction.performed -= PerformStrongerAttack;
+
+        alternativeAttackAction.started -= StartAlternativeAttack;
         alternativeAttackAction.performed -= PerformAlternativeAttack;
+        alternativeAttackAction.canceled -= CancelAlternativeAttack;
     }
 
-    void SwitchWeapon(InputAction.CallbackContext context)
+	void Update()
+	{
+        var scrollInputValue = scrollAction.ReadValue<float>();
+        if (scrollInputValue != 0) {
+            equippedWeapon.PerformBeamPullAction(scrollInputValue);
+		}
+	}
+
+	void SwitchWeapon(InputAction.CallbackContext context)
 	{
 		if (equipedMeleeWeapon) {
             equippedWeapon = rangedWeapon;
@@ -65,7 +85,6 @@ public class PlayerWeaponInputController : MonoBehaviour
             equippedWeapon = meleeWeapon;
             equipedMeleeWeapon = true;
         }
-        Debug.Log("Switch weapon");
 	}
 
     //Weapons attakcs
@@ -84,8 +103,16 @@ public class PlayerWeaponInputController : MonoBehaviour
         equippedWeapon.PerformStrongerAttack();
 	}
 
+    void StartAlternativeAttack(InputAction.CallbackContext context)
+	{
+        equippedWeapon.StartAlternativeAttack();
+	}
     void PerformAlternativeAttack(InputAction.CallbackContext context)
 	{
         equippedWeapon.PerformAlternativeAttack();
+	}
+    void CancelAlternativeAttack(InputAction.CallbackContext context)
+	{
+        equippedWeapon.CancelAlternativeAttack();
 	}
 }
