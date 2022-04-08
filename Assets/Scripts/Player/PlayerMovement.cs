@@ -13,14 +13,14 @@ public class PlayerMovement : MonoBehaviour
 	InputAction dashAction;
 
 	//Parameters
-	[SerializeField] float normalSpeed = 5f;
+	[SerializeField] float basicSpeed = 5f;
 	[SerializeField] float dashSpeed = 30f;
 	[SerializeField] float dashTime = 0.1f;
 
 	//Internal variables
 	Vector2 input;
 	bool isInDash;
-	float realSpeed;
+	float speed;
 
 	void Start()
 	{
@@ -31,10 +31,10 @@ public class PlayerMovement : MonoBehaviour
 
 		dashAction.performed += PerformDash;
 
-		realSpeed = normalSpeed;
+		speed = basicSpeed;
 	}
 
-	private void OnDestroy()
+	void OnDestroy()
 	{
 		dashAction.performed -= PerformDash;
 	}
@@ -49,23 +49,23 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		if (isInDash) {
-			rb.velocity = input.normalized * realSpeed;
+			rb.velocity = input.normalized * speed;
 		} else {
-			rb.velocity = input * realSpeed;
+			rb.velocity = input * speed;
 		}
 	}
 
 	void PerformDash(InputAction.CallbackContext context)
 	{
+		isInDash = true;
+		speed = dashSpeed;
 		StartCoroutine(DashDelay(dashTime));
 	}
 
 	IEnumerator DashDelay(float delay)
 	{
-		isInDash = true;
-		realSpeed = dashSpeed;
 		yield return new WaitForSeconds(delay);
-		realSpeed = normalSpeed;
+		speed = basicSpeed;
 		isInDash = false;
 	}
 }

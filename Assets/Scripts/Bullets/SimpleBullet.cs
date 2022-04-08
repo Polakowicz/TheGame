@@ -20,7 +20,7 @@ public class SimpleBullet : MonoBehaviour
         if (collision.gameObject.layer != 16) return; //16 = enemy
 
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        enemy.OnGetHit(damage);
+        enemy.GetHit(damage);
         Destroy(gameObject);
 	}
 }

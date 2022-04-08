@@ -26,7 +26,7 @@ public class MeleeWeapon : Weapon
 		meleeRange.OverlapCollider(contactFilter, hits);
 		foreach (Collider2D hit in hits) {
 			if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-				hit.GetComponent<Enemy>().OnGetHit(damage);
+				hit.GetComponent<Enemy>().GetHit(damage);
 			}
 		}
 	}
