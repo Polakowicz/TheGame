@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6695976794642740876}
   - component: {fileID: 6695976794642740979}
   - component: {fileID: 3023806048634917057}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Basic Enemy Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

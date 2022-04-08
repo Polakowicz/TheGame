@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //Properties
     [SerializeField] int hp;
 
     public void GetHit(int damage)

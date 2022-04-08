@@ -12,8 +12,6 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 	[SerializeField] float maxSightRange = 5;
 	[SerializeField] float minSightRange = 0.2f;
 
-	//Internal variables
-
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();

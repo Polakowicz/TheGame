@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class BulletFlyForward : MonoBehaviour
 {
-    //Components
     Rigidbody2D rb;
 
-    //Parameters
     [SerializeField] float speed = 10f;
 
     void Start()
