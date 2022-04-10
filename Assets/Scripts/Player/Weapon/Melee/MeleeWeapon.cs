@@ -23,7 +23,8 @@ public class MeleeWeapon : Weapon
 	public MeleeWeapon()
 	{
 		contactFilter = new ContactFilter2D {
-			layerMask = melleWeaponLayerMask
+			layerMask = melleWeaponLayerMask,
+			useLayerMask = true
 		};
 	}
 
@@ -32,20 +33,21 @@ public class MeleeWeapon : Weapon
 		List<Collider2D> hits = new List<Collider2D>();
 		meleeRange.OverlapCollider(contactFilter, hits);
 		foreach (Collider2D hit in hits) {
-			if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-				hit.GetComponent<Enemy>().GetHit(damage);
-			}
+			hit.GetComponent<Enemy>().GetHit(damage);
 		}
 	}
 	
 	public override void PerformStrongerAttack()
 	{
-		Debug.Log("MeleeWeapon Stronger attack");
 		eventSystem.StartBladeThrust(thrustSpeed, thrustTime, thrustDmg);
 	}
 	
 	public override void PerformAlternativeAttack()
 	{
-		Debug.Log("Melee alternative attack");
+		eventSystem.StartBladeBlock();
+	}
+	public override void CancelAlternativeAttack()
+	{
+		eventSystem.EndBladeBlock();
 	}
 }

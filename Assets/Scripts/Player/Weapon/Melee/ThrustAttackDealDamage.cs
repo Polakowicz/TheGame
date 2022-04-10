@@ -10,7 +10,7 @@ public class ThrustAttackDealDamage : MonoBehaviour
 	Collider2D hitCollider;
 	ContactFilter2D contactFilter;
 
-	bool attakcEnabled;
+	bool attackEnabled;
 	int damage;
 
 	void Start()
@@ -40,24 +40,24 @@ public class ThrustAttackDealDamage : MonoBehaviour
 		foreach (Collider2D hit in hits) {
 			hit.GetComponent<Enemy>().GetHit(damage);		
 		}
-		attakcEnabled = true;
+		attackEnabled = true;
 	}
 
 	void DisableTriggerEnterDamage()
 	{
-		attakcEnabled = false;
+		attackEnabled = false;
 	}
 
-	void OnTriggerEnter2D(Collider2D collider)
+	void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (!attakcEnabled) {
+		if (!attackEnabled) {
 			return;
 		}
 
-		if (!(hitLayerMask == (hitLayerMask | (1 << collider.gameObject.layer)))) {
+		if (!(hitLayerMask == (hitLayerMask | (1 << collision.gameObject.layer)))) {
 			return;
 		}
 
-		collider.GetComponent<Enemy>().GetHit(damage);
+		collision.GetComponent<Enemy>().GetHit(damage);
 	}
 }

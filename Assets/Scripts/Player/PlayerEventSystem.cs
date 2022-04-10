@@ -7,7 +7,7 @@ public class PlayerEventSystem : MonoBehaviour
 {
     [SerializeField] public PlayerData playerData;
 
-    //Blade Attacks
+    //Blade Thrust
     public event Action<PlayerData, float, float, int> OnBladeThrustStarted;
     public event Action OnBladeThrustEnded;
 
@@ -19,5 +19,19 @@ public class PlayerEventSystem : MonoBehaviour
     public void EndBladeThrust()
 	{
         OnBladeThrustEnded?.Invoke();
+	}
+
+    //Blade block
+    public event Action OnBladeBlockStarted;
+    public event Action OnBladeBlockEnded;
+
+    public void StartBladeBlock()
+	{
+        OnBladeBlockStarted?.Invoke();
+	}
+
+    public void EndBladeBlock()
+	{
+        OnBladeBlockEnded?.Invoke();
 	}
 }
