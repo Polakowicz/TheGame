@@ -7,11 +7,18 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
 	//Components
+	[SerializeField] PlayerEventSystem eventSystem;
 	[SerializeField] Collider2D meleeRange;
 	[SerializeField] LayerMask melleWeaponLayerMask;
+	[SerializeField] Collider2D blockRange;
 
 	//Internal variables
 	ContactFilter2D contactFilter;
+
+	//Parameters
+	[SerializeField] float thrustSpeed;
+	[SerializeField] float thrustTime;
+	[SerializeField] int thrustDmg;
 
 	public MeleeWeapon()
 	{
@@ -33,7 +40,8 @@ public class MeleeWeapon : Weapon
 	
 	public override void PerformStrongerAttack()
 	{
-		Debug.Log("Performed Melee stronger attack");
+		Debug.Log("MeleeWeapon Stronger attack");
+		eventSystem.StartBladeThrust(thrustSpeed, thrustTime, thrustDmg);
 	}
 	
 	public override void PerformAlternativeAttack()

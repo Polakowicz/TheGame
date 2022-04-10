@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerAim : MonoBehaviour
 {
 	//Components
+	[SerializeField] PlayerEventSystem eventSystem;
 	[SerializeField] PlayerInput playerInput;
 	[SerializeField] Transform crosshair;
 
@@ -17,7 +18,6 @@ public class PlayerAim : MonoBehaviour
 	void Start()
 	{
 		aimAction = playerInput.actions["Aim"];
-
 		gamepadCrosshariDistance = (crosshair.position - transform.position).magnitude;
 	}
 
@@ -35,7 +35,8 @@ public class PlayerAim : MonoBehaviour
 			crosshair.transform.position = mousePos;
 			lookDirection = mousePos - (Vector2)transform.position;
 		}
-		transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90));
+		transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90)); ;
+		eventSystem.playerData.aimDirection = lookDirection.normalized;
 	}
 
 	public void OnControlsChanged(PlayerInput input)

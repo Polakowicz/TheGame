@@ -6,11 +6,16 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] int hp;
 
+    void Die()
+	{
+        Destroy(gameObject);
+	}
+
     public void GetHit(int damage)
 	{
         hp -= damage;
         if(hp <= 0) {
-            Destroy(gameObject);
+            Die();
 		}
 	}
 }

@@ -36,5 +36,4 @@ public class EnemyShootsPlayer : MonoBehaviour
 		Instantiate(bullet, gameObject.transform.position, Quaternion.Euler(0, 0, rotation));
 		cooldown = shootCooldown;
 	}
-
 }

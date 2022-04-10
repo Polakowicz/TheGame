@@ -7,6 +7,8 @@ public class PlayerWeaponInputController : MonoBehaviour
 {
     //Components
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] MeleeWeapon meleeWeapon;
+    [SerializeField] RangedWeapon rangedWeapon;
 
     //InputActions
     InputAction switchWeaponAction;
@@ -14,10 +16,6 @@ public class PlayerWeaponInputController : MonoBehaviour
     InputAction strongerAttackAction;
     InputAction alternativeAttackAction;
     InputAction scrollAction;
-
-    //Parameters
-    [SerializeField] MeleeWeapon meleeWeapon;
-    [SerializeField] RangedWeapon rangedWeapon;
 
     //Internal Variables
     Weapon equippedWeapon;

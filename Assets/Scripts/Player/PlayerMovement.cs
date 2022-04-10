@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	//Components
 	Rigidbody2D rb;
+	[SerializeField] PlayerEventSystem eventSystem;
 	[SerializeField] PlayerInput playerInput;
 
 	//Input actions
@@ -18,18 +19,18 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] float dashTime = 0.1f;
 
 	//Internal variables
-	Vector2 input;
+	Vector2 direction;
 	bool isInDash;
 	float speed;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-
 		moveAction = playerInput.actions["Move"];
 		dashAction = playerInput.actions["Dash"];
 
 		dashAction.performed += PerformDash;
+		eventSystem.OnBladeThrustStarted += PerformThrustDash;
 
 		speed = basicSpeed;
 	}
@@ -37,29 +38,40 @@ public class PlayerMovement : MonoBehaviour
 	void OnDestroy()
 	{
 		dashAction.performed -= PerformDash;
+		eventSystem.OnBladeThrustStarted -= PerformThrustDash;
 	}
 
 	void Update()
 	{
 		if (!isInDash) {
-			input = moveAction.ReadValue<Vector2>();
+			direction = moveAction.ReadValue<Vector2>();
 		}
 	}
 
 	void FixedUpdate()
 	{
 		if (isInDash) {
-			rb.velocity = input.normalized * speed;
+			rb.velocity = direction.normalized * speed;
 		} else {
-			rb.velocity = input * speed;
+			rb.velocity = direction * speed;
 		}
 	}
 
 	void PerformDash(InputAction.CallbackContext context)
 	{
+		if (isInDash) {
+			return;
+		}
 		isInDash = true;
 		speed = dashSpeed;
 		StartCoroutine(DashDelay(dashTime));
+	}
+	void PerformThrustDash(PlayerData data, float s, float t, int d)
+	{
+		direction = data.aimDirection;
+		isInDash = true;
+		speed = s;
+		StartCoroutine(TrustDelay(t));
 	}
 
 	IEnumerator DashDelay(float delay)
@@ -67,5 +79,13 @@ public class PlayerMovement : MonoBehaviour
 		yield return new WaitForSeconds(delay);
 		speed = basicSpeed;
 		isInDash = false;
+	}
+
+	IEnumerator TrustDelay(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		speed = basicSpeed;
+		isInDash = false;
+		eventSystem.EndBladeThrust();
 	}
 }
