@@ -34,4 +34,18 @@ public class PlayerEventSystem : MonoBehaviour
 	{
         OnBladeBlockEnded?.Invoke();
 	}
+
+    //Blaaster beam
+    public event Action<GameObject, float> OnBeamPullTowardsEnemyStarted;
+    public event Action OnBeamPullTowardsEnemyEnded;
+    
+    public void StartBeamPullTowardsEnemy(GameObject enemy, float speed)
+	{
+        OnBeamPullTowardsEnemyStarted?.Invoke(enemy, speed);
+	}
+
+    public void EndBeamPullTowardsEnemy()
+	{
+        OnBeamPullTowardsEnemyEnded?.Invoke();
+	}
 }

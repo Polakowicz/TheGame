@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
 		dashAction.performed += PerformDash;
 		eventSystem.OnBladeThrustStarted += PerformThrustDash;
+		eventSystem.OnBeamPullTowardsEnemyStarted += PerformBeamPull;
 
 		speed = basicSpeed;
 	}
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		dashAction.performed -= PerformDash;
 		eventSystem.OnBladeThrustStarted -= PerformThrustDash;
+		eventSystem.OnBeamPullTowardsEnemyStarted -= PerformBeamPull;
 	}
 
 	void Update()
@@ -73,6 +75,17 @@ public class PlayerMovement : MonoBehaviour
 		speed = s;
 		StartCoroutine(TrustDelay(t));
 	}
+	void PerformBeamPull(GameObject enemy, float v)
+	{
+		Debug.Log("Here");
+		direction = enemy.transform.position - transform.position;
+		var s = direction.magnitude;
+		speed = v;
+		var t = s / v;
+		Debug.Log("enemy: " + enemy + "; s,t,v " + s + " "+ t + " " + v + "; direction: " + direction);
+		isInDash = true;
+		StartCoroutine(BeamPullDelay(t));
+	}
 
 	IEnumerator DashDelay(float delay)
 	{
@@ -80,12 +93,18 @@ public class PlayerMovement : MonoBehaviour
 		speed = basicSpeed;
 		isInDash = false;
 	}
-
 	IEnumerator TrustDelay(float delay)
 	{
 		yield return new WaitForSeconds(delay);
 		speed = basicSpeed;
 		isInDash = false;
 		eventSystem.EndBladeThrust();
+	}
+	IEnumerator BeamPullDelay(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		speed = basicSpeed;
+		isInDash = false;
+		eventSystem.EndBeamPullTowardsEnemy();
 	}
 }

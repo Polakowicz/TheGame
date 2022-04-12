@@ -9,6 +9,7 @@ public class RangedWeapon : Weapon
 	[SerializeField] Transform gunTransform;
 	[SerializeField] GameObject bulletPrefab;
 	[SerializeField] MonoBehaviour player;
+	[SerializeField] PlayerEventSystem playerEventSystem;
 
 	//Parameters
 	[SerializeField] float startFireRate;
@@ -18,6 +19,8 @@ public class RangedWeapon : Weapon
 	[SerializeField] float startDispersion;
 	[SerializeField] float maxDispersion;
 	[SerializeField] float dispersinPercentageIncrease;
+
+	[SerializeField] float beamPullSpeed;
 
 	[SerializeField] LayerMask beamHitLayerMask;
 	[SerializeField] float beamDistance = 10f;
@@ -92,7 +95,8 @@ public class RangedWeapon : Weapon
 	}
 	private void PullPlayerTowardsTarget()
 	{
-		Debug.Log("Pull player towards target");
+		Debug.Log(beamHit);
+		playerEventSystem.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed);
 	}
 	private void PullTargetTowardsPlayer()
 	{

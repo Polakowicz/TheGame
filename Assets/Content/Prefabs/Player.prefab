@@ -118,7 +118,7 @@ MonoBehaviour:
   blockRange: {fileID: 3700359822864264953}
   thrustSpeed: 15
   thrustTime: 0.2
-  thrustDmg: 0
+  thrustDmg: 50
 --- !u!1 &2225472237987491096
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,12 +648,14 @@ MonoBehaviour:
   gunTransform: {fileID: 2896284848948219050}
   bulletPrefab: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
   player: {fileID: 2896284850258396950}
+  playerEventSystem: {fileID: 4717716870089605577}
   startFireRate: 0.4
   maxFireRate: 0.1
   fireRatePercentageIncrease: 0.1
   startDispersion: 0
   maxDispersion: 30
   dispersinPercentageIncrease: 0.1
+  beamPullSpeed: 15
   beamHitLayerMask:
     serializedVersion: 2
     m_Bits: 65536
@@ -731,4 +733,4 @@ MonoBehaviour:
   eventSystem: {fileID: 4717716870089605577}
   hitLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65536
