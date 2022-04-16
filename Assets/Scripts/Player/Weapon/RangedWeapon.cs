@@ -6,10 +6,10 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
 	//Components
+	[SerializeField] PlayerEventSystem playerEventSystem;
 	[SerializeField] Transform gunTransform;
 	[SerializeField] GameObject bulletPrefab;
-	[SerializeField] MonoBehaviour player;
-
+	
 	//Parameters
 	[SerializeField] float startFireRate;
 	[SerializeField] float maxFireRate;
@@ -20,6 +20,7 @@ public class RangedWeapon : Weapon
 	[SerializeField] float dispersinPercentageIncrease;
 
 	[SerializeField] LayerMask beamHitLayerMask;
+	[SerializeField] float beamPullSpeed;
 	[SerializeField] float beamDistance = 10f;
 
 	//Internal variables
@@ -30,17 +31,17 @@ public class RangedWeapon : Weapon
 
 	public override void PerformBasicAttack()
 	{
-		UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
+		Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
 	}
 
 	public override void PerformStrongerAttack() 
 	{
-		autoFireCoroutine = player.StartCoroutine(AutoFire());
+		autoFireCoroutine = StartCoroutine(AutoFire());
 	}
 	public override void CancelStrongerAttack()
 	{
 		if(autoFireCoroutine != null) {
-			player.StopCoroutine(autoFireCoroutine);
+			StopCoroutine(autoFireCoroutine);
 		}
 	}
 	IEnumerator AutoFire()
@@ -48,7 +49,7 @@ public class RangedWeapon : Weapon
 		fireRate = startFireRate;
 		dispersion = startDispersion;
 		while (true) {
-			UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
+			Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
 			yield return new WaitForSeconds(fireRate);
 			if (dispersion < maxDispersion) {
 				dispersion += dispersinPercentageIncrease * Mathf.Abs(maxDispersion - dispersion);
@@ -68,7 +69,6 @@ public class RangedWeapon : Weapon
 	public override void StartAlternativeAttack()
 	{
 		var hit = Physics2D.Raycast(gunTransform.position, gunTransform.up, beamDistance, beamHitLayerMask);
-		Debug.DrawRay(gunTransform.position, gunTransform.up * beamDistance, Color.red, 0.5f);
 		if (hit.collider != null) {
 			beamHit = hit.collider.gameObject;
 		}
@@ -92,10 +92,10 @@ public class RangedWeapon : Weapon
 	}
 	private void PullPlayerTowardsTarget()
 	{
-		Debug.Log("Pull player towards target");
+		playerEventSystem.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed);
 	}
 	private void PullTargetTowardsPlayer()
 	{
-		Debug.Log("Pull target towards player");
+		beamHit.GetComponent<EnemyEventSystem>().Pull(transform, beamPullSpeed);
 	}
 }
