@@ -77,12 +77,10 @@ public class PlayerMovement : MonoBehaviour
 	}
 	void PerformBeamPull(GameObject enemy, float v)
 	{
-		Debug.Log("Here");
 		direction = enemy.transform.position - transform.position;
 		var s = direction.magnitude;
 		speed = v;
 		var t = s / v;
-		Debug.Log("enemy: " + enemy + "; s,t,v " + s + " "+ t + " " + v + "; direction: " + direction);
 		isInDash = true;
 		StartCoroutine(BeamPullDelay(t));
 	}

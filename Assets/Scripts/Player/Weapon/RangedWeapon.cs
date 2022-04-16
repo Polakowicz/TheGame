@@ -71,13 +71,16 @@ public class RangedWeapon : Weapon
 	public override void StartAlternativeAttack()
 	{
 		var hit = Physics2D.Raycast(gunTransform.position, gunTransform.up, beamDistance, beamHitLayerMask);
-		Debug.DrawRay(gunTransform.position, gunTransform.up * beamDistance, Color.red, 0.5f);
 		if (hit.collider != null) {
 			beamHit = hit.collider.gameObject;
+			beamHit.GetComponent<EnemyEventSystem>().GetCaught();
 		}
 	}
 	public override void CancelAlternativeAttack()
 	{
+		if (beamHit != null) {
+			beamHit.GetComponent<EnemyEventSystem>().CancelGetCaught();
+		}
 		beamHit = null;
 	}
 
@@ -95,11 +98,10 @@ public class RangedWeapon : Weapon
 	}
 	private void PullPlayerTowardsTarget()
 	{
-		Debug.Log(beamHit);
 		playerEventSystem.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed);
 	}
 	private void PullTargetTowardsPlayer()
 	{
-		Debug.Log("Pull target towards player");
+		beamHit.GetComponent<EnemyEventSystem>().Pull(transform, beamPullSpeed);
 	}
 }
