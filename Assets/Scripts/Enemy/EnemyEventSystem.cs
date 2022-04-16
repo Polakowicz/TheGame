@@ -5,49 +5,46 @@ using UnityEngine;
 
 public class EnemyEventSystem : MonoBehaviour
 {
-	private EnemyData data;
+	[SerializeField] private EnemyData data;
+	
+	//Pulling
+	public Action<Transform, float> OnGetPulledValues;
+	public Action OnGetPulled;
+	public Action OnGetPulledCanceled;
 
+	public void Pull(Transform position, float speed)
+	{
+		if (!data.Pullable) {
+			return;
+		}
+		OnGetPulled?.Invoke();
+		OnGetPulledValues?.Invoke(position, speed);
+	}
+
+	public void CancelPulling()
+	{
+		OnGetPulledCanceled.Invoke();
+	}
+
+	//Health
 	public Action<int> OnGetHit;
 	public Action OnDied;
-	public void GetHit(int dmg)
+
+	public void Hit(int dmg)
 	{
 		data.HP = Mathf.Clamp(data.HP - dmg, 0, int.MaxValue);
-		if(data.HP <= 0) {
+		if (data.HP <= 0) {
 			OnDied?.Invoke();
+			Destroy(gameObject);
 		} else {
 			OnGetHit?.Invoke(dmg);
 		}
 	}
 
-	public Action OnGetCaught;
-	public Action OnGetCaughtCanceled;
-	public Action<Transform, float> OnGetPulled;
-	public Action OnGetPulledCanceled;
-	public void GetCaught()
-	{
-		OnGetCaught?.Invoke();
-	}
-
-	public void CancelGetCaught()
-	{
-		OnGetPulledCanceled?.Invoke();
-		OnGetCaughtCanceled?.Invoke();
-	}
-
-	public void Pull(Transform position, float speed)
-	{
-		OnGetPulled?.Invoke(position, speed);
-	}
-
-	public void CancelPull()
-	{
-		OnGetPulledCanceled.Invoke();
-	}
-
-
 	//Stun
 	public Action OnGetStuned;
 	public Action OnGetStunedEnded;
+
 	public void Stun(float time)
 	{
 		OnGetStuned?.Invoke();

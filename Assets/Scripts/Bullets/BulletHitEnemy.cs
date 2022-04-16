@@ -6,12 +6,12 @@ public class BulletHitEnemy : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (collision.gameObject.layer != 16) {//16 = enemy
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Enemy")) {
             return;
         }
 
         EnemyEventSystem enemy = collision.gameObject.GetComponent<EnemyEventSystem>();
-        enemy.GetHit(damage);
+        enemy.Hit(damage);
         Destroy(gameObject);
 	}
 }

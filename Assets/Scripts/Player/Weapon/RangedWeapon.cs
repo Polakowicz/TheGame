@@ -6,11 +6,10 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
 	//Components
+	[SerializeField] PlayerEventSystem playerEventSystem;
 	[SerializeField] Transform gunTransform;
 	[SerializeField] GameObject bulletPrefab;
-	[SerializeField] MonoBehaviour player;
-	[SerializeField] PlayerEventSystem playerEventSystem;
-
+	
 	//Parameters
 	[SerializeField] float startFireRate;
 	[SerializeField] float maxFireRate;
@@ -20,9 +19,8 @@ public class RangedWeapon : Weapon
 	[SerializeField] float maxDispersion;
 	[SerializeField] float dispersinPercentageIncrease;
 
-	[SerializeField] float beamPullSpeed;
-
 	[SerializeField] LayerMask beamHitLayerMask;
+	[SerializeField] float beamPullSpeed;
 	[SerializeField] float beamDistance = 10f;
 
 	//Internal variables
@@ -33,17 +31,17 @@ public class RangedWeapon : Weapon
 
 	public override void PerformBasicAttack()
 	{
-		UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
+		Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
 	}
 
 	public override void PerformStrongerAttack() 
 	{
-		autoFireCoroutine = player.StartCoroutine(AutoFire());
+		autoFireCoroutine = StartCoroutine(AutoFire());
 	}
 	public override void CancelStrongerAttack()
 	{
 		if(autoFireCoroutine != null) {
-			player.StopCoroutine(autoFireCoroutine);
+			StopCoroutine(autoFireCoroutine);
 		}
 	}
 	IEnumerator AutoFire()
@@ -51,7 +49,7 @@ public class RangedWeapon : Weapon
 		fireRate = startFireRate;
 		dispersion = startDispersion;
 		while (true) {
-			UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
+			Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
 			yield return new WaitForSeconds(fireRate);
 			if (dispersion < maxDispersion) {
 				dispersion += dispersinPercentageIncrease * Mathf.Abs(maxDispersion - dispersion);
@@ -73,14 +71,10 @@ public class RangedWeapon : Weapon
 		var hit = Physics2D.Raycast(gunTransform.position, gunTransform.up, beamDistance, beamHitLayerMask);
 		if (hit.collider != null) {
 			beamHit = hit.collider.gameObject;
-			beamHit.GetComponent<EnemyEventSystem>().GetCaught();
 		}
 	}
 	public override void CancelAlternativeAttack()
 	{
-		if (beamHit != null) {
-			beamHit.GetComponent<EnemyEventSystem>().CancelGetCaught();
-		}
 		beamHit = null;
 	}
 

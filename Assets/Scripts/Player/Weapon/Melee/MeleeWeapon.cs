@@ -8,32 +8,35 @@ public class MeleeWeapon : Weapon
 {
 	//Components
 	[SerializeField] PlayerEventSystem eventSystem;
-	[SerializeField] Collider2D meleeRange;
 	[SerializeField] LayerMask melleWeaponLayerMask;
+	[SerializeField] Collider2D meleeRange;
 	[SerializeField] Collider2D blockRange;
 
 	//Internal variables
-	ContactFilter2D contactFilter;
+	ContactFilter2D attackContactFilter;
 
 	//Parameters
+	[SerializeField] int basicAttackDamage;
+
 	[SerializeField] float thrustSpeed;
 	[SerializeField] float thrustTime;
 	[SerializeField] int thrustDmg;
 
-	public MeleeWeapon()
+	void Start()
 	{
-		contactFilter = new ContactFilter2D {
+		attackContactFilter = new ContactFilter2D {
 			layerMask = melleWeaponLayerMask,
-			useLayerMask = true
+			useLayerMask = true,
+			useTriggers = true
 		};
 	}
 
 	public override void PerformBasicAttack()
 	{
 		List<Collider2D> hits = new List<Collider2D>();
-		meleeRange.OverlapCollider(contactFilter, hits);
+		meleeRange.OverlapCollider(attackContactFilter, hits);
 		foreach (Collider2D hit in hits) {
-			hit.GetComponent<EnemyEventSystem>().GetHit(damage);
+			hit.GetComponent<EnemyEventSystem>().Hit(basicAttackDamage);
 		}
 	}
 	

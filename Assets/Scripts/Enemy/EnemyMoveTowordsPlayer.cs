@@ -2,6 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(EnemyEventSystem))]
 public class EnemyMoveTowordsPlayer : MonoBehaviour
 {
 	EnemyEventSystem enemyEventSystem;
@@ -10,8 +11,8 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 
 	//Parameters
 	[SerializeField] float speed;
-	[SerializeField] float maxSightRange;
-	[SerializeField] float minSightRange;
+	[SerializeField] float maxRange;
+	[SerializeField] float minRange;
 
 	bool active;
 
@@ -21,16 +22,18 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		player = GameObject.FindGameObjectWithTag("Player");
 
-		enemyEventSystem.OnGetCaught += StopMovement;
-		enemyEventSystem.OnGetCaughtCanceled += StartMovement;
+		enemyEventSystem.OnDied += StopMovement;
+		enemyEventSystem.OnGetPulled += StopMovement;
+		enemyEventSystem.OnGetPulledCanceled += StartMovement;
 
 		active = true;
 	}
 
 	void OnDestroy()
 	{
-		enemyEventSystem.OnGetCaught -= StopMovement;
-		enemyEventSystem.OnGetCaughtCanceled -= StartMovement;
+		enemyEventSystem.OnDied -= StopMovement;
+		enemyEventSystem.OnGetPulled -= StopMovement;
+		enemyEventSystem.OnGetPulledCanceled -= StartMovement;
 	}
 
 	void Update()
@@ -40,7 +43,7 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		}
 
 		var distance = Vector2.Distance(transform.position, player.transform.position);
-		if(distance > maxSightRange || distance < minSightRange) {
+		if(distance > maxRange || distance < minRange) {
 			rb.velocity = Vector2.zero;
 			return;
 		}

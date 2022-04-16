@@ -15,7 +15,7 @@ public class PlayerWeaponInputController : MonoBehaviour
     InputAction basicAttackActinon;
     InputAction strongerAttackAction;
     InputAction alternativeAttackAction;
-    InputAction scrollAction;
+    InputAction pullAction;
 
     //Internal Variables
     Weapon equippedWeapon;
@@ -35,7 +35,7 @@ public class PlayerWeaponInputController : MonoBehaviour
         basicAttackActinon = playerInput.actions["Basic attack"];
         strongerAttackAction = playerInput.actions["Stronger attack"];
         alternativeAttackAction = playerInput.actions["Alternative attack"];
-        scrollAction = playerInput.actions["Scroll"];
+        pullAction = playerInput.actions["Scroll"];
     }
 
     void SubscribeToEvents()
@@ -68,7 +68,7 @@ public class PlayerWeaponInputController : MonoBehaviour
 
 	void Update()
 	{
-        var scrollInputValue = scrollAction.ReadValue<float>();
+        var scrollInputValue = pullAction.ReadValue<float>();
         if (scrollInputValue != 0) {
             equippedWeapon.PerformBeamPullAction(scrollInputValue);
 		}

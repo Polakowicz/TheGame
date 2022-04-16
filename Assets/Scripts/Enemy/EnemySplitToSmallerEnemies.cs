@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
-	public class EnemyMeleeAttack : MonoBehaviour
+	public class EnemySplitToSmallerEnemies : MonoBehaviour
 	{
 
 		// Use this for initialization

@@ -39,7 +39,8 @@ public class BlockEnemyAttacks : MonoBehaviour
 			if (redirectScript != null) {
 				redirectScript.Redirect();
 			} else {
-				Debug.LogError("Bullet has not BllockDirectionChangeScript");
+				Debug.Log("Bullet does not have redirect script");
+				Destroy(block.gameObject);
 			}
 		}
 		blockEnabled = true;
@@ -48,7 +49,6 @@ public class BlockEnemyAttacks : MonoBehaviour
 	void DisableBlock()
 	{
 		blockEnabled = false;
-		Debug.Log("Cancel");
 	}
 
 	void OnTriggerEnter2D(Collider2D collision)
