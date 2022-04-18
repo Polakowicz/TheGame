@@ -7,6 +7,26 @@ public class PlayerEventSystem : MonoBehaviour
 {
     [SerializeField] public PlayerData playerData;
 
+    public event Action OnGetDamaged;
+    public event Action OnHPGained;
+    public event Action OnDied;
+
+    public void GiveDamage(int dmg)
+    {
+        playerData.HP = Mathf.Clamp(playerData.HP - dmg, 0, playerData.MaxHP);
+        if(playerData.HP <= 0) {
+            OnDied?.Invoke();
+            Destroy(gameObject);//temporary solution
+		} else {
+            OnGetDamaged?.Invoke();
+		}
+    }
+    public void GiveHP(int hp)
+	{
+        playerData.HP += Mathf.Clamp(playerData.HP + hp, 0, playerData.MaxHP);
+        OnHPGained?.Invoke();
+    }
+
     //Blade Thrust
     public event Action<PlayerData, float, float, int> OnBladeThrustStarted;
     public event Action OnBladeThrustEnded;
