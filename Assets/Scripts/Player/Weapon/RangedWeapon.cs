@@ -22,6 +22,7 @@ public class RangedWeapon : Weapon
 	[SerializeField] LayerMask beamHitLayerMask;
 	[SerializeField] float beamPullSpeed;
 	[SerializeField] float beamDistance = 10f;
+	[SerializeField] float beamPullCooldown;
 
 	//Internal variables
 	GameObject beamHit;
@@ -29,6 +30,7 @@ public class RangedWeapon : Weapon
 	float fireRate;
 	float dispersion;
 
+	//Shooting
 	public override void PerformBasicAttack()
 	{
 		Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
@@ -66,6 +68,7 @@ public class RangedWeapon : Weapon
 		return Quaternion.Euler(0,0,newRotation);
 	}
 
+	//Beam
 	public override void StartAlternativeAttack()
 	{
 		var hit = Physics2D.Raycast(gunTransform.position, gunTransform.up, beamDistance, beamHitLayerMask);
@@ -78,6 +81,7 @@ public class RangedWeapon : Weapon
 		beamHit = null;
 	}
 
+	//Pull
 	public override void PerformBeamPullAction(float input)
 	{
 		if (beamHit == null) {
@@ -93,6 +97,7 @@ public class RangedWeapon : Weapon
 	private void PullPlayerTowardsTarget()
 	{
 		playerEventSystem.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed);
+		CancelAlternativeAttack();
 	}
 	private void PullTargetTowardsPlayer()
 	{

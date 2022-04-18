@@ -24,6 +24,8 @@ public class EnemyShootsPlayer : MonoBehaviour
 		enemyEventSystem.OnDied += StopShooting;
 		enemyEventSystem.OnGetPulled += StopShooting;
 		enemyEventSystem.OnGetPulledCanceled += StartShooting;
+		enemyEventSystem.OnGetStuned += StopShooting;
+		enemyEventSystem.OnGetStunedEnded += StartShooting;
 
 		active = true;
 	}
@@ -33,6 +35,8 @@ public class EnemyShootsPlayer : MonoBehaviour
 		enemyEventSystem.OnDied -= StopShooting;
 		enemyEventSystem.OnGetPulled -= StopShooting;
 		enemyEventSystem.OnGetPulledCanceled -= StartShooting;
+		enemyEventSystem.OnGetStuned -= StopShooting;
+		enemyEventSystem.OnGetStunedEnded -= StartShooting;
 	}
 
 	void Update()

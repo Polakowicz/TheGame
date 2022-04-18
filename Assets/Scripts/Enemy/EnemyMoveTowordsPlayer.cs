@@ -25,6 +25,8 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		enemyEventSystem.OnDied += StopMovement;
 		enemyEventSystem.OnGetPulled += StopMovement;
 		enemyEventSystem.OnGetPulledCanceled += StartMovement;
+		enemyEventSystem.OnGetStuned += StopMovement;
+		enemyEventSystem.OnGetStunedEnded += StartMovement;
 
 		active = true;
 	}
@@ -34,6 +36,8 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		enemyEventSystem.OnDied -= StopMovement;
 		enemyEventSystem.OnGetPulled -= StopMovement;
 		enemyEventSystem.OnGetPulledCanceled -= StartMovement;
+		enemyEventSystem.OnGetStuned -= StopMovement;
+		enemyEventSystem.OnGetStunedEnded -= StartMovement;
 	}
 
 	void Update()

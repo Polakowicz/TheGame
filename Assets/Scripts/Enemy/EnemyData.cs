@@ -10,5 +10,7 @@ class EnemyData
 {
 	public int HP;
 	public bool Pullable;
+	public float ChanceToBeStuned;
+	public float StunTime;
 }
 

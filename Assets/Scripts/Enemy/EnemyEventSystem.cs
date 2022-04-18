@@ -45,10 +45,14 @@ public class EnemyEventSystem : MonoBehaviour
 	public Action OnGetStuned;
 	public Action OnGetStunedEnded;
 
-	public void Stun(float time)
+	public void Stun()
 	{
+		if(UnityEngine.Random.value > data.ChanceToBeStuned) {
+			return;
+		}
+
 		OnGetStuned?.Invoke();
-		StartCoroutine(WaitStunTime(time));
+		StartCoroutine(WaitStunTime(data.StunTime));
 	}
 
 	IEnumerator WaitStunTime(float time)
