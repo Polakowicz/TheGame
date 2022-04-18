@@ -7,4 +7,5 @@ public class PlayerData
 {
 	public Vector2 aimDirection;
 	public int HP;
+	public GameObject enemyToPulled;
 }

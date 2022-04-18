@@ -41,11 +41,15 @@ public class PlayerEventSystem : MonoBehaviour
     
     public void StartBeamPullTowardsEnemy(GameObject enemy, float speed)
 	{
+        Debug.Log(enemy);
+        playerData.enemyToPulled = enemy;
         OnBeamPullTowardsEnemyStarted?.Invoke(enemy, speed);
 	}
 
     public void EndBeamPullTowardsEnemy()
 	{
+        playerData.enemyToPulled.GetComponent<EnemyEventSystem>().Stun();
+        playerData.enemyToPulled = null;
         OnBeamPullTowardsEnemyEnded?.Invoke();
 	}
 }
