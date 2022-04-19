@@ -3,40 +3,22 @@ using UnityEngine;
 
 public class EnemyShootsPlayer : MonoBehaviour
 {
-	EnemyEventSystem enemyEventSystem;
-	GameObject player;
+	Enemy enemy;
+	EnemySharedData data;
 
 	//Parameters
 	[SerializeField] GameObject bullet;
-	[SerializeField] float maxRange;
-	[SerializeField] float minRange;
+	[SerializeField] float maxDistance;
+	[SerializeField] float minDistance;
 	[SerializeField] float cooldown;
 	//Internal variables
 
 	float cooldownLeft;
-	bool active;
 
 	void Start()
 	{
-		enemyEventSystem = GetComponent<EnemyEventSystem>();
-		player = GameObject.FindWithTag("Player");
-
-		enemyEventSystem.OnDied += StopShooting;
-		enemyEventSystem.OnGetPulled += StopShooting;
-		enemyEventSystem.OnGetPulledCanceled += StartShooting;
-		enemyEventSystem.OnGetStuned += StopShooting;
-		enemyEventSystem.OnGetStunedEnded += StartShooting;
-
-		active = true;
-	}
-
-	void OnDestroy()
-	{
-		enemyEventSystem.OnDied -= StopShooting;
-		enemyEventSystem.OnGetPulled -= StopShooting;
-		enemyEventSystem.OnGetPulledCanceled -= StartShooting;
-		enemyEventSystem.OnGetStuned -= StopShooting;
-		enemyEventSystem.OnGetStunedEnded -= StartShooting;
+		enemy = GetComponent<Enemy>();
+		data = enemy.SharedData;
 	}
 
 	void Update()
@@ -46,28 +28,18 @@ public class EnemyShootsPlayer : MonoBehaviour
 			return;
 		}
 
-		if (!active) {
+		if (data.Stunned || data.Pulled) {
 			return;
 		}
 
-		var distance = Vector2.Distance(transform.position, player.transform.position);
-		if (distance > maxRange || distance < minRange) {
+		var distance = data.DistanceToPlayer;
+		if (distance > maxDistance || distance < minDistance) {
 			return;
 		}
 
-		var direction = player.transform.position - transform.position;
+		var direction = data.DirectionToPlayer;
 		var rotation = Vector2.SignedAngle(Vector2.up, direction);
 		Instantiate(bullet, gameObject.transform.position, Quaternion.Euler(0, 0, rotation));
 		cooldownLeft = cooldown;
-	}
-
-	void StopShooting()
-	{
-		active = false;
-	}
-
-	void StartShooting()
-	{
-		active = true;
 	}
 }

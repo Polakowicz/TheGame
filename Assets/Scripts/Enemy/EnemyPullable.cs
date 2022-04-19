@@ -4,60 +4,35 @@ using UnityEngine;
 
 public class EnemyPullable : MonoBehaviour
 {
-	EnemyEventSystem enemyEventSystem;
+	Enemy enemy;
+	EnemySharedData data;
 	Rigidbody2D rb;
 
 	[SerializeField] float targetDistance;
-
-	Transform playerPositoin;
-	float speed;
-	bool active;
 	
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-
-		enemyEventSystem = GetComponent<EnemyEventSystem>();
-
-		enemyEventSystem.OnGetPulledValues += GetPulledToPosition;
-		enemyEventSystem.OnGetPulledCanceled += CanelGetPulledToPosition;
-	}
-
-	void OnDestroy()
-	{
-		enemyEventSystem.OnGetPulledValues -= GetPulledToPosition;
-		enemyEventSystem.OnGetPulledCanceled -= CanelGetPulledToPosition;
+		enemy = GetComponent<Enemy>();
+		data = enemy.SharedData;
 	}
 
 	void Update()
 	{
-		if (!active) {
+		if (!data.Pulled) {
 			return;
 		}
 
-		var distance = Vector2.Distance(playerPositoin.position, rb.position);
+		var distance = data.DistanceToPlayer;
 
 		if (distance <= targetDistance) {
-			active = false;
+			data.Pulled = false;
 			rb.velocity = Vector2.zero;
-			enemyEventSystem.CancelPulling();
+			enemy.EndPull();
 			return;
 		}
 
-		var direction = (Vector2)playerPositoin.position - rb.position;
-		rb.velocity = direction.normalized * speed;
-	}
-
-	void GetPulledToPosition(Transform position, float speed)
-	{
-		playerPositoin = position;
-		this.speed = speed;
-		active = true;
-	}
-
-	void CanelGetPulledToPosition()
-	{
-		rb.velocity = Vector2.zero;
-		active = false;
+		var direction = data.DirectionToPlayer;
+		rb.velocity = direction.normalized * data.PullSpeed;
 	}
 }

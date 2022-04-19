@@ -2,68 +2,38 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(EnemyEventSystem))]
+[RequireComponent(typeof(Enemy))]
 public class EnemyMoveTowordsPlayer : MonoBehaviour
 {
-	EnemyEventSystem enemyEventSystem;
-	GameObject player;
+	Enemy enemy;
+	EnemySharedData data;
 	Rigidbody2D rb;
 
 	//Parameters
-	[SerializeField] float speed;
-	[SerializeField] float maxRange;
-	[SerializeField] float minRange;
-
-	bool active;
+	[SerializeField] float defaultSpeed;
+	[SerializeField] float maxDistance;
+	[SerializeField] float minDistance;
 
 	void Start()
 	{
-		enemyEventSystem = GetComponent<EnemyEventSystem>();
+		enemy = GetComponent<Enemy>();
+		data = enemy.SharedData;
 		rb = GetComponent<Rigidbody2D>();
-		player = GameObject.FindGameObjectWithTag("Player");
-
-		enemyEventSystem.OnDied += StopMovement;
-		enemyEventSystem.OnGetPulled += StopMovement;
-		enemyEventSystem.OnGetPulledCanceled += StartMovement;
-		enemyEventSystem.OnGetStuned += StopMovement;
-		enemyEventSystem.OnGetStunedEnded += StartMovement;
-
-		active = true;
-	}
-
-	void OnDestroy()
-	{
-		enemyEventSystem.OnDied -= StopMovement;
-		enemyEventSystem.OnGetPulled -= StopMovement;
-		enemyEventSystem.OnGetPulledCanceled -= StartMovement;
-		enemyEventSystem.OnGetStuned -= StopMovement;
-		enemyEventSystem.OnGetStunedEnded -= StartMovement;
 	}
 
 	void Update()
 	{
-		if (!active) {
+		if (data.Pulled || data.Stunned) {
 			return;
 		}
 
-		var distance = Vector2.Distance(transform.position, player.transform.position);
-		if(distance > maxRange || distance < minRange) {
+		var distance = data.DistanceToPlayer;
+		if(distance > maxDistance || distance < minDistance) {
 			rb.velocity = Vector2.zero;
 			return;
 		}
 
-		var direction = player.transform.position - transform.position;
-		rb.velocity = direction.normalized * speed;
-	}
-
-	void StopMovement()
-	{
-		rb.velocity = Vector2.zero;
-		active = false;
-	}
-
-	void StartMovement()
-	{
-		active = true;
+		var direction = data.DirectionToPlayer;
+		rb.velocity = direction.normalized * defaultSpeed;
 	}
 }
