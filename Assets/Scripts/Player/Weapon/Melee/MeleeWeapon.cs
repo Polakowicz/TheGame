@@ -36,7 +36,7 @@ public class MeleeWeapon : Weapon
 		List<Collider2D> hits = new List<Collider2D>();
 		meleeRange.OverlapCollider(attackContactFilter, hits);
 		foreach (Collider2D hit in hits) {
-			hit.GetComponent<EnemyEventSystem>().Hit(basicAttackDamage);
+			hit.GetComponent<Enemy>().Hit(basicAttackDamage);
 		}
 	}
 	

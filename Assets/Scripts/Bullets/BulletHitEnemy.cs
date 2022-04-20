@@ -10,7 +10,7 @@ public class BulletHitEnemy : MonoBehaviour
             return;
         }
 
-        EnemyEventSystem enemy = collision.gameObject.GetComponent<EnemyEventSystem>();
+        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         enemy.Hit(damage);
         Destroy(gameObject);
 	}

@@ -11,9 +11,14 @@ public class Enemy : MonoBehaviour
 
 	public EnemySharedData SharedData;
 
-	void Start()
+	private void Awake()
 	{
 		SharedData = new EnemySharedData();
+	}
+
+	void Start()
+	{
+		
 		SharedData.Player = GameObject.FindGameObjectWithTag("Player");
 		SharedData.Enemy = gameObject;
 	}
@@ -72,6 +77,6 @@ public class Enemy : MonoBehaviour
 	public void EndPull()
 	{
 		SharedData.Pulled = false;
-		OnPullEnded.Invoke();	
+		OnPullEnded?.Invoke();	
 	}
 }

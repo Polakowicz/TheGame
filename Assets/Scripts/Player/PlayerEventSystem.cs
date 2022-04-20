@@ -68,7 +68,7 @@ public class PlayerEventSystem : MonoBehaviour
 
     public void EndBeamPullTowardsEnemy()
 	{
-        playerData.enemyToPulled.GetComponent<EnemyEventSystem>().Stun();
+        playerData.enemyToPulled.GetComponent<Enemy>().Stun();
         playerData.enemyToPulled = null;
         OnBeamPullTowardsEnemyEnded?.Invoke();
 	}
