@@ -8,7 +8,9 @@ public class RangedWeapon : Weapon
 	//Components
 	[SerializeField] PlayerEventSystem playerEventSystem;
 	[SerializeField] Transform gunTransform;
-	[SerializeField] GameObject bulletPrefab;
+	[SerializeField] GameObject defaultBullet;
+	[SerializeField] GameObject explosiveBullet;
+	[SerializeField] GameObject piercingBullet;
 	
 	//Parameters
 	[SerializeField] float startFireRate;
@@ -27,13 +29,25 @@ public class RangedWeapon : Weapon
 	//Internal variables
 	GameObject beamHit;
 	Coroutine autoFireCoroutine;
+	GameObject bullet;
 	float fireRate;
 	float dispersion;
+
+	void Start()
+	{
+		bullet = defaultBullet;
+
+		playerEventSystem.powerUpController.OnPowerUpChanged += ChangePowerUp;
+	}
 
 	//Shooting
 	public override void PerformBasicAttack()
 	{
-		Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
+		Instantiate(bullet, gunTransform.position, gunTransform.rotation);
+
+		if (bullet == explosiveBullet) {
+			playerEventSystem.powerUpController.ShootExplosiveBullet();
+		}
 	}
 
 	public override void PerformStrongerAttack() 
@@ -51,7 +65,10 @@ public class RangedWeapon : Weapon
 		fireRate = startFireRate;
 		dispersion = startDispersion;
 		while (true) {
-			Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
+			Instantiate(defaultBullet, gunTransform.position, GetRandomisedAccuracy());
+			if (bullet == explosiveBullet) {
+				playerEventSystem.powerUpController.ShootExplosiveBullet();
+			}
 			yield return new WaitForSeconds(fireRate);
 			if (dispersion < maxDispersion) {
 				dispersion += dispersinPercentageIncrease * Mathf.Abs(maxDispersion - dispersion);
@@ -66,6 +83,15 @@ public class RangedWeapon : Weapon
 		var rotation = gunTransform.rotation.eulerAngles.z;
 		float newRotation = UnityEngine.Random.Range(rotation - dispersion, rotation + dispersion);
 		return Quaternion.Euler(0,0,newRotation);
+	}
+
+	public void ChangePowerUp(PowerUp.PowerType type, bool active)
+	{
+		if (type == PowerUp.PowerType.ShotExplosion) {
+			bullet = active ? explosiveBullet : defaultBullet;
+		} else if (type == PowerUp.PowerType.ShotPiercing) {
+			bullet = active ? piercingBullet : defaultBullet;
+		}
 	}
 
 	//Beam

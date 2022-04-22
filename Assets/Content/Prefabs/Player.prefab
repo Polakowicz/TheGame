@@ -92,6 +92,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1436956162}
+  - {fileID: 3380846687765363776}
   - {fileID: 7867766914167915164}
   - {fileID: 5803267822016605072}
   m_Father: {fileID: 2896284850258396948}
@@ -113,12 +114,76 @@ MonoBehaviour:
   melleWeaponLayerMask:
     serializedVersion: 2
     m_Bits: 65536
-  meleeRange: {fileID: 1436956163}
+  defaultRange: {fileID: 1436956163}
+  powerupRange: {fileID: 7492179955472192783}
   blockRange: {fileID: 3700359822864264953}
   basicAttackDamage: 15
   thrustSpeed: 15
   thrustTime: 0.2
   thrustDmg: 50
+--- !u!1 &1995817468467714320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3380846687765363776}
+  - component: {fileID: 7492179955472192783}
+  m_Layer: 15
+  m_Name: MeleeDoubleRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3380846687765363776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995817468467714320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4135934037195639935}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &7492179955472192783
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995817468467714320}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.3, y: 1.9}
+      - {x: 0, y: 2}
+      - {x: -0.3, y: 1.9}
+      - {x: -0.75, y: 1.5}
+      - {x: -0.1, y: 0}
+      - {x: 0.1, y: 0}
+      - {x: 0.75, y: 1.5}
 --- !u!1 &2225472237987491096
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4135934037195639935}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &3700359822864264953
 CircleCollider2D:
@@ -310,6 +375,7 @@ GameObject:
   - component: {fileID: 2896284850009964027}
   - component: {fileID: 4717716870089605577}
   - component: {fileID: 2896284850009964007}
+  - component: {fileID: 6348656884894791210}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -517,12 +583,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    MaxHP: 0
-    NewForceFieldCharges: 2
+    MaxHP: 100
     aimDirection: {x: 0, y: 0}
     HP: 0
     enemyToPulled: {fileID: 0}
-    forceFieldchargesRemaining: 0
+  powerUpController: {fileID: 6348656884894791210}
 --- !u!114 &2896284850009964007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +605,22 @@ MonoBehaviour:
   basicSpeed: 5
   dashSpeed: 30
   dashTime: 0.1
+--- !u!114 &6348656884894791210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57be62309cf120e44920977166cb9a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoubleBladeTimeLeft: 0
+  forceFieldChargesRemaining: 0
+  piercingBulletsTimeLeft: 0
+  explosiveBulletsRemaining: 0
 --- !u!1 &2896284850258396949
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +732,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerEventSystem: {fileID: 4717716870089605577}
   gunTransform: {fileID: 2896284848948219050}
-  bulletPrefab: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
+  defaultBullet: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
+  explosiveBullet: {fileID: 2060159463036227266, guid: e4a8e39fa29b01c4085fd0463640fdf3, type: 3}
+  piercingBullet: {fileID: 6116300935966142805, guid: 12a9281e2f011544db65a78115faf54b, type: 3}
   startFireRate: 0.4
   maxFireRate: 0.1
   fireRatePercentageIncrease: 0.1
@@ -694,7 +777,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4135934037195639935}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8162505908868652061
 BoxCollider2D:
