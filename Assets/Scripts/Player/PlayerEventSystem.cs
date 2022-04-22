@@ -12,14 +12,20 @@ public class PlayerEventSystem : MonoBehaviour
     public event Action OnHPGained;
     public event Action OnDied;
 
-    //Health
-    public void GiveDamage(int dmg)
+	void Start()
+	{
+		playerData.HP = playerData.MaxHP;
+	}
+
+	//Health
+	public void GiveDamage(int dmg)
     {
 		if (powerUpController.HitForceField()) {
             return;
 		}
 
         playerData.HP = Mathf.Clamp(playerData.HP - dmg, 0, playerData.MaxHP);
+        Debug.Log($"Player HP: {playerData.HP}");
         if(playerData.HP <= 0) {
             OnDied?.Invoke();
             Destroy(gameObject);//temporary solution
