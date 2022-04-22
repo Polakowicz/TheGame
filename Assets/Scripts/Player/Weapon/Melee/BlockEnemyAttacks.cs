@@ -57,7 +57,7 @@ public class BlockEnemyAttacks : MonoBehaviour
 			return;
 		}
 
-		if (!(blockLayerMask == (blockLayerMask | (1 << collision.gameObject.layer)))) {
+		if (blockLayerMask != (blockLayerMask | (1 << collision.gameObject.layer))) {
 			return;
 		}
 		

@@ -22,6 +22,6 @@ public class PowerUp : MonoBehaviour
 			return;
 		}
 
-		collision.GetComponent<PlayerEventSystem>().GetPowerUp(powerType);
+		collision.GetComponent<PlayerEventSystem>().GetPowerUp(this);
 	}
 }
