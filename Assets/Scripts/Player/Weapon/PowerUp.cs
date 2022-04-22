@@ -22,6 +22,11 @@ public class PowerUp : MonoBehaviour
 			return;
 		}
 
-		collision.GetComponent<PlayerEventSystem>().AddPowerUp(this);
+		if (collision.isTrigger) {
+			return;
+		}
+
+		collision.gameObject.GetComponent<PlayerEventSystem>().AddPowerUp(this);
+		Destroy(gameObject);
 	}
 }
