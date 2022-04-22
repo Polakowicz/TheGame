@@ -101,6 +101,6 @@ public class RangedWeapon : Weapon
 	}
 	private void PullTargetTowardsPlayer()
 	{
-		beamHit.GetComponent<EnemyEventSystem>().Pull(transform, beamPullSpeed);
+		beamHit.GetComponent<Enemy>().Pull(beamPullSpeed);
 	}
 }
