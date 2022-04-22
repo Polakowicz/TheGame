@@ -110,10 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 4717716870089605577}
-  meleeRange: {fileID: 1436956163}
   melleWeaponLayerMask:
     serializedVersion: 2
     m_Bits: 65536
+  meleeRange: {fileID: 1436956163}
   blockRange: {fileID: 3700359822864264953}
   basicAttackDamage: 15
   thrustSpeed: 15
@@ -420,9 +420,9 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    pivot: {x: 0.53051746, y: 0.24615064}
+    oldSize: {x: 3.875, y: 3.875}
+    newSize: {x: 3.875, y: 3.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -517,8 +517,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
+    MaxHP: 0
+    NewForceFieldCharges: 2
     aimDirection: {x: 0, y: 0}
     HP: 0
+    enemyToPulled: {fileID: 0}
+    forceFieldchargesRemaining: 0
 --- !u!114 &2896284850009964007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,21 +649,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455109904c2044e41a69bc81c95e68b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerEventSystem: {fileID: 4717716870089605577}
   gunTransform: {fileID: 2896284848948219050}
   bulletPrefab: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
-  player: {fileID: 2896284850258396950}
-  playerEventSystem: {fileID: 4717716870089605577}
   startFireRate: 0.4
   maxFireRate: 0.1
   fireRatePercentageIncrease: 0.1
   startDispersion: 0
   maxDispersion: 30
   dispersinPercentageIncrease: 0.1
-  beamPullSpeed: 15
   beamHitLayerMask:
     serializedVersion: 2
     m_Bits: 65536
+  beamPullSpeed: 15
   beamDistance: 7
+  beamPullCooldown: 0
 --- !u!1 &4129938975792256201
 GameObject:
   m_ObjectHideFlags: 0

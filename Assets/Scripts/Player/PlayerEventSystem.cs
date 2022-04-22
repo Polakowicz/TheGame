@@ -11,6 +11,7 @@ public class PlayerEventSystem : MonoBehaviour
     public event Action OnHPGained;
     public event Action OnDied;
 
+    //Health
     public void GiveDamage(int dmg)
     {
         playerData.HP = Mathf.Clamp(playerData.HP - dmg, 0, playerData.MaxHP);
@@ -26,6 +27,18 @@ public class PlayerEventSystem : MonoBehaviour
         playerData.HP += Mathf.Clamp(playerData.HP + hp, 0, playerData.MaxHP);
         OnHPGained?.Invoke();
     }
+
+    //PowerUps
+    public event Action<PowerUp.PowerType> OnGetPowerUp;
+
+    public void GetPowerUp(PowerUp.PowerType type)
+	{
+       if(type == PowerUp.PowerType.ForceField) {
+            playerData.forceFieldchargesRemaining = playerData.NewForceFieldCharges;
+	   }
+
+       OnGetPowerUp?.Invoke(type);
+	}
 
     //Blade Thrust
     public event Action<PlayerData, float, float, int> OnBladeThrustStarted;
