@@ -14,6 +14,11 @@ public class PlayerEventSystem : MonoBehaviour
     //Health
     public void GiveDamage(int dmg)
     {
+        if(playerData.forceFieldchargesRemaining > 0) {
+            playerData.forceFieldchargesRemaining--;
+            return;
+		}
+
         playerData.HP = Mathf.Clamp(playerData.HP - dmg, 0, playerData.MaxHP);
         if(playerData.HP <= 0) {
             OnDied?.Invoke();
