@@ -34,15 +34,28 @@ public class PlayerEventSystem : MonoBehaviour
     }
 
     //PowerUps
-    public event Action<PowerUp.PowerType> OnGetPowerUp;
+    public event Action OnForceFieldGet;
+    public event Action OnDoubleBladeStart;
+    public event Action OnDoubleBladeEnd;
 
-    public void GetPowerUp(PowerUp.PowerType type)
+    public void GetPowerUp(PowerUp powerup)
 	{
-       if(type == PowerUp.PowerType.ForceField) {
-            playerData.forceFieldchargesRemaining = playerData.NewForceFieldCharges;
-	   }
+        switch (powerup.powerType) {
+            case PowerUp.PowerType.ForceField:
+                playerData.forceFieldchargesRemaining = playerData.NewForceFieldCharges;
+                OnForceFieldGet?.Invoke();
+                return;
+            case PowerUp.PowerType.DoubleBlade:
+                OnDoubleBladeStart?.Invoke();
+                StartCoroutine(DoubleBladeDuration(powerup.Duration));
+                return;
+        }
+	}
 
-       OnGetPowerUp?.Invoke(type);
+    private IEnumerator DoubleBladeDuration(float time)
+	{
+        yield return new WaitForSeconds(time);
+        OnDoubleBladeEnd?.Invoke();
 	}
 
     //Blade Thrust

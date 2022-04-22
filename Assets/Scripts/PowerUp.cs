@@ -14,6 +14,7 @@ public class PowerUp : MonoBehaviour
 	}
 
 	public PowerType powerType;
+	public int Duration;
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
