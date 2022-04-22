@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletExplode : MonoBehaviour
 {
 	[SerializeField] LayerMask hitLayerMask;
+	[SerializeField] int damage;
 
 	CircleCollider2D rangeCollider;
 	ContactFilter2D filter;
@@ -32,8 +33,9 @@ public class BulletExplode : MonoBehaviour
 		rangeCollider.OverlapCollider(filter, hits);
 		foreach (Collider2D hit in hits) {
 			var distance = Vector2.Distance(transform.position, hit.transform.position);
-			var dmg = (range - distance) / range;
+			var dmg = (range - distance) / range * damage;
 			hit.GetComponent<Enemy>().Hit(Mathf.FloorToInt(dmg));
 		}
+		Destroy(gameObject);
 	}
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerEventSystem : MonoBehaviour
 {
     [SerializeField] public PlayerData playerData;
+    [SerializeField] public PowerUpController powerUpController;
 
     public event Action OnGetDamaged;
     public event Action OnHPGained;
@@ -14,8 +15,7 @@ public class PlayerEventSystem : MonoBehaviour
     //Health
     public void GiveDamage(int dmg)
     {
-        if(playerData.forceFieldchargesRemaining > 0) {
-            playerData.forceFieldchargesRemaining--;
+		if (powerUpController.HitForceField()) {
             return;
 		}
 
@@ -33,30 +33,36 @@ public class PlayerEventSystem : MonoBehaviour
         OnHPGained?.Invoke();
     }
 
-    //PowerUps
-    public event Action OnForceFieldGet;
-    public event Action OnDoubleBladeStart;
-    public event Action OnDoubleBladeEnd;
-
-    public void GetPowerUp(PowerUp powerup)
+    //PowerUp
+    public void AddPowerUp(PowerUp powerUp)
 	{
-        switch (powerup.powerType) {
-            case PowerUp.PowerType.ForceField:
-                playerData.forceFieldchargesRemaining = playerData.NewForceFieldCharges;
-                OnForceFieldGet?.Invoke();
-                return;
-            case PowerUp.PowerType.DoubleBlade:
-                OnDoubleBladeStart?.Invoke();
-                StartCoroutine(DoubleBladeDuration(powerup.Duration));
-                return;
-        }
+        powerUpController.AddPowerUp(powerUp);
 	}
 
-    private IEnumerator DoubleBladeDuration(float time)
-	{
-        yield return new WaitForSeconds(time);
-        OnDoubleBladeEnd?.Invoke();
-	}
+ //   //PowerUps
+ //   public event Action OnForceFieldGet;
+ //   public event Action OnDoubleBladeStart;
+ //   public event Action OnDoubleBladeEnd;
+
+ //   public void GetPowerUp(PowerUp powerup)
+	//{
+ //       switch (powerup.powerType) {
+ //           case PowerUp.PowerType.ForceField:
+ //               playerData.forceFieldchargesRemaining = playerData.NewForceFieldCharges;
+ //               OnForceFieldGet?.Invoke();
+ //               return;
+ //           case PowerUp.PowerType.DoubleBlade:
+ //               OnDoubleBladeStart?.Invoke();
+ //               StartCoroutine(DoubleBladeDuration(powerup.Duration));
+ //               return;
+ //       }
+	//}
+
+ //   private IEnumerator DoubleBladeDuration(float time)
+	//{
+ //       yield return new WaitForSeconds(time);
+ //       OnDoubleBladeEnd?.Invoke();
+	//}
 
     //Blade Thrust
     public event Action<PlayerData, float, float, int> OnBladeThrustStarted;

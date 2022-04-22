@@ -33,8 +33,7 @@ public class MeleeWeapon : Weapon
 		};
 
 		range = defaultRange;
-		eventSystem.OnDoubleBladeStart += GetDoubleBlade;
-		eventSystem.OnDoubleBladeEnd += EndDoubleBlade;
+		eventSystem.powerUpController.OnPowerUpChanged += ChangePowerUp;
 	}
 
 	public override void PerformBasicAttack()
@@ -60,13 +59,12 @@ public class MeleeWeapon : Weapon
 		eventSystem.EndBladeBlock();
 	}
 
-	private void GetDoubleBlade()
+	private void ChangePowerUp(PowerUp.PowerType type, bool active)
 	{
-		range = powerupRange;
-	}
+		if(type != PowerUp.PowerType.DoubleBlade) {
+			return;
+		}
 
-	private void EndDoubleBlade()
-	{
-		range = defaultRange;
+		range = active ? powerupRange : defaultRange;
 	}
 }
