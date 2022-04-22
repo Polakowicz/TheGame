@@ -9,11 +9,13 @@ public class MeleeWeapon : Weapon
 	//Components
 	[SerializeField] PlayerEventSystem eventSystem;
 	[SerializeField] LayerMask melleWeaponLayerMask;
-	[SerializeField] Collider2D meleeRange;
+	[SerializeField] Collider2D defaultRange;
+	[SerializeField] Collider2D powerupRange;
 	[SerializeField] Collider2D blockRange;
 
 	//Internal variables
 	ContactFilter2D attackContactFilter;
+	Collider2D range;
 
 	//Parameters
 	[SerializeField] int basicAttackDamage;
@@ -29,12 +31,15 @@ public class MeleeWeapon : Weapon
 			useLayerMask = true,
 			useTriggers = true
 		};
+
+		range = defaultRange;
+		eventSystem.powerUpController.OnPowerUpChanged += ChangePowerUp;
 	}
 
 	public override void PerformBasicAttack()
 	{
 		List<Collider2D> hits = new List<Collider2D>();
-		meleeRange.OverlapCollider(attackContactFilter, hits);
+		range.OverlapCollider(attackContactFilter, hits);
 		foreach (Collider2D hit in hits) {
 			hit.GetComponent<Enemy>().Hit(basicAttackDamage);
 		}
@@ -52,5 +57,14 @@ public class MeleeWeapon : Weapon
 	public override void CancelAlternativeAttack()
 	{
 		eventSystem.EndBladeBlock();
+	}
+
+	private void ChangePowerUp(PowerUp.PowerType type, bool active)
+	{
+		if(type != PowerUp.PowerType.DoubleBlade) {
+			return;
+		}
+
+		range = active ? powerupRange : defaultRange;
 	}
 }

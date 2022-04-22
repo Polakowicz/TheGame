@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
 	private void Awake()
 	{
 		SharedData = new EnemySharedData();
+		SharedData.HP = MaxHP;
 	}
 
 	void Start()
@@ -29,7 +30,9 @@ public class Enemy : MonoBehaviour
 
 	public void Hit(int dmg)
 	{
+		Debug.Log($"HP {SharedData.HP}, dmg {dmg}");
 		SharedData.HP = Mathf.Clamp(SharedData.HP - dmg, 0, int.MaxValue);
+		
 		if (SharedData.HP <= 0) {
 			OnDied?.Invoke();
 			Destroy(gameObject);//Temporary

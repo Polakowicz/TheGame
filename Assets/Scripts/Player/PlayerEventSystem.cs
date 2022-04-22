@@ -6,14 +6,26 @@ using UnityEngine;
 public class PlayerEventSystem : MonoBehaviour
 {
     [SerializeField] public PlayerData playerData;
+    [SerializeField] public PowerUpController powerUpController;
 
     public event Action OnGetDamaged;
     public event Action OnHPGained;
     public event Action OnDied;
 
-    public void GiveDamage(int dmg)
+	void Start()
+	{
+		playerData.HP = playerData.MaxHP;
+	}
+
+	//Health
+	public void GiveDamage(int dmg)
     {
+		if (powerUpController.HitForceField()) {
+            return;
+		}
+
         playerData.HP = Mathf.Clamp(playerData.HP - dmg, 0, playerData.MaxHP);
+        Debug.Log($"Player HP: {playerData.HP}");
         if(playerData.HP <= 0) {
             OnDied?.Invoke();
             Destroy(gameObject);//temporary solution
@@ -26,6 +38,12 @@ public class PlayerEventSystem : MonoBehaviour
         playerData.HP += Mathf.Clamp(playerData.HP + hp, 0, playerData.MaxHP);
         OnHPGained?.Invoke();
     }
+
+    //PowerUp
+    public void AddPowerUp(PowerUp powerUp)
+	{
+        powerUpController.AddPowerUp(powerUp);
+	}
 
     //Blade Thrust
     public event Action<PlayerData, float, float, int> OnBladeThrustStarted;

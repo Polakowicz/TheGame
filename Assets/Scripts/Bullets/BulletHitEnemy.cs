@@ -3,6 +3,7 @@ using UnityEngine;
 public class BulletHitEnemy : MonoBehaviour
 {
     [SerializeField] int damage = 5;
+    [SerializeField] bool piercing;
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -12,6 +13,8 @@ public class BulletHitEnemy : MonoBehaviour
 
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         enemy.Hit(damage);
-        Destroy(gameObject);
-	}
+		if (!piercing) {
+            Destroy(gameObject);
+        }
+    }
 }
