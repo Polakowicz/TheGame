@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 4717716870089605577}
   - component: {fileID: 2896284850009964007}
   - component: {fileID: 6348656884894791210}
+  - component: {fileID: 1092963254359713420}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -485,8 +486,8 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.53051746, y: 0.24615064}
+    border: {x: 1.5625, y: 0.875, z: 1.40625, w: 1.6875}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.875, y: 3.875}
     newSize: {x: 3.875, y: 3.875}
     adaptiveTilingThreshold: 0.5
@@ -621,6 +622,25 @@ MonoBehaviour:
   forceFieldChargesRemaining: 0
   piercingBulletsTimeLeft: 0
   explosiveBulletsRemaining: 0
+--- !u!95 &1092963254359713420
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ddbe2fad8fb76945ae3da4c12df4699, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2896284850258396949
 GameObject:
   m_ObjectHideFlags: 0
