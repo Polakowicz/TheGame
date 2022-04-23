@@ -17,6 +17,7 @@ public class AnimationController : MonoBehaviour
 		eventSystem.OnBladeAttack += TriggerBladeAttackAnimation;
 		//eventSystem.OnGunFire += TriggerBlasterAttackAnimation;
 		eventSystem.OnGunChanged += ChangeGun;
+		eventSystem.OnDodge += Dodge;
 	}
 
 	private void Update()
@@ -43,5 +44,10 @@ public class AnimationController : MonoBehaviour
 	void ChangeGun()
 	{
 		animator.SetBool("Blaster_equiped", eventSystem.playerData.weapon == PlayerData.Weapon.Blaster ? true : false);
+	}
+
+	void Dodge()
+	{
+		animator.SetTrigger("Dodge");
 	}
 }

@@ -43,6 +43,7 @@ public class PlayerEventSystem : MonoBehaviour
     public Action OnBladeAttack;
     public Action OnGunFire;
     public Action OnGunChanged;
+    public Action OnDodge;
 
     public void ChangedWeapon(PlayerData.Weapon weapon)
 	{
