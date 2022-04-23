@@ -57,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
 		} else {
 			rb.velocity = direction * speed;
 		}
+
+		eventSystem.playerData.moveDireciton= rb.velocity;
 	}
 
 	void PerformDash(InputAction.CallbackContext context)

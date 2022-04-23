@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 2896284850009964004}
   - component: {fileID: 2896284850009964005}
   - component: {fileID: 4652231911992384287}
+  - component: {fileID: 7161357687933618366}
   - component: {fileID: 2896284850009964027}
   - component: {fileID: 4717716870089605577}
   - component: {fileID: 2896284850009964007}
@@ -497,6 +498,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.7}
   m_EdgeRadius: 0
+--- !u!114 &7161357687933618366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6166e5119facd48ba70410eaac9495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 21300000, guid: c26a0bf8b96177d4fbb21504325c46dd, type: 3}
+  gunSprite: {fileID: 21300000, guid: c26a0bf8b96177d4fbb21504325c46dd, type: 3}
 --- !u!114 &2896284850009964027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,6 +601,7 @@ MonoBehaviour:
   playerData:
     MaxHP: 100
     aimDirection: {x: 0, y: 0}
+    moveDireciton: {x: 0, y: 0}
     HP: 0
     enemyToPulled: {fileID: 0}
   powerUpController: {fileID: 6348656884894791210}
@@ -703,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d075d448ee530a440a4c1bd695b22ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerEventSystem: {fileID: 4717716870089605577}
   playerInput: {fileID: 2896284850009964027}
   meleeWeapon: {fileID: 134073437048459800}
   rangedWeapon: {fileID: 6573227749687704276}

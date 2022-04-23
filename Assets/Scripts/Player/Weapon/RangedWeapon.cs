@@ -48,11 +48,14 @@ public class RangedWeapon : Weapon
 		if (bullet == explosiveBullet) {
 			playerEventSystem.powerUpController.ShootExplosiveBullet();
 		}
+
+		playerEventSystem.OnGunFire?.Invoke();
 	}
 
 	public override void PerformStrongerAttack() 
 	{
 		autoFireCoroutine = StartCoroutine(AutoFire());
+		playerEventSystem.OnGunFire?.Invoke();
 	}
 	public override void CancelStrongerAttack()
 	{
@@ -66,6 +69,7 @@ public class RangedWeapon : Weapon
 		dispersion = startDispersion;
 		while (true) {
 			Instantiate(defaultBullet, gunTransform.position, GetRandomisedAccuracy());
+			playerEventSystem.OnGunFire?.Invoke();
 			if (bullet == explosiveBullet) {
 				playerEventSystem.powerUpController.ShootExplosiveBullet();
 			}

@@ -43,11 +43,13 @@ public class MeleeWeapon : Weapon
 		foreach (Collider2D hit in hits) {
 			hit.GetComponent<Enemy>().Hit(basicAttackDamage);
 		}
+		eventSystem.OnBladeAttack?.Invoke();
 	}
 	
 	public override void PerformStrongerAttack()
 	{
 		eventSystem.StartBladeThrust(thrustSpeed, thrustTime, thrustDmg);
+		eventSystem.OnBladeAttack?.Invoke();
 	}
 	
 	public override void PerformAlternativeAttack()
