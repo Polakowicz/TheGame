@@ -68,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
 		}
 		isInDash = true;
 		speed = dashSpeed;
+
+		eventSystem.OnDodge?.Invoke();
 		StartCoroutine(DashDelay(dashTime));
 	}
 	void PerformThrustDash(PlayerData data, float s, float t, int d)

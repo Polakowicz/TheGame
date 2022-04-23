@@ -49,7 +49,7 @@ public class MeleeWeapon : Weapon
 	public override void PerformStrongerAttack()
 	{
 		eventSystem.StartBladeThrust(thrustSpeed, thrustTime, thrustDmg);
-		eventSystem.OnBladeAttack?.Invoke();
+		//eventSystem.OnBladeAttack?.Invoke();
 	}
 	
 	public override void PerformAlternativeAttack()
