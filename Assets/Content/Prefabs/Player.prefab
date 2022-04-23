@@ -372,10 +372,12 @@ GameObject:
   - component: {fileID: 2896284850009964004}
   - component: {fileID: 2896284850009964005}
   - component: {fileID: 4652231911992384287}
+  - component: {fileID: 7161357687933618366}
   - component: {fileID: 2896284850009964027}
   - component: {fileID: 4717716870089605577}
   - component: {fileID: 2896284850009964007}
   - component: {fileID: 6348656884894791210}
+  - component: {fileID: 1092963254359713420}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -485,8 +487,8 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.53051746, y: 0.24615064}
+    border: {x: 1.5625, y: 0.875, z: 1.40625, w: 1.6875}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.875, y: 3.875}
     newSize: {x: 3.875, y: 3.875}
     adaptiveTilingThreshold: 0.5
@@ -496,6 +498,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.7}
   m_EdgeRadius: 0
+--- !u!114 &7161357687933618366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6166e5119facd48ba70410eaac9495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2896284850009964027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,7 +598,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData:
     MaxHP: 100
+    weapon: 0
     aimDirection: {x: 0, y: 0}
+    moveDireciton: {x: 0, y: 0}
     HP: 0
     enemyToPulled: {fileID: 0}
   powerUpController: {fileID: 6348656884894791210}
@@ -621,6 +637,25 @@ MonoBehaviour:
   forceFieldChargesRemaining: 0
   piercingBulletsTimeLeft: 0
   explosiveBulletsRemaining: 0
+--- !u!95 &1092963254359713420
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ddbe2fad8fb76945ae3da4c12df4699, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2896284850258396949
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +682,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2896284850258396949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2896284849141417200}
@@ -683,6 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d075d448ee530a440a4c1bd695b22ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerEventSystem: {fileID: 4717716870089605577}
   playerInput: {fileID: 2896284850009964027}
   meleeWeapon: {fileID: 134073437048459800}
   rangedWeapon: {fileID: 6573227749687704276}

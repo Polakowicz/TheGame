@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponInputController : MonoBehaviour
 {
     //Components
+    [SerializeField] PlayerEventSystem playerEventSystem;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] MeleeWeapon meleeWeapon;
     [SerializeField] RangedWeapon rangedWeapon;
@@ -79,10 +80,14 @@ public class PlayerWeaponInputController : MonoBehaviour
 		if (equipedMeleeWeapon) {
             equippedWeapon = rangedWeapon;
             equipedMeleeWeapon = false;
-		} else {
+            playerEventSystem.ChangedWeapon(PlayerData.Weapon.Blaster);
+
+        } else {
             equippedWeapon = meleeWeapon;
             equipedMeleeWeapon = true;
+            playerEventSystem.ChangedWeapon(PlayerData.Weapon.Blade);
         }
+        
 	}
 
     //Weapons attakcs

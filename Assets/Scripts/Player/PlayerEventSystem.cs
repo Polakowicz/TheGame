@@ -39,6 +39,18 @@ public class PlayerEventSystem : MonoBehaviour
         OnHPGained?.Invoke();
     }
 
+    //Weapons
+    public Action OnBladeAttack;
+    public Action OnGunFire;
+    public Action OnGunChanged;
+    public Action OnDodge;
+
+    public void ChangedWeapon(PlayerData.Weapon weapon)
+	{
+        playerData.weapon = weapon;
+        OnGunChanged?.Invoke();
+	}
+
     //PowerUp
     public void AddPowerUp(PowerUp powerUp)
 	{
