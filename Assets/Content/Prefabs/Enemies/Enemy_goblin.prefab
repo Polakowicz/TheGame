@@ -214,8 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6695976794642740978, guid: e2caac4826eb71945b199050e71f0730, type: 3}
   maxDistance: 10
-  minDistance: 5
-  cooldown: 4
+  minDistance: 0
+  cooldown: 1
 --- !u!1 &5184015857411907286
 GameObject:
   m_ObjectHideFlags: 0
