@@ -8,7 +8,7 @@ public class EnemyPullable : MonoBehaviour
 	EnemySharedData data;
 	Rigidbody2D rb;
 
-	[SerializeField] float targetDistance;
+	[SerializeField] float targetDistance = 1;
 	
 	void Start()
 	{

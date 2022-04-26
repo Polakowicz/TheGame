@@ -25,7 +25,7 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 
 	void Update()
 	{
-		if (data.Pulled || data.Stunned) {
+		if (data.Pulled || data.Stunned || data.Player == null) {
 			return;
 		}
 
