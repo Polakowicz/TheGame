@@ -11,6 +11,7 @@ public class RangedWeapon : Weapon
 	[SerializeField] GameObject defaultBullet;
 	[SerializeField] GameObject explosiveBullet;
 	[SerializeField] GameObject piercingBullet;
+	LineRenderer lineRenderer;
 	
 	//Parameters
 	[SerializeField] float startFireRate;
@@ -35,9 +36,19 @@ public class RangedWeapon : Weapon
 
 	void Start()
 	{
+		lineRenderer = GetComponent<LineRenderer>();
+		lineRenderer.enabled = false;
 		bullet = defaultBullet;
 
 		playerEventSystem.powerUpController.OnPowerUpChanged += ChangePowerUp;
+	}
+
+	void Update()
+	{
+		if(beamHit != null) {
+			lineRenderer.SetPosition(0, transform.position);
+			lineRenderer.SetPosition(1, beamHit.transform.position);
+		}
 	}
 
 	//Shooting
@@ -104,11 +115,15 @@ public class RangedWeapon : Weapon
 		var hit = Physics2D.Raycast(gunTransform.position, gunTransform.up, beamDistance, beamHitLayerMask);
 		if (hit.collider != null) {
 			beamHit = hit.collider.gameObject;
+			lineRenderer.SetPosition(0, transform.position);
+			lineRenderer.SetPosition(1, beamHit.transform.position);
+			lineRenderer.enabled = true;
 		}
 	}
 	public override void CancelAlternativeAttack()
 	{
 		beamHit = null;
+		lineRenderer.enabled = false;
 	}
 
 	//Pull
