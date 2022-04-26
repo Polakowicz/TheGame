@@ -33,7 +33,6 @@ public class BulletExplode : MonoBehaviour
 		foreach (Collider2D hit in hits) {
 			var distance = Vector2.Distance(transform.position, hit.transform.position);
 			var dmg = (range - distance) / range * damage;
-			Debug.Log(Mathf.FloorToInt(dmg));
 			hit.GetComponent<Enemy>().Hit(Mathf.FloorToInt(dmg));
 		}
 		Destroy(gameObject);
