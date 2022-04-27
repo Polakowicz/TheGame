@@ -6,10 +6,13 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
 	//Components
+	[SerializeField] PlayerEventSystem playerEventSystem;
 	[SerializeField] Transform gunTransform;
-	[SerializeField] GameObject bulletPrefab;
-	[SerializeField] MonoBehaviour player;
-
+	[SerializeField] GameObject defaultBullet;
+	[SerializeField] GameObject explosiveBullet;
+	[SerializeField] GameObject piercingBullet;
+	LineRenderer lineRenderer;
+	
 	//Parameters
 	[SerializeField] float startFireRate;
 	[SerializeField] float maxFireRate;
@@ -20,27 +23,55 @@ public class RangedWeapon : Weapon
 	[SerializeField] float dispersinPercentageIncrease;
 
 	[SerializeField] LayerMask beamHitLayerMask;
+	[SerializeField] float beamPullSpeed;
 	[SerializeField] float beamDistance = 10f;
+	[SerializeField] float beamPullCooldown;
 
 	//Internal variables
 	GameObject beamHit;
 	Coroutine autoFireCoroutine;
+	GameObject bullet;
 	float fireRate;
 	float dispersion;
 
+	void Start()
+	{
+		lineRenderer = GetComponent<LineRenderer>();
+		lineRenderer.enabled = false;
+		bullet = defaultBullet;
+
+		playerEventSystem.powerUpController.OnPowerUpChanged += ChangePowerUp;
+	}
+
+	void Update()
+	{
+		if(beamHit != null) {
+			lineRenderer.SetPosition(0, transform.position);
+			lineRenderer.SetPosition(1, beamHit.transform.position);
+		}
+	}
+
+	//Shooting
 	public override void PerformBasicAttack()
 	{
-		UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
+		Instantiate(bullet, gunTransform.position, gunTransform.rotation);
+
+		if (bullet == explosiveBullet) {
+			playerEventSystem.powerUpController.ShootExplosiveBullet();
+		}
+
+		playerEventSystem.OnGunFire?.Invoke();
 	}
 
 	public override void PerformStrongerAttack() 
 	{
-		autoFireCoroutine = player.StartCoroutine(AutoFire());
+		autoFireCoroutine = StartCoroutine(AutoFire());
+		playerEventSystem.OnGunFire?.Invoke();
 	}
 	public override void CancelStrongerAttack()
 	{
 		if(autoFireCoroutine != null) {
-			player.StopCoroutine(autoFireCoroutine);
+			StopCoroutine(autoFireCoroutine);
 		}
 	}
 	IEnumerator AutoFire()
@@ -48,7 +79,11 @@ public class RangedWeapon : Weapon
 		fireRate = startFireRate;
 		dispersion = startDispersion;
 		while (true) {
-			UnityEngine.Object.Instantiate(bulletPrefab, gunTransform.position, GetRandomisedAccuracy());
+			Instantiate(defaultBullet, gunTransform.position, GetRandomisedAccuracy());
+			playerEventSystem.OnGunFire?.Invoke();
+			if (bullet == explosiveBullet) {
+				playerEventSystem.powerUpController.ShootExplosiveBullet();
+			}
 			yield return new WaitForSeconds(fireRate);
 			if (dispersion < maxDispersion) {
 				dispersion += dispersinPercentageIncrease * Mathf.Abs(maxDispersion - dispersion);
@@ -65,19 +100,33 @@ public class RangedWeapon : Weapon
 		return Quaternion.Euler(0,0,newRotation);
 	}
 
+	public void ChangePowerUp(PowerUp.PowerType type, bool active)
+	{
+		if (type == PowerUp.PowerType.ShotExplosion) {
+			bullet = active ? explosiveBullet : defaultBullet;
+		} else if (type == PowerUp.PowerType.ShotPiercing) {
+			bullet = active ? piercingBullet : defaultBullet;
+		}
+	}
+
+	//Beam
 	public override void StartAlternativeAttack()
 	{
 		var hit = Physics2D.Raycast(gunTransform.position, gunTransform.up, beamDistance, beamHitLayerMask);
-		Debug.DrawRay(gunTransform.position, gunTransform.up * beamDistance, Color.red, 0.5f);
 		if (hit.collider != null) {
 			beamHit = hit.collider.gameObject;
+			lineRenderer.SetPosition(0, transform.position);
+			lineRenderer.SetPosition(1, beamHit.transform.position);
+			lineRenderer.enabled = true;
 		}
 	}
 	public override void CancelAlternativeAttack()
 	{
 		beamHit = null;
+		lineRenderer.enabled = false;
 	}
 
+	//Pull
 	public override void PerformBeamPullAction(float input)
 	{
 		if (beamHit == null) {
@@ -92,10 +141,11 @@ public class RangedWeapon : Weapon
 	}
 	private void PullPlayerTowardsTarget()
 	{
-		Debug.Log("Pull player towards target");
+		playerEventSystem.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed);
+		CancelAlternativeAttack();
 	}
 	private void PullTargetTowardsPlayer()
 	{
-		Debug.Log("Pull target towards player");
+		beamHit.GetComponent<Enemy>().Pull(beamPullSpeed);
 	}
 }

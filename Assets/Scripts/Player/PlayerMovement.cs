@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	//Components
 	Rigidbody2D rb;
+	[SerializeField] PlayerEventSystem eventSystem;
 	[SerializeField] PlayerInput playerInput;
 
 	//Input actions
@@ -13,59 +14,99 @@ public class PlayerMovement : MonoBehaviour
 	InputAction dashAction;
 
 	//Parameters
-	[SerializeField] float normalSpeed = 5f;
+	[SerializeField] float basicSpeed = 5f;
 	[SerializeField] float dashSpeed = 30f;
 	[SerializeField] float dashTime = 0.1f;
 
 	//Internal variables
-	Vector2 input;
+	Vector2 direction;
 	bool isInDash;
-	float realSpeed;
+	float speed;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-
 		moveAction = playerInput.actions["Move"];
 		dashAction = playerInput.actions["Dash"];
 
 		dashAction.performed += PerformDash;
+		eventSystem.OnBladeThrustStarted += PerformThrustDash;
+		eventSystem.OnBeamPullTowardsEnemyStarted += PerformBeamPull;
 
-		realSpeed = normalSpeed;
+		speed = basicSpeed;
 	}
 
-	private void OnDestroy()
+	void OnDestroy()
 	{
 		dashAction.performed -= PerformDash;
+		eventSystem.OnBladeThrustStarted -= PerformThrustDash;
+		eventSystem.OnBeamPullTowardsEnemyStarted -= PerformBeamPull;
 	}
 
 	void Update()
 	{
 		if (!isInDash) {
-			input = moveAction.ReadValue<Vector2>();
+			direction = moveAction.ReadValue<Vector2>();
 		}
 	}
 
 	void FixedUpdate()
 	{
 		if (isInDash) {
-			rb.velocity = input.normalized * realSpeed;
+			rb.velocity = direction.normalized * speed;
 		} else {
-			rb.velocity = input * realSpeed;
+			rb.velocity = direction * speed;
 		}
+
+		eventSystem.playerData.moveDireciton= rb.velocity;
 	}
 
 	void PerformDash(InputAction.CallbackContext context)
 	{
+		if (isInDash) {
+			return;
+		}
+		isInDash = true;
+		speed = dashSpeed;
+
+		eventSystem.OnDodge?.Invoke();
 		StartCoroutine(DashDelay(dashTime));
+	}
+	void PerformThrustDash(PlayerData data, float s, float t, int d)
+	{
+		direction = data.aimDirection;
+		isInDash = true;
+		speed = s;
+		StartCoroutine(TrustDelay(t));
+	}
+	void PerformBeamPull(GameObject enemy, float v)
+	{
+		direction = enemy.transform.position - transform.position;
+		var s = direction.magnitude;
+		speed = v;
+		var t = s / v;
+		isInDash = true;
+		StartCoroutine(BeamPullDelay(t));
 	}
 
 	IEnumerator DashDelay(float delay)
 	{
-		isInDash = true;
-		realSpeed = dashSpeed;
 		yield return new WaitForSeconds(delay);
-		realSpeed = normalSpeed;
+		speed = basicSpeed;
 		isInDash = false;
+	}
+	IEnumerator TrustDelay(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		speed = basicSpeed;
+		isInDash = false;
+		eventSystem.EndBladeThrust();
+	}
+	IEnumerator BeamPullDelay(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		speed = basicSpeed;
+		isInDash = false;
+		eventSystem.EndBeamPullTowardsEnemy();
 	}
 }

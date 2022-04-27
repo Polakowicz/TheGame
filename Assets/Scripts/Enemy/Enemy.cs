@@ -1,19 +1,96 @@
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //Properties
-    [SerializeField] int hp;
-    [SerializeField] float speed;
+	public int MaxHP;
+	public bool Pullable;
+	public float ChanceToBeStunned;
+	public float StunTime;
 
-    public void OnGetHit(int damage)
+	public EnemySharedData SharedData;
+
+	private void Awake()
 	{
-        hp -= damage;
-        Debug.Log("HP: " + hp);
-        if(hp <= 0) {
-            Destroy(gameObject);
+		SharedData = new EnemySharedData();
+		SharedData.HP = MaxHP;
+	}
+
+	void Start()
+	{
+		
+		SharedData.Player = GameObject.FindGameObjectWithTag("Player");
+		SharedData.Enemy = gameObject;
+		GameEventSystem.Instance.OnPlayerDied += NullPlayerReference;
+	}
+
+	private void OnDestroy()
+	{
+		GameEventSystem.Instance.OnPlayerDied -= NullPlayerReference;
+	}
+
+	private void NullPlayerReference()
+	{
+		SharedData.Player = null;
+	}
+
+	//Health
+	public Action<int> OnGetHit;
+	public Action OnDied;
+
+	public void Hit(int dmg)
+	{
+		//Debug.Log($"HP {SharedData.HP}, dmg {dmg}");
+		SharedData.HP = Mathf.Clamp(SharedData.HP - dmg, 0, int.MaxValue);
+		
+		if (SharedData.HP <= 0) {
+			OnDied?.Invoke();
+			Destroy(gameObject);//Temporary
+		} else {
+			OnGetHit?.Invoke(dmg);
 		}
+	}
+
+	//Stun
+	public Action OnGetStuned;
+	public Action OnGetStunedEnded;
+
+	public void Stun()
+	{
+		if (UnityEngine.Random.value > ChanceToBeStunned) {
+			return;
+		}
+
+		SharedData.Stunned = true;
+		OnGetStuned?.Invoke();
+		StartCoroutine(WaitStunTime(StunTime));
+	}
+
+	IEnumerator WaitStunTime(float time)
+	{
+		yield return new WaitForSeconds(time);
+		SharedData.Stunned = false;
+		OnGetStunedEnded?.Invoke();
+	}
+
+	//Pulling
+	public Action OnPulled;
+	public Action OnPullEnded;
+
+	public void Pull(float speed)
+	{
+		if (!Pullable) {
+			return;
+		}
+		SharedData.PullSpeed = speed;
+		SharedData.Pulled = true;
+		OnPulled?.Invoke();
+	}
+
+	public void EndPull()
+	{
+		SharedData.Pulled = false;
+		OnPullEnded?.Invoke();	
 	}
 }
