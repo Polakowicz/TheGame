@@ -28,7 +28,7 @@ public class EnemyShootsPlayer : MonoBehaviour
 			return;
 		}
 
-		if (data.Stunned || data.Pulled) {
+		if (data.Stunned || data.Pulled || data.Player == null) {
 			return;
 		}
 

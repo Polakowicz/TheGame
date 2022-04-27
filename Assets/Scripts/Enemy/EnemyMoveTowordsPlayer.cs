@@ -8,6 +8,7 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 	Enemy enemy;
 	EnemySharedData data;
 	Rigidbody2D rb;
+	SpriteRenderer spriteRenderer;
 
 	//Parameters
 	[SerializeField] float defaultSpeed;
@@ -19,11 +20,12 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		enemy = GetComponent<Enemy>();
 		data = enemy.SharedData;
 		rb = GetComponent<Rigidbody2D>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	void Update()
 	{
-		if (data.Pulled || data.Stunned) {
+		if (data.Pulled || data.Stunned || data.Player == null) {
 			return;
 		}
 
@@ -34,6 +36,16 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		}
 
 		var direction = data.DirectionToPlayer;
-		rb.velocity = direction.normalized * defaultSpeed;
+
+		if (enemy.transform.position.x < data.Player.transform.position.x)
+		{
+			spriteRenderer.flipX = true;
+			
+		} else if (enemy.transform.position.x > data.Player.transform.position.x)
+		{
+			spriteRenderer.flipX = false;
+		}
+
+			rb.velocity = direction.normalized * defaultSpeed;
 	}
 }

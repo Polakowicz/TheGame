@@ -22,6 +22,17 @@ public class Enemy : MonoBehaviour
 		
 		SharedData.Player = GameObject.FindGameObjectWithTag("Player");
 		SharedData.Enemy = gameObject;
+		GameEventSystem.Instance.OnPlayerDied += NullPlayerReference;
+	}
+
+	private void OnDestroy()
+	{
+		GameEventSystem.Instance.OnPlayerDied -= NullPlayerReference;
+	}
+
+	private void NullPlayerReference()
+	{
+		SharedData.Player = null;
 	}
 
 	//Health
@@ -30,7 +41,7 @@ public class Enemy : MonoBehaviour
 
 	public void Hit(int dmg)
 	{
-		Debug.Log($"HP {SharedData.HP}, dmg {dmg}");
+		//Debug.Log($"HP {SharedData.HP}, dmg {dmg}");
 		SharedData.HP = Mathf.Clamp(SharedData.HP - dmg, 0, int.MaxValue);
 		
 		if (SharedData.HP <= 0) {

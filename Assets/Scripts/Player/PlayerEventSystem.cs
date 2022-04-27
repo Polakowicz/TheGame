@@ -21,12 +21,14 @@ public class PlayerEventSystem : MonoBehaviour
 	public void GiveDamage(int dmg)
     {
 		if (powerUpController.HitForceField()) {
+            Debug.Log("Blocked by shield");
             return;
 		}
 
         playerData.HP = Mathf.Clamp(playerData.HP - dmg, 0, playerData.MaxHP);
         Debug.Log($"Player HP: {playerData.HP}");
         if(playerData.HP <= 0) {
+            GameEventSystem.Instance.OnPlayerDied?.Invoke();
             OnDied?.Invoke();
             Destroy(gameObject);//temporary solution
 		} else {

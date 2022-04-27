@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-	PlayerEventSystem eventSystem;
+	[SerializeField] PlayerEventSystem eventSystem;
 	SpriteRenderer spriteRenderer;
 	Animator animator;
 	bool gun;
 
 	private void Start()
 	{
-		eventSystem = GetComponent<PlayerEventSystem>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		animator = GetComponent<Animator>();
 
@@ -49,5 +48,10 @@ public class AnimationController : MonoBehaviour
 	void Dodge()
 	{
 		animator.SetTrigger("Dodge");
+	}
+
+	void Die()
+	{
+		//animator.SetInteger("Health", eventSystem.playerData.HP);
 	}
 }
