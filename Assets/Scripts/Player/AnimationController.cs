@@ -49,4 +49,9 @@ public class AnimationController : MonoBehaviour
 	{
 		animator.SetTrigger("Dodge");
 	}
+
+	void Die()
+	{
+		//animator.SetInteger("Health", eventSystem.playerData.HP);
+	}
 }
