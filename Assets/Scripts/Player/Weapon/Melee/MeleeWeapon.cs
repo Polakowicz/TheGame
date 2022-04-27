@@ -38,6 +38,7 @@ public class MeleeWeapon : Weapon
 
 	public override void PerformBasicAttack()
 	{
+		FindObjectOfType<AudioManager>().Play("MeleeBasicAttack");
 		List<Collider2D> hits = new List<Collider2D>();
 		range.OverlapCollider(attackContactFilter, hits);
 		foreach (Collider2D hit in hits) {

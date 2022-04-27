@@ -54,6 +54,7 @@ public class RangedWeapon : Weapon
 	//Shooting
 	public override void PerformBasicAttack()
 	{
+		FindObjectOfType<AudioManager>().Play("RangedBasicAttack");
 		Instantiate(bullet, gunTransform.position, gunTransform.rotation);
 
 		if (bullet == explosiveBullet) {
