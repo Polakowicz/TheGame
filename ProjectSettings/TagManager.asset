@@ -19,8 +19,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Minimap_background
+  - Minimap_icons
   - Player
   - Enemy
   - Bullet
