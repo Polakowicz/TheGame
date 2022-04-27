@@ -6,18 +6,32 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    private float fixedDeltaTime;
+    // private float fixedDeltaTime;
     public GameObject pauseMenu;
 
-    void Start()
-    {
-        this.fixedDeltaTime = Time.fixedDeltaTime;
-        pauseMenu.gameObject.SetActive(false);
-    }
-
+    public static bool GameIsPaused = false;
+    /*
+        void Start()
+        {
+            this.fixedDeltaTime = Time.fixedDeltaTime;
+            pauseMenu.gameObject.SetActive(false);
+        }
+    */
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+        /*
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Time.timeScale == 1.0f)
             {
@@ -31,16 +45,29 @@ public class PauseMenu : MonoBehaviour
             }
             Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
         }
+        */
     }
 
-    public void ResumeGame()
+    public void GoMenu()
     {
-        pauseMenu.gameObject.SetActive(false);
-        Time.timeScale = 1.0f;
+        FindObjectOfType<AudioManager>().Play("ButtonClick");
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+        // SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(0).buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    public void GoMainMenu()
+    public void Resume()
     {
-        SceneManager.LoadScene("Main Menu");
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
+
+    void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 }

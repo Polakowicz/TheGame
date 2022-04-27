@@ -77,6 +77,7 @@ public class PlayerWeaponInputController : MonoBehaviour
 
 	void SwitchWeapon(InputAction.CallbackContext context)
 	{
+        FindObjectOfType<AudioManager>().Play("SwitchWeapon");
 		if (equipedMeleeWeapon) {
             equippedWeapon = rangedWeapon;
             equipedMeleeWeapon = false;
