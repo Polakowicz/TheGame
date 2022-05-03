@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class Freez : Skill
+{
+	Collider2D range;
+	[SerializeField]
+	LayerMask mask;
+	ContactFilter2D filter;
+
+	[SerializeField]
+	float freezTime;
+
+	void Start()
+	{
+		range = GetComponent<Collider2D>();
+		//mask = LayerMask.NameToLayer("Enemy");
+		filter = new ContactFilter2D {
+			layerMask = mask,
+			useLayerMask = true,
+			useTriggers = true
+		};
+	}
+
+	public Action UnfreezEnemy;
+
+	public override void UseSkill()
+	{
+		List<Collider2D> colliders = new List<Collider2D>();
+		range.OverlapCollider(filter, colliders);
+		foreach(Collider2D collider in colliders) {
+			collider.GetComponent<Enemy>().Freez(this);
+		}
+
+		StartCoroutine(UnfreezDelay());
+	}
+
+	public IEnumerator UnfreezDelay()
+	{
+		yield return new WaitForSeconds(freezTime);
+		UnfreezEnemy?.Invoke();
+	}
+}

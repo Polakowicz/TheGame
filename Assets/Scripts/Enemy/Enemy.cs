@@ -93,4 +93,20 @@ public class Enemy : MonoBehaviour
 		SharedData.Pulled = false;
 		OnPullEnded?.Invoke();	
 	}
+
+	//Freez
+
+	Freez freez;
+	public void Freez(Freez freez)
+	{
+		this.freez = freez;
+		this.freez.UnfreezEnemy += Unfreez;
+		Debug.Log($"{gameObject} freez");
+	}
+	public void Unfreez()
+	{
+		freez.UnfreezEnemy -= Unfreez;
+		freez = null;
+		Debug.Log($"{gameObject} unfreez");
+	}
 }
