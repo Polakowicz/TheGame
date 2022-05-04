@@ -13,6 +13,9 @@ public class Freez : Skill
 	[SerializeField]
 	float freezTime;
 
+	[SerializeField]
+	float freezStrength;
+
 	void Start()
 	{
 		range = GetComponent<Collider2D>();
@@ -31,7 +34,7 @@ public class Freez : Skill
 		List<Collider2D> colliders = new List<Collider2D>();
 		range.OverlapCollider(filter, colliders);
 		foreach(Collider2D collider in colliders) {
-			collider.GetComponent<Enemy>().Freez(this);
+			collider.GetComponent<Enemy>().Freez(this, freezStrength);
 		}
 
 		StartCoroutine(UnfreezDelay());

@@ -24,7 +24,7 @@ public class EnemyShootsPlayer : MonoBehaviour
 	void Update()
 	{
 		if (cooldownLeft > 0) {
-			cooldownLeft -= Time.deltaTime;
+			cooldownLeft -= Time.deltaTime * data.SpeedMultiplier;
 			return;
 		}
 

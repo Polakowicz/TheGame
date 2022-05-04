@@ -94,17 +94,19 @@ public class Enemy : MonoBehaviour
 
 	//Freez
 	Freez freez;
-	public void Freez(Freez freez)
+	float freezStrength;
+	public void Freez(Freez freez, float strength)
 	{
 		this.freez = freez;
 		this.freez.UnfreezEnemy += Unfreez;
-		Debug.Log($"{gameObject} freez");
+		freezStrength = strength;
+		SharedData.SpeedMultiplier -= freezStrength;
 	}
 	public void Unfreez()
 	{
 		freez.UnfreezEnemy -= Unfreez;
 		freez = null;
-		Debug.Log($"{gameObject} unfreez");
+		SharedData.SpeedMultiplier += freezStrength;
 	}
 
 	//Whack-a-mole
