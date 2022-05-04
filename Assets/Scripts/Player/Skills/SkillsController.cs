@@ -18,7 +18,7 @@ public class SkillsController : MonoBehaviour
 
 	public enum SkillType
 	{
-		FreezTime,
+		FreezeTime,
 		Warp,
 		WhackAMole,
 		Speeding
@@ -26,7 +26,7 @@ public class SkillsController : MonoBehaviour
 
 	public IDictionary<SkillType, Skill> skills = new Dictionary<SkillType, Skill>();
 
-	SkillType equipedSkill = SkillType.FreezTime;
+	SkillType equipedSkill = SkillType.FreezeTime;
 
 	void Start()
 	{
@@ -36,14 +36,14 @@ public class SkillsController : MonoBehaviour
 	}
 	void CreateSkillsDictionary()
 	{
-		skills.Add(SkillType.FreezTime, GetComponentInChildren<Freez>());
+		skills.Add(SkillType.FreezeTime, GetComponentInChildren<Freeze>());
 		skills.Add(SkillType.Warp, GetComponentInChildren<Warp>());
 		skills.Add(SkillType.WhackAMole, GetComponentInChildren<WhackAMole>());
 		skills.Add(SkillType.Speeding, GetComponentInChildren<Speeding>());
 	}
 	void CreateActionInputs()
 	{
-		selectFreezTimeAction = input.actions["Select Freez Time Skill"];
+		selectFreezTimeAction = input.actions["Select Freeze Time Skill"];
 		selectWarpAction = input.actions["Select Warp Skill"];
 		selectWhackAMoleAction = input.actions["Select Whack-a-mole Skill"];
 		selectSpeeding = input.actions["Select Speeding Skill"];
@@ -77,7 +77,7 @@ public class SkillsController : MonoBehaviour
 
 	void SelectFreezTimeSkill(InputAction.CallbackContext context)
 	{
-		equipedSkill = SkillType.FreezTime;
+		equipedSkill = SkillType.FreezeTime;
 	}
 	void SelectWarpSkill(InputAction.CallbackContext context)
 	{

@@ -93,9 +93,9 @@ public class Enemy : MonoBehaviour
 	}
 
 	//Freez
-	Freez freez;
+	Freeze freez;
 	float freezStrength;
-	public void Freez(Freez freez, float strength)
+	public void Freez(Freeze freez, float strength)
 	{
 		this.freez = freez;
 		this.freez.UnfreezEnemy += Unfreez;

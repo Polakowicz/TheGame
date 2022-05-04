@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Freez : Skill
+public class Freeze : Skill
 {
 	Collider2D range;
 	LayerMask mask;

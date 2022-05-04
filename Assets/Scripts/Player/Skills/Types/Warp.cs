@@ -12,6 +12,7 @@ public class Warp : Skill
 	[SerializeField] int maxEnemies;
 
 	bool charging;
+	bool inWarp;
 	List<Enemy> enemies = new List<Enemy>();
 
 	void Start()
@@ -44,22 +45,25 @@ public class Warp : Skill
 	{
 		charging = false;
 		range.radius = 0;
+		inWarp = true;
 		StartCoroutine(WarpToEnemies(enemies));
-		enemies.Clear();
 	}
 
 	private IEnumerator WarpToEnemies(List<Enemy> enemies)
 	{
 		foreach (Enemy enemy in enemies) {
 			if (enemy != null) {
-				transform.position = enemy.transform.position;
+				transform.root.position = enemy.transform.position;
 				yield return new WaitForSeconds(1);
 			}
 		}
+		enemies.Clear();
+		inWarp = false;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if (inWarp) return;
 		if (mask != (mask | (1 << collision.gameObject.layer))) return;
 		if (enemies.Count >= maxEnemies) return;
 

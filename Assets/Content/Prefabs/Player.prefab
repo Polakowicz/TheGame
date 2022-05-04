@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 7566341682411984956}
   - component: {fileID: 591988291472749318}
   m_Layer: 15
-  m_Name: Freez
+  m_Name: Freeze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

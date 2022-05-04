@@ -87,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Select Freez Time Skill",
+                    "name": "Select Freeze Time Skill",
                     "type": "Button",
                     "id": "57f77f2d-f925-4ada-9285-8949824867f3",
                     "expectedControlType": "Button",
@@ -340,7 +340,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "Select Freez Time Skill",
+                    "action": "Select Freeze Time Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
