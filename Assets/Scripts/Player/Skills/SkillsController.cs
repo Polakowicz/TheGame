@@ -13,13 +13,15 @@ public class SkillsController : MonoBehaviour
 	InputAction selectFreezTimeAction;
 	InputAction selectWarpAction;
 	InputAction selectWhackAMoleAction;
+	InputAction selectSpeeding;
 	InputAction useSkillAction;
 
 	public enum SkillType
 	{
 		FreezTime,
 		Warp,
-		WhackAMole
+		WhackAMole,
+		Speeding
 	}
 
 	public IDictionary<SkillType, Skill> skills = new Dictionary<SkillType, Skill>();
@@ -37,12 +39,14 @@ public class SkillsController : MonoBehaviour
 		skills.Add(SkillType.FreezTime, GetComponentInChildren<Freez>());
 		skills.Add(SkillType.Warp, GetComponentInChildren<Warp>());
 		skills.Add(SkillType.WhackAMole, GetComponentInChildren<WhackAMole>());
+		skills.Add(SkillType.Speeding, GetComponentInChildren<Speeding>());
 	}
 	void CreateActionInputs()
 	{
 		selectFreezTimeAction = input.actions["Select Freez Time Skill"];
 		selectWarpAction = input.actions["Select Warp Skill"];
 		selectWhackAMoleAction = input.actions["Select Whack-a-mole Skill"];
+		selectSpeeding = input.actions["Select Speeding Skill"];
 		useSkillAction = input.actions["Use Skill"];
 	}
 	void SubscribeToInputs()
@@ -50,6 +54,7 @@ public class SkillsController : MonoBehaviour
 		selectFreezTimeAction.performed += SelectFreezTimeSkill;
 		selectWarpAction.performed += SelectWarpSkill;
 		selectWhackAMoleAction.performed += SelectWhackAMoleSkill;
+		selectSpeeding.performed += SelectSpeedingSkill;
 		useSkillAction.started += StartUsingSkill;
 		useSkillAction.performed += UseSkill;
 		useSkillAction.canceled += StopUsingSkill;
@@ -64,6 +69,7 @@ public class SkillsController : MonoBehaviour
 		selectFreezTimeAction.performed -= SelectFreezTimeSkill;
 		selectWarpAction.performed -= SelectWarpSkill;
 		selectWhackAMoleAction.performed -= SelectWhackAMoleSkill;
+		selectSpeeding.performed += SelectSpeedingSkill;
 		useSkillAction.started -= StartUsingSkill;
 		useSkillAction.performed -= UseSkill;
 		useSkillAction.canceled -= StopUsingSkill;
@@ -80,6 +86,10 @@ public class SkillsController : MonoBehaviour
 	void SelectWhackAMoleSkill(InputAction.CallbackContext context)
 	{
 		equipedSkill = SkillType.WhackAMole;
+	}
+	void SelectSpeedingSkill(InputAction.CallbackContext context)
+	{
+		equipedSkill = SkillType.Speeding;
 	}
 
 	void StartUsingSkill(InputAction.CallbackContext context)

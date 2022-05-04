@@ -18,4 +18,5 @@ public class PlayerData
 	public Vector2 moveDireciton;
 	public int HP;
 	public GameObject enemyToPulled;
+	public float speedMultiplier = 1;//100%
 }

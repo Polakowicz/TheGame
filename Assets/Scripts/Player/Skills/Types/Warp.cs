@@ -44,13 +44,18 @@ public class Warp : Skill
 	{
 		charging = false;
 		range.radius = 0;
+		StartCoroutine(WarpToEnemies(enemies));
+		enemies.Clear();
+	}
 
+	private IEnumerator WarpToEnemies(List<Enemy> enemies)
+	{
 		foreach (Enemy enemy in enemies) {
 			if (enemy != null) {
-				Debug.Log("Wrap  to enemy");
+				transform.position = enemy.transform.position;
+				yield return new WaitForSeconds(1);
 			}
 		}
-		enemies.Clear();
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

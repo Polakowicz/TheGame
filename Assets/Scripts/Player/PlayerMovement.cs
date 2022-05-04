@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 		if (isInDash) {
 			rb.velocity = direction.normalized * speed;
 		} else {
-			rb.velocity = direction * speed;
+			rb.velocity = direction * speed * eventSystem.playerData.speedMultiplier;
 		}
 
 		eventSystem.playerData.moveDireciton= rb.velocity;
