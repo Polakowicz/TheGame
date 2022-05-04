@@ -51,13 +51,18 @@ public class Warp : Skill
 
 	private IEnumerator WarpToEnemies(List<Enemy> enemies)
 	{
+		Collider2D collider = transform.root.gameObject.GetComponent<Collider2D>();
+		Vector2 startPos = transform.root.position;
+		collider.enabled = false;
 		foreach (Enemy enemy in enemies) {
 			if (enemy != null) {
 				transform.root.position = enemy.transform.position;
-				yield return new WaitForSeconds(1);
+				yield return new WaitForSeconds(0.3f);
 			}
 		}
 		enemies.Clear();
+		transform.root.position = startPos;
+		collider.enabled = true;
 		inWarp = false;
 	}
 
