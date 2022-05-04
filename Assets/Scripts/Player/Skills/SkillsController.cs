@@ -24,7 +24,6 @@ public class SkillsController : MonoBehaviour
 
 	public Dictionary<SkillType, Skill> skills;
 
-
 	SkillType equipedSkill = SkillType.FreezTime;
 
 	void Start()
@@ -36,7 +35,7 @@ public class SkillsController : MonoBehaviour
 	void CreateSkillsDictionary()
 	{
 		skills.Add(SkillType.FreezTime, GetComponentInChildren<Freez>());
-		//skillsMap.Add(SkillType.Warp, GetComponentInChildren<>());
+		skills.Add(SkillType.Warp, GetComponentInChildren<Warp>());
 		skills.Add(SkillType.WhackAMole, GetComponentInChildren<WhackAMole>());
 	}
 	void CreateActionInputs()
@@ -87,12 +86,10 @@ public class SkillsController : MonoBehaviour
 	{
 		skills[equipedSkill].StartUsingSkill();
 	}
-
 	void UseSkill(InputAction.CallbackContext context)
 	{
 		skills[equipedSkill].UseSkill();
 	}
-
 	void StopUsingSkill(InputAction.CallbackContext context)
 	{
 		skills[equipedSkill].StopUsingSkill();
