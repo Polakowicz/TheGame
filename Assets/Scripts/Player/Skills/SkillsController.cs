@@ -22,18 +22,22 @@ public class SkillsController : MonoBehaviour
 		WhackAMole
 	}
 
-	[SerializeField]
-	SkillType[] skillTypes;
+	public Dictionary<SkillType, Skill> skills;
 
-	[SerializeField]
-	Skill[] skills;
 
 	SkillType equipedSkill = SkillType.FreezTime;
 
 	void Start()
 	{
+		CreateSkillsDictionary();
 		CreateActionInputs();
 		SubscribeToInputs();
+	}
+	void CreateSkillsDictionary()
+	{
+		skills.Add(SkillType.FreezTime, GetComponentInChildren<Freez>());
+		//skillsMap.Add(SkillType.Warp, GetComponentInChildren<>());
+		skills.Add(SkillType.WhackAMole, GetComponentInChildren<WhackAMole>());
 	}
 	void CreateActionInputs()
 	{
@@ -81,27 +85,16 @@ public class SkillsController : MonoBehaviour
 
 	void StartUsingSkill(InputAction.CallbackContext context)
 	{
-		FindSkill(equipedSkill).StartUsingSkill();
+		skills[equipedSkill].StartUsingSkill();
 	}
 
 	void UseSkill(InputAction.CallbackContext context)
 	{
-		FindSkill(equipedSkill).UseSkill();
+		skills[equipedSkill].UseSkill();
 	}
 
 	void StopUsingSkill(InputAction.CallbackContext context)
 	{
-		FindSkill(equipedSkill).StopUsingSkill();
-	}
-
-	Skill FindSkill(SkillType type)
-	{
-		for (int i = 0; i < skillTypes.Length; i++) {
-			if (skillTypes[i] == equipedSkill) {
-				return skills[i];
-			}
-		}
-
-		return null;
+		skills[equipedSkill].StopUsingSkill();
 	}
 }
