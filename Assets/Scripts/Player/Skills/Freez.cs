@@ -7,7 +7,6 @@ using UnityEngine;
 public class Freez : Skill
 {
 	Collider2D range;
-	[SerializeField]
 	LayerMask mask;
 	ContactFilter2D filter;
 
@@ -17,7 +16,7 @@ public class Freez : Skill
 	void Start()
 	{
 		range = GetComponent<Collider2D>();
-		//mask = LayerMask.NameToLayer("Enemy");
+		mask = LayerMask.GetMask("Enemy");
 		filter = new ContactFilter2D {
 			layerMask = mask,
 			useLayerMask = true,
@@ -38,7 +37,7 @@ public class Freez : Skill
 		StartCoroutine(UnfreezDelay());
 	}
 
-	public IEnumerator UnfreezDelay()
+	private IEnumerator UnfreezDelay()
 	{
 		yield return new WaitForSeconds(freezTime);
 		UnfreezEnemy?.Invoke();

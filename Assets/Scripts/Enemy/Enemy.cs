@@ -66,7 +66,6 @@ public class Enemy : MonoBehaviour
 		OnGetStuned?.Invoke();
 		StartCoroutine(WaitStunTime(StunTime));
 	}
-
 	IEnumerator WaitStunTime(float time)
 	{
 		yield return new WaitForSeconds(time);
@@ -87,7 +86,6 @@ public class Enemy : MonoBehaviour
 		SharedData.Pulled = true;
 		OnPulled?.Invoke();
 	}
-
 	public void EndPull()
 	{
 		SharedData.Pulled = false;
@@ -95,7 +93,6 @@ public class Enemy : MonoBehaviour
 	}
 
 	//Freez
-
 	Freez freez;
 	public void Freez(Freez freez)
 	{
@@ -108,5 +105,11 @@ public class Enemy : MonoBehaviour
 		freez.UnfreezEnemy -= Unfreez;
 		freez = null;
 		Debug.Log($"{gameObject} unfreez");
+	}
+
+	//Whack-a-mole
+	public void Overthrow()
+	{
+		Debug.Log($"{gameObject} overthrow");
 	}
 }

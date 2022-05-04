@@ -24,6 +24,7 @@ public class SkillsController : MonoBehaviour
 
 	[SerializeField]
 	SkillType[] skillTypes;
+
 	[SerializeField]
 	Skill[] skills;
 
@@ -48,6 +49,7 @@ public class SkillsController : MonoBehaviour
 		selectWhackAMoleAction.performed += SelectWhackAMoleSkill;
 		useSkillAction.started += StartUsingSkill;
 		useSkillAction.performed += UseSkill;
+		useSkillAction.canceled += StopUsingSkill;
 	}
 
 	void OnDestroy()
@@ -61,6 +63,7 @@ public class SkillsController : MonoBehaviour
 		selectWhackAMoleAction.performed -= SelectWhackAMoleSkill;
 		useSkillAction.started -= StartUsingSkill;
 		useSkillAction.performed -= UseSkill;
+		useSkillAction.canceled -= StopUsingSkill;
 	}
 
 	void SelectFreezTimeSkill(InputAction.CallbackContext context)
@@ -78,21 +81,27 @@ public class SkillsController : MonoBehaviour
 
 	void StartUsingSkill(InputAction.CallbackContext context)
 	{
-		for(int i = 0; i < skillTypes.Length; i++) {
-			if(skillTypes[i] == equipedSkill) {
-				skills[i].StartUsingSkill();
-				return;
-			}
-		}
+		FindSkill(equipedSkill).StartUsingSkill();
 	}
 
 	void UseSkill(InputAction.CallbackContext context)
 	{
+		FindSkill(equipedSkill).UseSkill();
+	}
+
+	void StopUsingSkill(InputAction.CallbackContext context)
+	{
+		FindSkill(equipedSkill).StopUsingSkill();
+	}
+
+	Skill FindSkill(SkillType type)
+	{
 		for (int i = 0; i < skillTypes.Length; i++) {
 			if (skillTypes[i] == equipedSkill) {
-				skills[i].UseSkill();
-				return;
+				return skills[i];
 			}
 		}
+
+		return null;
 	}
 }
