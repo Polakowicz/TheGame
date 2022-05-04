@@ -22,7 +22,7 @@ public class SkillsController : MonoBehaviour
 		WhackAMole
 	}
 
-	public Dictionary<SkillType, Skill> skills;
+	public IDictionary<SkillType, Skill> skills = new Dictionary<SkillType, Skill>();
 
 	SkillType equipedSkill = SkillType.FreezTime;
 
