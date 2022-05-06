@@ -10,6 +10,11 @@ public class WhackAMole : Skill
 
 	[SerializeField]
 	float radiusGrow;
+	[SerializeField]
+	int damage;
+	[SerializeField]
+	float stunTime;
+
 	bool charging;
 
 	void Start()
@@ -43,9 +48,8 @@ public class WhackAMole : Skill
 		List<Collider2D> colliders = new List<Collider2D>();
 		range.OverlapCollider(filter, colliders);
 		foreach (Collider2D collider in colliders) {
-			collider.GetComponent<Enemy>().Overthrow();
+			collider.GetComponent<Enemy>().Overthrow(damage, stunTime);
 		}
-
 		charging = false;
 		range.radius = 0;
 	}

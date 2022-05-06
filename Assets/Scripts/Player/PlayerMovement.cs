@@ -79,14 +79,14 @@ public class PlayerMovement : MonoBehaviour
 		speed = s;
 		StartCoroutine(TrustDelay(t));
 	}
-	void PerformBeamPull(GameObject enemy, float v)
+	void PerformBeamPull(GameObject enemy, float v, float stunTime)
 	{
 		direction = enemy.transform.position - transform.position;
 		var s = direction.magnitude;
 		speed = v;
 		var t = s / v;
 		isInDash = true;
-		StartCoroutine(BeamPullDelay(t));
+		StartCoroutine(BeamPullDelay(t, stunTime));
 	}
 
 	IEnumerator DashDelay(float delay)
@@ -102,11 +102,11 @@ public class PlayerMovement : MonoBehaviour
 		isInDash = false;
 		eventSystem.EndBladeThrust();
 	}
-	IEnumerator BeamPullDelay(float delay)
+	IEnumerator BeamPullDelay(float delay, float stunTime)
 	{
 		yield return new WaitForSeconds(delay);
 		speed = basicSpeed;
 		isInDash = false;
-		eventSystem.EndBeamPullTowardsEnemy();
+		eventSystem.EndBeamPullTowardsEnemy(stunTime);
 	}
 }

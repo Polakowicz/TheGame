@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezTime: 3
-  freezStrength: 0.5
+  freezStrength: 0.9
 --- !u!1 &2896284848948219051
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +964,7 @@ MonoBehaviour:
   beamPullSpeed: 15
   beamDistance: 7
   beamPullCooldown: 0
+  beamStunTime: 1
 --- !u!120 &2106739156
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1275,6 +1276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiusGrow: 2
   maxEnemies: 5
+  damage: 20
 --- !u!58 &5781230282660426172
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1336,6 +1338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusGrow: 2
+  damage: 20
+  stunTime: 5
 --- !u!58 &7527550362854623186
 CircleCollider2D:
   m_ObjectHideFlags: 0

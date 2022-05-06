@@ -10,6 +10,7 @@ public class Warp : Skill
 
 	[SerializeField] float radiusGrow;
 	[SerializeField] int maxEnemies;
+	[SerializeField] int damage;
 
 	bool charging;
 	bool inWarp;
@@ -56,8 +57,9 @@ public class Warp : Skill
 		collider.enabled = false;
 		foreach (Enemy enemy in enemies) {
 			if (enemy != null) {
+				enemy.Hit(damage);
 				transform.root.position = enemy.transform.position;
-				yield return new WaitForSeconds(0.3f);
+				yield return new WaitForSeconds(0.1f);
 			}
 		}
 		enemies.Clear();
