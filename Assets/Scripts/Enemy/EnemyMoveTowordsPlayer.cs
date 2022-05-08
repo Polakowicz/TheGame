@@ -46,6 +46,6 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 			spriteRenderer.flipX = false;
 		}
 
-			rb.velocity = direction.normalized * defaultSpeed;
+		rb.velocity = direction.normalized * defaultSpeed * data.SpeedMultiplier;
 	}
 }

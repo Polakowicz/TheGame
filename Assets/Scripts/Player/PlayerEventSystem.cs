@@ -88,19 +88,19 @@ public class PlayerEventSystem : MonoBehaviour
 	}
 
     //Blaaster beam
-    public event Action<GameObject, float> OnBeamPullTowardsEnemyStarted;
+    public event Action<GameObject, float, float> OnBeamPullTowardsEnemyStarted;
     public event Action OnBeamPullTowardsEnemyEnded;
     
-    public void StartBeamPullTowardsEnemy(GameObject enemy, float speed)
+    public void StartBeamPullTowardsEnemy(GameObject enemy, float speed, float stunTime)
 	{
         Debug.Log(enemy);
         playerData.enemyToPulled = enemy;
-        OnBeamPullTowardsEnemyStarted?.Invoke(enemy, speed);
+        OnBeamPullTowardsEnemyStarted?.Invoke(enemy, speed, stunTime);
 	}
 
-    public void EndBeamPullTowardsEnemy()
+    public void EndBeamPullTowardsEnemy(float stunTime)
 	{
-        playerData.enemyToPulled.GetComponent<Enemy>().Stun();
+        playerData.enemyToPulled.GetComponent<Enemy>().Stun(stunTime);
         playerData.enemyToPulled = null;
         OnBeamPullTowardsEnemyEnded?.Invoke();
 	}

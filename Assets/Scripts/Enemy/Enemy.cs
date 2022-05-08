@@ -6,8 +6,6 @@ public class Enemy : MonoBehaviour
 {
 	public int MaxHP;
 	public bool Pullable;
-	public float ChanceToBeStunned;
-	public float StunTime;
 
 	public EnemySharedData SharedData;
 
@@ -56,17 +54,12 @@ public class Enemy : MonoBehaviour
 	public Action OnGetStuned;
 	public Action OnGetStunedEnded;
 
-	public void Stun()
+	public void Stun(float time)
 	{
-		if (UnityEngine.Random.value > ChanceToBeStunned) {
-			return;
-		}
-
 		SharedData.Stunned = true;
 		OnGetStuned?.Invoke();
-		StartCoroutine(WaitStunTime(StunTime));
+		StartCoroutine(WaitStunTime(time));
 	}
-
 	IEnumerator WaitStunTime(float time)
 	{
 		yield return new WaitForSeconds(time);
@@ -87,10 +80,33 @@ public class Enemy : MonoBehaviour
 		SharedData.Pulled = true;
 		OnPulled?.Invoke();
 	}
-
 	public void EndPull()
 	{
 		SharedData.Pulled = false;
 		OnPullEnded?.Invoke();	
+	}
+
+	//Freez
+	Freeze freez;
+	float freezStrength;
+	public void Freez(Freeze freez, float strength)
+	{
+		this.freez = freez;
+		this.freez.UnfreezEnemy += Unfreez;
+		freezStrength = strength;
+		SharedData.SpeedMultiplier -= freezStrength;
+	}
+	public void Unfreez()
+	{
+		freez.UnfreezEnemy -= Unfreez;
+		freez = null;
+		SharedData.SpeedMultiplier += freezStrength;
+	}
+
+	//Whack-a-mole
+	public void Overthrow(int damage, float stunTime)
+	{
+		Hit(damage);
+		Stun(stunTime);
 	}
 }

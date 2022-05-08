@@ -19,4 +19,5 @@ public class EnemySharedData
 	public float PullSpeed;
 	public bool Stunned;
 	public bool Pulled;
+	public float SpeedMultiplier = 1;
 }
