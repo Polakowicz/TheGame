@@ -27,17 +27,14 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		if (enemy.Data.Pulled || enemy.Data.Stunned || enemy.Data.Player == null) {
 			return;
 		}
-		Debug.Log("Here");
 
 		var distance = enemy.Data.DistanceToPlayer;
 		if(distance > maxDistance || distance < minDistance) {
 			rb.velocity = Vector2.zero;
 			return;
 		}
-		Debug.Log(distance);
-		var direction = enemy.Data.DirectionToPlayer;
-		Debug.Log(direction);
 
+		var direction = enemy.Data.DirectionToPlayer;
 		if (enemy.transform.position.x < enemy.Data.Player.transform.position.x)
 		{
 			spriteRenderer.flipX = true;

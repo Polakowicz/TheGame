@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour
 	private void NullPlayerReference()
 	{
 		Data.Player = null;
-	}	//When Player dies
+	}//When Player dies
 	private IEnumerator WaitForStunToEnd(float time)
 	{
 		yield return new WaitForSeconds(time);
