@@ -46,13 +46,14 @@ public class Enemy : MonoBehaviour
 	[SerializeField] public int MaxHP { get; private set; }
 	[SerializeField] public bool Pullable { get; private set; }
 
-	public Action OnMeleeAttackStart;
 	public Action<int> OnDamaged;
 	public Action OnDied;
 	public Action OnStuned;
 	public Action OnStunEnded;
 	public Action OnPulled;
 	public Action OnPullEnded;
+	public Action OnMeleeAttackStart;
+	public Action OnIgnited;
 
 	private void Awake()
 	{
