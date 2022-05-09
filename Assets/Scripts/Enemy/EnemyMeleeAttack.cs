@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyMeleeAttack : MonoBehaviour
 {
 	private Enemy enemy;
-	private EnemySharedData data;
 
 	[SerializeField] private int damage;
 	[SerializeField] private float range;
@@ -17,7 +16,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 	private void Start()
 	{
 		enemy = GetComponent<Enemy>();
-		data = enemy.SharedData;
+
 	}
 	private void Update()
 	{
@@ -27,7 +26,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 		}
 
 		if (!CanAttack()) return;
-		if (data.DistanceToPlayer > range) return;
+		if (enemy.Data.DistanceToPlayer > range) return;
 
 		enemy.OnMeleeAttackStart?.Invoke();
 		StartCoroutine(WaitForAttack());
@@ -38,12 +37,12 @@ public class EnemyMeleeAttack : MonoBehaviour
 		yield return new WaitForSeconds(animationDelay);
 
 		if (!CanAttack()) yield break;
-		if(data.DistanceToPlayer < range) {
-			data.Player.GetComponent<PlayerEventSystem>().GiveDamage(damage);
+		if(enemy.Data.DistanceToPlayer < range) {
+			enemy.Data.Player.GetComponent<PlayerEventSystem>().GiveDamage(damage);
 		}
 	}
 	private bool CanAttack()
 	{
-		return !(data.Stunned || data.Pulled || data.Player == null);
+		return !(enemy.Data.Stunned || enemy.Data.Pulled || enemy.Data.Player == null);
 	}
 }

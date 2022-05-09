@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemyShootsPlayer : MonoBehaviour
 {
 	Enemy enemy;
-	EnemySharedData data;
 
 	//Parameters
 	[SerializeField] GameObject bullet;
@@ -18,26 +17,25 @@ public class EnemyShootsPlayer : MonoBehaviour
 	void Start()
 	{
 		enemy = GetComponent<Enemy>();
-		data = enemy.SharedData;
 	}
 
 	void Update()
 	{
 		if (cooldownLeft > 0) {
-			cooldownLeft -= Time.deltaTime * data.SpeedMultiplier;
+			cooldownLeft -= Time.deltaTime * enemy.Data.SpeedMultiplier;
 			return;
 		}
 
-		if (data.Stunned || data.Pulled || data.Player == null) {
+		if (enemy.Data.Stunned || enemy.Data.Pulled || enemy.Data.Player == null) {
 			return;
 		}
 
-		var distance = data.DistanceToPlayer;
+		var distance = enemy.Data.DistanceToPlayer;
 		if (distance > maxDistance || distance < minDistance) {
 			return;
 		}
 
-		var direction = data.DirectionToPlayer;
+		var direction = enemy.Data.DirectionToPlayer;
 		var rotation = Vector2.SignedAngle(Vector2.up, direction);
 		Instantiate(bullet, gameObject.transform.position, Quaternion.Euler(0, 0, rotation));
 		cooldownLeft = cooldown;
