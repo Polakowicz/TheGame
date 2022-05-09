@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
 
 	public EnemySharedData SharedData;
 
+	public Action OnMeleeAttackAnimationStarts;
+
 	private void Awake()
 	{
 		SharedData = new EnemySharedData();
