@@ -57,7 +57,7 @@ public class Warp : Skill
 		collider.enabled = false;
 		foreach (Enemy enemy in enemies) {
 			if (enemy != null) {
-				enemy.Hit(damage);
+				enemy.Damage(damage);
 				transform.root.position = enemy.transform.position;
 				yield return new WaitForSeconds(0.1f);
 			}

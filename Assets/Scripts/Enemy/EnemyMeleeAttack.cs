@@ -2,25 +2,24 @@
 using UnityEngine;
 
 
-public class EnemyMelleAttack : MonoBehaviour
+public class EnemyMeleeAttack : MonoBehaviour
 {
-	Enemy enemy;
-	EnemySharedData data;
+	private Enemy enemy;
+	private EnemySharedData data;
 
-	[SerializeField] int damage;
-	[SerializeField] float range;
-	[SerializeField] float cooldown;
-	[SerializeField] float animationDelay;
+	[SerializeField] private int damage;
+	[SerializeField] private float range;
+	[SerializeField] private float cooldown;
+	[SerializeField] private float animationDelay;
 
-	float cooldownLeft;
+	private float cooldownLeft;
 
-	void Start()
+	private void Start()
 	{
 		enemy = GetComponent<Enemy>();
 		data = enemy.SharedData;
 	}
-
-	void Update()
+	private void Update()
 	{
 		if(cooldownLeft > 0) {
 			cooldownLeft -= Time.deltaTime;
@@ -30,11 +29,11 @@ public class EnemyMelleAttack : MonoBehaviour
 		if (!CanAttack()) return;
 		if (data.DistanceToPlayer > range) return;
 
-		enemy.OnMeleeAttackAnimationStarts?.Invoke();
+		enemy.OnMeleeAttackStart?.Invoke();
 		StartCoroutine(WaitForAttack());
 	}
 
-	IEnumerator WaitForAttack()
+	private IEnumerator WaitForAttack()
 	{
 		yield return new WaitForSeconds(animationDelay);
 
@@ -43,8 +42,7 @@ public class EnemyMelleAttack : MonoBehaviour
 			data.Player.GetComponent<PlayerEventSystem>().GiveDamage(damage);
 		}
 	}
-
-	bool CanAttack()
+	private bool CanAttack()
 	{
 		return !(data.Stunned || data.Pulled || data.Player == null);
 	}

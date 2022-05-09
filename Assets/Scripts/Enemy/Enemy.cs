@@ -4,75 +4,59 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public int MaxHP;
-	public bool Pullable;
+	private struct Data
+	{
+		public Freeze FreezeScript;
+		public float FreezStrength;
+	}
 
-	public EnemySharedData SharedData;
+	private Data data;
+	public EnemySharedData SharedData { get; private set; }
 
-	public Action OnMeleeAttackAnimationStarts;
+	[SerializeField] public int MaxHP { get; private set; }
+	[SerializeField] public bool Pullable { get; private set; }
+
+	public Action OnMeleeAttackStart;
+
+	public Action<int> OnDamaged;
+	public Action OnDied;
+	public Action OnStuned;
+	public Action OnStunEnded;
+	public Action OnPulled;
+	public Action OnPullEnded;
 
 	private void Awake()
 	{
-		SharedData = new EnemySharedData();
-		SharedData.HP = MaxHP;
+		SharedData = new EnemySharedData(gameObject, MaxHP);
+		data = new Data();
 	}
-
-	void Start()
+	private void Start()
 	{
-		
 		SharedData.Player = GameObject.FindGameObjectWithTag("Player");
-		SharedData.Enemy = gameObject;
 		GameEventSystem.Instance.OnPlayerDied += NullPlayerReference;
 	}
-
 	private void OnDestroy()
 	{
 		GameEventSystem.Instance.OnPlayerDied -= NullPlayerReference;
 	}
 
-	private void NullPlayerReference()
+	public void Damage(int dmg)
 	{
-		SharedData.Player = null;
-	}
-
-	//Health
-	public Action<int> OnGetHit;
-	public Action OnDied;
-
-	public void Hit(int dmg)
-	{
-		//Debug.Log($"HP {SharedData.HP}, dmg {dmg}");
 		SharedData.HP = Mathf.Clamp(SharedData.HP - dmg, 0, int.MaxValue);
-		
+
 		if (SharedData.HP <= 0) {
 			OnDied?.Invoke();
 			Destroy(gameObject);//Temporary
 		} else {
-			OnGetHit?.Invoke(dmg);
+			OnDamaged?.Invoke(dmg);
 		}
 	}
-
-	//Stun
-	public Action OnGetStuned;
-	public Action OnGetStunedEnded;
-
 	public void Stun(float time)
 	{
 		SharedData.Stunned = true;
-		OnGetStuned?.Invoke();
-		StartCoroutine(WaitStunTime(time));
+		OnStuned?.Invoke();
+		StartCoroutine(WaitForStunToEnd(time));
 	}
-	IEnumerator WaitStunTime(float time)
-	{
-		yield return new WaitForSeconds(time);
-		SharedData.Stunned = false;
-		OnGetStunedEnded?.Invoke();
-	}
-
-	//Pulling
-	public Action OnPulled;
-	public Action OnPullEnded;
-
 	public void Pull(float speed)
 	{
 		if (!Pullable) {
@@ -85,30 +69,40 @@ public class Enemy : MonoBehaviour
 	public void EndPull()
 	{
 		SharedData.Pulled = false;
-		OnPullEnded?.Invoke();	
+		OnPullEnded?.Invoke();
 	}
-
-	//Freez
-	Freeze freez;
-	float freezStrength;
+	public void Overthrow(int damage, float stunTime)
+	{
+		Damage(damage);
+		Stun(stunTime);
+	}//Wack-a-mole Skill
 	public void Freez(Freeze freez, float strength)
 	{
-		this.freez = freez;
-		this.freez.UnfreezEnemy += Unfreez;
-		freezStrength = strength;
-		SharedData.SpeedMultiplier -= freezStrength;
+		data.FreezeScript = freez;
+		data.FreezeScript.UnfreezEnemy += Unfreez;
+		data.FreezStrength = strength;
+		SharedData.SpeedMultiplier -= data.FreezStrength;
 	}
 	public void Unfreez()
 	{
-		freez.UnfreezEnemy -= Unfreez;
-		freez = null;
-		SharedData.SpeedMultiplier += freezStrength;
+		data.FreezeScript.UnfreezEnemy -= Unfreez;
+		data.FreezeScript = null;
+		SharedData.SpeedMultiplier += data.FreezStrength;
 	}
 
-	//Whack-a-mole
-	public void Overthrow(int damage, float stunTime)
+	private void NullPlayerReference()
 	{
-		Hit(damage);
-		Stun(stunTime);
+		SharedData.Player = null;
+	}	//When Player dies
+	private IEnumerator WaitForStunToEnd(float time)
+	{
+		yield return new WaitForSeconds(time);
+		SharedData.Stunned = false;
+		OnStunEnded?.Invoke();
 	}
+	
+
+	
+	
+	
 }
