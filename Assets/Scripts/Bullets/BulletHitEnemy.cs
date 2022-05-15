@@ -12,7 +12,7 @@ public class BulletHitEnemy : MonoBehaviour
         }
 
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        enemy.Hit(damage);
+        enemy.Damage(damage);
 		if (!piercing) {
             Destroy(gameObject);
         }
