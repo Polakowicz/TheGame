@@ -7,6 +7,8 @@ public class Goblin : MonoBehaviour
 	private Animator animator;
 	private GameObject player;
 
+	[SerializeField] GameObject wave;
+
 	[SerializeField] private int rockHitsToDie = 3;
 	[SerializeField] private int hp = 100000;
 	[SerializeField] private float kickSpeed;
@@ -32,6 +34,10 @@ public class Goblin : MonoBehaviour
 	private void Kick()
 	{
 		player.GetComponent<PlayerEventSystem>().Kick(kickSpeed, kickDistance, kickDamage);
+	}
+	private void MakeWave()
+	{
+		Instantiate(wave);
 	}
 
 	public void HitWithRock()

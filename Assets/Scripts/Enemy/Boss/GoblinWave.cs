@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageWave : MonoBehaviour
+public class GoblinWave : MonoBehaviour
 {
 	private CircleCollider2D waveCollider;
 
-	[SerializeField] private int waveMaxRange;
-	[SerializeField] private float waveGrowSpeed;
+	[SerializeField] private int waveMaxRange = 5;
+	[SerializeField] private float waveGrowSpeed = 5;
 	[SerializeField] private int waveDamage;
 
 	private void Start()
 	{
 		waveCollider = GetComponent<CircleCollider2D>();
 		waveCollider.radius = 0;
+		StartCoroutine(GrowWave());
+		SpawnRocks();
 	}
 
-	private void MakeWave()
+	private void SpawnRocks()
 	{
-		StartCoroutine(GrowWave());
+		Debug.Log("Spawn Rocks");
 	}
 
 	private IEnumerator GrowWave()
@@ -34,6 +36,8 @@ public class DamageWave : MonoBehaviour
 	{
 		if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
 
-		collision.GetComponent<PlayerEventSystem>().GiveDamage(waveDamage);
+		if (collision.name.Equals("Player")) {
+			collision.GetComponent<PlayerEventSystem>().GiveDamage(waveDamage);
+		}
 	}
 }
