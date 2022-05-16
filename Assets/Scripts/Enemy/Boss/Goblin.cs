@@ -35,11 +35,11 @@ public class Goblin : MonoBehaviour
 	{
 		player.GetComponent<PlayerEventSystem>().Kick(kickSpeed, kickDistance, kickDamage);
 	}
-	private void MakeWave()
+	private void CreateWave()
 	{
 		Instantiate(wave);
 	}
-
+	
 	public void HitWithRock()
 	{
 		rockHitsToDie--;

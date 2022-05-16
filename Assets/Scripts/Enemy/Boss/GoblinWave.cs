@@ -6,9 +6,16 @@ public class GoblinWave : MonoBehaviour
 {
 	private CircleCollider2D waveCollider;
 
+	[SerializeField] GameObject rock;
+
 	[SerializeField] private int waveMaxRange = 5;
 	[SerializeField] private float waveGrowSpeed = 5;
 	[SerializeField] private int waveDamage;
+	[SerializeField] private int RocksToSpawn = 3;
+
+	private Vector2 bottomLeftSpawn;
+	private Vector2 topRightSpawn;
+	private float rockYdistance;
 
 	private void Start()
 	{
@@ -20,7 +27,12 @@ public class GoblinWave : MonoBehaviour
 
 	private void SpawnRocks()
 	{
-		Debug.Log("Spawn Rocks");
+		for (int i = 0; i < RocksToSpawn; i++) {
+			var x = Random.Range(bottomLeftSpawn.x, topRightSpawn.x);
+			var y = Random.Range(bottomLeftSpawn.y, topRightSpawn.y);
+			var pos = new Vector2(x, y + rockYdistance);
+			Instantiate(rock, pos, Quaternion.identity);
+		}
 	}
 
 	private IEnumerator GrowWave()
