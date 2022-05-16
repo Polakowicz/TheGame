@@ -25,7 +25,7 @@ public class PushableRock : MonoBehaviour
 		if (!pushed) return;
 
 		if(collision.gameObject.layer == LayerMask.NameToLayer("Boss")) {
-			Debug.Log("Damage boss with rock");
+			collision.otherCollider.GetComponent<Goblin>().HitWithRock();
 		}
 
 		Destroy(gameObject);

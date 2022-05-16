@@ -42,7 +42,12 @@ public class MeleeWeapon : Weapon
 		List<Collider2D> hits = new List<Collider2D>();
 		range.OverlapCollider(attackContactFilter, hits);
 		foreach (Collider2D hit in hits) {
-			hit.GetComponent<Enemy>().Damage(basicAttackDamage);
+			if(hit.gameObject.layer == LayerMask.NameToLayer("Rock")) {
+				hit.GetComponent<PushableRock>().Push(hit.transform.position - transform.position);
+			}else {
+				hit.GetComponent<Enemy>().Damage(basicAttackDamage);
+			}
+			
 		}
 		eventSystem.OnBladeAttack?.Invoke();
 	}
