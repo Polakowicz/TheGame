@@ -60,6 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f05ace071c90840b615707b6dd2c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rock: {fileID: 1795194695332783529, guid: 0fd114f2d327c4f46bbd7e2e21467062, type: 3}
   waveMaxRange: 5
   waveGrowSpeed: 5
   waveDamage: 15
+  RocksToSpawn: 1
