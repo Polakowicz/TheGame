@@ -20,6 +20,10 @@ public class PlayerEventSystem : MonoBehaviour
 	//Health
 	public void GiveDamage(int dmg)
     {
+		if (playerData.blocking) {
+            return;
+		}
+
 		if (powerUpController.HitForceField()) {
             Debug.Log("Blocked by shield");
             return;
@@ -79,8 +83,17 @@ public class PlayerEventSystem : MonoBehaviour
 
     public void StartBladeBlock()
 	{
+
         OnBladeBlockStarted?.Invoke();
+        StartCoroutine(BlockDelay());
 	}
+
+    IEnumerator BlockDelay()
+	{
+        playerData.blocking = true;
+        yield return new WaitForSeconds(1);
+        playerData.blocking = false;
+    }
 
     public void EndBladeBlock()
 	{

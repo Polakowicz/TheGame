@@ -19,4 +19,5 @@ public class PlayerData
 	public int HP;
 	public GameObject enemyToPulled;
 	public float speedMultiplier = 1;//100%
+	public bool blocking;
 }
