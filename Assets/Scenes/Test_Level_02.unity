@@ -5696,9 +5696,9 @@ MonoBehaviour:
   wave: {fileID: 8543191143308997617, guid: aa16035fd665f7a4fba3a7d6f17b9b20, type: 3}
   rockHitsToDie: 3
   hp: 100000
-  kickSpeed: 0
-  kickDistance: 0
-  kickDamage: 0
+  kickSpeed: 5
+  kickDistance: 3
+  kickDamage: 15
 --- !u!50 &146136457
 Rigidbody2D:
   serializedVersion: 4
@@ -6258,6 +6258,10 @@ PrefabInstance:
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4717716870089605577, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: playerData.MaxHP
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fde203b3e4dde024a90af516e7c94283, type: 3}

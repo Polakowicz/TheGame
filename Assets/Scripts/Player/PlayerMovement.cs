@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 		dashAction.performed += PerformDash;
 		eventSystem.OnBladeThrustStarted += PerformThrustDash;
 		eventSystem.OnBeamPullTowardsEnemyStarted += PerformBeamPull;
+		eventSystem.OnKicked += PerformKicked;
 
 		speed = basicSpeed;
 	}
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 		dashAction.performed -= PerformDash;
 		eventSystem.OnBladeThrustStarted -= PerformThrustDash;
 		eventSystem.OnBeamPullTowardsEnemyStarted -= PerformBeamPull;
+		eventSystem.OnKicked -= PerformKicked;
 	}
 
 	void Update()
@@ -87,6 +89,14 @@ public class PlayerMovement : MonoBehaviour
 		var t = s / v;
 		isInDash = true;
 		StartCoroutine(BeamPullDelay(t, stunTime));
+	}
+	void PerformKicked(Vector2 direction, float v, float s)
+	{
+		var t = s / v;
+		this.direction = direction;
+		isInDash=true;
+		speed = v;
+		StartCoroutine(DashDelay(t));
 	}
 
 	IEnumerator DashDelay(float delay)
