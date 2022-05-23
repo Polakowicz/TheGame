@@ -104,4 +104,9 @@ public class PlayerEventSystem : MonoBehaviour
         playerData.enemyToPulled = null;
         OnBeamPullTowardsEnemyEnded?.Invoke();
 	}
+
+    public void Kick(float speed, float distance, int damage)
+	{
+        Debug.Log("Kicked");
+	}
 }

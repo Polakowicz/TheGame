@@ -230,7 +230,7 @@ MonoBehaviour:
   eventSystem: {fileID: 4717716870089605577}
   melleWeaponLayerMask:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 327680
   defaultRange: {fileID: 1436956163}
   powerupRange: {fileID: 7492179955472192783}
   blockRange: {fileID: 3700359822864264953}
