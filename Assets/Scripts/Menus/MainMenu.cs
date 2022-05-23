@@ -58,6 +58,8 @@ public class MainMenu : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("ButtonClick");
         Debug.Log("Można teraz bezpiecznie wyłączyć komputer.");
+        Application.Quit();
+        /*
         if (UnityEditor.EditorApplication.isPlaying == true)
         {
             UnityEditor.EditorApplication.isPlaying = false;
@@ -66,5 +68,6 @@ public class MainMenu : MonoBehaviour
         {
             Application.Quit();
         }
+        */
     }
 }
