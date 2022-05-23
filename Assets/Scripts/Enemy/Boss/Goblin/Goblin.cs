@@ -5,7 +5,7 @@ using UnityEngine;
 public class Goblin : MonoBehaviour
 {
 	private Animator animator;
-	private GameObject player;
+	public GameObject Player { get; private set; }
 
 	[SerializeField] GameObject wave;
 
@@ -20,20 +20,21 @@ public class Goblin : MonoBehaviour
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
-		player = GameObject.FindGameObjectWithTag("Player");
+		Player = GameObject.FindGameObjectWithTag("Player");
+		alive = true;
 	}
 
 	private void Update()
 	{
 		if (!alive) return;
 
-		var distance = Vector2.Distance(transform.position, player.transform.position);
+		var distance = Vector2.Distance(transform.position, Player.transform.position);
 		animator.SetFloat("Distance", distance);
 	}
 
 	private void Kick()
 	{
-		player.GetComponent<PlayerEventSystem>().Kick(kickSpeed, kickDistance, kickDamage);
+		Player.GetComponent<PlayerEventSystem>().Kick(kickSpeed, kickDistance, kickDamage);
 	}
 	private void CreateWave()
 	{

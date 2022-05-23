@@ -6,7 +6,7 @@ public class PushableRock : MonoBehaviour
 	private Rigidbody2D rb;
 	private Collider2D col;
 
-	private float pushSpeed = 3;
+	private float pushSpeed = 10;
 	private float fallSpeed = 10;
 
 	bool pushed;
@@ -29,13 +29,15 @@ public class PushableRock : MonoBehaviour
 		while (rb.position.y > target) {
 			yield return null;
 		}
+
 		rb.velocity = Vector2.zero;
 		col.enabled = true;
 		falling = false;
-		}
+	}
 
 	public void Push(Vector2 direction)
 	{
+		Debug.Log("Push");
 		if (falling) return;
 
 		pushed = true;

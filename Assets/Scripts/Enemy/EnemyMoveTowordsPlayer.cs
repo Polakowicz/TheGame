@@ -35,11 +35,11 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 		}
 
 		var direction = enemy.Data.DirectionToPlayer;
-		if (enemy.transform.position.x < enemy.Data.Player.transform.position.x)
+		if (direction.x < 0)
 		{
 			spriteRenderer.flipX = true;
 			
-		} else if (enemy.transform.position.x > enemy.Data.Player.transform.position.x)
+		} else if (direction.x > 0)
 		{
 			spriteRenderer.flipX = false;
 		}
