@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
 
 	[SerializeField] public int MaxHP { get; private set; }
 	[SerializeField] public bool Pullable { get; private set; }
+	[SerializeField] GameObject[] PowerUps;
 
 	public Action<int> OnDamaged;
 	public Action OnDied;
@@ -118,6 +119,17 @@ public class Enemy : MonoBehaviour
 		privateData.FreezeScript.UnfreezEnemy -= Unfreez;
 		privateData.FreezeScript = null;
 		Data.SpeedMultiplier += privateData.FreezStrength;
+	}
+	public void Finish()
+	{
+		if (!Data.Stunned) return;
+
+		OnDied?.Invoke();
+		
+
+		var i = UnityEngine.Random.Range(0, PowerUps.Length - 1);
+		Instantiate(PowerUps[i], transform.position, Quaternion.identity);
+		Destroy(gameObject);//Temporary
 	}
 
 	private void NullPlayerReference()
