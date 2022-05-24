@@ -20,6 +20,10 @@ public class PlayerEventSystem : MonoBehaviour
 	//Health
 	public void GiveDamage(int dmg)
     {
+		if (playerData.blocking) {
+            return;
+		}
+
 		if (powerUpController.HitForceField()) {
             Debug.Log("Blocked by shield");
             return;
@@ -79,8 +83,17 @@ public class PlayerEventSystem : MonoBehaviour
 
     public void StartBladeBlock()
 	{
+
         OnBladeBlockStarted?.Invoke();
+        StartCoroutine(BlockDelay());
 	}
+
+    IEnumerator BlockDelay()
+	{
+        playerData.blocking = true;
+        yield return new WaitForSeconds(1);
+        playerData.blocking = false;
+    }
 
     public void EndBladeBlock()
 	{
@@ -105,8 +118,11 @@ public class PlayerEventSystem : MonoBehaviour
         OnBeamPullTowardsEnemyEnded?.Invoke();
 	}
 
-    public void Kick(float speed, float distance, int damage)
+    public event Action<Vector2, float, float> OnKicked;
+    public void Kick(Vector2 direction, float speed, float distance, int damage)
 	{
-        Debug.Log("Kicked");
+        Debug.Log("Kick");
+        OnKicked?.Invoke(direction, speed, distance);
+        GiveDamage(damage);
 	}
 }

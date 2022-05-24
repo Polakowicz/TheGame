@@ -17,6 +17,8 @@ public class Goblin : MonoBehaviour
 
 	private bool alive;
 
+	private bool deleay;
+
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
@@ -30,15 +32,33 @@ public class Goblin : MonoBehaviour
 
 		var distance = Vector2.Distance(transform.position, Player.transform.position);
 		animator.SetFloat("Distance", distance);
+
+		if (deleay) return;
+
+		if(distance < 3) {
+			Kick();
+			StartCoroutine(Delay());
+		} else if (distance < 10) {
+			CreateWave();
+			StartCoroutine(Delay());
+		}
+	}
+
+	IEnumerator Delay()
+	{
+		deleay = true;
+		yield return new WaitForSeconds(2);
+		deleay = false;
 	}
 
 	private void Kick()
 	{
-		Player.GetComponent<PlayerEventSystem>().Kick(kickSpeed, kickDistance, kickDamage);
+		var direction = Player.transform.position - transform.position;
+		Player.GetComponent<PlayerEventSystem>().Kick(direction, kickSpeed, kickDistance, kickDamage);
 	}
 	private void CreateWave()
 	{
-		Instantiate(wave);
+		Instantiate(wave, transform.position, Quaternion.identity);
 	}
 	
 	public void HitWithRock()

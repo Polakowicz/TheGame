@@ -52,6 +52,19 @@ public class MeleeWeapon : Weapon
 		}
 		eventSystem.OnBladeAttack?.Invoke();
 	}
+
+	public void Interact()
+	{
+		List<Collider2D> hits = new List<Collider2D>();
+		range.OverlapCollider(attackContactFilter, hits);
+		foreach (Collider2D hit in hits) {
+			if(hit.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+				hit.GetComponent<Enemy>().Finish();
+				break;
+			}
+
+		}
+	}
 	
 	public override void PerformStrongerAttack()
 	{
