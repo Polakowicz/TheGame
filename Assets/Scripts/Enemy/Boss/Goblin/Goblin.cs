@@ -79,7 +79,7 @@ public class Goblin : MonoBehaviour
 	private void Die()
 	{
 		alive = false;
-		//Trigger die animation;
+		Destroy(gameObject);//Temp
 	}
 	private void Destroy()
 	{
