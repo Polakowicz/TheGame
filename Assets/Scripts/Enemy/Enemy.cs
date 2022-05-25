@@ -4,93 +4,147 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public int MaxHP;
-	public bool Pullable;
-	public float ChanceToBeStunned;
-	public float StunTime;
+	private struct PrivateData
+	{
+		public Freeze FreezeScript;
+		public float FreezStrength;
+	}
+	public class SharedData
+	{
+		private GameObject gameObject;
 
-	public EnemySharedData SharedData;
+		public GameObject Player;
+		public int HP;
+		public float PullSpeed;
+		public bool Stunned;
+		public bool Pulled;
+		public float SpeedMultiplier;
+
+		public float DistanceToPlayer {
+			get {
+				return Vector2.Distance(gameObject.transform.position, Player.transform.position);
+			}
+		}
+		public Vector2 DirectionToPlayer {
+			get {
+				return Player.transform.position - gameObject.transform.position;
+			}
+		}
+
+		public SharedData(GameObject thisGameObject, int maxHP)
+		{
+			gameObject = thisGameObject;
+			HP = maxHP;
+			Player = GameObject.FindGameObjectWithTag("Player");
+			SpeedMultiplier = 1;
+		}
+	}
+
+	private PrivateData privateData;
+	public SharedData Data { get; private set; }
+
+	[SerializeField] public int MaxHP { get; private set; }
+	[SerializeField] public bool Pullable { get; private set; }
+	[SerializeField] GameObject[] PowerUps;
+
+	public Action<int> OnDamaged;
+	public Action OnDied;
+	public Action OnStuned;
+	public Action OnStunEnded;
+	public Action OnPulled;
+	public Action OnPullEnded;
+	public Action OnMeleeAttackStart;
+	public Action OnIgnited;
 
 	private void Awake()
 	{
-		SharedData = new EnemySharedData();
-		SharedData.HP = MaxHP;
+		Data = new SharedData(gameObject, MaxHP);
+		privateData = new PrivateData();
 	}
-
-	void Start()
+	private void Start()
 	{
-		
-		SharedData.Player = GameObject.FindGameObjectWithTag("Player");
-		SharedData.Enemy = gameObject;
+		Data.Player = GameObject.FindGameObjectWithTag("Player");
 		GameEventSystem.Instance.OnPlayerDied += NullPlayerReference;
 	}
-
 	private void OnDestroy()
 	{
 		GameEventSystem.Instance.OnPlayerDied -= NullPlayerReference;
 	}
 
-	private void NullPlayerReference()
+	public void Damage(int dmg)
 	{
-		SharedData.Player = null;
-	}
+		Data.HP = Mathf.Clamp(Data.HP - dmg, 0, int.MaxValue);
 
-	//Health
-	public Action<int> OnGetHit;
-	public Action OnDied;
-
-	public void Hit(int dmg)
-	{
-		//Debug.Log($"HP {SharedData.HP}, dmg {dmg}");
-		SharedData.HP = Mathf.Clamp(SharedData.HP - dmg, 0, int.MaxValue);
-		
-		if (SharedData.HP <= 0) {
+		if (Data.HP <= 0) {
 			OnDied?.Invoke();
 			Destroy(gameObject);//Temporary
 		} else {
-			OnGetHit?.Invoke(dmg);
+			OnDamaged?.Invoke(dmg);
 		}
 	}
-
-	//Stun
-	public Action OnGetStuned;
-	public Action OnGetStunedEnded;
-
-	public void Stun()
+	public void Stun(float time)
 	{
-		if (UnityEngine.Random.value > ChanceToBeStunned) {
-			return;
-		}
-
-		SharedData.Stunned = true;
-		OnGetStuned?.Invoke();
-		StartCoroutine(WaitStunTime(StunTime));
+		Data.Stunned = true;
+		OnStuned?.Invoke();
+		StartCoroutine(WaitForStunToEnd(time));
 	}
-
-	IEnumerator WaitStunTime(float time)
-	{
-		yield return new WaitForSeconds(time);
-		SharedData.Stunned = false;
-		OnGetStunedEnded?.Invoke();
-	}
-
-	//Pulling
-	public Action OnPulled;
-	public Action OnPullEnded;
-
 	public void Pull(float speed)
 	{
 		if (!Pullable) {
 			return;
 		}
-		SharedData.PullSpeed = speed;
-		SharedData.Pulled = true;
+		Data.PullSpeed = speed;
+		Data.Pulled = true;
 		OnPulled?.Invoke();
 	}
-
 	public void EndPull()
 	{
-		SharedData.Pulled = false;
-		OnPullEnded?.Invoke();	
+		Data.Pulled = false;
+		OnPullEnded?.Invoke();
 	}
+	public void Overthrow(int damage, float stunTime)
+	{
+		Damage(damage);
+		Stun(stunTime);
+	}//Wack-a-mole Skill
+	public void Freez(Freeze freez, float strength)
+	{
+		privateData.FreezeScript = freez;
+		privateData.FreezeScript.UnfreezEnemy += Unfreez;
+		privateData.FreezStrength = strength;
+		Data.SpeedMultiplier -= privateData.FreezStrength;
+	}
+	public void Unfreez()
+	{
+		privateData.FreezeScript.UnfreezEnemy -= Unfreez;
+		privateData.FreezeScript = null;
+		Data.SpeedMultiplier += privateData.FreezStrength;
+	}
+	public void Finish()
+	{
+		if (!Data.Stunned) return;
+
+		OnDied?.Invoke();
+		
+
+		var i = UnityEngine.Random.Range(0, PowerUps.Length - 1);
+		Instantiate(PowerUps[i], transform.position, Quaternion.identity);
+		Destroy(gameObject);//Temporary
+	}
+
+	private void NullPlayerReference()
+	{
+		Data.Player = null;
+	}//When Player dies
+	private IEnumerator WaitForStunToEnd(float time)
+	{
+		yield return new WaitForSeconds(time);
+		Data.Stunned = false;
+		OnStunEnded?.Invoke();
+	}
+	
+
+	
+	
+	
 }

@@ -17,6 +17,7 @@ public class PlayerWeaponInputController : MonoBehaviour
     InputAction strongerAttackAction;
     InputAction alternativeAttackAction;
     InputAction pullAction;
+    InputAction interactAcction;
 
     //Internal Variables
     Weapon equippedWeapon;
@@ -37,6 +38,7 @@ public class PlayerWeaponInputController : MonoBehaviour
         strongerAttackAction = playerInput.actions["Stronger attack"];
         alternativeAttackAction = playerInput.actions["Alternative attack"];
         pullAction = playerInput.actions["Scroll"];
+        interactAcction = playerInput.actions["Interact"];
     }
 
     void SubscribeToEvents()
@@ -51,6 +53,8 @@ public class PlayerWeaponInputController : MonoBehaviour
         alternativeAttackAction.started += StartAlternativeAttack;
         alternativeAttackAction.performed += PerformAlternativeAttack;
         alternativeAttackAction.canceled += CancelAlternativeAttack;
+
+        interactAcction.performed += Finish;
     }
 
 	void OnDestroy()
@@ -65,6 +69,8 @@ public class PlayerWeaponInputController : MonoBehaviour
         alternativeAttackAction.started -= StartAlternativeAttack;
         alternativeAttackAction.performed -= PerformAlternativeAttack;
         alternativeAttackAction.canceled -= CancelAlternativeAttack;
+
+        interactAcction.performed -= Finish;
     }
 
 	void Update()
@@ -89,6 +95,10 @@ public class PlayerWeaponInputController : MonoBehaviour
             playerEventSystem.ChangedWeapon(PlayerData.Weapon.Blade);
         }
         
+	}
+    void Finish(InputAction.CallbackContext context)
+	{
+        meleeWeapon.Interact();
 	}
 
     //Weapons attakcs

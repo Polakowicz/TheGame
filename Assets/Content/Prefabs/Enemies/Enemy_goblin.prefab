@@ -149,10 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fed2894b89b10540811bbb506b42bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  Pullable: 1
-  ChanceToBeStunned: 0
-  StunTime: 0
+  PowerUps:
+  - {fileID: 2179698435022389918, guid: 62b8a75dcf7d28f4f81e0b9101822c08, type: 3}
+  - {fileID: 4622951604835209452, guid: ebbfaaa281623fc47a9bfe17bad325d6, type: 3}
+  - {fileID: 8384750978492464676, guid: 0084ad87292d52146946cea85b378f4c, type: 3}
+  - {fileID: 7753718837127953338, guid: ddcac5593cd35ec4c8d6372463a0e31f, type: 3}
 --- !u!114 &2582230054303877598
 MonoBehaviour:
   m_ObjectHideFlags: 0
