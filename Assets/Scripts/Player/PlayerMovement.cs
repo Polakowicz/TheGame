@@ -1,9 +1,13 @@
+using Interfaces;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IKick
 {
+
+
+
 	//Components
 	Rigidbody2D rb;
 	[SerializeField] PlayerEventSystem eventSystem;
@@ -118,5 +122,24 @@ public class PlayerMovement : MonoBehaviour
 		speed = basicSpeed;
 		isInDash = false;
 		eventSystem.EndBeamPullTowardsEnemy(stunTime);
+	}
+
+
+
+
+
+
+
+	private readonly float KickTime = 1f;
+
+
+	public void Kick(Vector2 direction)
+	{
+		PerformKicked(direction, 1, KickTime);
+	}
+
+	public void Kick(Vector2 direction, float force)
+	{
+		PerformKicked(direction, force, KickTime);
 	}
 }

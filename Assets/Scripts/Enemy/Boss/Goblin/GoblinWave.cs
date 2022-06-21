@@ -13,7 +13,7 @@ public class GoblinWave : MonoBehaviour
 	[SerializeField] private int waveMaxRange = 5;
 	[SerializeField] private float waveGrowSpeed = 5;
 	[SerializeField] private int waveDamage;
-	private int RocksToSpawn = 3;
+	private int RocksToSpawn = 1;
 
 	private static readonly float spawnRange = 5;
 	private Vector2 bottomLeftSpawn = new Vector2(-spawnRange, spawnRange);
