@@ -1,4 +1,5 @@
 using Interfaces;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -51,6 +52,8 @@ public class PlayerMovement : MonoBehaviour, IKick
 
 	void Update()
 	{
+		if (disableImput > 0) return;
+
 		if (!isInDash) {
 			direction = moveAction.ReadValue<Vector2>();
 		}
@@ -58,6 +61,8 @@ public class PlayerMovement : MonoBehaviour, IKick
 
 	void FixedUpdate()
 	{
+		if (disableImput > 0) return;
+
 		if (isInDash) {
 			rb.velocity = direction.normalized * speed;
 		} else {
@@ -128,18 +133,27 @@ public class PlayerMovement : MonoBehaviour, IKick
 
 
 
+	private delegate void VoidFunction();
 
-
-	private readonly float KickTime = 1f;
-
+	private readonly float KickTime = 0.5f;
+	private int disableImput;
 
 	public void Kick(Vector2 direction)
 	{
-		PerformKicked(direction, 1, KickTime);
+		rb.velocity = direction;
+		disableImput++;
+		StartCoroutine(Wait(KickTime, () => disableImput--));
+	
 	}
-
 	public void Kick(Vector2 direction, float force)
 	{
-		PerformKicked(direction, force, KickTime);
+		Kick(direction * force);
 	}
+
+	private IEnumerator Wait(float time, Action func)
+	{
+		yield return new WaitForSeconds(time);
+		func();
+	}
+
 }

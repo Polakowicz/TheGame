@@ -8,7 +8,7 @@ public class Goblin : MonoBehaviour, IHit
 	private readonly int MaxHP = 10000;
 	private readonly int RockHitsResilience = 3;
 	private readonly float KickDistance = 2.5f;
-	private readonly float KickForce = 10f;
+	private readonly float KickForce = 20f;
 
 	private int RockDamage => MaxHP / RockHitsResilience + 1;
 
@@ -47,6 +47,8 @@ public class Goblin : MonoBehaviour, IHit
 		var distance = Vector2.Distance(transform.position, Player.transform.position);
 		if(distance <= KickDistance) {
 			animator.SetTrigger("Kick");
+			active = false;
+			StartCoroutine(Wait(1, () => active = true));
 		}
 
 
@@ -79,9 +81,7 @@ public class Goblin : MonoBehaviour, IHit
 	private void Kick()
 	{
 		var direction = Player.transform.position - transform.position;
-		Debug.Log(direction);
-		Player.GetComponent<IKick>()?.Kick(direction * KickForce);
-		//Player.GetComponent<PlayerEventSystem>().Kick(direction, kickSpeed, kickDistance, kickDamage);
+		Player.GetComponent<IKick>()?.Kick(direction.normalized * KickForce);
 	}
 	private void Die()
 	{
@@ -108,5 +108,11 @@ public class Goblin : MonoBehaviour, IHit
 			Die();
 		}
 		//Invoke Hud change;
+	}
+
+	private IEnumerator Wait(float time, Action func)
+	{
+		yield return new WaitForSeconds(time);
+		func();
 	}
 }
