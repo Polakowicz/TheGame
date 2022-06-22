@@ -720,6 +720,7 @@ MonoBehaviour:
     HP: 0
     enemyToPulled: {fileID: 0}
     speedMultiplier: 1
+    blocking: 0
   powerUpController: {fileID: 6348656884894791210}
 --- !u!114 &2896284850009964007
 MonoBehaviour:
@@ -960,7 +961,7 @@ MonoBehaviour:
   dispersinPercentageIncrease: 0.1
   beamHitLayerMask:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 1114112
   beamPullSpeed: 15
   beamDistance: 7
   beamPullCooldown: 0

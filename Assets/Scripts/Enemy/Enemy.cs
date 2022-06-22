@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPullable
 {
 	private struct PrivateData
 	{
@@ -90,9 +90,11 @@ public class Enemy : MonoBehaviour
 	}
 	public void Pull(float speed)
 	{
-		if (!Pullable) {
-			return;
-		}
+		Debug.Log("Pulled");
+		speed = 10;
+		//if (!Pullable) {
+		//	return;
+		//}
 		Data.PullSpeed = speed;
 		Data.Pulled = true;
 		OnPulled?.Invoke();

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Interfaces;
+using System.Collections;
 using UnityEngine;
 
 public class PushableRock : MonoBehaviour
@@ -51,7 +52,7 @@ public class PushableRock : MonoBehaviour
 		if (!pushed) return;
 
 		if(collision.gameObject.layer == LayerMask.NameToLayer("Boss")) {
-			collision.otherCollider.GetComponent<Goblin>().HitWithRock();
+			collision.gameObject.GetComponent<IHit>().Hit(1,IHit.HitWeapon.Rock);
 		}
 
 		Destroy(gameObject);

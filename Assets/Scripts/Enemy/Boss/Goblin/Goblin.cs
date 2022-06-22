@@ -1,29 +1,35 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class Goblin : MonoBehaviour
+public class Goblin : MonoBehaviour, IHit
 {
+	private readonly int MaxHP = 10000;
+	private readonly int RockHitsResilience = 3;
+	private readonly float KickDistance = 2.5f;
+	private readonly float KickForce = 20f;
+
+	private int RockDamage => MaxHP / RockHitsResilience + 1;
+
 	private Animator animator;
 	public GameObject Player { get; private set; }
 
+
 	[SerializeField] GameObject wave;
 
-	[SerializeField] private int rockHitsToDie = 3;
-	[SerializeField] private int hp = 100000;
-	[SerializeField] private float kickSpeed;
-	[SerializeField] private float kickDistance;
-	[SerializeField] private int kickDamage;
-
-	private bool alive;
-
-	private bool deleay;
+	
+	
+	private bool alive = true;
+	private bool active = true;
+	private int hp;
 
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
 		Player = GameObject.FindGameObjectWithTag("Player");
-		alive = true;
+
+		hp = MaxHP;
 	}
 
 	private void Update()
@@ -32,57 +38,52 @@ public class Goblin : MonoBehaviour
 
 		var distance = Vector2.Distance(transform.position, Player.transform.position);
 		animator.SetFloat("Distance", distance);
-
-		if (deleay) return;
-
-		if(distance < 3) {
-			Kick();
-			StartCoroutine(Delay());
-		} else if (distance < 10) {
-			CreateWave();
-			StartCoroutine(Delay());
+		if (distance <= KickDistance) {
+			active = false;
 		}
 	}
 
-	IEnumerator Delay()
+	public void Hit(int damage, IHit.HitWeapon weapon)
 	{
-		deleay = true;
-		yield return new WaitForSeconds(2);
-		deleay = false;
+		switch (weapon) {
+			case IHit.HitWeapon.Bullet:
+				hp--;
+				break;
+			case IHit.HitWeapon.Rock:
+				hp -= RockDamage;
+				break;
+		}
+
+		hp = Mathf.Clamp(hp, 0, MaxHP);
+		if (hp == 0) {
+			Die();
+		} else if (active) {
+			animator.SetTrigger("HitGround");
+		}
 	}
 
 	private void Kick()
 	{
 		var direction = Player.transform.position - transform.position;
-		Player.GetComponent<PlayerEventSystem>().Kick(direction, kickSpeed, kickDistance, kickDamage);
+		Player.GetComponent<IKick>()?.Kick(direction.normalized * KickForce);
 	}
 	private void CreateWave()
 	{
 		Instantiate(wave, transform.position, Quaternion.identity);
 	}
-	
-	public void HitWithRock()
-	{
-		rockHitsToDie--;
-		if(rockHitsToDie <= 0) {
-			Die();
-		}
-	}
-	public void HitWithBlaster(int dmg)
-	{
-		hp = Mathf.Clamp(hp - dmg, 0, int.MaxValue);
+	private void Deactive() => active = false;
+	private void Active() => active = true;
 
-		if (hp == 0) {
-			Die();
-		}
-	}
+	
 	private void Die()
 	{
 		alive = false;
-		//Trigger die animation;
+		animator.SetTrigger("Die");
 	}
 	private void Destroy()
 	{
 		Destroy(gameObject);
 	}
+
+	
 }
