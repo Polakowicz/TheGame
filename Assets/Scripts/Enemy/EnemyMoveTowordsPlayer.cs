@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyMoveTowordsPlayer : MonoBehaviour
 {
 	Enemy enemy;
-	EnemySharedData data;
 	Rigidbody2D rb;
 	SpriteRenderer spriteRenderer;
 
@@ -15,37 +14,36 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 	[SerializeField] float maxDistance;
 	[SerializeField] float minDistance;
 
+
 	void Start()
 	{
 		enemy = GetComponent<Enemy>();
-		data = enemy.SharedData;
 		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	void Update()
 	{
-		if (data.Pulled || data.Stunned || data.Player == null) {
+		if (enemy.Data.Pulled || enemy.Data.Stunned || enemy.Data.Player == null) {
 			return;
 		}
 
-		var distance = data.DistanceToPlayer;
+		var distance = enemy.Data.DistanceToPlayer;
 		if(distance > maxDistance || distance < minDistance) {
 			rb.velocity = Vector2.zero;
 			return;
 		}
 
-		var direction = data.DirectionToPlayer;
-
-		if (enemy.transform.position.x < data.Player.transform.position.x)
+		var direction = enemy.Data.DirectionToPlayer;
+		if (direction.x < 0)
 		{
 			spriteRenderer.flipX = true;
 			
-		} else if (enemy.transform.position.x > data.Player.transform.position.x)
+		} else if (direction.x > 0)
 		{
 			spriteRenderer.flipX = false;
 		}
 
-			rb.velocity = direction.normalized * defaultSpeed;
+		rb.velocity = direction.normalized * defaultSpeed * enemy.Data.SpeedMultiplier;
 	}
 }

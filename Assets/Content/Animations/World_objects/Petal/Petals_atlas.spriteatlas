@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Petals_atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: f336e68250d32a049b0b63c2e548df34, type: 3}
+    - {fileID: 2800000, guid: d7d4fa7d52abc6b419367ca9f47cc246, type: 3}
+    - {fileID: 2800000, guid: f7a7b6a7911e78d48b6cff307fa2f95d, type: 3}
+    - {fileID: 2800000, guid: eaf1130e127104d41a30910fe11f60a9, type: 3}
+    - {fileID: 2800000, guid: 565f736a6f9155f40a10ad274d5bf379, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f336e68250d32a049b0b63c2e548df34, type: 3}
+  - {fileID: 21300000, guid: f7a7b6a7911e78d48b6cff307fa2f95d, type: 3}
+  - {fileID: 21300000, guid: 565f736a6f9155f40a10ad274d5bf379, type: 3}
+  - {fileID: 21300000, guid: d7d4fa7d52abc6b419367ca9f47cc246, type: 3}
+  - {fileID: 21300000, guid: eaf1130e127104d41a30910fe11f60a9, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Petal_falling1
+  - Petal_falling3
+  - Petal_falling5
+  - Petal_falling2
+  - Petal_falling4
+  m_RenderDataMap: {}
+  m_Tag: Petals_atlas
+  m_IsVariant: 0

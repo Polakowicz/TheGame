@@ -24,9 +24,9 @@ TagManager:
   - Player
   - Enemy
   - Bullet
-  - 
-  - 
-  - 
+  - Rock
+  - Boss
+  - Platform
   - 
   - 
   - 

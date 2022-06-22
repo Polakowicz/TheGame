@@ -26,6 +26,7 @@ public class RangedWeapon : Weapon
 	[SerializeField] float beamPullSpeed;
 	[SerializeField] float beamDistance = 10f;
 	[SerializeField] float beamPullCooldown;
+	[SerializeField] float beamStunTime = 1;
 
 	//Internal variables
 	GameObject beamHit;
@@ -142,11 +143,11 @@ public class RangedWeapon : Weapon
 	}
 	private void PullPlayerTowardsTarget()
 	{
-		playerEventSystem.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed);
+		playerEventSystem.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed, beamStunTime);
 		CancelAlternativeAttack();
 	}
 	private void PullTargetTowardsPlayer()
 	{
-		beamHit.GetComponent<Enemy>().Pull(beamPullSpeed);
+		beamHit.GetComponent<IPullable>().Pull(beamPullSpeed);
 	}
 }

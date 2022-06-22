@@ -20,6 +20,10 @@ public class PlayerEventSystem : MonoBehaviour
 	//Health
 	public void GiveDamage(int dmg)
     {
+		if (playerData.blocking) {
+            return;
+		}
+
 		if (powerUpController.HitForceField()) {
             Debug.Log("Blocked by shield");
             return;
@@ -79,8 +83,17 @@ public class PlayerEventSystem : MonoBehaviour
 
     public void StartBladeBlock()
 	{
+
         OnBladeBlockStarted?.Invoke();
+        StartCoroutine(BlockDelay());
 	}
+
+    IEnumerator BlockDelay()
+	{
+        playerData.blocking = true;
+        yield return new WaitForSeconds(1);
+        playerData.blocking = false;
+    }
 
     public void EndBladeBlock()
 	{
@@ -88,20 +101,30 @@ public class PlayerEventSystem : MonoBehaviour
 	}
 
     //Blaaster beam
-    public event Action<GameObject, float> OnBeamPullTowardsEnemyStarted;
+    public event Action<GameObject, float, float> OnBeamPullTowardsEnemyStarted;
     public event Action OnBeamPullTowardsEnemyEnded;
     
-    public void StartBeamPullTowardsEnemy(GameObject enemy, float speed)
+    public void StartBeamPullTowardsEnemy(GameObject enemy, float speed, float stunTime)
 	{
         Debug.Log(enemy);
         playerData.enemyToPulled = enemy;
-        OnBeamPullTowardsEnemyStarted?.Invoke(enemy, speed);
+        OnBeamPullTowardsEnemyStarted?.Invoke(enemy, speed, stunTime);
 	}
 
-    public void EndBeamPullTowardsEnemy()
+    public void EndBeamPullTowardsEnemy(float stunTime)
 	{
-        playerData.enemyToPulled.GetComponent<Enemy>().Stun();
+        var enemy = playerData.enemyToPulled.GetComponent<Enemy>();
+        if(enemy != null)
+            enemy.Stun(stunTime);
         playerData.enemyToPulled = null;
         OnBeamPullTowardsEnemyEnded?.Invoke();
+	}
+
+    public event Action<Vector2, float, float> OnKicked;
+    public void Kick(Vector2 direction, float speed, float distance, int damage)
+	{
+        Debug.Log("Kick");
+        OnKicked?.Invoke(direction, speed, distance);
+        GiveDamage(damage);
 	}
 }

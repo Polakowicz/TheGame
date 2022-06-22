@@ -38,7 +38,7 @@ public class ThrustAttackDealDamage : MonoBehaviour
 		List<Collider2D> hits = new List<Collider2D>();
 		hitCollider.OverlapCollider(contactFilter, hits);
 		foreach (Collider2D hit in hits) {
-			hit.GetComponent<Enemy>().Hit(damage);		
+			hit.GetComponent<Enemy>().Damage(damage);		
 		}
 		attackEnabled = true;
 	}
@@ -58,6 +58,6 @@ public class ThrustAttackDealDamage : MonoBehaviour
 			return;
 		}
 
-		collision.GetComponent<Enemy>().Hit(damage);
+		collision.GetComponent<Enemy>().Damage(damage);
 	}
 }
