@@ -6,13 +6,61 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public AudioMixer audioMixer;
-
     public Dropdown resolutionDropdown;
-
     Resolution[] resolutions;
+    public Slider volumeSlider;
+    public Slider effectsVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider voiceVolumeSlider;
+    public AudioMixer mainMixer;
+    public AudioMixer effectsMixer;
+    public AudioMixer musicMixer;
+    public AudioMixer voiceMixer;
 
     void Start()
+    {
+        initiateResolution();
+        initiateVolumes();
+    }
+
+    public void SetVolume(float decimalVolume)
+    {
+        var dbVolume = decimalToDecibel(decimalVolume);
+        mainMixer.SetFloat("volume", dbVolume);
+    }
+
+    public void SetEffectsVolume(float decimalVolume)
+    {
+        var dbVolume = decimalToDecibel(decimalVolume);
+        effectsMixer.SetFloat("effectsVolume", dbVolume);
+    }
+
+    public void SetMusicVolume(float decimalVolume)
+    {
+        var dbVolume = decimalToDecibel(decimalVolume);
+        musicMixer.SetFloat("musicVolume", dbVolume);
+    }
+
+    public void SetVoiceVolume(float decimalVolume)
+    {
+        var dbVolume = decimalToDecibel(decimalVolume);
+        voiceMixer.SetFloat("voiceVolume", dbVolume);
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Debug.Log("I just changed resolution!");
+    }
+
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+        Debug.Log("I just switched fullscreen!");
+    }
+
+    void initiateResolution()
     {
         resolutions = Screen.resolutions;
 
@@ -39,27 +87,19 @@ public class Settings : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
-    public void SetVolume(float decimalVolume)
+    void initiateVolumes()
+    {
+        // TO DO
+    }
+
+    float decimalToDecibel(float decimalVolume)
     {
         var dbVolume = Mathf.Log10(decimalVolume) * 20;
         if (decimalVolume == 0.0f)
         {
             dbVolume = -80.0f;
         }
-        audioMixer.SetFloat("volume", dbVolume);
-    }
-
-    public void SetResolution(int resolutionIndex)
-    {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        Debug.Log("I just changed resolution!");
-    }
-
-    public void SetFullscreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
-        Debug.Log("I just switched fullscreen!");
+        return dbVolume;
     }
 
 }

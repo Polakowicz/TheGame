@@ -1,20 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public Text nameText;
+    public Text dialogueText;
 
+    public Animator animator;
     public Queue<string> sentences;
+
+    public Button startDialogueButton;
 
     void Start()
     {
         sentences = new Queue<string>();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            DisplayNextSentence();
+        }
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("Starting conversation with " + dialogue.name);
+        startDialogueButton.gameObject.SetActive(false);
+        
+        animator.SetBool("isOpen", true);
+
+        // Debug.Log("Starting conversation with " + dialogue.name);
+        nameText.text = dialogue.name;
 
         sentences.Clear();
 
@@ -22,7 +41,12 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-
+        /*
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    DisplayNextSentence();
+                }
+        */
         DisplayNextSentence();
     }
 
@@ -35,10 +59,27 @@ public class DialogueManager : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
-        Debug.Log(sentence);
+        // Debug.Log(sentence);
+        // dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
     }
 
-    void EndDialogue(){
-        Debug.Log("End of conversation.");
+    IEnumerator TypeSentence(string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return null;
+        }
+    }
+
+    void EndDialogue()
+    {
+        animator.SetBool("isOpen", false);
+        // Debug.Log("End of conversation.");
+
+        // startDialogueButton.gameObject.SetActive(false);
     }
 }
