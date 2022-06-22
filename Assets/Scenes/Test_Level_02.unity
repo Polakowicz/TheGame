@@ -6408,7 +6408,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 508102311}
   m_OnClick:
     m_PersistentCalls:
@@ -6792,6 +6792,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7d6e5843c99494982de220f1133f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameText: {fileID: 0}
+  dialogueText: {fileID: 0}
+  animator: {fileID: 0}
+  startDialogueButton: {fileID: 0}
 --- !u!4 &805061736
 Transform:
   m_ObjectHideFlags: 0
@@ -13205,6 +13209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1895393597}
+  musicMixer: {fileID: 24100000, guid: c4a2607bdead4d84997531e8d5f4cd33, type: 2}
 --- !u!1 &1228079211
 GameObject:
   m_ObjectHideFlags: 0
