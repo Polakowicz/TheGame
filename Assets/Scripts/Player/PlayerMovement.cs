@@ -1,9 +1,14 @@
+using Interfaces;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IKick
 {
+
+
+
 	//Components
 	Rigidbody2D rb;
 	[SerializeField] PlayerEventSystem eventSystem;
@@ -47,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
+		if (disableImput > 0) return;
+
 		if (!isInDash) {
 			direction = moveAction.ReadValue<Vector2>();
 		}
@@ -54,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		if (disableImput > 0) return;
+
 		if (isInDash) {
 			rb.velocity = direction.normalized * speed;
 		} else {
@@ -119,4 +128,32 @@ public class PlayerMovement : MonoBehaviour
 		isInDash = false;
 		eventSystem.EndBeamPullTowardsEnemy(stunTime);
 	}
+
+
+
+
+
+	private delegate void VoidFunction();
+
+	private readonly float KickTime = 0.5f;
+	private int disableImput;
+
+	public void Kick(Vector2 direction)
+	{
+		rb.velocity = direction;
+		disableImput++;
+		StartCoroutine(Wait(KickTime, () => disableImput--));
+	
+	}
+	public void Kick(Vector2 direction, float force)
+	{
+		Kick(direction * force);
+	}
+
+	private IEnumerator Wait(float time, Action func)
+	{
+		yield return new WaitForSeconds(time);
+		func();
+	}
+
 }
