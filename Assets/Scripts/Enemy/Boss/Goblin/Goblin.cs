@@ -19,17 +19,10 @@ public class Goblin : MonoBehaviour, IHit
 	[SerializeField] GameObject wave;
 
 	
-
-	private float kickSpeed;
-	private float kickDistance;
-	private int kickDamage;
-
 	
 	private bool alive = true;
 	private bool active = true;
 	private int hp;
-
-	private bool deleay;
 
 	private void Start()
 	{
@@ -42,56 +35,14 @@ public class Goblin : MonoBehaviour, IHit
 	private void Update()
 	{
 		if (!alive) return;
-		if (!active) return;
 
 		var distance = Vector2.Distance(transform.position, Player.transform.position);
-		if(distance <= KickDistance) {
-			animator.SetTrigger("Kick");
+		animator.SetFloat("Distance", distance);
+		if (distance <= KickDistance) {
 			active = false;
-			StartCoroutine(Wait(1, () => active = true));
 		}
-
-
-
-		//animator.SetFloat("Distance", distance);
-
-		//if (deleay) return;
-
-		//if(distance < 3) {
-		//	Kick();
-		//	StartCoroutine(Delay());
-		//} else if (distance < 10) {
-		//	CreateWave();
-		//	StartCoroutine(Delay());
-		//}
-	}
-	private void CreateWave()
-	{
-		Instantiate(wave, transform.position, Quaternion.identity);
-	}
-	IEnumerator Delay()
-	{
-		deleay = true;
-		yield return new WaitForSeconds(2);
-		deleay = false;
 	}
 
-
-
-	private void Kick()
-	{
-		var direction = Player.transform.position - transform.position;
-		Player.GetComponent<IKick>()?.Kick(direction.normalized * KickForce);
-	}
-	private void Die()
-	{
-		alive = false;
-		animator.SetTrigger("Die");
-	}
-	private void Destroy()
-	{
-		Destroy(gameObject);
-	}
 	public void Hit(int damage, IHit.HitWeapon weapon)
 	{
 		switch (weapon) {
@@ -106,13 +57,33 @@ public class Goblin : MonoBehaviour, IHit
 		hp = Mathf.Clamp(hp, 0, MaxHP);
 		if (hp == 0) {
 			Die();
+		} else if (active) {
+			animator.SetTrigger("HitGround");
 		}
-		//Invoke Hud change;
 	}
 
-	private IEnumerator Wait(float time, Action func)
+	private void Kick()
 	{
-		yield return new WaitForSeconds(time);
-		func();
+		var direction = Player.transform.position - transform.position;
+		Player.GetComponent<IKick>()?.Kick(direction.normalized * KickForce);
 	}
+	private void CreateWave()
+	{
+		Instantiate(wave, transform.position, Quaternion.identity);
+	}
+	private void Deactive() => active = false;
+	private void Active() => active = true;
+
+	
+	private void Die()
+	{
+		alive = false;
+		animator.SetTrigger("Die");
+	}
+	private void Destroy()
+	{
+		Destroy(gameObject);
+	}
+
+	
 }
