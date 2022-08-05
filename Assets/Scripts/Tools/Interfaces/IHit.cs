@@ -1,10 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Interfaces
-{
-	public interface IHit 
-	{
+namespace Scripts.Interfaces
+{ 
+    public interface IHit
+    {
 		public enum HitWeapon
 		{
 			Sword,

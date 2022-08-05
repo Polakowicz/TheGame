@@ -2,12 +2,13 @@
 using System.Collections;
 using UnityEngine;
 
-namespace script.Player.Weapon
+namespace Scripts.Player.Weapon
 {
 	[Serializable]
 	public class RangedWeapon : Weapon
 	{
-		private PlayerManager player;	
+		private PlayerManager player;
+		private PlayerMovement movement;
 		[SerializeField] private Transform gunBarrel;
 
 		//Bullet Types
@@ -44,6 +45,7 @@ namespace script.Player.Weapon
 		private void Start()
 		{
 			player = GetComponentInParent<PlayerManager>();
+			movement = GetComponentInParent<PlayerMovement>();
 			bimRenderer = GetComponent<LineRenderer>();
 
 			Type = WeaponType.Blaster;
@@ -147,7 +149,12 @@ namespace script.Player.Weapon
 		}
 		private void PullPlayerTowardsTarget()
 		{
-			player.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed, beamStunTime);
+			Vector2 direction = beamHit.transform.position - transform.position;
+			var time = beamPullSpeed / direction.magnitude;
+			movement.Dash(direction, beamPullSpeed, time, () => {
+				//TODO
+			});
+			//player.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed, beamStunTime);
 			CancelAlternativeAttack();
 		}
 		private void PullTargetTowardsPlayer()

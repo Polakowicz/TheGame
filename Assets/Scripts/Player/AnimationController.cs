@@ -1,4 +1,4 @@
-﻿using script.Player.Weapon;
+﻿using Scripts.Player.Weapon;
 using System.Collections;
 using UnityEngine;
 

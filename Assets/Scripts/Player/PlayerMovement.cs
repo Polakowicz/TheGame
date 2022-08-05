@@ -5,7 +5,7 @@ using Scripts.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace scripts.Player
+namespace Scripts.Player
 {
 	public class PlayerMovement : ExtendedMonoBehaviour, IKick
 	{
@@ -65,21 +65,22 @@ namespace scripts.Player
 
 		private void PerformDash(InputAction.CallbackContext context)
 		{
-			Dash(direction, dashSpeed, dashTime);
+			Dash(direction, dashSpeed, dashTime, null);
 		}
-		public void Dash(Vector2 direction, float speed, float time)
+		public void Dash(Vector2 direction, float speed, float time, Action func)
 		{
 			if (isInDash) return;
 
 			isInDash = true;
 			rb.velocity = direction.normalized * speed;
-
-			StartCoroutine(WaitAndDo(time, DisableDash));
+			StartCoroutine(WaitAndDo(time, func));
 		}
-		private void DisableDash()
+		private IEnumerator Dashing(float time, Action after)
 		{
+			yield return new WaitForSeconds(time);
 			speed = basicSpeed;
 			isInDash = false;
+			after?.Invoke();
 		}
 
 

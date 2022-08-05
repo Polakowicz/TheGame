@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace script.Player.Weapon
+namespace Scripts.Player.Weapon
 {
     public abstract class Weapon : MonoBehaviour
     {

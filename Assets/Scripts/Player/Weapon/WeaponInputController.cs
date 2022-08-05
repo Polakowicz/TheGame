@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace script.Player.Weapon
+namespace Scripts.Player.Weapon
 {
-    public class PlayerWeaponInputController : MonoBehaviour
+    public class WeaponInputController : MonoBehaviour
     {
         //Components
         private PlayerManager player;
         private PlayerInput input;
-        private MeleeWeapon meleeWeapon;
-        private RangedWeapon rangedWeapon;
-
+        
         //InputActions
         private InputAction switchWeaponAction;
         private InputAction basicAttackActinon;
@@ -21,16 +17,18 @@ namespace script.Player.Weapon
         private InputAction pullAction;
         private InputAction interactAcction;
 
-        //Internal Variables
+        //Weapons
+        private MeleeWeapon meleeWeapon;
+        private RangedWeapon rangedWeapon;
         private Weapon equippedWeapon;
 
         private void Start()
         {
             player = GetComponentInParent<PlayerManager>();
             input = GetComponentInParent<PlayerInput>();
+
             meleeWeapon = GetComponentInChildren<MeleeWeapon>();
             rangedWeapon = GetComponentInChildren<RangedWeapon>();
-
             equippedWeapon = meleeWeapon;
 
             CreatActionInputs();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace scritp.Player
+namespace scritps.Player
 {
 	public class PlayerAim : MonoBehaviour
 	{

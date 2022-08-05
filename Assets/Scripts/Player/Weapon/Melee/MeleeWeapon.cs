@@ -1,19 +1,23 @@
-﻿using System;
+﻿using Scripts.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace script.Player.Weapon
+namespace Scripts.Player.Weapon
 {
 	[Serializable]
 	public class MeleeWeapon : Weapon
 	{
-		//Components
-		[SerializeField] PlayerManager eventSystem;
-		[SerializeField] LayerMask melleWeaponLayerMask;
-		[SerializeField] Collider2D defaultRange;
-		[SerializeField] Collider2D powerupRange;
-		[SerializeField] Collider2D blockRange;
+		private PlayerManager player;
+
+
+		[SerializeField] private LayerMask melleWeaponLayerMask;
+
+
+		[SerializeField] private Collider2D defaultRange;
+		[SerializeField] private Collider2D powerupRange;
+		[SerializeField] private Collider2D blockRange;
 
 		//Internal variables
 		ContactFilter2D attackContactFilter;
@@ -22,12 +26,14 @@ namespace script.Player.Weapon
 		//Parameters
 		[SerializeField] int basicAttackDamage;
 
+		//
 		[SerializeField] float thrustSpeed;
 		[SerializeField] float thrustTime;
 		[SerializeField] int thrustDmg;
 
 		void Start()
 		{
+			player = GetComponentInParent<PlayerManager>();
 			Type = WeaponType.Blade;
 
 			attackContactFilter = new ContactFilter2D {
@@ -37,24 +43,24 @@ namespace script.Player.Weapon
 			};
 
 			range = defaultRange;
-			eventSystem.powerUpController.OnPowerUpChanged += ChangePowerUp;
+			player.powerUpController.OnPowerUpChanged += ChangePowerUp;
 		}
 
 		public override void PerformBasicAttack()
 		{
-			FindObjectOfType<AudioManager>().Play("MeleeBasicAttack");
+			player.AudioManager.Play("MeleeBasicAttack");
 			List<Collider2D> hits = new List<Collider2D>();
 			range.OverlapCollider(attackContactFilter, hits);
 			foreach (Collider2D hit in hits) {
-				Debug.Log(hit.gameObject.layer);
-				if (hit.gameObject.layer == LayerMask.NameToLayer("Rock")) {
-					hit.GetComponent<PushableRock>().Push(hit.transform.position - transform.position);
-				} else {
-					hit.GetComponent<Enemy>().Damage(basicAttackDamage);
-				}
+				hit.GetComponent<IHit>()?.Hit(basicAttackDamage, IHit.HitWeapon.Sword);
+				//if (hit.gameObject.layer == LayerMask.NameToLayer("Rock")) {
+				//	hit.GetComponent<PushableRock>().Push(hit.transform.position - transform.position);
+				//} else {
+				//	hit.GetComponent<Enemy>().Damage(basicAttackDamage);
+				//}
 
 			}
-			eventSystem.OnBladeAttack?.Invoke();
+			player.OnBladeAttack?.Invoke();
 		}
 
 		public void Interact()
@@ -72,17 +78,17 @@ namespace script.Player.Weapon
 
 		public override void PerformStrongerAttack()
 		{
-			eventSystem.StartBladeThrust(thrustSpeed, thrustTime, thrustDmg);
+			player.StartBladeThrust(thrustSpeed, thrustTime, thrustDmg);
 			//eventSystem.OnBladeAttack?.Invoke();
 		}
 
 		public override void PerformAlternativeAttack()
 		{
-			eventSystem.StartBladeBlock();
+			player.StartBladeBlock();
 		}
 		public override void CancelAlternativeAttack()
 		{
-			eventSystem.EndBladeBlock();
+			player.EndBladeBlock();
 		}
 
 		private void ChangePowerUp(PowerUp.PowerType type, bool active)

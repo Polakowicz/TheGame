@@ -1,5 +1,6 @@
-using Interfaces;
+using Scripts.Interfaces;
 using UnityEngine;
+
 
 public class BulletHitEnemy : MonoBehaviour
 {
