@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-	[SerializeField] Player eventSystem;
+	[SerializeField] PlayerManager eventSystem;
 	SpriteRenderer spriteRenderer;
 	Animator animator;
 	bool gun;

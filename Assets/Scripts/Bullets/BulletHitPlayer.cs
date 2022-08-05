@@ -15,7 +15,7 @@ public class BulletHitPlayer : MonoBehaviour
             return;
         }
 
-        Player player = collision.gameObject.GetComponent<Player>();
+        PlayerManager player = collision.gameObject.GetComponent<PlayerManager>();
         player.GiveDamage(damage);
         Destroy(gameObject);
         

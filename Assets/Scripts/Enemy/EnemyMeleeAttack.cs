@@ -39,7 +39,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 
 		if (!CanAttack()) yield break;
 		if(main.Data.DistanceToPlayer < range) {
-			main.Data.Player.GetComponent<Player>().GiveDamage(damage);
+			main.Data.Player.GetComponent<PlayerManager>().GiveDamage(damage);
 		}
 	}
 	private bool CanAttack()

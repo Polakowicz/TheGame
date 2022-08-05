@@ -7,7 +7,7 @@ using UnityEngine;
 public class MeleeWeapon : Weapon
 {
 	//Components
-	[SerializeField] Player eventSystem;
+	[SerializeField] PlayerManager eventSystem;
 	[SerializeField] LayerMask melleWeaponLayerMask;
 	[SerializeField] Collider2D defaultRange;
 	[SerializeField] Collider2D powerupRange;

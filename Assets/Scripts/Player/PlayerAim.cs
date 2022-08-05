@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerAim : MonoBehaviour
 {
 	//Components
-	[SerializeField] Player eventSystem;
+	[SerializeField] PlayerManager eventSystem;
 	[SerializeField] PlayerInput playerInput;
 	[SerializeField] Transform crosshair;
 

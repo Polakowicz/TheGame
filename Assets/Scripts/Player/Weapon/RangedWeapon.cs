@@ -6,7 +6,7 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
 	//Components
-	[SerializeField] Player playerEventSystem;
+	[SerializeField] PlayerManager playerEventSystem;
 	[SerializeField] Transform gunTransform;
 	[SerializeField] GameObject defaultBullet;
 	[SerializeField] GameObject explosiveBullet;
