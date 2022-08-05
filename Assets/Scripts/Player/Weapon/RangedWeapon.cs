@@ -11,27 +11,33 @@ namespace script.Player.Weapon
 		[SerializeField] private Transform gunBarrel;
 
 		//Bullet Types
+		[Header("Bullet Types")]
 		[SerializeField] private GameObject defaultBullet;
 		[SerializeField] private GameObject explosiveBullet;
 		[SerializeField] private GameObject piercingBullet;
+		[Space(20)]
 		private GameObject bullet;
 
 		//AutoFire
+		[Header("Auto Fire")]
 		[SerializeField] private float autoFireStartRate = 0.4f;
 		[SerializeField] private float autoFireMaxRate = 0.1f;
 		[SerializeField] private float autoFireRateIncrease = 0.1f;
 		[SerializeField] private float autoFireStartDispersion = 0;
 		[SerializeField] private float autoFireMaxDispersion = 40;
 		[SerializeField] private float autoFireDispersinIncrease = 0.1f;
+		[Space(20)]
 		private Coroutine autoFireCoroutine;
 		private float autoFireRate;
 		private float autoFireDispersion;
 
 		//Beam
+		[Header("Beam")]
 		[SerializeField] private LayerMask beamLayerMask;
 		[SerializeField] private float beamPullSpeed = 15f;
 		[SerializeField] private float beamRange = 7f;
 		[SerializeField] private float beamStunTime = 1f;
+		[Space(20)]
 		private LineRenderer bimRenderer;
 		private GameObject beamHit;
 
