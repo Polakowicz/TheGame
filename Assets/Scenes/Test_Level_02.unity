@@ -6178,6 +6178,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2896284848948219051, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_Name
+      value: Blaster Barrel
+      objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964024, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6229,6 +6233,14 @@ PrefabInstance:
     - target: {fileID: 4717716870089605577, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: playerData.MaxHP
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: gunBarrel
+      value: 
+      objectReference: {fileID: 1561422886}
+    - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: beamLayerMask.m_Bits
+      value: 65536
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
@@ -14496,6 +14508,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1561422886 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2896284848948219050, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+  m_PrefabInstance: {fileID: 416595043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1598841490
 GameObject:
   m_ObjectHideFlags: 0
