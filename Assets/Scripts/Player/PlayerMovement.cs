@@ -65,7 +65,7 @@ namespace scripts.Player
 
 		private void PerformDash(InputAction.CallbackContext context)
 		{
-			Dash(direction, basicSpeed, dashTime);
+			Dash(direction, dashSpeed, dashTime);
 		}
 		public void Dash(Vector2 direction, float speed, float time)
 		{

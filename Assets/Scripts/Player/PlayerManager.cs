@@ -53,7 +53,7 @@ public class PlayerManager : MonoBehaviour
 
     //Weapons
     public Action OnBladeAttack;
-    public Action OnGunFire;
+
     public Action OnGunChanged;
     public Action OnDodge;
 

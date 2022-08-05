@@ -9,6 +9,7 @@ namespace script.Player.Weapon
 	{
 		private PlayerManager player;
 
+		private Coroutine autoFireCoroutine;
 
 		//Components
 		[SerializeField] Transform gunTransform;
@@ -34,7 +35,7 @@ namespace script.Player.Weapon
 
 		//Internal variables
 		GameObject beamHit;
-		Coroutine autoFireCoroutine;
+		
 		GameObject bullet;
 		float fireRate;
 		float dispersion;
@@ -61,22 +62,27 @@ namespace script.Player.Weapon
 		}
 
 		//Shooting
-		public override void PerformBasicAttack()
+		private void ShootBullet()
+		{
+			ShootBullet(gunTransform.rotation);
+		}
+		private void ShootBullet(Quaternion rotation)
 		{
 			player.AudioManager.Play("RangedBasicAttack");
-			Instantiate(bullet, gunTransform.position, gunTransform.rotation);
+			Instantiate(bullet, gunTransform.position, rotation);
 
 			if (bullet == explosiveBullet) {
 				player.powerUpController.ShootExplosiveBullet();
 			}
-
-			player.OnGunFire?.Invoke();
 		}
 
+		public override void PerformBasicAttack()
+		{
+			ShootBullet();
+		}
 		public override void PerformStrongerAttack()
 		{
 			autoFireCoroutine = StartCoroutine(AutoFire());
-			player.OnGunFire?.Invoke();
 		}
 		public override void CancelStrongerAttack()
 		{
@@ -89,11 +95,7 @@ namespace script.Player.Weapon
 			fireRate = startFireRate;
 			dispersion = startDispersion;
 			while (true) {
-				Instantiate(defaultBullet, gunTransform.position, GetRandomisedAccuracy());
-				player.OnGunFire?.Invoke();
-				if (bullet == explosiveBullet) {
-					player.powerUpController.ShootExplosiveBullet();
-				}
+				ShootBullet(GetRandomisedAccuracy());
 				yield return new WaitForSeconds(fireRate);
 				if (dispersion < maxDispersion) {
 					dispersion += dispersinPercentageIncrease * Mathf.Abs(maxDispersion - dispersion);
