@@ -1,3 +1,4 @@
+using script.Player.Weapon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    
+    public AudioManager AudioManager { get; private set; }
 
 
 
@@ -18,7 +19,8 @@ public class PlayerManager : MonoBehaviour
 
 	void Start()
 	{
-		playerData.HP = playerData.MaxHP;
+        AudioManager = FindObjectOfType<AudioManager>();
+        playerData.HP = playerData.MaxHP;
 	}
 
 	//Health

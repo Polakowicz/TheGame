@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using script.Player.Weapon;
+using System.Collections;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour

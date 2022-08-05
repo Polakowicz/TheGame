@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace script.Player
+namespace script.Player.Weapon
 {
     public class PlayerWeaponInputController : MonoBehaviour
     {
-        
-
         //Components
         private PlayerManager player;
         private PlayerInput input;
@@ -26,7 +24,7 @@ namespace script.Player
         //Internal Variables
         private Weapon equippedWeapon;
 
-        void Start()
+        private void Start()
         {
             player = GetComponentInParent<PlayerManager>();
             input = GetComponentInParent<PlayerInput>();
@@ -35,11 +33,10 @@ namespace script.Player
 
             equippedWeapon = meleeWeapon;
 
-            creatActionInputs();
+            CreatActionInputs();
             SubscribeToEvents();
         }
-
-        void creatActionInputs()
+        private void CreatActionInputs()
         {
             switchWeaponAction = input.actions["Switch weapon"];
             basicAttackActinon = input.actions["Basic attack"];
@@ -48,8 +45,7 @@ namespace script.Player
             pullAction = input.actions["Scroll"];
             interactAcction = input.actions["Interact"];
         }
-
-        void SubscribeToEvents()
+        private void SubscribeToEvents()
         {
             switchWeaponAction.performed += SwitchWeapon;
 
@@ -65,7 +61,7 @@ namespace script.Player
             interactAcction.performed += Finish;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             switchWeaponAction.performed -= SwitchWeapon;
 
@@ -81,7 +77,7 @@ namespace script.Player
             interactAcction.performed -= Finish;
         }
 
-        void Update()
+        private void Update()
         {
             var scrollInputValue = pullAction.ReadValue<float>();
             if (scrollInputValue != 0) {
@@ -89,9 +85,9 @@ namespace script.Player
             }
         }
 
-        void SwitchWeapon(InputAction.CallbackContext context)
+        private void SwitchWeapon(InputAction.CallbackContext context)
         {
-            FindObjectOfType<AudioManager>().Play("SwitchWeapon");
+            player.AudioManager.Play("SwitchWeapon");
             if (equippedWeapon.Type == Weapon.WeaponType.Blade) {
                 equippedWeapon = rangedWeapon;
             } else {
@@ -101,36 +97,36 @@ namespace script.Player
             player.ChangedWeapon(equippedWeapon.Type);
 
         }
-        void Finish(InputAction.CallbackContext context)
+        private void Finish(InputAction.CallbackContext context)
         {
             meleeWeapon.Interact();
         }
 
         //Weapons attakcs
         //===============
-        void PerformeBasicAttack(InputAction.CallbackContext context)
+        private void PerformeBasicAttack(InputAction.CallbackContext context)
         {
             equippedWeapon.PerformBasicAttack();
         }
 
-        void CancelStrongerAttack(InputAction.CallbackContext context)
+        private void CancelStrongerAttack(InputAction.CallbackContext context)
         {
             equippedWeapon.CancelStrongerAttack();
         }
-        void PerformStrongerAttack(InputAction.CallbackContext context)
+        private void PerformStrongerAttack(InputAction.CallbackContext context)
         {
             equippedWeapon.PerformStrongerAttack();
         }
 
-        void StartAlternativeAttack(InputAction.CallbackContext context)
+        private void StartAlternativeAttack(InputAction.CallbackContext context)
         {
             equippedWeapon.StartAlternativeAttack();
         }
-        void PerformAlternativeAttack(InputAction.CallbackContext context)
+        private void PerformAlternativeAttack(InputAction.CallbackContext context)
         {
             equippedWeapon.PerformAlternativeAttack();
         }
-        void CancelAlternativeAttack(InputAction.CallbackContext context)
+        private void CancelAlternativeAttack(InputAction.CallbackContext context)
         {
             equippedWeapon.CancelAlternativeAttack();
         }
