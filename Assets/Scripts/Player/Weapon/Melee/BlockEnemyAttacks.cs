@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlockEnemyAttacks : MonoBehaviour
 {
-    [SerializeField] PlayerEventSystem eventSystem;
+    [SerializeField] Player eventSystem;
 	[SerializeField] LayerMask blockLayerMask;
 
 	Collider2D blockCollider;

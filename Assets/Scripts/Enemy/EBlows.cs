@@ -48,7 +48,7 @@ public class EBlows : MonoBehaviour
 		var mult = blowRange - main.Data.DistanceToPlayer;
 		mult /= blowRange;
 		var dmg = Mathf.FloorToInt(mult * maxDamage);
-		main.Data.Player.GetComponent<PlayerEventSystem>().GiveDamage(dmg);
+		main.Data.Player.GetComponent<Player>().GiveDamage(dmg);
 		Destroy(gameObject);//temporary
 	}
 }

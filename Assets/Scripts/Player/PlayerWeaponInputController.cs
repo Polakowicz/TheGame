@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponInputController : MonoBehaviour
 {
     //Components
-    [SerializeField] PlayerEventSystem playerEventSystem;
+    [SerializeField] Player playerEventSystem;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] MeleeWeapon meleeWeapon;
     [SerializeField] RangedWeapon rangedWeapon;

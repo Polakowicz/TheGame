@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEventSystem : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] public PlayerData playerData;
     [SerializeField] public PowerUpController powerUpController;

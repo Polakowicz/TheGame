@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Speeding : Skill
 {
-	PlayerEventSystem playerEventSystem;
+	Player playerEventSystem;
 
 	[SerializeField]
 	float speedIncrease;
@@ -12,7 +12,7 @@ public class Speeding : Skill
 
 	void Start()
 	{
-		playerEventSystem = GetComponentInParent<PlayerEventSystem>();
+		playerEventSystem = GetComponentInParent<Player>();
 	}
 
 	public override void UseSkill()

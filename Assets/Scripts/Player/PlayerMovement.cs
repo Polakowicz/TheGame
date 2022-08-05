@@ -6,12 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour, IKick
 {
-
-
-
 	//Components
 	Rigidbody2D rb;
-	[SerializeField] PlayerEventSystem eventSystem;
+	[SerializeField] Player eventSystem;
 	[SerializeField] PlayerInput playerInput;
 
 	//Input actions

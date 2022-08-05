@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThrustAttackDealDamage : MonoBehaviour
 {
-	[SerializeField] PlayerEventSystem eventSystem;
+	[SerializeField] Player eventSystem;
 	[SerializeField] LayerMask hitLayerMask;
 
 	Collider2D hitCollider;
