@@ -26,6 +26,8 @@ public class MeleeWeapon : Weapon
 
 	void Start()
 	{
+		Type = WeaponType.Blade;
+
 		attackContactFilter = new ContactFilter2D {
 			layerMask = melleWeaponLayerMask,
 			useLayerMask = true,

@@ -37,6 +37,8 @@ public class RangedWeapon : Weapon
 
 	void Start()
 	{
+		Type = WeaponType.Blaster;
+
 		lineRenderer = GetComponent<LineRenderer>();
 		lineRenderer.enabled = false;
 		bullet = defaultBullet;

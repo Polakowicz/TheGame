@@ -42,7 +42,7 @@ public class AnimationController : MonoBehaviour
 
 	void ChangeGun()
 	{
-		animator.SetBool("Blaster_equiped", eventSystem.playerData.weapon == PlayerData.Weapon.Blaster ? true : false);
+		animator.SetBool("Blaster_equiped", eventSystem.playerData.weapon == Weapon.WeaponType.Blaster ? true : false);
 	}
 
 	void Dodge()

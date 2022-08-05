@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
-{ 
+{
+    public enum WeaponType
+    {
+        Blaster,
+        Blade
+    }
+
+    public WeaponType Type { get; protected set; }
+
     public virtual void PerformBasicAttack() { }
 
     public virtual void PerformStrongerAttack() { }

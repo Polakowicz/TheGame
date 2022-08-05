@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    
+
+
+
     [SerializeField] public PlayerData playerData;
     [SerializeField] public PowerUpController powerUpController;
 
@@ -51,7 +55,7 @@ public class PlayerManager : MonoBehaviour
     public Action OnGunChanged;
     public Action OnDodge;
 
-    public void ChangedWeapon(PlayerData.Weapon weapon)
+    public void ChangedWeapon(Weapon.WeaponType weapon)
 	{
         playerData.weapon = weapon;
         OnGunChanged?.Invoke();

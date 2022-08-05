@@ -5,15 +5,11 @@ using UnityEngine;
 [Serializable]
 public class PlayerData
 {
-	public enum Weapon
-	{
-		Blaster,
-		Blade
-	}
+
 
 	public int MaxHP;
 
-	public Weapon weapon;
+	public Weapon.WeaponType weapon;
 	public Vector2 aimDirection;
 	public Vector2 moveDireciton;
 	public int HP;
