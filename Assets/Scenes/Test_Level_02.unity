@@ -6239,8 +6239,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1561422886}
     - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: autoFireMaxRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: autoFireStartRate
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: autoFireRateIncrease
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: beamLayerMask.m_Bits
       value: 65536
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: autoFireMaxDispersion
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: autoFireDispersinIncrease
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fde203b3e4dde024a90af516e7c94283, type: 3}

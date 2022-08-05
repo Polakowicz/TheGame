@@ -7,35 +7,31 @@ namespace script.Player.Weapon
 	[Serializable]
 	public class RangedWeapon : Weapon
 	{
-		//Components
-		private PlayerManager player;
-		
-
+		private PlayerManager player;	
 		[SerializeField] private Transform gunBarrel;
-		private GameObject bullet;
 
 		//Bullet Types
 		[SerializeField] private GameObject defaultBullet;
 		[SerializeField] private GameObject explosiveBullet;
 		[SerializeField] private GameObject piercingBullet;
+		private GameObject bullet;
 
 		//AutoFire
-		[SerializeField] private float autoFireStartRate;
-		[SerializeField] private float autoFireMaxRate;
-		[SerializeField] private float autoFireRateIncrease;
-		[SerializeField] private float autoFireStartDispersion;
-		[SerializeField] private float autoFireMaxDispersion;
-		[SerializeField] private float autoFireDispersinIncrease;
+		[SerializeField] private float autoFireStartRate = 0.4f;
+		[SerializeField] private float autoFireMaxRate = 0.1f;
+		[SerializeField] private float autoFireRateIncrease = 0.1f;
+		[SerializeField] private float autoFireStartDispersion = 0;
+		[SerializeField] private float autoFireMaxDispersion = 40;
+		[SerializeField] private float autoFireDispersinIncrease = 0.1f;
 		private Coroutine autoFireCoroutine;
 		private float autoFireRate;
 		private float autoFireDispersion;
 
 		//Beam
 		[SerializeField] private LayerMask beamLayerMask;
-		[SerializeField] private float beamPullSpeed;
-		[SerializeField] private float beamDistance = 10f;
-		[SerializeField] private float beamPullCooldown;
-		[SerializeField] private float beamStunTime = 1;
+		[SerializeField] private float beamPullSpeed = 15f;
+		[SerializeField] private float beamRange = 7f;
+		[SerializeField] private float beamStunTime = 1f;
 		private LineRenderer bimRenderer;
 		private GameObject beamHit;
 
@@ -52,11 +48,10 @@ namespace script.Player.Weapon
 			player.powerUpController.OnPowerUpChanged += ChangePowerUp;
 		}
 
-		void Update()
+		private void Update()
 		{
 			if (beamHit != null) {
-				bimRenderer.SetPosition(0, transform.position);
-				bimRenderer.SetPosition(1, beamHit.transform.position);
+				DrawBim();
 			}
 		}
 
@@ -111,25 +106,21 @@ namespace script.Player.Weapon
 			return Quaternion.Euler(0, 0, newRotation);
 		}
 
-		public void ChangePowerUp(PowerUp.PowerType type, bool active)
-		{
-			if (type == PowerUp.PowerType.ShotExplosion) {
-				bullet = active ? explosiveBullet : defaultBullet;
-			} else if (type == PowerUp.PowerType.ShotPiercing) {
-				bullet = active ? piercingBullet : defaultBullet;
-			}
-		}
-
 		//Beam
+		private void DrawBim()
+		{
+			bimRenderer.SetPosition(0, transform.position);
+			bimRenderer.SetPosition(1, beamHit.transform.position);
+		}
 		public override void StartAlternativeAttack()
 		{
-			var hit = Physics2D.Raycast(gunBarrel.position, gunBarrel.up, beamDistance, beamLayerMask);
-			if (hit.collider != null) {
-				beamHit = hit.collider.gameObject;
-				bimRenderer.SetPosition(0, transform.position);
-				bimRenderer.SetPosition(1, beamHit.transform.position);
-				bimRenderer.enabled = true;
-			}
+			var hit = Physics2D.Raycast(gunBarrel.position, gunBarrel.up, beamRange, beamLayerMask);
+			if (hit.collider == null) return;
+			
+			beamHit = hit.collider.gameObject;
+			DrawBim();
+			bimRenderer.enabled = true;
+			
 		}
 		public override void CancelAlternativeAttack()
 		{
@@ -140,9 +131,7 @@ namespace script.Player.Weapon
 		//Pull
 		public override void PerformBeamPullAction(float input)
 		{
-			if (beamHit == null) {
-				return;
-			}
+			if (beamHit == null) return;
 
 			if (input > 0) {
 				PullPlayerTowardsTarget();
@@ -157,7 +146,17 @@ namespace script.Player.Weapon
 		}
 		private void PullTargetTowardsPlayer()
 		{
-			beamHit.GetComponent<IPullable>().Pull(beamPullSpeed);
+			beamHit.GetComponent<IPullable>()?.Pull(beamPullSpeed);
+		}
+
+
+		public void ChangePowerUp(PowerUp.PowerType type, bool active)
+		{
+			if (type == PowerUp.PowerType.ShotExplosion) {
+				bullet = active ? explosiveBullet : defaultBullet;
+			} else if (type == PowerUp.PowerType.ShotPiercing) {
+				bullet = active ? piercingBullet : defaultBullet;
+			}
 		}
 	}
 }
