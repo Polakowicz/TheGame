@@ -1,12 +1,13 @@
 using Interfaces;
 using System;
 using System.Collections;
+using Scripts.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Player
+namespace scripts.Player
 {
-	public class PlayerMovement : MonoBehaviour, IKick
+	public class PlayerMovement : ExtendedMonoBehaviour, IKick
 	{
 		//Components
 		private Rigidbody2D rb;
@@ -27,7 +28,7 @@ namespace Player
 		private bool isInDash;
 		private float speed;
 
-		void Start()
+		private void Start()
 		{
 			rb = GetComponent<Rigidbody2D>();
 			player = GetComponentInParent<PlayerManager>();
@@ -44,7 +45,7 @@ namespace Player
 			speed = basicSpeed;
 		}
 
-		void OnDestroy()
+		private void OnDestroy()
 		{
 			dashAction.performed -= PerformDash;
 			player.OnBladeThrustStarted -= PerformThrustDash;
@@ -52,39 +53,36 @@ namespace Player
 			player.OnKicked -= PerformKicked;
 		}
 
-		void Update()
+		private void Update()
 		{
-			if (disableImput > 0) return;
+			if (disableImput > 0 || isInDash) return;
 
-			if (!isInDash) {
-				direction = moveAction.ReadValue<Vector2>();
-			}
-		}
-
-		void FixedUpdate()
-		{
-			if (disableImput > 0) return;
-
-			if (isInDash) {
-				rb.velocity = direction.normalized * speed;
-			} else {
-				rb.velocity = direction * speed * player.playerData.speedMultiplier;
-			}
-
+			direction = moveAction.ReadValue<Vector2>();
+			rb.velocity = direction.normalized * basicSpeed;
 			player.playerData.moveDireciton = rb.velocity;
 		}
 
-		void PerformDash(InputAction.CallbackContext context)
-		{
-			if (isInDash) {
-				return;
-			}
-			isInDash = true;
-			speed = dashSpeed;
 
-			player.OnDodge?.Invoke();
-			StartCoroutine(DashDelay(dashTime));
+		private void PerformDash(InputAction.CallbackContext context)
+		{
+			Dash(direction, basicSpeed, dashTime);
 		}
+		public void Dash(Vector2 direction, float speed, float time)
+		{
+			if (isInDash) return;
+
+			isInDash = true;
+			rb.velocity = direction.normalized * speed;
+
+			StartCoroutine(WaitAndDo(time, DisableDash));
+		}
+		private void DisableDash()
+		{
+			speed = basicSpeed;
+			isInDash = false;
+		}
+
+
 		void PerformThrustDash(PlayerData data, float s, float t, int d)
 		{
 			direction = data.aimDirection;
@@ -121,7 +119,7 @@ namespace Player
 			yield return new WaitForSeconds(delay);
 			speed = basicSpeed;
 			isInDash = false;
-			player.EndBladeThrust();
+			//player.EndBladeThrust();
 		}
 		IEnumerator BeamPullDelay(float delay, float stunTime)
 		{
