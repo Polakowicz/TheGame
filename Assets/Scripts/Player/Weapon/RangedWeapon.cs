@@ -132,6 +132,8 @@ namespace Scripts.Player.Weapon
 		}
 		public override void CancelAlternativeAttack()
 		{
+			if (player.State == PlayerManager.PlayerState.Dash) return;
+
 			beamHit = null;
 			bimRenderer.enabled = false;
 		}
@@ -150,12 +152,13 @@ namespace Scripts.Player.Weapon
 		private void PullPlayerTowardsTarget()
 		{
 			Vector2 direction = beamHit.transform.position - transform.position;
-			var time = beamPullSpeed / direction.magnitude;
+			var time = direction.magnitude / beamPullSpeed;
 			movement.Dash(direction, beamPullSpeed, time, () => {
-				//TODO
+				if (beamHit.TryGetComponent<Enemy>(out var enemy))
+					enemy.Stun(1);//TODO
+				CancelAlternativeAttack();
 			});
-			//player.StartBeamPullTowardsEnemy(beamHit, beamPullSpeed, beamStunTime);
-			CancelAlternativeAttack();
+			
 		}
 		private void PullTargetTowardsPlayer()
 		{

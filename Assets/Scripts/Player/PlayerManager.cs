@@ -8,6 +8,13 @@ public class PlayerManager : MonoBehaviour
 {
     public AudioManager AudioManager { get; private set; }
 
+    public enum PlayerState
+	{
+        Walk,
+        Dash
+	}
+    public PlayerState State;
+
 
 
     [SerializeField] public PlayerData playerData;
@@ -108,7 +115,7 @@ public class PlayerManager : MonoBehaviour
 
     //Blaaster beam
     public event Action<GameObject, float, float> OnBeamPullTowardsEnemyStarted;
-    public event Action OnBeamPullTowardsEnemyEnded;
+ 
     
     public void StartBeamPullTowardsEnemy(GameObject enemy, float speed, float stunTime)
 	{
@@ -123,7 +130,7 @@ public class PlayerManager : MonoBehaviour
         if(enemy != null)
             enemy.Stun(stunTime);
         playerData.enemyToPulled = null;
-        OnBeamPullTowardsEnemyEnded?.Invoke();
+
 	}
 
     public event Action<Vector2, float, float> OnKicked;

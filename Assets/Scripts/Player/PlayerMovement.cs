@@ -25,7 +25,6 @@ namespace Scripts.Player
 
 		//Internal variables
 		private Vector2 direction;
-		private bool isInDash;
 		private float speed;
 
 		private void Start()
@@ -55,7 +54,7 @@ namespace Scripts.Player
 
 		private void Update()
 		{
-			if (disableImput > 0 || isInDash) return;
+			if (player.State == PlayerManager.PlayerState.Dash) return;
 
 			direction = moveAction.ReadValue<Vector2>();
 			rb.velocity = direction.normalized * basicSpeed;
@@ -69,25 +68,24 @@ namespace Scripts.Player
 		}
 		public void Dash(Vector2 direction, float speed, float time, Action func)
 		{
-			if (isInDash) return;
+			if (player.State == PlayerManager.PlayerState.Dash) return;
 
-			isInDash = true;
+			player.State = PlayerManager.PlayerState.Dash;
 			rb.velocity = direction.normalized * speed;
-			StartCoroutine(WaitAndDo(time, func));
+			StartCoroutine(Dashing(time, func));
 		}
 		private IEnumerator Dashing(float time, Action after)
 		{
 			yield return new WaitForSeconds(time);
 			speed = basicSpeed;
-			isInDash = false;
+			player.State = PlayerManager.PlayerState.Walk;
 			after?.Invoke();
 		}
-
 
 		void PerformThrustDash(PlayerData data, float s, float t, int d)
 		{
 			direction = data.aimDirection;
-			isInDash = true;
+			player.State = PlayerManager.PlayerState.Dash;
 			speed = s;
 			StartCoroutine(TrustDelay(t));
 		}
@@ -97,14 +95,14 @@ namespace Scripts.Player
 			var s = direction.magnitude;
 			speed = v;
 			var t = s / v;
-			isInDash = true;
+			player.State = PlayerManager.PlayerState.Dash;
 			StartCoroutine(BeamPullDelay(t, stunTime));
 		}
 		void PerformKicked(Vector2 direction, float v, float s)
 		{
 			var t = s / v;
 			this.direction = direction;
-			isInDash = true;
+			player.State = PlayerManager.PlayerState.Dash;
 			speed = v;
 			StartCoroutine(DashDelay(t));
 		}
@@ -113,20 +111,20 @@ namespace Scripts.Player
 		{
 			yield return new WaitForSeconds(delay);
 			speed = basicSpeed;
-			isInDash = false;
+			player.State = PlayerManager.PlayerState.Walk;
 		}
 		IEnumerator TrustDelay(float delay)
 		{
 			yield return new WaitForSeconds(delay);
 			speed = basicSpeed;
-			isInDash = false;
+			player.State = PlayerManager.PlayerState.Walk;
 			//player.EndBladeThrust();
 		}
 		IEnumerator BeamPullDelay(float delay, float stunTime)
 		{
 			yield return new WaitForSeconds(delay);
 			speed = basicSpeed;
-			isInDash = false;
+			player.State = PlayerManager.PlayerState.Walk;
 			player.EndBeamPullTowardsEnemy(stunTime);
 		}
 
