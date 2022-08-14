@@ -38,6 +38,7 @@ namespace Scripts.Player.Weapon
 		[SerializeField] private float beamPullSpeed = 15f;
 		[SerializeField] private float beamRange = 7f;
 		[SerializeField] private float beamStunTime = 1f;
+		[SerializeField] private float beamPullStunTime = 1f;
 		[Space(20)]
 		private LineRenderer bimRenderer;
 		private GameObject beamHit;
@@ -54,6 +55,10 @@ namespace Scripts.Player.Weapon
 			bimRenderer.enabled = false;
 	
 			player.powerUpController.OnPowerUpChanged += ChangePowerUp;
+		}
+		private void OnDestroy()
+		{
+			player.powerUpController.OnPowerUpChanged -= ChangePowerUp;
 		}
 
 		private void Update()
@@ -155,7 +160,7 @@ namespace Scripts.Player.Weapon
 			var time = direction.magnitude / beamPullSpeed;
 			movement.Dash(direction, beamPullSpeed, time, () => {
 				if (beamHit.TryGetComponent<Enemy>(out var enemy))
-					enemy.Stun(1);//TODO
+					enemy.Stun(beamPullStunTime);
 				CancelAlternativeAttack();
 			});
 			

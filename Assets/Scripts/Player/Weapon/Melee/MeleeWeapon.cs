@@ -11,27 +11,25 @@ namespace Scripts.Player.Weapon
 	{
 		private PlayerManager player;
 
-
-		[SerializeField] private LayerMask melleWeaponLayerMask;
-
-
+		[Header("Weapon Colliders")]
 		[SerializeField] private Collider2D defaultRange;
 		[SerializeField] private Collider2D powerupRange;
 		[SerializeField] private Collider2D blockRange;
+		[SerializeField] private LayerMask melleWeaponLayerMask;
+		private ContactFilter2D attackContactFilter;
+		private ContactFilter2D interactContactFilter;
+		private Collider2D range;
+		[Space(20)]
 
-		//Internal variables
-		ContactFilter2D attackContactFilter;
-		Collider2D range;
+		[Header("Thrust")]
+		[SerializeField] private float thrustSpeed;
+		[SerializeField] private float thrustTime;
+		[SerializeField] private int thrustDmg;
+		[Space(20)]
 
-		//Parameters
-		[SerializeField] int basicAttackDamage;
+		[SerializeField] private int basicAttackDamage = 20;
 
-		//
-		[SerializeField] float thrustSpeed;
-		[SerializeField] float thrustTime;
-		[SerializeField] int thrustDmg;
-
-		void Start()
+		private void Start()
 		{
 			player = GetComponentInParent<PlayerManager>();
 			Type = WeaponType.Blade;
@@ -41,9 +39,14 @@ namespace Scripts.Player.Weapon
 				useLayerMask = true,
 				useTriggers = true
 			};
+			interactContactFilter = new ContactFilter2D().NoFilter();
 
 			range = defaultRange;
 			player.powerUpController.OnPowerUpChanged += ChangePowerUp;
+		}
+		private void OnDestroy()
+		{
+			player.powerUpController.OnPowerUpChanged -= ChangePowerUp;
 		}
 
 		public override void PerformBasicAttack()
@@ -53,26 +56,16 @@ namespace Scripts.Player.Weapon
 			range.OverlapCollider(attackContactFilter, hits);
 			foreach (Collider2D hit in hits) {
 				hit.GetComponent<IHit>()?.Hit(basicAttackDamage, IHit.HitWeapon.Sword);
-				//if (hit.gameObject.layer == LayerMask.NameToLayer("Rock")) {
-				//	hit.GetComponent<PushableRock>().Push(hit.transform.position - transform.position);
-				//} else {
-				//	hit.GetComponent<Enemy>().Damage(basicAttackDamage);
-				//}
-
 			}
-			player.OnBladeAttack?.Invoke();
+			player.OnBladeAttack?.Invoke();//TODO
 		}
 
 		public void Interact()
 		{
 			List<Collider2D> hits = new List<Collider2D>();
-			range.OverlapCollider(attackContactFilter, hits);
+			range.OverlapCollider(interactContactFilter, hits);
 			foreach (Collider2D hit in hits) {
-				if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-					hit.GetComponent<Enemy>().Finish();
-					break;
-				}
-
+				hit.GetComponent<IInteract>()?.Interact();
 			}
 		}
 
@@ -93,9 +86,7 @@ namespace Scripts.Player.Weapon
 
 		private void ChangePowerUp(PowerUp.PowerType type, bool active)
 		{
-			if (type != PowerUp.PowerType.DoubleBlade) {
-				return;
-			}
+			if (type != PowerUp.PowerType.DoubleBlade) return;
 
 			range = active ? powerupRange : defaultRange;
 		}

@@ -15,4 +15,8 @@ namespace Scripts.Interfaces
 
 		public void Hit(int damage, HitWeapon weapon);
 	}
+	public interface IInteract
+	{
+		public void Interact();
+	}
 }

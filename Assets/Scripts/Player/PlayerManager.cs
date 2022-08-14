@@ -17,8 +17,8 @@ public class PlayerManager : MonoBehaviour
 
 
 
-    [SerializeField] public PlayerData playerData;
-    [SerializeField] public PowerUpController powerUpController;
+    public PlayerData playerData;
+    public PowerUpController powerUpController;
 
     public event Action OnGetDamaged;
     public event Action OnHPGained;
