@@ -70,12 +70,6 @@ public class PlayerManager : MonoBehaviour
         OnGunChanged?.Invoke();
 	}
 
-    //PowerUp
-    public void AddPowerUp(PowerUp powerUp)
-	{
-        powerUpController.AddPowerUp(powerUp);
-	}
-
     //Blade Thrust
     public event Action<PlayerData, float, float, int> OnBladeThrustStarted;
     public event Action OnBladeThrustEnded;
