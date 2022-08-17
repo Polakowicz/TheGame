@@ -14,7 +14,6 @@ public class AnimationController : MonoBehaviour
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		animator = GetComponent<Animator>();
 
-		eventSystem.OnBladeAttack += TriggerBladeAttackAnimation;
 		//eventSystem.OnGunFire += TriggerBlasterAttackAnimation;
 		eventSystem.OnGunChanged += ChangeGun;
 		eventSystem.OnDodge += Dodge;
@@ -31,7 +30,7 @@ public class AnimationController : MonoBehaviour
 		animator.SetFloat("Speed", eventSystem.playerData.moveDireciton.magnitude);
 	}
 
-	void TriggerBladeAttackAnimation()
+	public void TriggerBladeAttackAnimation()
 	{
 		animator.SetTrigger("Sword_fighting");
 	}

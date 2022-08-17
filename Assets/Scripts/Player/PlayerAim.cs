@@ -5,17 +5,12 @@ namespace scritps.Player
 {
 	public class PlayerAim : MonoBehaviour
 	{
-		//Components
+		[SerializeField]
+		private Transform crosshair;
 		private PlayerManager player;
 		private PlayerInput input;
 
-		//Parameters
-		[SerializeField] private Transform crosshair;
-
-		//Input actions
 		private InputAction aimAction;
-
-		//Internal variables
 		private bool gamepad;
 		private float gamepadCrosshariDistance;
 

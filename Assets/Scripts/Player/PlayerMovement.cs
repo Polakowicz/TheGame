@@ -37,8 +37,7 @@ namespace Scripts.Player
 			dashAction = input.actions["Dash"];
 
 			dashAction.performed += PerformDash;
-			player.OnBladeThrustStarted += PerformThrustDash;
-			player.OnBeamPullTowardsEnemyStarted += PerformBeamPull;
+			//player.OnBladeThrustStarted += PerformThrustDash;
 			player.OnKicked += PerformKicked;
 
 			speed = basicSpeed;
@@ -47,8 +46,7 @@ namespace Scripts.Player
 		private void OnDestroy()
 		{
 			dashAction.performed -= PerformDash;
-			player.OnBladeThrustStarted -= PerformThrustDash;
-			player.OnBeamPullTowardsEnemyStarted -= PerformBeamPull;
+			//player.OnBladeThrustStarted -= PerformThrustDash;
 			player.OnKicked -= PerformKicked;
 		}
 
@@ -82,6 +80,12 @@ namespace Scripts.Player
 			after?.Invoke();
 		}
 
+
+
+
+
+
+
 		void PerformThrustDash(PlayerData data, float s, float t, int d)
 		{
 			direction = data.aimDirection;
@@ -89,15 +93,7 @@ namespace Scripts.Player
 			speed = s;
 			StartCoroutine(TrustDelay(t));
 		}
-		void PerformBeamPull(GameObject enemy, float v, float stunTime)
-		{
-			direction = enemy.transform.position - transform.position;
-			var s = direction.magnitude;
-			speed = v;
-			var t = s / v;
-			player.State = PlayerManager.PlayerState.Dash;
-			StartCoroutine(BeamPullDelay(t, stunTime));
-		}
+
 		void PerformKicked(Vector2 direction, float v, float s)
 		{
 			var t = s / v;

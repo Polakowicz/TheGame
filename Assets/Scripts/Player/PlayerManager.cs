@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public AudioManager AudioManager { get; private set; }
+    public AnimationController AnimationController { get; private set; }
 
     public enum PlayerState
 	{
@@ -27,6 +28,7 @@ public class PlayerManager : MonoBehaviour
 	void Start()
 	{
         AudioManager = FindObjectOfType<AudioManager>();
+        AnimationController = GetComponentInChildren<AnimationController>();
         playerData.HP = playerData.MaxHP;
 	}
 
@@ -59,7 +61,6 @@ public class PlayerManager : MonoBehaviour
     }
 
     //Weapons
-    public Action OnBladeAttack;
 
     public Action OnGunChanged;
     public Action OnDodge;
@@ -71,18 +72,18 @@ public class PlayerManager : MonoBehaviour
 	}
 
     //Blade Thrust
-    public event Action<PlayerData, float, float, int> OnBladeThrustStarted;
-    public event Action OnBladeThrustEnded;
+ //   public event Action<PlayerData, float, float, int> OnBladeThrustStarted;
+ //   public event Action OnBladeThrustEnded;
 
-    public void StartBladeThrust(float speed, float time, int dmg)
-	{
-        OnBladeThrustStarted?.Invoke(playerData, speed, time, dmg);
-	}
+ //   public void StartBladeThrust(float speed, float time, int dmg)
+	//{
+ //       OnBladeThrustStarted?.Invoke(playerData, speed, time, dmg);
+	//}
 
-    public void EndBladeThrust()
-	{
-        OnBladeThrustEnded?.Invoke();
-	}
+ //   public void EndBladeThrust()
+	//{
+ //       OnBladeThrustEnded?.Invoke();
+	//}
 
     //Blade block
     public event Action OnBladeBlockStarted;
@@ -107,16 +108,6 @@ public class PlayerManager : MonoBehaviour
         OnBladeBlockEnded?.Invoke();
 	}
 
-    //Blaaster beam
-    public event Action<GameObject, float, float> OnBeamPullTowardsEnemyStarted;
- 
-    
-    public void StartBeamPullTowardsEnemy(GameObject enemy, float speed, float stunTime)
-	{
-        Debug.Log(enemy);
-        playerData.enemyToPulled = enemy;
-        OnBeamPullTowardsEnemyStarted?.Invoke(enemy, speed, stunTime);
-	}
 
     public void EndBeamPullTowardsEnemy(float stunTime)
 	{

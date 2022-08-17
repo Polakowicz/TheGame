@@ -5386,6 +5386,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 250570695, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
   m_PrefabInstance: {fileID: 416595043}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &60859515 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8162505908868652061, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+  m_PrefabInstance: {fileID: 416595043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &70244730
 GameObject:
   m_ObjectHideFlags: 0
@@ -6178,6 +6183,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: thrustRange
+      value: 
+      objectReference: {fileID: 60859515}
     - target: {fileID: 2896284848948219051, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Blaster Barrel
