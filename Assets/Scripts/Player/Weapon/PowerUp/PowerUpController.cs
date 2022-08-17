@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Player.Weapon
@@ -61,9 +60,17 @@ namespace Scripts.Player.Weapon
 					DoubleBladeTimeLeft = powerUp.Duration;
 					break;
 				case PowerUp.PowerType.ShotPiercing:
+					if(ExplosiveBulletsRemaining > 0) {
+						ExplosiveBulletsRemaining = 0;
+						OnPowerUpChanged?.Invoke(PowerUp.PowerType.ShotExplosion, false);
+					}
 					PiercingBulletsTimeLeft = powerUp.Duration;
 					break;
 				case PowerUp.PowerType.ShotExplosion:
+					if (PiercingBulletsTimeLeft > 0) {
+						PiercingBulletsTimeLeft = 0;
+						OnPowerUpChanged?.Invoke(PowerUp.PowerType.ShotPiercing, false);
+					}
 					ExplosiveBulletsRemaining = powerUp.Duration;
 					break;
 				case PowerUp.PowerType.ForceField:

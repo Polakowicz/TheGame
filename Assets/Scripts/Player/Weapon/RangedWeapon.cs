@@ -173,6 +173,8 @@ namespace Scripts.Player.Weapon
 
 		public void ChangePowerUp(PowerUp.PowerType type, bool active)
 		{
+			//if (!active && bullet != defaultBullet) return;
+
 			if (type == PowerUp.PowerType.ShotExplosion) {
 				bullet = active ? explosiveBullet : defaultBullet;
 			} else if (type == PowerUp.PowerType.ShotPiercing) {
