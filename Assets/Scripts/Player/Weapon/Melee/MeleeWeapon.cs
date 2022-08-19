@@ -12,19 +12,18 @@ namespace Scripts.Player.Weapon
 		private PlayerManager player;
 		private PlayerMovement movement;
 
-		[Header("Weapon Colliders")]
+		[Header("Attack")]
 		[SerializeField] private Collider2D defaultRange;
 		[SerializeField] private Collider2D powerupRange;
-		[SerializeField] private Collider2D blockRange;
-		[SerializeField] private Collider2D thrustRange;
-		[SerializeField] private LayerMask melleWeaponLayerMask;
+		[SerializeField] private LayerMask attackLayerMask;
+		[SerializeField] private int basicAttackDamage = 20;
 		private ContactFilter2D attackContactFilter;
-		private ContactFilter2D interactContactFilter;
 		private Collider2D range;
-		public LayerMask AttackLayerMask { get => melleWeaponLayerMask; }
+		public LayerMask AttackLayerMask { get => attackLayerMask; }
 		[Space(20)]
 
 		[Header("Thrust")]
+		[SerializeField] private Collider2D thrustRange;
 		[SerializeField] private float thrustSpeed;
 		[SerializeField] private float thrustTime;
 		[SerializeField] private int thrustDmg;
@@ -32,7 +31,13 @@ namespace Scripts.Player.Weapon
 		public bool ThrustActive { get; private set; }
 		[Space(20)]
 
-		[SerializeField] private int basicAttackDamage = 20;
+		[Header("Block")]
+		[SerializeField] private Collider2D blockRange;
+		[SerializeField] private LayerMask blockLayerMask;
+		private ContactFilter2D blockContactFilter;
+		public LayerMask BlockLayerMask { get => blockLayerMask; }
+		public bool BlockActive { get; private set; }
+	
 
 		private void Start()
 		{
@@ -41,11 +46,14 @@ namespace Scripts.Player.Weapon
 			Type = WeaponType.Blade;
 
 			attackContactFilter = new ContactFilter2D {
-				layerMask = melleWeaponLayerMask,
+				layerMask = attackLayerMask,
 				useLayerMask = true,
 				useTriggers = true
 			};
-			interactContactFilter = new ContactFilter2D().NoFilter();
+			blockContactFilter = new ContactFilter2D {
+				layerMask = blockLayerMask,
+				useLayerMask = true
+			};
 
 			range = defaultRange;
 			player.powerUpController.OnPowerUpChanged += ChangePowerUp;
@@ -63,15 +71,6 @@ namespace Scripts.Player.Weapon
 			range.OverlapCollider(attackContactFilter, hits);
 			foreach (Collider2D hit in hits) {
 				hit.GetComponent<IHit>()?.Hit(basicAttackDamage, IHit.HitWeapon.Sword);
-			}
-		}
-
-		public void Interact()
-		{
-			List<Collider2D> hits = new List<Collider2D>();
-			range.OverlapCollider(interactContactFilter, hits);
-			foreach (Collider2D hit in hits) {
-				hit.GetComponent<IInteract>()?.Interact();
 			}
 		}
 
@@ -93,11 +92,16 @@ namespace Scripts.Player.Weapon
 
 		public override void PerformAlternativeAttack()
 		{
-			player.StartBladeBlock();
+			List<Collider2D> blocks = new List<Collider2D>();
+			blockRange.OverlapCollider(blockContactFilter, blocks);
+			foreach (Collider2D block in blocks) {
+				block.GetComponent<IRiposte>()?.Riposte();
+			}
+			BlockActive = true;
 		}
 		public override void CancelAlternativeAttack()
 		{
-			player.EndBladeBlock();
+			BlockActive = false;
 		}
 
 		private void ChangePowerUp(PowerUp.PowerType type, bool active)

@@ -19,4 +19,8 @@ namespace Scripts.Interfaces
 	{
 		public void Interact();
 	}
+	public interface IRiposte
+	{
+		public void Riposte();
+	}
 }

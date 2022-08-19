@@ -2,65 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockEnemyAttacks : MonoBehaviour
-{
-    [SerializeField] PlayerManager eventSystem;
-	[SerializeField] LayerMask blockLayerMask;
+namespace Scripts.Player.Weapon {
 
-	Collider2D blockCollider;
-	ContactFilter2D contactFilter;
-
-	bool blockEnabled;
-
-	void Start()
+	public class BlockEnemyAttacks : MonoBehaviour
 	{
-		blockCollider = GetComponent<Collider2D>();
-		contactFilter = new ContactFilter2D {
-			layerMask = blockLayerMask,
-			useLayerMask = true,
-			useTriggers = true
-		};
-		eventSystem.OnBladeBlockStarted += EnableBlock;
-		eventSystem.OnBladeBlockEnded += DisableBlock;
-	}
+		private MeleeWeapon weapon;
 
-	void OnDestroy()
-	{
-		eventSystem.OnBladeBlockStarted -= EnableBlock;
-		eventSystem.OnBladeBlockEnded -= DisableBlock;
-	}
-
-	void EnableBlock()
-	{
-		List<Collider2D> blocks = new List<Collider2D>();
-		blockCollider.OverlapCollider(contactFilter, blocks);
-		foreach (Collider2D block in blocks) {
-			var redirectScript = block.GetComponent<BlockDirectionChange>();
-			if (redirectScript != null) {
-				redirectScript.Redirect();
-			} else {
-				Debug.Log("Bullet does not have redirect script");
-				Destroy(block.gameObject);
-			}
-		}
-		blockEnabled = true;
-	}
-
-	void DisableBlock()
-	{
-		blockEnabled = false;
-	}
-
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (!blockEnabled) {
-			return;
+		void Start()
+		{
+			weapon = GetComponentInParent<MeleeWeapon>();
 		}
 
-		if (blockLayerMask != (blockLayerMask | (1 << collision.gameObject.layer))) {
-			return;
+		void OnTriggerEnter2D(Collider2D collision)
+		{
+			if (!weapon.BlockActive) return;
+
+			if (weapon.BlockLayerMask !=
+				(weapon.BlockLayerMask | (1 << collision.gameObject.layer)))
+				return;
+			
+			Destroy(collision.gameObject);//TODO
 		}
-		
-		Destroy(collision.gameObject);
 	}
 }

@@ -8,16 +8,17 @@ namespace Scripts.Player.Weapon
 	public class ThrustAttackDealDamage : MonoBehaviour
 	{
 		private MeleeWeapon weapon;
+
 		private void Start()
 		{
 			weapon = GetComponentInParent<MeleeWeapon>();
 		}
 
-		void OnTriggerEnter2D(Collider2D collision)
+		private void OnTriggerEnter2D(Collider2D collision)
 		{
 			if (!weapon.ThrustActive) return;
 
-			if (!(weapon.AttackLayerMask ==
+			if (!(weapon.AttackLayerMask !=
 				(weapon.AttackLayerMask | (1 << collision.gameObject.layer))))
 				return;
 

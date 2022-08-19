@@ -116,13 +116,7 @@ namespace Scripts.Player
 			player.State = PlayerManager.PlayerState.Walk;
 			//player.EndBladeThrust();
 		}
-		IEnumerator BeamPullDelay(float delay, float stunTime)
-		{
-			yield return new WaitForSeconds(delay);
-			speed = basicSpeed;
-			player.State = PlayerManager.PlayerState.Walk;
-			player.EndBeamPullTowardsEnemy(stunTime);
-		}
+
 
 
 

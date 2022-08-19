@@ -97,7 +97,7 @@ namespace Scripts.Player.Weapon
         }
         private void Finish(InputAction.CallbackContext context)
         {
-            meleeWeapon.Interact();
+            //TODO
         }
 
         //Weapons attakcs

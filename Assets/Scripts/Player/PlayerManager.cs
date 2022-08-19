@@ -71,52 +71,9 @@ public class PlayerManager : MonoBehaviour
         OnGunChanged?.Invoke();
 	}
 
-    //Blade Thrust
- //   public event Action<PlayerData, float, float, int> OnBladeThrustStarted;
- //   public event Action OnBladeThrustEnded;
-
- //   public void StartBladeThrust(float speed, float time, int dmg)
-	//{
- //       OnBladeThrustStarted?.Invoke(playerData, speed, time, dmg);
-	//}
-
- //   public void EndBladeThrust()
-	//{
- //       OnBladeThrustEnded?.Invoke();
-	//}
-
-    //Blade block
-    public event Action OnBladeBlockStarted;
-    public event Action OnBladeBlockEnded;
-
-    public void StartBladeBlock()
-	{
-
-        OnBladeBlockStarted?.Invoke();
-        StartCoroutine(BlockDelay());
-	}
-
-    IEnumerator BlockDelay()
-	{
-        playerData.blocking = true;
-        yield return new WaitForSeconds(1);
-        playerData.blocking = false;
-    }
-
-    public void EndBladeBlock()
-	{
-        OnBladeBlockEnded?.Invoke();
-	}
 
 
-    public void EndBeamPullTowardsEnemy(float stunTime)
-	{
-        var enemy = playerData.enemyToPulled.GetComponent<Enemy>();
-        if(enemy != null)
-            enemy.Stun(stunTime);
-        playerData.enemyToPulled = null;
 
-	}
 
     public event Action<Vector2, float, float> OnKicked;
     public void Kick(Vector2 direction, float speed, float distance, int damage)
