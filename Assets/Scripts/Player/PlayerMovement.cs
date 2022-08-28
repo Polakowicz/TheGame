@@ -25,7 +25,6 @@ namespace Scripts.Player
 
 		//Internal variables
 		private Vector2 direction;
-		private float speed;
 
 		private void Start()
 		{
@@ -37,8 +36,6 @@ namespace Scripts.Player
 			dashAction = input.actions["Dash"];
 
 			dashAction.performed += PerformDash;
-
-			speed = basicSpeed;
 		}
 
 		private void OnDestroy()
@@ -54,7 +51,6 @@ namespace Scripts.Player
 			rb.velocity = direction.normalized * basicSpeed;
 			player.MoveDirection = rb.velocity;
 		}
-
 
 		private void PerformDash(InputAction.CallbackContext context)
 		{
@@ -72,7 +68,6 @@ namespace Scripts.Player
 		private IEnumerator Dashing(float time, Action after)
 		{
 			yield return new WaitForSeconds(time);
-			speed = basicSpeed;
 			player.State = PlayerManager.PlayerState.Walk;
 			after?.Invoke();
 		}

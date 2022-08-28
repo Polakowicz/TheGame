@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Player.Weapon {
+namespace Scripts.Player {
 
 	public class BlockEnemyAttacks : MonoBehaviour
 	{
 		private MeleeWeapon weapon;
 
-		void Start()
+		private void Start()
 		{
 			weapon = GetComponentInParent<MeleeWeapon>();
 		}
 
-		void OnTriggerEnter2D(Collider2D collision)
+		private void OnTriggerEnter2D(Collider2D collision)
 		{
 			if (!weapon.BlockActive) return;
 
@@ -21,7 +19,7 @@ namespace Scripts.Player.Weapon {
 				(weapon.BlockLayerMask | (1 << collision.gameObject.layer)))
 				return;
 			
-			Destroy(collision.gameObject);//TODO
+			Destroy(collision.gameObject);//TODO is this class even required???
 		}
 	}
 }

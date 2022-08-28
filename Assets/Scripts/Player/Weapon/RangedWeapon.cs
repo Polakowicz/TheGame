@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Scripts.Player.Weapon
+namespace Scripts.Player
 {
 	[Serializable]
 	public class RangedWeapon : Weapon

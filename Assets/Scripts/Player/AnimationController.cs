@@ -1,62 +1,62 @@
-﻿using Scripts.Player.Weapon;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AnimationController : MonoBehaviour
+namespace Scripts.Player
 {
-	private PlayerManager player;
-	SpriteRenderer spriteRenderer;
-	Animator animator;
-	bool gun;
-
-	private void Start()
+	public class AnimationController : MonoBehaviour
 	{
-		player = GetComponentInParent<PlayerManager>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		animator = GetComponent<Animator>();
+		private PlayerManager player;
+		private SpriteRenderer spriteRenderer;
+		private Animator animator;
 
-	}
+		private void Start()
+		{
+			player = GetComponentInParent<PlayerManager>();
+			spriteRenderer = GetComponent<SpriteRenderer>();
+			animator = GetComponent<Animator>();
 
-	private void Update()
-	{
-		if (player.AimDirection.x > 0) {
-			spriteRenderer.flipX = true;
-		} else if (player.AimDirection.x < 0) {
-			spriteRenderer.flipX = false;
 		}
 
-		animator.SetFloat("Speed", player.MoveDirection.magnitude);
-	}
+		private void Update()
+		{
+			if (player.AimDirection.x > 0) {
+				spriteRenderer.flipX = true;
+			} else if (player.AimDirection.x < 0) {
+				spriteRenderer.flipX = false;
+			}
 
-	public void TriggerBladeAttackAnimation()
-	{
-		animator.SetTrigger("Sword_fighting");
-	}
+			animator.SetFloat("Speed", player.MoveDirection.magnitude);
+		}
 
-	//void TriggerBlasterAttackAnimation()
-	//{
-	//	animator.SetTrigger("Gun_fighting");
-	//}
+		public void TriggerBladeAttackAnimation()
+		{
+			animator.SetTrigger("Sword_fighting");
+		}
 
-	
-	
-
-	void Die()
-	{
-		//animator.SetInteger("Health", eventSystem.playerData.HP);
-	}
-
-
+		//void TriggerBlasterAttackAnimation()
+		//{
+		//	animator.SetTrigger("Gun_fighting");
+		//}
 
 
-	public void ChangeGun(Weapon.WeaponType type)
-	{
-		//TODO
-		//animator.SetBool("Blaster_equiped", player.playerData.weapon == Weapon.WeaponType.Blaster ? true : false);
-	}
 
-	public void Dash()
-	{
-		animator.SetTrigger("Dodge");
+
+		void Die()
+		{
+			//animator.SetInteger("Health", eventSystem.playerData.HP);
+		}
+
+
+
+
+		public void ChangeGun(Weapon.WeaponType type)
+		{
+			//TODO
+			//animator.SetBool("Blaster_equiped", player.playerData.weapon == Weapon.WeaponType.Blaster ? true : false);
+		}
+
+		public void Dash()
+		{
+			animator.SetTrigger("Dodge");
+		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scripts.Player.Weapon
+namespace Scripts.Player
 {
 	[Serializable]
 	public class PowerUpController : MonoBehaviour

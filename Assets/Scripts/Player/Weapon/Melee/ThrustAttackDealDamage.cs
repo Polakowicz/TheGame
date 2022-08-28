@@ -1,9 +1,7 @@
 using Scripts.Interfaces;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Player.Weapon
+namespace Scripts.Player
 {
 	public class ThrustAttackDealDamage : MonoBehaviour
 	{
