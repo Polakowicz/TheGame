@@ -17,10 +17,16 @@ namespace Scripts.Player
         public Vector2 AimDirection;
         public Vector2 MoveDirection;
 
-        private void Start()
+		private void Awake()
+		{
+            PowerUpController = GetComponent<PowerUpController>();
+        }
+
+		private void Start()
         {
             AudioManager = FindObjectOfType<AudioManager>();
             AnimationController = GetComponentInChildren<AnimationController>();
+            
         }
     }
 }
