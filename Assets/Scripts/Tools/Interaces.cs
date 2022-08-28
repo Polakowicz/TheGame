@@ -10,7 +10,8 @@ namespace Scripts.Interfaces
 		{
 			Sword,
 			Bullet,
-			Rock
+			Rock,
+			OTHER
 		}
 
 		public void Hit(int damage, HitWeapon weapon);
@@ -22,5 +23,9 @@ namespace Scripts.Interfaces
 	public interface IRiposte
 	{
 		public void Riposte();
+	}
+	public interface IKick
+	{
+		public void Kick(Vector2 direction, int damage);
 	}
 }

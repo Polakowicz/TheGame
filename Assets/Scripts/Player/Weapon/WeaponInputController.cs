@@ -21,6 +21,7 @@ namespace Scripts.Player.Weapon
         private MeleeWeapon meleeWeapon;
         private RangedWeapon rangedWeapon;
         private Weapon equippedWeapon;
+        //public Weapon.WeaponType WeaponType { get => equippedWeapon.Type; }
 
         private void Start()
         {
@@ -92,7 +93,7 @@ namespace Scripts.Player.Weapon
                 equippedWeapon = meleeWeapon;
             }
 
-            player.ChangedWeapon(equippedWeapon.Type);
+            player.AnimationController.ChangeGun(equippedWeapon.Type);
 
         }
         private void Finish(InputAction.CallbackContext context)

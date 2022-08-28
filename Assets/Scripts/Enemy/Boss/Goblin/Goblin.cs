@@ -1,5 +1,4 @@
-﻿using Interfaces;
-using Scripts.Interfaces;
+﻿using Scripts.Interfaces;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -66,7 +65,7 @@ public class Goblin : MonoBehaviour, IHit
 	private void Kick()
 	{
 		var direction = Player.transform.position - transform.position;
-		Player.GetComponent<IKick>()?.Kick(direction.normalized * KickForce);
+		Player.GetComponent<IKick>()?.Kick(direction.normalized * KickForce, 0);
 	}
 	private void CreateWave()
 	{

@@ -1,3 +1,4 @@
+using Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,7 +58,7 @@ public class GoblinWave : MonoBehaviour
 		if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
 
 		if (collision.name.Equals("Player")) {
-			collision.GetComponent<PlayerManager>().GiveDamage(waveDamage);
+			collision.GetComponent<IHit>().Hit(waveDamage, IHit.HitWeapon.OTHER);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using UnityEngine;
 
 
@@ -39,7 +40,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 
 		if (!CanAttack()) yield break;
 		if(main.Data.DistanceToPlayer < range) {
-			main.Data.Player.GetComponent<PlayerManager>().GiveDamage(damage);
+			main.Data.Player.GetComponent<IHit>().Hit(damage, IHit.HitWeapon.OTHER);
 		}
 	}
 	private bool CanAttack()

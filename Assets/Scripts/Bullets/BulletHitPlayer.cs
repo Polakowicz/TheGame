@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using UnityEngine;
 
 public class BulletHitPlayer : MonoBehaviour
@@ -15,8 +16,8 @@ public class BulletHitPlayer : MonoBehaviour
             return;
         }
 
-        PlayerManager player = collision.gameObject.GetComponent<PlayerManager>();
-        player.GiveDamage(damage);
+        IHit player = collision.gameObject.GetComponent<IHit>();
+        player.Hit(damage, IHit.HitWeapon.OTHER);
         Destroy(gameObject);
         
     }

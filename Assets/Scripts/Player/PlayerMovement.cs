@@ -1,13 +1,13 @@
-using Interfaces;
 using System;
 using System.Collections;
+using Scripts.Interfaces;
 using Scripts.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class PlayerMovement : ExtendedMonoBehaviour, IKick
+	public class PlayerMovement : ExtendedMonoBehaviour
 	{
 		//Components
 		private Rigidbody2D rb;
@@ -37,8 +37,6 @@ namespace Scripts.Player
 			dashAction = input.actions["Dash"];
 
 			dashAction.performed += PerformDash;
-			//player.OnBladeThrustStarted += PerformThrustDash;
-			player.OnKicked += PerformKicked;
 
 			speed = basicSpeed;
 		}
@@ -46,8 +44,6 @@ namespace Scripts.Player
 		private void OnDestroy()
 		{
 			dashAction.performed -= PerformDash;
-			//player.OnBladeThrustStarted -= PerformThrustDash;
-			player.OnKicked -= PerformKicked;
 		}
 
 		private void Update()
@@ -56,13 +52,14 @@ namespace Scripts.Player
 
 			direction = moveAction.ReadValue<Vector2>();
 			rb.velocity = direction.normalized * basicSpeed;
-			player.playerData.moveDireciton = rb.velocity;
+			player.MoveDirection = rb.velocity;
 		}
 
 
 		private void PerformDash(InputAction.CallbackContext context)
 		{
 			Dash(direction, dashSpeed, dashTime, null);
+			player.AnimationController.Dash();
 		}
 		public void Dash(Vector2 direction, float speed, float time, Action func)
 		{
@@ -79,71 +76,5 @@ namespace Scripts.Player
 			player.State = PlayerManager.PlayerState.Walk;
 			after?.Invoke();
 		}
-
-
-
-
-
-
-
-		void PerformThrustDash(PlayerData data, float s, float t, int d)
-		{
-			direction = data.aimDirection;
-			player.State = PlayerManager.PlayerState.Dash;
-			speed = s;
-			StartCoroutine(TrustDelay(t));
-		}
-
-		void PerformKicked(Vector2 direction, float v, float s)
-		{
-			var t = s / v;
-			this.direction = direction;
-			player.State = PlayerManager.PlayerState.Dash;
-			speed = v;
-			StartCoroutine(DashDelay(t));
-		}
-
-		IEnumerator DashDelay(float delay)
-		{
-			yield return new WaitForSeconds(delay);
-			speed = basicSpeed;
-			player.State = PlayerManager.PlayerState.Walk;
-		}
-		IEnumerator TrustDelay(float delay)
-		{
-			yield return new WaitForSeconds(delay);
-			speed = basicSpeed;
-			player.State = PlayerManager.PlayerState.Walk;
-			//player.EndBladeThrust();
-		}
-
-
-
-
-
-
-		private delegate void VoidFunction();
-
-		private readonly float KickTime = 0.5f;
-		private int disableImput;
-
-		public void Kick(Vector2 direction)
-		{
-			rb.velocity = direction;
-			disableImput++;
-			StartCoroutine(Wait(KickTime, () => disableImput--));
-
-		}
-		public void Kick(Vector2 direction, float force)
-		{
-			Kick(direction * force);
-		}
-
-		private IEnumerator Wait(float time, Action func)
-		{
-			yield return new WaitForSeconds(time);
-			func();
-		}
-
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using UnityEngine;
 
 public class EBlows : MonoBehaviour
@@ -48,7 +49,7 @@ public class EBlows : MonoBehaviour
 		var mult = blowRange - main.Data.DistanceToPlayer;
 		mult /= blowRange;
 		var dmg = Mathf.FloorToInt(mult * maxDamage);
-		main.Data.Player.GetComponent<PlayerManager>().GiveDamage(dmg);
+		main.Data.Player.GetComponent<IHit>().Hit(dmg, IHit.HitWeapon.OTHER);
 		Destroy(gameObject);//temporary
 	}
 }

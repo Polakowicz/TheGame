@@ -38,7 +38,7 @@ namespace scritps.Player
 				lookDirection = mousePos - (Vector2)transform.position;
 			}
 			transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90)); ;
-			player.playerData.aimDirection = lookDirection.normalized;
+			player.AimDirection = lookDirection.normalized;
 		}
 
 		public void OnControlsChanged(PlayerInput input)

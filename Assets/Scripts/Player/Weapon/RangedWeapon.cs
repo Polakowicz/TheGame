@@ -54,11 +54,11 @@ namespace Scripts.Player.Weapon
 
 			bimRenderer.enabled = false;
 	
-			player.powerUpController.OnPowerUpChanged += ChangePowerUp;
+			player.PowerUpController.OnPowerUpChanged += ChangePowerUp;
 		}
 		private void OnDestroy()
 		{
-			player.powerUpController.OnPowerUpChanged -= ChangePowerUp;
+			player.PowerUpController.OnPowerUpChanged -= ChangePowerUp;
 		}
 
 		private void Update()
@@ -79,7 +79,7 @@ namespace Scripts.Player.Weapon
 			Instantiate(bullet, gunBarrel.position, rotation);
 
 			if (bullet == explosiveBullet) {
-				player.powerUpController.ShootExplosiveBullet();
+				player.PowerUpController.ShootExplosiveBullet();
 			}
 		}
 

@@ -56,11 +56,11 @@ namespace Scripts.Player.Weapon
 			};
 
 			range = defaultRange;
-			player.powerUpController.OnPowerUpChanged += ChangePowerUp;
+			player.PowerUpController.OnPowerUpChanged += ChangePowerUp;
 		}
 		private void OnDestroy()
 		{
-			player.powerUpController.OnPowerUpChanged -= ChangePowerUp;
+			player.PowerUpController.OnPowerUpChanged -= ChangePowerUp;
 		}
 
 		public override void PerformBasicAttack()
@@ -84,7 +84,7 @@ namespace Scripts.Player.Weapon
 				hit.GetComponent<IHit>()?.Hit(thrustDmg, IHit.HitWeapon.Sword);
 			}
 			ThrustActive = true;
-			movement.Dash(player.playerData.aimDirection, thrustSpeed, thrustTime,
+			movement.Dash(player.AimDirection, thrustSpeed, thrustTime,
 				() => {
 					ThrustActive = false;
 				});
