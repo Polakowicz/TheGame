@@ -11,10 +11,12 @@ namespace Scripts.Interfaces
 			Sword,
 			Bullet,
 			Rock,
+			WhackAMole,
 			OTHER
 		}
 
 		public void Hit(int damage, HitWeapon weapon);
+		public void StunHit(int damage, float stunTime, HitWeapon weapon);
 	}
 	public interface IInteract
 	{

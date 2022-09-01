@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,37 +7,31 @@ namespace Scripts.Player
 {
 	public class WhackAMole : Skill
 	{
-		CircleCollider2D range;
-		LayerMask mask;
-		ContactFilter2D filter;
+		private CircleCollider2D range;
+		private ContactFilter2D filter;
+		[SerializeField] private LayerMask mask;
 
-		[SerializeField]
-		float radiusGrow;
-		[SerializeField]
-		int damage;
-		[SerializeField]
-		float stunTime;
+		[SerializeField] private float radiusGrow;
+		[SerializeField] private int damage;
+		[SerializeField] private float stunTime;
 
-		bool charging;
+		private bool charging;
 
-		void Start()
+		private void Start()
 		{
 			range = GetComponent<CircleCollider2D>();
-			mask = LayerMask.GetMask("Enemy");
 			filter = new ContactFilter2D {
 				layerMask = mask,
-				useLayerMask = true,
-				useTriggers = true
+				useLayerMask = true
 			};
 
 			range.radius = 0;
 			charging = false;
 		}
 
-		void Update()
+		private void Update()
 		{
 			if (!charging) return;
-
 			range.radius += radiusGrow * Time.deltaTime;
 		}
 
@@ -50,7 +45,7 @@ namespace Scripts.Player
 			List<Collider2D> colliders = new List<Collider2D>();
 			range.OverlapCollider(filter, colliders);
 			foreach (Collider2D collider in colliders) {
-				collider.GetComponent<Enemy>().Overthrow(damage, stunTime);
+				collider.GetComponent<IHit>()?.StunHit(damage, stunTime, IHit.HitWeapon.WhackAMole);
 			}
 			charging = false;
 			range.radius = 0;
