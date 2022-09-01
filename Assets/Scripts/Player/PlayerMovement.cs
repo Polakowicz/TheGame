@@ -22,9 +22,10 @@ namespace Scripts.Player
 		[SerializeField] private float basicSpeed = 5f;
 		[SerializeField] private float dashSpeed = 30f;
 		[SerializeField] private float dashTime = 0.1f;
-
-		//Internal variables
 		private Vector2 direction;
+		private float movementSpeed;
+		public float SpeedMultiplier { get; set; } = 1f;
+
 
 		private void Start()
 		{
@@ -36,6 +37,8 @@ namespace Scripts.Player
 			dashAction = input.actions["Dash"];
 
 			dashAction.performed += PerformDash;
+
+			movementSpeed = basicSpeed;
 		}
 
 		private void OnDestroy()
@@ -48,10 +51,11 @@ namespace Scripts.Player
 			if (player.State == PlayerManager.PlayerState.Dash) return;
 
 			direction = moveAction.ReadValue<Vector2>();
-			rb.velocity = direction.normalized * basicSpeed;
+			rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
 			player.MoveDirection = rb.velocity;
 		}
 
+		//Dash
 		private void PerformDash(InputAction.CallbackContext context)
 		{
 			Dash(direction, dashSpeed, dashTime, null);

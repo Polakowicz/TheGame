@@ -98,7 +98,7 @@ namespace Scripts.Player
         }
         private void Finish(InputAction.CallbackContext context)
         {
-            //TODO
+            player.AnimationController.ChangeGun(equippedWeapon.Type);
         }
 
         //Weapons attakcs

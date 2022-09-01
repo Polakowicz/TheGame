@@ -113,13 +113,11 @@ public class Enemy : MonoBehaviour, IPullable
 	public void Freez(Freeze freez, float strength)
 	{
 		privateData.FreezeScript = freez;
-		privateData.FreezeScript.UnfreezEnemy += Unfreez;
 		privateData.FreezStrength = strength;
 		Data.SpeedMultiplier -= privateData.FreezStrength;
 	}
 	public void Unfreez()
 	{
-		privateData.FreezeScript.UnfreezEnemy -= Unfreez;
 		privateData.FreezeScript = null;
 		Data.SpeedMultiplier += privateData.FreezStrength;
 	}

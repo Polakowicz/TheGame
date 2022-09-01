@@ -50,8 +50,7 @@ namespace Scripts.Player
 
 		public void ChangeGun(Weapon.WeaponType type)
 		{
-			//TODO
-			//animator.SetBool("Blaster_equiped", player.playerData.weapon == Weapon.WeaponType.Blaster ? true : false);
+			animator.SetBool("Blaster_equiped", type == Weapon.WeaponType.Blaster);
 		}
 
 		public void Dash()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,37 +7,35 @@ namespace Scripts.Player
 {
 	public class Warp : Skill
 	{
-		CircleCollider2D range;
-		LayerMask mask;
-		ContactFilter2D filter;
+		private CircleCollider2D range;
+		private ContactFilter2D filter;
+		[SerializeField] private LayerMask mask;
 
-		[SerializeField] float radiusGrow;
-		[SerializeField] int maxEnemies;
-		[SerializeField] int damage;
+		[SerializeField] private float radiusGrowSpeed;
+		[SerializeField] private int maxEnemies;
+		[SerializeField] private int damage;
+		[SerializeField] private float jumpDelay = 1.0f;
 
-		bool charging;
-		bool inWarp;
-		List<Enemy> enemies = new List<Enemy>();
+		private bool charging;
+		private bool inWarp;
+		private List<GameObject> enemies = new List<GameObject>();
 
-		void Start()
+		private void Start()
 		{
 			range = GetComponent<CircleCollider2D>();
-			mask = LayerMask.GetMask("Enemy");
 			filter = new ContactFilter2D {
 				layerMask = mask,
-				useLayerMask = true,
-				useTriggers = true
+				useLayerMask = true
 			};
 
 			range.radius = 0;
 			charging = false;
 		}
 
-		void Update()
+		private void Update()
 		{
 			if (!charging) return;
-
-			range.radius += radiusGrow * Time.deltaTime;
+			range.radius += radiusGrowSpeed * Time.deltaTime;
 		}
 
 		public override void StartUsingSkill()
@@ -47,27 +46,27 @@ namespace Scripts.Player
 		public override void StopUsingSkill()
 		{
 			charging = false;
-			range.radius = 0;
 			inWarp = true;
 			StartCoroutine(WarpToEnemies(enemies));
 		}
 
-		private IEnumerator WarpToEnemies(List<Enemy> enemies)
+		private IEnumerator WarpToEnemies(List<GameObject> enemies)
 		{
 			Collider2D collider = transform.root.gameObject.GetComponent<Collider2D>();
 			Vector2 startPos = transform.root.position;
 			collider.enabled = false;
-			foreach (Enemy enemy in enemies) {
+			foreach (GameObject enemy in enemies) {
 				if (enemy != null) {
-					enemy.Damage(damage);
+					enemy.GetComponent<IHit>().Hit(damage, IHit.HitWeapon.Sword);
 					transform.root.position = enemy.transform.position;
-					yield return new WaitForSeconds(0.1f);
+					yield return new WaitForSeconds(jumpDelay);
 				}
 			}
-			enemies.Clear();
 			transform.root.position = startPos;
+			enemies.Clear();
 			collider.enabled = true;
 			inWarp = false;
+			range.radius = 0;
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)
@@ -76,7 +75,7 @@ namespace Scripts.Player
 			if (mask != (mask | (1 << collision.gameObject.layer))) return;
 			if (enemies.Count >= maxEnemies) return;
 
-			enemies.Add(collision.GetComponent<Enemy>());
+			enemies.Add(collision.gameObject);
 		}
 
 	}

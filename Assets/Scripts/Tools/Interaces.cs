@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using Scripts.Player;
 using UnityEngine;
 
 namespace Scripts.Interfaces
@@ -27,5 +27,14 @@ namespace Scripts.Interfaces
 	public interface IKick
 	{
 		public void Kick(Vector2 direction, int damage);
+	}
+	public interface IStun
+	{
+		public enum StunType
+		{
+			Freeze,
+		}
+
+		public void Stun(StunType type, float time, float strength = 1);
 	}
 }

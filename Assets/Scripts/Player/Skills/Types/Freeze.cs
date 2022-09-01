@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,8 @@ namespace Scripts.Player
 	public class Freeze : Skill
 	{
 		private Collider2D range;
+		private ContactFilter2D filter;
 		[SerializeField] private LayerMask mask;
-		ContactFilter2D filter;
 
 		[SerializeField] private float freezTime;
 		[SerializeField] private float freezStrength;
@@ -24,23 +25,13 @@ namespace Scripts.Player
 			};
 		}
 
-		public Action UnfreezEnemy;
-
 		public override void UseSkill()
 		{
 			List<Collider2D> colliders = new List<Collider2D>();
 			range.OverlapCollider(filter, colliders);
 			foreach (Collider2D collider in colliders) {
-				collider.GetComponent<Enemy>().Freez(this, freezStrength);
+				collider.GetComponent<IStun>().Stun(IStun.StunType.Freeze, freezTime, freezStrength);
 			}
-
-			StartCoroutine(UnfreezDelay());
-		}
-
-		private IEnumerator UnfreezDelay()
-		{
-			yield return new WaitForSeconds(freezTime);
-			UnfreezEnemy?.Invoke();
 		}
 	}
 }
