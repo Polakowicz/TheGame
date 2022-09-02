@@ -85,5 +85,13 @@ public class Goblin : MonoBehaviour, IHit
 		Destroy(gameObject);
 	}
 
-	
+	public void StunHit(int damage, float stunTime, IHit.HitWeapon weapon)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void Stun(IHit.HitWeapon weapon, float time, float strength = 1)
+	{
+		throw new NotImplementedException();
+	}
 }

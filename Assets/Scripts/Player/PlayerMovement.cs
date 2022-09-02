@@ -23,7 +23,6 @@ namespace Scripts.Player
 		[SerializeField] private float dashSpeed = 30f;
 		[SerializeField] private float dashTime = 0.1f;
 		private Vector2 direction;
-		private float movementSpeed;
 		public float SpeedMultiplier { get; set; } = 1f;
 
 
@@ -37,8 +36,6 @@ namespace Scripts.Player
 			dashAction = input.actions["Dash"];
 
 			dashAction.performed += PerformDash;
-
-			movementSpeed = basicSpeed;
 		}
 
 		private void OnDestroy()

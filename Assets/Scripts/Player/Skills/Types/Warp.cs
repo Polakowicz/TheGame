@@ -8,13 +8,12 @@ namespace Scripts.Player
 	public class Warp : Skill
 	{
 		private CircleCollider2D range;
-		private ContactFilter2D filter;
 		[SerializeField] private LayerMask mask;
 
 		[SerializeField] private float radiusGrowSpeed;
 		[SerializeField] private int maxEnemies;
 		[SerializeField] private int damage;
-		[SerializeField] private float jumpDelay = 1.0f;
+		[SerializeField] private float jumpDelay;
 
 		private bool charging;
 		private bool inWarp;
@@ -23,10 +22,6 @@ namespace Scripts.Player
 		private void Start()
 		{
 			range = GetComponent<CircleCollider2D>();
-			filter = new ContactFilter2D {
-				layerMask = mask,
-				useLayerMask = true
-			};
 
 			range.radius = 0;
 			charging = false;

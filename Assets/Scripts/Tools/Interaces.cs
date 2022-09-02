@@ -12,11 +12,13 @@ namespace Scripts.Interfaces
 			Bullet,
 			Rock,
 			WhackAMole,
+			SkillFreeze,
 			OTHER
 		}
 
 		public void Hit(int damage, HitWeapon weapon);
 		public void StunHit(int damage, float stunTime, HitWeapon weapon);
+		public void Stun(HitWeapon weapon, float time, float strength = 1);
 	}
 	public interface IInteract
 	{
@@ -29,14 +31,5 @@ namespace Scripts.Interfaces
 	public interface IKick
 	{
 		public void Kick(Vector2 direction, int damage);
-	}
-	public interface IStun
-	{
-		public enum StunType
-		{
-			Freeze,
-		}
-
-		public void Stun(StunType type, float time, float strength = 1);
 	}
 }

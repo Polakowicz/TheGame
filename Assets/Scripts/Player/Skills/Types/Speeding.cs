@@ -21,7 +21,7 @@ namespace Scripts.Player
 			StartCoroutine(SkillDuration(skillTime));
 		}
 
-		IEnumerator SkillDuration(float time)
+		private IEnumerator SkillDuration(float time)
 		{
 			yield return new WaitForSeconds(time);
 			movement.SpeedMultiplier = 1;

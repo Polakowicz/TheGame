@@ -30,7 +30,7 @@ namespace Scripts.Player
 			List<Collider2D> colliders = new List<Collider2D>();
 			range.OverlapCollider(filter, colliders);
 			foreach (Collider2D collider in colliders) {
-				collider.GetComponent<IStun>().Stun(IStun.StunType.Freeze, freezTime, freezStrength);
+				collider.GetComponent<IHit>().Stun(IHit.HitWeapon.SkillFreeze, freezTime, freezStrength);
 			}
 		}
 	}

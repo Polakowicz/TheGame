@@ -13,7 +13,6 @@ namespace Scripts.Player
 			player = GetComponentInParent<PlayerManager>();
 			spriteRenderer = GetComponent<SpriteRenderer>();
 			animator = GetComponent<Animator>();
-
 		}
 
 		private void Update()

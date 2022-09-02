@@ -15,4 +15,5 @@ public class GameEventSystem : MonoBehaviour
 	}
 
 	public Action OnPlayerDied;
+	public Action<int> OnPlayerHPChanged;
 }

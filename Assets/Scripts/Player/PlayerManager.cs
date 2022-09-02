@@ -11,7 +11,8 @@ namespace Scripts.Player
         public enum PlayerState
         {
             Walk,
-            Dash
+            Dash,
+            Stun
         }
         public PlayerState State;
         public Vector2 AimDirection;
