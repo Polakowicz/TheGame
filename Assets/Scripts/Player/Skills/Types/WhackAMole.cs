@@ -7,9 +7,10 @@ namespace Scripts.Player
 {
 	public class WhackAMole : Skill
 	{
+		private PlayerManager player;
 		private CircleCollider2D range;
 		private ContactFilter2D filter;
-		[SerializeField] private LayerMask mask;
+		private LayerMask mask;
 
 		[SerializeField] private float radiusGrow;
 		[SerializeField] private int damage;
@@ -19,7 +20,9 @@ namespace Scripts.Player
 
 		private void Start()
 		{
+			player = GetComponentInParent<PlayerManager>();
 			range = GetComponent<CircleCollider2D>();
+			mask = LayerMask.GetMask("Enemy");
 			filter = new ContactFilter2D {
 				layerMask = mask,
 				useLayerMask = true
@@ -37,11 +40,13 @@ namespace Scripts.Player
 
 		public override void StartUsingSkill()
 		{
+			Debug.Log("Whack-a-mole start charging");
 			charging = true;
+			player.State = PlayerManager.PlayerState.Charging;
 		}
-
 		public override void StopUsingSkill()
 		{
+			Debug.Log("Whack-a-mole attck");
 			List<Collider2D> colliders = new List<Collider2D>();
 			range.OverlapCollider(filter, colliders);
 			foreach (Collider2D collider in colliders) {
@@ -49,6 +54,7 @@ namespace Scripts.Player
 			}
 			charging = false;
 			range.radius = 0;
+			player.State = PlayerManager.PlayerState.Walk;
 		}
 	}
 }

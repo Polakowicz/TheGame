@@ -7,8 +7,9 @@ namespace Scripts.Player
 {
 	public class Warp : Skill
 	{
+		private PlayerManager player;
 		private CircleCollider2D range;
-		[SerializeField] private LayerMask mask;
+		private LayerMask mask;
 
 		[SerializeField] private float radiusGrowSpeed;
 		[SerializeField] private int maxEnemies;
@@ -17,16 +18,17 @@ namespace Scripts.Player
 
 		private bool charging;
 		private bool inWarp;
-		private List<GameObject> enemies = new List<GameObject>();
+		private readonly List<GameObject> enemies = new List<GameObject>();
 
 		private void Start()
 		{
+			player = GetComponentInParent<PlayerManager>();
 			range = GetComponent<CircleCollider2D>();
+			mask = LayerMask.GetMask("Enemy");
 
 			range.radius = 0;
 			charging = false;
 		}
-
 		private void Update()
 		{
 			if (!charging) return;
@@ -35,16 +37,17 @@ namespace Scripts.Player
 
 		public override void StartUsingSkill()
 		{
+			Debug.Log("Warp skill start charging");
+			player.State = PlayerManager.PlayerState.Charging;
 			charging = true;
 		}
-
 		public override void StopUsingSkill()
 		{
+			Debug.Log("Warp skill start warps");
 			charging = false;
 			inWarp = true;
 			StartCoroutine(WarpToEnemies(enemies));
 		}
-
 		private IEnumerator WarpToEnemies(List<GameObject> enemies)
 		{
 			Collider2D collider = transform.root.gameObject.GetComponent<Collider2D>();
@@ -52,7 +55,7 @@ namespace Scripts.Player
 			collider.enabled = false;
 			foreach (GameObject enemy in enemies) {
 				if (enemy != null) {
-					enemy.GetComponent<IHit>().Hit(damage);
+					enemy.GetComponent<IHit>()?.Hit(damage);
 					transform.root.position = enemy.transform.position;
 					yield return new WaitForSeconds(jumpDelay);
 				}
@@ -62,6 +65,7 @@ namespace Scripts.Player
 			collider.enabled = true;
 			inWarp = false;
 			range.radius = 0;
+			player.State = PlayerManager.PlayerState.Walk;
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)
@@ -72,6 +76,5 @@ namespace Scripts.Player
 
 			enemies.Add(collision.gameObject);
 		}
-
 	}
 }

@@ -45,7 +45,11 @@ namespace Scripts.Player
 
 		private void Update()
 		{
-			if (player.State == PlayerManager.PlayerState.Dash) return;
+			if (player.State == PlayerManager.PlayerState.Stun ||
+				player.State == PlayerManager.PlayerState.Charging) {
+				rb.velocity = Vector2.zero;
+				return;
+			}
 
 			direction = moveAction.ReadValue<Vector2>();
 			rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;

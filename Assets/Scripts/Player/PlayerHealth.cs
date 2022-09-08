@@ -38,7 +38,8 @@ namespace Scripts.Player
 			throw new System.NotImplementedException();
 
 		}
-		public void Stun(IHit.HitWeapon weapon, float time, float strength = 1)
+
+		public void Stun(float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
 			throw new System.NotImplementedException();
 		}

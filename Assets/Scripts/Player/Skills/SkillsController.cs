@@ -22,11 +22,10 @@ namespace Scripts.Player
 			Speeding
 		}
 
-		public IDictionary<SkillType, Skill> skills = new Dictionary<SkillType, Skill>();
-
+		private readonly IDictionary<SkillType, Skill> skills = new Dictionary<SkillType, Skill>();
 		private SkillType equipedSkill = SkillType.FreezeTime;
 
-		void Start()
+		private void Start()
 		{
 			input = GetComponentInParent<PlayerInput>();
 
@@ -34,14 +33,14 @@ namespace Scripts.Player
 			CreateActionInputs();
 			SubscribeToInputs();
 		}
-		void CreateSkillsDictionary()
+		private void CreateSkillsDictionary()
 		{
 			skills.Add(SkillType.FreezeTime, GetComponentInChildren<Freeze>());
 			skills.Add(SkillType.Warp, GetComponentInChildren<Warp>());
 			skills.Add(SkillType.WhackAMole, GetComponentInChildren<WhackAMole>());
 			skills.Add(SkillType.Speeding, GetComponentInChildren<Speeding>());
 		}
-		void CreateActionInputs()
+		private void CreateActionInputs()
 		{
 			selectFreezTimeAction = input.actions["Select Freeze Time Skill"];
 			selectWarpAction = input.actions["Select Warp Skill"];
@@ -49,7 +48,7 @@ namespace Scripts.Player
 			selectSpeeding = input.actions["Select Speeding Skill"];
 			useSkillAction = input.actions["Use Skill"];
 		}
-		void SubscribeToInputs()
+		private void SubscribeToInputs()
 		{
 			selectFreezTimeAction.performed += SelectFreezTimeSkill;
 			selectWarpAction.performed += SelectWarpSkill;
@@ -60,11 +59,11 @@ namespace Scripts.Player
 			useSkillAction.canceled += StopUsingSkill;
 		}
 
-		void OnDestroy()
+		private void OnDestroy()
 		{
 			UnsubscribeToInputs();
 		}
-		void UnsubscribeToInputs()
+		private void UnsubscribeToInputs()
 		{
 			selectFreezTimeAction.performed -= SelectFreezTimeSkill;
 			selectWarpAction.performed -= SelectWarpSkill;
@@ -75,34 +74,18 @@ namespace Scripts.Player
 			useSkillAction.canceled -= StopUsingSkill;
 		}
 
-		void SelectFreezTimeSkill(InputAction.CallbackContext context)
+		private void SelectFreezTimeSkill(InputAction.CallbackContext context) => SelectSkill(SkillType.FreezeTime);
+		private void SelectWarpSkill(InputAction.CallbackContext context) => SelectSkill(SkillType.Warp);
+		private void SelectWhackAMoleSkill(InputAction.CallbackContext context) => SelectSkill(SkillType.WhackAMole);
+		private void SelectSpeedingSkill(InputAction.CallbackContext context) => SelectSkill(SkillType.Speeding);	
+		private void SelectSkill(SkillType skill)
 		{
-			equipedSkill = SkillType.FreezeTime;
-		}
-		void SelectWarpSkill(InputAction.CallbackContext context)
-		{
-			equipedSkill = SkillType.Warp;
-		}
-		void SelectWhackAMoleSkill(InputAction.CallbackContext context)
-		{
-			equipedSkill = SkillType.WhackAMole;
-		}
-		void SelectSpeedingSkill(InputAction.CallbackContext context)
-		{
-			equipedSkill = SkillType.Speeding;
+			equipedSkill = skill;
+			Debug.Log($"Euiped skill: {skill}");
 		}
 
-		void StartUsingSkill(InputAction.CallbackContext context)
-		{
-			skills[equipedSkill].StartUsingSkill();
-		}
-		void UseSkill(InputAction.CallbackContext context)
-		{
-			skills[equipedSkill].UseSkill();
-		}
-		void StopUsingSkill(InputAction.CallbackContext context)
-		{
-			skills[equipedSkill].StopUsingSkill();
-		}
+		private void StartUsingSkill(InputAction.CallbackContext context) => skills[equipedSkill].StartUsingSkill();
+		private void UseSkill(InputAction.CallbackContext context) => skills[equipedSkill].UseSkill();
+		private void StopUsingSkill(InputAction.CallbackContext context) => skills[equipedSkill].StopUsingSkill();
 	}
 }

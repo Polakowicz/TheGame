@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 7785775}
   - component: {fileID: 7785776}
   - component: {fileID: 7785777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Map_borders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6226,6 +6226,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2940462072967487106, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450211379118437946, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: speedMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711489999734522515, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: jumpDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711489999734522515, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: radiusGrowSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
 --- !u!1 &504864602
@@ -6864,7 +6880,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2064439
+    m_Bits: 2064503
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
