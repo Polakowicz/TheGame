@@ -28,6 +28,10 @@ namespace Scripts.Player
 
 			HP = HP < 0 ? 0 : HP;
 			GameEventSystem.Instance.OnPlayerHPChanged?.Invoke(HP);
+
+			if(HP == 0) {
+				//TODO Die
+			}
 		}
 		public void StunHit(int damage, float stunTime, IHit.HitWeapon weapon)
 		{

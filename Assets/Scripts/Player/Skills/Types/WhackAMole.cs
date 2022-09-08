@@ -45,7 +45,7 @@ namespace Scripts.Player
 			List<Collider2D> colliders = new List<Collider2D>();
 			range.OverlapCollider(filter, colliders);
 			foreach (Collider2D collider in colliders) {
-				collider.GetComponent<IHit>()?.StunHit(damage, stunTime, IHit.HitWeapon.WhackAMole);
+				collider.GetComponent<IHit>()?.StunHit(damage, stunTime);
 			}
 			charging = false;
 			range.radius = 0;

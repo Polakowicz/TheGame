@@ -45,14 +45,15 @@ public class Goblin : MonoBehaviour, IHit
 
 	public void Hit(int damage, IHit.HitWeapon weapon)
 	{
-		switch (weapon) {
-			case IHit.HitWeapon.Bullet:
-				hp--;
-				break;
-			case IHit.HitWeapon.Rock:
-				hp -= RockDamage;
-				break;
-		}
+		//switch (weapon) {
+		//	case IHit.HitWeapon.Bullet:
+		//		hp--;
+		//		break;
+		//	case IHit.HitWeapon.Rock:
+		//		hp -= RockDamage;
+		//		break;
+		//}
+		hp--;
 
 		hp = Mathf.Clamp(hp, 0, MaxHP);
 		if (hp == 0) {
@@ -90,7 +91,7 @@ public class Goblin : MonoBehaviour, IHit
 		throw new NotImplementedException();
 	}
 
-	public void Stun(IHit.HitWeapon weapon, float time, float strength = 1)
+	public void Stun(float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 	{
 		throw new NotImplementedException();
 	}

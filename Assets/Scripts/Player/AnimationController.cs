@@ -31,21 +31,10 @@ namespace Scripts.Player
 			animator.SetTrigger("Sword_fighting");
 		}
 
-		//void TriggerBlasterAttackAnimation()
-		//{
-		//	animator.SetTrigger("Gun_fighting");
-		//}
-
-
-
-
-		void Die()
+		public void Die()
 		{
-			//animator.SetInteger("Health", eventSystem.playerData.HP);
+			animator.SetTrigger("Die");
 		}
-
-
-
 
 		public void ChangeGun(Weapon.WeaponType type)
 		{

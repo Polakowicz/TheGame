@@ -69,7 +69,7 @@ namespace Scripts.Player
 			List<Collider2D> hits = new List<Collider2D>();
 			range.OverlapCollider(attackContactFilter, hits);
 			foreach (Collider2D hit in hits) {
-				hit.GetComponent<IHit>()?.Hit(basicAttackDamage, IHit.HitWeapon.Sword);
+				hit.GetComponent<IHit>()?.Hit(basicAttackDamage);
 			}
 		}
 
@@ -80,7 +80,7 @@ namespace Scripts.Player
 			List<Collider2D> hits = new List<Collider2D>();
 			thrustRange.OverlapCollider(attackContactFilter, hits);
 			foreach (Collider2D hit in hits) {
-				hit.GetComponent<IHit>()?.Hit(thrustDmg, IHit.HitWeapon.Sword);
+				hit.GetComponent<IHit>()?.Hit(thrustDmg);
 			}
 			ThrustActive = true;
 			movement.Dash(player.AimDirection, thrustSpeed, thrustTime,

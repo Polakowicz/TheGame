@@ -20,7 +20,7 @@ namespace Scripts.Player
 				(weapon.AttackLayerMask | (1 << collision.gameObject.layer))))
 				return;
 
-			collision.GetComponent<IHit>()?.Hit(weapon.ThrustDmg, IHit.HitWeapon.Sword);
+			collision.GetComponent<IHit>()?.Hit(weapon.ThrustDmg);
 		}
 	}
 }

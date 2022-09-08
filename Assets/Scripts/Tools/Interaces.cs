@@ -8,17 +8,12 @@ namespace Scripts.Interfaces
     {
 		public enum HitWeapon
 		{
-			Sword,
-			Bullet,
-			Rock,
-			WhackAMole,
-			SkillFreeze,
 			OTHER
 		}
 
-		public void Hit(int damage, HitWeapon weapon);
-		public void StunHit(int damage, float stunTime, HitWeapon weapon);
-		public void Stun(HitWeapon weapon, float time, float strength = 1);
+		public void Hit(int damage, HitWeapon weapon = HitWeapon.OTHER);
+		public void StunHit(int damage, float stunTime, HitWeapon weapon = HitWeapon.OTHER);
+		public void Stun(float time, float strength = 1, HitWeapon weapon = HitWeapon.OTHER);
 	}
 	public interface IInteract
 	{

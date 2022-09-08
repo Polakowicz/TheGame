@@ -52,7 +52,7 @@ public class PushableRock : MonoBehaviour
 		if (!pushed) return;
 
 		if(collision.gameObject.layer == LayerMask.NameToLayer("Boss")) {
-			collision.gameObject.GetComponent<IHit>().Hit(1, IHit.HitWeapon.Rock);
+			collision.gameObject.GetComponent<IHit>().Hit(1);
 		}
 
 		Destroy(gameObject);

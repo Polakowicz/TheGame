@@ -14,9 +14,9 @@ namespace Scripts.Player
             Dash,
             Stun
         }
-        public PlayerState State;
-        public Vector2 AimDirection;
-        public Vector2 MoveDirection;
+        [HideInInspector] public PlayerState State;
+        [HideInInspector] public Vector2 AimDirection;
+        [HideInInspector] public Vector2 MoveDirection;
 
 		private void Awake()
 		{
