@@ -7,7 +7,7 @@ namespace Scripts.Player
 {
 	public class WhackAMole : Skill
 	{
-		private PlayerManager player;
+		private Manager player;
 		private CircleCollider2D range;
 		private ContactFilter2D filter;
 		private LayerMask mask;
@@ -20,7 +20,7 @@ namespace Scripts.Player
 
 		private void Start()
 		{
-			player = GetComponentInParent<PlayerManager>();
+			player = GetComponentInParent<Manager>();
 			range = GetComponent<CircleCollider2D>();
 			mask = LayerMask.GetMask("Enemy");
 			filter = new ContactFilter2D {
@@ -42,7 +42,7 @@ namespace Scripts.Player
 		{
 			Debug.Log("Whack-a-mole start charging");
 			charging = true;
-			player.State = PlayerManager.PlayerState.Charging;
+			player.State = Manager.PlayerState.Charging;
 		}
 		public override void StopUsingSkill()
 		{
@@ -54,7 +54,7 @@ namespace Scripts.Player
 			}
 			charging = false;
 			range.radius = 0;
-			player.State = PlayerManager.PlayerState.Walk;
+			player.State = Manager.PlayerState.Walk;
 		}
 	}
 }

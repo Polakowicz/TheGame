@@ -8,8 +8,8 @@ namespace Scripts.Player
 	[Serializable]
 	public class MeleeWeapon : Weapon
 	{
-		private PlayerManager player;
-		private PlayerMovement movement;
+		private Manager player;
+		private Movement movement;
 
 		[Header("Attack")]
 		[SerializeField] private Collider2D defaultRange;
@@ -40,8 +40,8 @@ namespace Scripts.Player
 
 		private void Start()
 		{
-			player = GetComponentInParent<PlayerManager>();
-			movement = GetComponentInParent<PlayerMovement>();
+			player = GetComponentInParent<Manager>();
+			movement = GetComponentInParent<Movement>();
 			Type = WeaponType.Blade;
 
 			attackContactFilter = new ContactFilter2D {

@@ -6,13 +6,13 @@ namespace Scripts.Player
 {
 	public class PlayerHealth : MonoBehaviour, IHit
 	{
-		private PlayerManager player;
+		private Manager player;
 		private MeleeWeapon meleeWeapon;
 		public int HP { get; private set; }
 
 		private void Start()
 		{
-			player = GetComponentInParent<PlayerManager>();
+			player = GetComponentInParent<Manager>();
 			meleeWeapon = GetComponentInChildren<MeleeWeapon>();
 		}
 

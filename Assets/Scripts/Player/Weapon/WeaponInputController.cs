@@ -6,7 +6,7 @@ namespace Scripts.Player
     public class WeaponInputController : MonoBehaviour
     {
         //Components
-        private PlayerManager player;
+        private Manager player;
         private PlayerInput input;
         
         //InputActions
@@ -25,7 +25,7 @@ namespace Scripts.Player
 
         private void Start()
         {
-            player = GetComponentInParent<PlayerManager>();
+            player = GetComponentInParent<Manager>();
             input = GetComponentInParent<PlayerInput>();
 
             meleeWeapon = GetComponentInChildren<MeleeWeapon>();

@@ -7,7 +7,7 @@ namespace Scripts.Player
 {
 	public class Warp : Skill
 	{
-		private PlayerManager player;
+		private Manager player;
 		private CircleCollider2D range;
 		private LayerMask mask;
 
@@ -22,7 +22,7 @@ namespace Scripts.Player
 
 		private void Start()
 		{
-			player = GetComponentInParent<PlayerManager>();
+			player = GetComponentInParent<Manager>();
 			range = GetComponent<CircleCollider2D>();
 			mask = LayerMask.GetMask("Enemy");
 
@@ -38,7 +38,7 @@ namespace Scripts.Player
 		public override void StartUsingSkill()
 		{
 			Debug.Log("Warp skill start charging");
-			player.State = PlayerManager.PlayerState.Charging;
+			player.State = Manager.PlayerState.Charging;
 			charging = true;
 		}
 		public override void StopUsingSkill()
@@ -65,7 +65,7 @@ namespace Scripts.Player
 			collider.enabled = true;
 			inWarp = false;
 			range.radius = 0;
-			player.State = PlayerManager.PlayerState.Walk;
+			player.State = Manager.PlayerState.Walk;
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)

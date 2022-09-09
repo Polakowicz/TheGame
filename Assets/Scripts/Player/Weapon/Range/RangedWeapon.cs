@@ -7,8 +7,8 @@ namespace Scripts.Player
 	[Serializable]
 	public class RangedWeapon : Weapon
 	{
-		private PlayerManager player;
-		private PlayerMovement movement;
+		private Manager player;
+		private Movement movement;
 		[SerializeField] private Transform gunBarrel;
 
 		//Bullet Types
@@ -45,8 +45,8 @@ namespace Scripts.Player
 
 		private void Start()
 		{
-			player = GetComponentInParent<PlayerManager>();
-			movement = GetComponentInParent<PlayerMovement>();
+			player = GetComponentInParent<Manager>();
+			movement = GetComponentInParent<Movement>();
 			bimRenderer = GetComponent<LineRenderer>();
 
 			Type = WeaponType.Blaster;
@@ -137,7 +137,7 @@ namespace Scripts.Player
 		}
 		public override void CancelAlternativeAttack()
 		{
-			if (player.State == PlayerManager.PlayerState.Dash) return;
+			if (player.State == Manager.PlayerState.Dash) return;
 
 			beamHit = null;
 			bimRenderer.enabled = false;

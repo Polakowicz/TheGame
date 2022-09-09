@@ -4,13 +4,13 @@ namespace Scripts.Player
 {
 	public class AnimationController : MonoBehaviour
 	{
-		private PlayerManager player;
+		private Manager player;
 		private SpriteRenderer spriteRenderer;
 		private Animator animator;
 
 		private void Start()
 		{
-			player = GetComponentInParent<PlayerManager>();
+			player = GetComponentInParent<Manager>();
 			spriteRenderer = GetComponent<SpriteRenderer>();
 			animator = GetComponent<Animator>();
 		}

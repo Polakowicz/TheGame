@@ -7,11 +7,11 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class PlayerMovement : ExtendedMonoBehaviour
+	public class Movement : ExtendedMonoBehaviour
 	{
 		//Components
 		private Rigidbody2D rb;
-		private PlayerManager player;
+		private Manager player;
 		private PlayerInput input;
 
 		//Input actions
@@ -29,7 +29,7 @@ namespace Scripts.Player
 		private void Start()
 		{
 			rb = GetComponent<Rigidbody2D>();
-			player = GetComponentInParent<PlayerManager>();
+			player = GetComponentInParent<Manager>();
 			input = GetComponentInParent<PlayerInput>();
 
 			moveAction = input.actions["Move"];
@@ -44,13 +44,13 @@ namespace Scripts.Player
 
 		private void Update()
 		{
-			if (player.State == PlayerManager.PlayerState.Stun ||
-				player.State == PlayerManager.PlayerState.Charging) {
+			if (player.State == Manager.PlayerState.Stun ||
+				player.State == Manager.PlayerState.Charging) {
 				rb.velocity = Vector2.zero;
 				return;
 			}
 
-			if (player.State == PlayerManager.PlayerState.Dash) return;
+			if (player.State == Manager.PlayerState.Dash) return;
 
 			direction = moveAction.ReadValue<Vector2>();
 			rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
@@ -60,7 +60,7 @@ namespace Scripts.Player
 		//Dash
 		private void PerformDash(InputAction.CallbackContext context)
 		{
-			if (player.State != PlayerManager.PlayerState.Walk) return;
+			if (player.State != Manager.PlayerState.Walk) return;
 
 			MoveInDirection(direction, dashSpeed, dashTime, null);
 			player.AnimationController.Dash();
@@ -68,7 +68,7 @@ namespace Scripts.Player
 		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)
 		{
 			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
-			player.State = PlayerManager.PlayerState.Dash;
+			player.State = Manager.PlayerState.Dash;
 			rb.velocity = direction.normalized * speed;
 			StartCoroutine(Dashing(time, func));
 		}
@@ -76,7 +76,7 @@ namespace Scripts.Player
 		{
 			yield return new WaitForSeconds(time);
 			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
-			player.State = PlayerManager.PlayerState.Walk;
+			player.State = Manager.PlayerState.Walk;
 			after?.Invoke();
 		}
 	}

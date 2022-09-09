@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-    public class PlayerManager : MonoBehaviour
+    public class Manager : MonoBehaviour
     {
         public AudioManager AudioManager { get; private set; }
         public AnimationController AnimationController { get; private set; }
