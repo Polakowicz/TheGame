@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class PlayerAim : MonoBehaviour
+	public class Aim : MonoBehaviour
 	{
 		[SerializeField]
 		private Transform crosshair;

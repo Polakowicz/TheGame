@@ -83,7 +83,7 @@ namespace Scripts.Player
 				hit.GetComponent<IHit>()?.Hit(thrustDmg);
 			}
 			ThrustActive = true;
-			movement.Dash(player.AimDirection, thrustSpeed, thrustTime,
+			movement.MoveInDirection(player.AimDirection, thrustSpeed, thrustTime,
 				() => {
 					ThrustActive = false;
 				});

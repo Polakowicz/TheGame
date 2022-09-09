@@ -37,7 +37,6 @@ namespace Scripts.Player
 
 			dashAction.performed += PerformDash;
 		}
-
 		private void OnDestroy()
 		{
 			dashAction.performed -= PerformDash;
@@ -51,6 +50,8 @@ namespace Scripts.Player
 				return;
 			}
 
+			if (player.State == PlayerManager.PlayerState.Dash) return;
+
 			direction = moveAction.ReadValue<Vector2>();
 			rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
 			player.MoveDirection = rb.velocity;
@@ -59,13 +60,14 @@ namespace Scripts.Player
 		//Dash
 		private void PerformDash(InputAction.CallbackContext context)
 		{
-			Dash(direction, dashSpeed, dashTime, null);
+			if (player.State != PlayerManager.PlayerState.Walk) return;
+
+			MoveInDirection(direction, dashSpeed, dashTime, null);
 			player.AnimationController.Dash();
 		}
-		public void Dash(Vector2 direction, float speed, float time, Action func)
+		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)
 		{
-			if (player.State == PlayerManager.PlayerState.Dash) return;
-
+			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
 			player.State = PlayerManager.PlayerState.Dash;
 			rb.velocity = direction.normalized * speed;
 			StartCoroutine(Dashing(time, func));
@@ -73,6 +75,7 @@ namespace Scripts.Player
 		private IEnumerator Dashing(float time, Action after)
 		{
 			yield return new WaitForSeconds(time);
+			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
 			player.State = PlayerManager.PlayerState.Walk;
 			after?.Invoke();
 		}
