@@ -15,13 +15,11 @@ namespace Scripts.Player
         private InputAction strongerAttackAction;
         private InputAction alternativeAttackAction;
         private InputAction pullAction;
-        private InputAction interactAcction;
 
         //Weapons
         private MeleeWeapon meleeWeapon;
         private RangedWeapon rangedWeapon;
         private Weapon equippedWeapon;
-        //public Weapon.WeaponType WeaponType { get => equippedWeapon.Type; }
 
         private void Start()
         {
@@ -42,7 +40,6 @@ namespace Scripts.Player
             strongerAttackAction = input.actions["Stronger attack"];
             alternativeAttackAction = input.actions["Alternative attack"];
             pullAction = input.actions["Scroll"];
-            interactAcction = input.actions["Interact"];
         }
         private void SubscribeToEvents()
         {
@@ -56,8 +53,6 @@ namespace Scripts.Player
             alternativeAttackAction.started += StartAlternativeAttack;
             alternativeAttackAction.performed += PerformAlternativeAttack;
             alternativeAttackAction.canceled += CancelAlternativeAttack;
-
-            interactAcction.performed += Finish;
         }
 
         private void OnDestroy()
@@ -72,8 +67,6 @@ namespace Scripts.Player
             alternativeAttackAction.started -= StartAlternativeAttack;
             alternativeAttackAction.performed -= PerformAlternativeAttack;
             alternativeAttackAction.canceled -= CancelAlternativeAttack;
-
-            interactAcction.performed -= Finish;
         }
 
         private void Update()
@@ -96,38 +89,16 @@ namespace Scripts.Player
             player.AnimationController.ChangeGun(equippedWeapon.Type);
 
         }
-        private void Finish(InputAction.CallbackContext context)
-        {
-            player.AnimationController.ChangeGun(equippedWeapon.Type);
-        }
 
-        //Weapons attakcs
-        //===============
-        private void PerformeBasicAttack(InputAction.CallbackContext context)
-        {
-            equippedWeapon.PerformBasicAttack();
-        }
+		//Weapons attakcs
+		//===============
+		private void PerformeBasicAttack(InputAction.CallbackContext context) => equippedWeapon.PerformBasicAttack();
 
-        private void CancelStrongerAttack(InputAction.CallbackContext context)
-        {
-            equippedWeapon.CancelStrongerAttack();
-        }
-        private void PerformStrongerAttack(InputAction.CallbackContext context)
-        {
-            equippedWeapon.PerformStrongerAttack();
-        }
+		private void CancelStrongerAttack(InputAction.CallbackContext context) => equippedWeapon.CancelStrongerAttack();
+		private void PerformStrongerAttack(InputAction.CallbackContext context) => equippedWeapon.PerformStrongerAttack();
 
-        private void StartAlternativeAttack(InputAction.CallbackContext context)
-        {
-            equippedWeapon.StartAlternativeAttack();
-        }
-        private void PerformAlternativeAttack(InputAction.CallbackContext context)
-        {
-            equippedWeapon.PerformAlternativeAttack();
-        }
-        private void CancelAlternativeAttack(InputAction.CallbackContext context)
-        {
-            equippedWeapon.CancelAlternativeAttack();
-        }
-    }
+		private void StartAlternativeAttack(InputAction.CallbackContext context) => equippedWeapon.StartAlternativeAttack();
+		private void PerformAlternativeAttack(InputAction.CallbackContext context) => equippedWeapon.PerformAlternativeAttack();
+		private void CancelAlternativeAttack(InputAction.CallbackContext context) => equippedWeapon.CancelAlternativeAttack();
+	}
 }
