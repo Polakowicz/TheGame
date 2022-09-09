@@ -26,7 +26,11 @@ namespace Scripts.Player
 			animator.SetFloat("Speed", player.MoveDirection.magnitude);
 		}
 
-		public void TriggerBladeAttackAnimation()
+		public void ChangeGun(Weapon.WeaponType type)
+		{
+			animator.SetBool("Blaster_equiped", type == Weapon.WeaponType.Blaster);
+		}
+		public void BlaseAttack()
 		{
 			animator.SetTrigger("Sword_fighting");
 		}
@@ -34,11 +38,6 @@ namespace Scripts.Player
 		public void Die()
 		{
 			animator.SetTrigger("Die");
-		}
-
-		public void ChangeGun(Weapon.WeaponType type)
-		{
-			animator.SetBool("Blaster_equiped", type == Weapon.WeaponType.Blaster);
 		}
 
 		public void Dash()
