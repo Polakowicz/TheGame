@@ -55,6 +55,8 @@ namespace Scripts.Player
 
 		public void AddPowerUp(PowerUp powerUp)
 		{
+			Debug.Log($"Added powerUp: {powerUp}");
+
 			switch (powerUp.Type) {
 				case PowerUp.PowerType.DoubleBlade:
 					DoubleBladeTimeLeft = powerUp.Duration;
