@@ -25,7 +25,6 @@ namespace Scripts.Player
 		private Vector2 direction;
 		public float SpeedMultiplier { get; set; } = 1f;
 
-
 		private void Start()
 		{
 			rb = GetComponent<Rigidbody2D>();
@@ -44,17 +43,15 @@ namespace Scripts.Player
 
 		private void Update()
 		{
-			if (player.State == Manager.PlayerState.Stun ||
-				player.State == Manager.PlayerState.Charging) {
-				rb.velocity = Vector2.zero;
-				return;
-			}
-
 			if (player.State == Manager.PlayerState.Dash) return;
 
-			direction = moveAction.ReadValue<Vector2>();
-			rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
-			player.MoveDirection = rb.velocity;
+			if(player.State == Manager.PlayerState.Walk) {
+				direction = moveAction.ReadValue<Vector2>();
+				rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
+				player.MoveDirection = rb.velocity;
+			} else {
+				rb.velocity = Vector2.zero;
+			}
 		}
 
 		//Dash

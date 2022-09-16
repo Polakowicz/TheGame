@@ -9,7 +9,8 @@ namespace Scripts.Player
 	{
 		private Manager player;
 		private MeleeWeapon meleeWeapon;
-		public int HP { get; private set; }
+		[SerializeField] private int hp;
+		public int HP { get => hp; private set => hp = value; }
 
 		private void Start()
 		{
@@ -44,6 +45,7 @@ namespace Scripts.Player
 
 		private void Damage(int damage)
 		{
+			Debug.Log($"Player damaged by {damage}; HP left: {HP}");
 			if (meleeWeapon.BlockActive) {
 				HP -= damage / 2;
 			} else {
@@ -54,7 +56,7 @@ namespace Scripts.Player
 			GameEventSystem.Instance.OnPlayerHPChanged?.Invoke(HP);
 
 			if (HP == 0) {
-				//TODO Die
+				player.AnimationController.Die();
 			}
 		}
 		private bool IsHit()

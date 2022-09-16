@@ -64,7 +64,7 @@ namespace Scripts.Player
 
 		public override void PerformBasicAttack()
 		{
-			player.AnimationController.BlaseAttack();
+			player.AnimationController.BladeAttack();
 			player.AudioManager.Play("MeleeBasicAttack");
 			List<Collider2D> hits = new List<Collider2D>();
 			range.OverlapCollider(attackContactFilter, hits);

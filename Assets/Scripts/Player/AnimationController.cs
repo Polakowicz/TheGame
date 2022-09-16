@@ -30,7 +30,7 @@ namespace Scripts.Player
 		{
 			animator.SetBool("Blaster_equiped", type == Weapon.WeaponType.Blaster);
 		}
-		public void BlaseAttack()
+		public void BladeAttack()
 		{
 			animator.SetTrigger("Sword_fighting");
 		}

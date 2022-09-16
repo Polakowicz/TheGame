@@ -13,7 +13,8 @@ namespace Scripts.Player
             Walk,
             Dash,
             Stun,
-            Charging
+            Charging,
+            Dead
         }
         [HideInInspector] public PlayerState State;
         [HideInInspector] public Vector2 AimDirection;
