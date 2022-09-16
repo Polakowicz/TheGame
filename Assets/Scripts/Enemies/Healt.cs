@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class EnemyHealt : MonoBehaviour, IHit
+	public class Healt : MonoBehaviour, IHit
 	{
 		[SerializeField] private int hp;
 
