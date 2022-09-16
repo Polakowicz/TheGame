@@ -18,6 +18,7 @@ namespace Scripts.Bullets
                 Destroy(gameObject);
 			}
 
+            Debug.Log("Bullet Hit");
             if (collision.TryGetComponent(out IHit hit)) {
                 hit.Hit(gameObject, damage);
 				if (!piercing) {
