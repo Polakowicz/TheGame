@@ -58,7 +58,7 @@ public class GoblinWave : MonoBehaviour
 		if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
 
 		if (collision.name.Equals("Player")) {
-			collision.GetComponent<IHit>().Hit(waveDamage, IHit.HitWeapon.OTHER);
+			collision.GetComponent<IHit>().Hit(gameObject, waveDamage, IHit.HitWeapon.OTHER);
 		}
 	}
 }

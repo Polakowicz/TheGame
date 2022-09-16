@@ -159,7 +159,7 @@ namespace Scripts.Player
 			Vector2 direction = beamHit.transform.position - transform.position;
 			var time = direction.magnitude / beamPullSpeed;
 			movement.MoveInDirection(direction, beamPullSpeed, time, () => {
-				if (beamHit.TryGetComponent<Enemy>(out var enemy))
+				if (beamHit.TryGetComponent<OldEnemy>(out var enemy))
 					enemy.Stun(beamPullStunTime);
 				CancelAlternativeAttack();
 			});

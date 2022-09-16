@@ -43,7 +43,7 @@ public class Goblin : MonoBehaviour, IHit
 		}
 	}
 
-	public void Hit(int damage, IHit.HitWeapon weapon)
+	public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
 	{
 		//switch (weapon) {
 		//	case IHit.HitWeapon.Bullet:
@@ -86,12 +86,12 @@ public class Goblin : MonoBehaviour, IHit
 		Destroy(gameObject);
 	}
 
-	public void StunHit(int damage, float stunTime, IHit.HitWeapon weapon)
+	public void StunHit(GameObject attacker, int damage, float stunTime, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 	{
 		throw new NotImplementedException();
 	}
 
-	public void Stun(float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
+	public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 	{
 		throw new NotImplementedException();
 	}

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyShootsPlayer : MonoBehaviour
 {
-	Enemy enemy;
+	OldEnemy enemy;
 
 	//Parameters
 	[SerializeField] GameObject bullet;
@@ -16,7 +16,7 @@ public class EnemyShootsPlayer : MonoBehaviour
 
 	void Start()
 	{
-		enemy = GetComponent<Enemy>();
+		enemy = GetComponent<OldEnemy>();
 	}
 
 	void Update()

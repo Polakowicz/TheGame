@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyPullable : MonoBehaviour
 {
-	Enemy enemy;
+	OldEnemy enemy;
 	Rigidbody2D rb;
 
 	[SerializeField] float targetDistance = 1;
@@ -12,7 +12,7 @@ public class EnemyPullable : MonoBehaviour
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		enemy = GetComponent<Enemy>();
+		enemy = GetComponent<OldEnemy>();
 	}
 
 	void Update()

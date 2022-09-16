@@ -55,7 +55,7 @@ namespace Scripts.Player
 			collider.enabled = false;
 			foreach (GameObject enemy in enemies) {
 				if (enemy != null) {
-					enemy.GetComponent<IHit>()?.Hit(damage);
+					enemy.GetComponent<IHit>()?.Hit(gameObject, damage);
 					transform.root.position = enemy.transform.position;
 					yield return new WaitForSeconds(jumpDelay);
 				}

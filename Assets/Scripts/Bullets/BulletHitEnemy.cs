@@ -19,7 +19,7 @@ namespace Scripts.Bullets
 			}
 
             if (collision.TryGetComponent(out IHit hit)) {
-                hit.Hit(damage);
+                hit.Hit(gameObject, damage);
 				if (!piercing) {
                     Destroy(gameObject);
 				}

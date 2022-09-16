@@ -11,9 +11,9 @@ namespace Scripts.Interfaces
 			OTHER
 		}
 
-		public void Hit(int damage, HitWeapon weapon = HitWeapon.OTHER);
-		public void StunHit(int damage, float stunTime, HitWeapon weapon = HitWeapon.OTHER);
-		public void Stun(float time, float strength = 1, HitWeapon weapon = HitWeapon.OTHER);
+		public void Hit(GameObject attacker, int damage, HitWeapon weapon = HitWeapon.OTHER);
+		public void StunHit(GameObject attacker, int damage, float stunTime, HitWeapon weapon = HitWeapon.OTHER);
+		public void Stun(GameObject attacker, float time, float strength = 1, HitWeapon weapon = HitWeapon.OTHER);
 	}
 	public interface IInteract
 	{

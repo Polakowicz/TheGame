@@ -18,7 +18,7 @@ namespace Scripts.Bullets
             if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
   
             IHit player = collision.gameObject.GetComponent<IHit>();
-            player.Hit(damage, IHit.HitWeapon.OTHER);
+            player.Hit(gameObject, damage, IHit.HitWeapon.OTHER);
             Destroy(gameObject);
         }
     }

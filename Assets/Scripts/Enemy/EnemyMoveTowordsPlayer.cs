@@ -2,10 +2,10 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(OldEnemy))]
 public class EnemyMoveTowordsPlayer : MonoBehaviour
 {
-	Enemy enemy;
+	OldEnemy enemy;
 	Rigidbody2D rb;
 	SpriteRenderer spriteRenderer;
 
@@ -17,7 +17,7 @@ public class EnemyMoveTowordsPlayer : MonoBehaviour
 
 	void Start()
 	{
-		enemy = GetComponent<Enemy>();
+		enemy = GetComponent<OldEnemy>();
 		rb = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 	}

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IPullable
+public class OldEnemy : MonoBehaviour, IPullable
 {
 	private struct PrivateData
 	{

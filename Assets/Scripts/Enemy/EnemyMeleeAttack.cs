@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : MonoBehaviour
 {
-	private Enemy main;
+	private OldEnemy main;
 
 	[SerializeField] private int damage;
 	[SerializeField] private float range;
@@ -16,7 +16,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 
 	private void Start()
 	{
-		main = GetComponent<Enemy>();
+		main = GetComponent<OldEnemy>();
 
 	}
 	private void Update()
@@ -40,7 +40,7 @@ public class EnemyMeleeAttack : MonoBehaviour
 
 		if (!CanAttack()) yield break;
 		if(main.Data.DistanceToPlayer < range) {
-			main.Data.Player.GetComponent<IHit>().Hit(damage, IHit.HitWeapon.OTHER);
+			main.Data.Player.GetComponent<IHit>().Hit(gameObject, damage, IHit.HitWeapon.OTHER);
 		}
 	}
 	private bool CanAttack()

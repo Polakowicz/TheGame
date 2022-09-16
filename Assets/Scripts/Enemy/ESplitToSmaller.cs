@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class ESplitToSmaller : MonoBehaviour
 {
-	private Enemy main;
+	private OldEnemy main;
 
 	[SerializeField] private GameObject minionPrefab;
 	[SerializeField] private int numbersOfMinions;
 
 	private void Start()
 	{
-		main = GetComponent<Enemy>();
+		main = GetComponent<OldEnemy>();
 		main.OnDied += CreateMinions;
 	}
 

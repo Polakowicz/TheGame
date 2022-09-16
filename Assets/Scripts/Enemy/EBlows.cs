@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EBlows : MonoBehaviour
 {
-	private Enemy main;
+	private OldEnemy main;
 
 	[SerializeField] private int maxDamage;
 	[SerializeField] private float blowRange;
@@ -15,7 +15,7 @@ public class EBlows : MonoBehaviour
 
 	private void Start()
 	{
-		main = GetComponent<Enemy>();
+		main = GetComponent<OldEnemy>();
 		main.OnDied += Blow;
 	}
 	private void OnDestroy()
@@ -49,7 +49,7 @@ public class EBlows : MonoBehaviour
 		var mult = blowRange - main.Data.DistanceToPlayer;
 		mult /= blowRange;
 		var dmg = Mathf.FloorToInt(mult * maxDamage);
-		main.Data.Player.GetComponent<IHit>().Hit(dmg, IHit.HitWeapon.OTHER);
+		main.Data.Player.GetComponent<IHit>().Hit(gameObject, dmg, IHit.HitWeapon.OTHER);
 		Destroy(gameObject);//temporary
 	}
 }

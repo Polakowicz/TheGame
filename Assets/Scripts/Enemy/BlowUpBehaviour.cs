@@ -21,7 +21,7 @@ namespace Scripts.Enemies
 				var distance = Vector2.Distance(animator.transform.position, hit.transform.position);
 				var dmg = (range - distance) / range * damage;
 				if(hit.TryGetComponent<IHit>(out IHit hitInt)) {
-					hitInt.Hit(Mathf.FloorToInt(dmg), IHit.HitWeapon.OTHER);
+					hitInt.Hit(animator.gameObject, Mathf.FloorToInt(dmg), IHit.HitWeapon.OTHER);
 				}
 			}
 		}
