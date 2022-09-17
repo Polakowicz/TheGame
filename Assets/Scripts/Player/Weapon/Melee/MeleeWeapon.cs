@@ -1,5 +1,6 @@
 ﻿using Scripts.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,9 +34,11 @@ namespace Scripts.Player
 		[Header("Block")]
 		[SerializeField] private Collider2D blockRange;
 		[SerializeField] private LayerMask blockLayerMask;
+		[SerializeField] private float riposetTime;
 		private ContactFilter2D blockContactFilter;
 		public LayerMask BlockLayerMask { get => blockLayerMask; }
 		public bool BlockActive { get; private set; }
+		public bool RiposteActive { get; private set; }
 	
 
 		private void Start()
@@ -80,6 +83,7 @@ namespace Scripts.Player
 			List<Collider2D> hits = new List<Collider2D>();
 			thrustRange.OverlapCollider(attackContactFilter, hits);
 			foreach (Collider2D hit in hits) {
+				Debug.Log("Thrust damage in collider");
 				hit.GetComponent<IHit>()?.Hit(gameObject, thrustDmg);
 			}
 			ThrustActive = true;
@@ -97,10 +101,18 @@ namespace Scripts.Player
 				block.GetComponent<IRiposte>()?.Riposte();
 			}
 			BlockActive = true;
+			RiposteActive = true;
+			StartCoroutine(WaitaForRiposteTime());
 		}
 		public override void CancelAlternativeAttack()
 		{
 			BlockActive = false;
+			RiposteActive = false;
+		}
+		private IEnumerator WaitaForRiposteTime()
+		{
+			yield return new WaitForSeconds(riposetTime);
+			RiposteActive = false;
 		}
 
 		private void ChangePowerUp(PowerUp.PowerType type, bool active)

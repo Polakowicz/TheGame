@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class Healt : MonoBehaviour, IHit
+	public class Health : MonoBehaviour, IHit, IRiposte
 	{
 		private Enemy manager;
 		[SerializeField] private int hp;
@@ -32,6 +32,11 @@ namespace Scripts.Enemies
 		public void StunHit(GameObject attacker, int damage, float stunTime, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
 			throw new System.NotImplementedException();
+		}
+
+		public void Riposte()
+		{
+			Debug.Log("Enemy riposeted");
 		}
 	}
 }

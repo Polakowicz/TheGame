@@ -20,13 +20,13 @@ namespace Scripts.Player
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
 		{
-			if (IsHit()) {
+			if (IsHit(attacker)) {
 				Damage(damage);
 			}
 		}
 		public void StunHit(GameObject attacker, int damage, float stunTime, IHit.HitWeapon weapon)
 		{
-			if (!IsHit()) return;
+			if (!IsHit(attacker)) return;
 
 			Damage(damage);
 			Stun(gameObject, stunTime);
@@ -45,8 +45,9 @@ namespace Scripts.Player
 
 		private void Damage(int damage)
 		{
-			Debug.Log($"Player damaged by {damage}; HP left: {HP}");
+			//Debug.Log($"Player damaged by {damage}; HP left: {HP}");
 			if (meleeWeapon.BlockActive) {
+				Debug.Log("Attack blocked");
 				HP -= damage / 2;
 			} else {
 				HP -= damage;
@@ -59,11 +60,16 @@ namespace Scripts.Player
 				player.AnimationController.Die();
 			}
 		}
-		private bool IsHit()
+		private bool IsHit(GameObject attacker)
 		{
 			if (player.State == Manager.PlayerState.Dash) return false;
 
 			if (player.PowerUpController.HitForceField()) return false;
+
+			if (meleeWeapon.RiposteActive) {
+				attacker.GetComponent<IRiposte>().Riposte();
+				return false;
+			}
 
 			return true;
 		}

@@ -15,11 +15,10 @@ namespace Scripts.Player
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
 			if (!weapon.ThrustActive) return;
-
-			if (!(weapon.AttackLayerMask !=
-				(weapon.AttackLayerMask | (1 << collision.gameObject.layer))))
+			if (weapon.AttackLayerMask !=
+				(weapon.AttackLayerMask | (1 << collision.gameObject.layer)))
 				return;
-
+			Debug.Log("Hit with Blase Thrust");
 			collision.GetComponent<IHit>()?.Hit(gameObject, weapon.ThrustDmg);
 		}
 	}
