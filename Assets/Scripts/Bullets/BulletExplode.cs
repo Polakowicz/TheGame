@@ -1,40 +1,41 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletExplode : MonoBehaviour
+namespace Scripts.Bullets
 {
-	[SerializeField] LayerMask hitLayerMask;
-	[SerializeField] int damage;
-
-	[SerializeField] CircleCollider2D rangeCollider;
-	ContactFilter2D filter;
-	float range;
-
-	void Start()
+	public class BulletExplode : MonoBehaviour
 	{
-		range = rangeCollider.radius;
+		[SerializeField] private CircleCollider2D rangeCollider;
+		[SerializeField] private LayerMask hitLayerMask;
+		[SerializeField] private int damage;
 
-		filter = new ContactFilter2D {
-			layerMask = LayerMask.GetMask("Enemy"),
-			useLayerMask = true,
-			useTriggers = true
-		};
-	}
+		private ContactFilter2D filter;
 
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (hitLayerMask != (hitLayerMask | (1 << collision.gameObject.layer))) {
-			return;
+		private void Start()
+		{
+			filter = new ContactFilter2D {
+				layerMask = hitLayerMask,
+				useLayerMask = true,
+				useTriggers = true
+			};
 		}
 
-		List<Collider2D> hits = new List<Collider2D>();
-		rangeCollider.OverlapCollider(filter, hits);
-		foreach (Collider2D hit in hits) {
-			var distance = Vector2.Distance(transform.position, hit.transform.position);
-			var dmg = (range - distance) / range * damage;
-			hit.GetComponent<Enemy>().Damage(Mathf.FloorToInt(dmg));
+		private void OnTriggerEnter2D(Collider2D collision)
+		{
+			if (hitLayerMask != (hitLayerMask | (1 << collision.gameObject.layer))) {
+				return;
+			}
+
+			List<Collider2D> hits = new List<Collider2D>();
+			rangeCollider.OverlapCollider(filter, hits);
+			foreach (Collider2D hit in hits) {
+				var distance = Vector2.Distance(transform.position, hit.transform.position);
+				var dmg = (rangeCollider.radius - distance) / rangeCollider.radius * damage;
+				hit.GetComponent<IHit>().Hit(gameObject, Mathf.FloorToInt(dmg));
+			}
+			Destroy(gameObject);
 		}
-		Destroy(gameObject);
 	}
 }

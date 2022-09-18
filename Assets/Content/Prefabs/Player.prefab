@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6166e5119facd48ba70410eaac9495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 4717716870089605577}
 --- !u!95 &250570695
 Animator:
   serializedVersion: 3
@@ -126,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1436956162}
   - component: {fileID: 1436956163}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: MelleRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4135934037195639935}
   - component: {fileID: 134073437048459800}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,17 +226,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cfca45c6d269d46b3a519d1f3ccb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 4717716870089605577}
-  melleWeaponLayerMask:
-    serializedVersion: 2
-    m_Bits: 327680
   defaultRange: {fileID: 1436956163}
   powerupRange: {fileID: 7492179955472192783}
-  blockRange: {fileID: 3700359822864264953}
+  attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
   basicAttackDamage: 15
+  thrustRange: {fileID: 8162505908868652061}
   thrustSpeed: 15
   thrustTime: 0.2
   thrustDmg: 50
+  blockRange: {fileID: 3700359822864264953}
+  blockLayerMask:
+    serializedVersion: 2
+    m_Bits: 131072
+  riposetTime: 0.2
 --- !u!1 &1995817468467714320
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3380846687765363776}
   - component: {fileID: 7492179955472192783}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: MeleeDoubleRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,8 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7867766914167915164}
   - component: {fileID: 3700359822864264953}
-  - component: {fileID: 6381072681590462956}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: BlockRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,22 +351,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.5
---- !u!114 &6381072681590462956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2225472237987491096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d29855c259cdf1b4e80e51f9b830997e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventSystem: {fileID: 4717716870089605577}
-  blockLayerMask:
-    serializedVersion: 2
-    m_Bits: 131072
 --- !u!1 &2442637883807098470
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,8 +422,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2896284848948219050}
-  m_Layer: 15
-  m_Name: Shoot Point
+  m_Layer: 21
+  m_Name: Blaster Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,7 +453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2896284849141417200}
   - component: {fileID: 2896284849141417203}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,8 +538,9 @@ GameObject:
   - component: {fileID: 4652231911992384287}
   - component: {fileID: 2896284850009964027}
   - component: {fileID: 4717716870089605577}
-  - component: {fileID: 2896284850009964007}
   - component: {fileID: 6348656884894791210}
+  - component: {fileID: 2896284850009964007}
+  - component: {fileID: 2015716106}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -712,33 +699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6ae2c9dfbaeef48945428826e9bccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-    MaxHP: 100
-    weapon: 0
-    aimDirection: {x: 0, y: 0}
-    moveDireciton: {x: 0, y: 0}
-    HP: 0
-    enemyToPulled: {fileID: 0}
-    speedMultiplier: 1
-    blocking: 0
-  powerUpController: {fileID: 6348656884894791210}
---- !u!114 &2896284850009964007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2896284850009964024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34935d070014c1749aeddc0ccef24c18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventSystem: {fileID: 4717716870089605577}
-  playerInput: {fileID: 2896284850009964027}
-  basicSpeed: 5
-  dashSpeed: 30
-  dashTime: 0.1
+  State: 0
+  AimDirection: {x: 0, y: 0}
+  MoveDirection: {x: 0, y: 0}
 --- !u!114 &6348656884894791210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,10 +714,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57be62309cf120e44920977166cb9a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoubleBladeTimeLeft: 0
-  forceFieldChargesRemaining: 0
-  piercingBulletsTimeLeft: 0
-  explosiveBulletsRemaining: 0
+--- !u!114 &2896284850009964007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34935d070014c1749aeddc0ccef24c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicSpeed: 5
+  dashSpeed: 30
+  dashTime: 0.1
+--- !u!114 &2015716106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d56ac14079b76947887a21cd395a544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 500
 --- !u!1 &2896284850258396949
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,7 +753,7 @@ GameObject:
   - component: {fileID: 2896284850258396948}
   - component: {fileID: 2896284850258396950}
   - component: {fileID: 619834540}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Rotatable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,8 +789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad631ab91cb09ed43b06861eb18227ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 4717716870089605577}
-  playerInput: {fileID: 2896284850009964027}
   crosshair: {fileID: 2896284849141417200}
 --- !u!114 &619834540
 MonoBehaviour:
@@ -817,10 +802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d075d448ee530a440a4c1bd695b22ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEventSystem: {fileID: 4717716870089605577}
-  playerInput: {fileID: 2896284850009964027}
-  meleeWeapon: {fileID: 134073437048459800}
-  rangedWeapon: {fileID: 6573227749687704276}
 --- !u!1 &2940462072967487106
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +895,7 @@ GameObject:
   - component: {fileID: 6809897908705690059}
   - component: {fileID: 6573227749687704276}
   - component: {fileID: 2106739156}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,24 +929,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455109904c2044e41a69bc81c95e68b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEventSystem: {fileID: 4717716870089605577}
-  gunTransform: {fileID: 2896284848948219050}
+  gunBarrel: {fileID: 2896284848948219050}
   defaultBullet: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
   explosiveBullet: {fileID: 2060159463036227266, guid: e4a8e39fa29b01c4085fd0463640fdf3, type: 3}
   piercingBullet: {fileID: 6116300935966142805, guid: 12a9281e2f011544db65a78115faf54b, type: 3}
-  startFireRate: 0.4
-  maxFireRate: 0.1
-  fireRatePercentageIncrease: 0.1
-  startDispersion: 0
-  maxDispersion: 30
-  dispersinPercentageIncrease: 0.1
-  beamHitLayerMask:
+  autoFireStartRate: 0.4
+  autoFireMaxRate: 0.1
+  autoFireRateIncrease: 0.1
+  autoFireStartDispersion: 0
+  autoFireMaxDispersion: 40
+  autoFireDispersinIncrease: 0.1
+  beamLayerMask:
     serializedVersion: 2
-    m_Bits: 1114112
+    m_Bits: 65536
   beamPullSpeed: 15
-  beamDistance: 7
-  beamPullCooldown: 0
+  beamRange: 7
   beamStunTime: 1
+  beamPullStunTime: 1
 --- !u!120 &2106739156
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1005,10 +985,8 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  m_SortingOrder: 20
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1017,7 +995,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.07999992
+        value: 0.05435753
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1075,7 +1053,7 @@ GameObject:
   - component: {fileID: 5803267822016605072}
   - component: {fileID: 8162505908868652061}
   - component: {fileID: 5870070358581918923}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: ThrustDamageRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1098,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &5870070358581918923
 MonoBehaviour:
@@ -1134,10 +1112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca0c6028e6ff114aafa1f9b6d35f393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 4717716870089605577}
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 65536
 --- !u!1 &6454618148412881142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,7 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb040e2da8498c7419bcf2a59fc0b2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedIncrease: 2
+  speedMultiplier: 2
   skillTime: 3
 --- !u!1 &6925164063738957291
 GameObject:
@@ -1230,7 +1204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633a3b9bab3f5214c98d670eef16b502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 2896284850009964027}
 --- !u!1 &8550739333175329940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,9 +1248,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a9e973057f4e64c8c915c3e67a2518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusGrow: 2
+  radiusGrowSpeed: 2
   maxEnemies: 5
   damage: 20
+  jumpDelay: 0.1
 --- !u!58 &5781230282660426172
 CircleCollider2D:
   m_ObjectHideFlags: 0

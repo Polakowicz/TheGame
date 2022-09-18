@@ -1,63 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using Scripts.Interfaces;
 using UnityEngine;
 
-public class ThrustAttackDealDamage : MonoBehaviour
+namespace Scripts.Player
 {
-	[SerializeField] PlayerEventSystem eventSystem;
-	[SerializeField] LayerMask hitLayerMask;
-
-	Collider2D hitCollider;
-	ContactFilter2D contactFilter;
-
-	bool attackEnabled;
-	int damage;
-
-	void Start()
+	public class ThrustAttackDealDamage : MonoBehaviour
 	{
-		hitCollider = GetComponent<Collider2D>();
-		contactFilter = new ContactFilter2D {
-			layerMask = hitLayerMask,
-			useLayerMask = true,
-			useTriggers = true
-		};
-		eventSystem.OnBladeThrustStarted += EnableTriggerEnterDamage;
-		eventSystem.OnBladeThrustEnded += DisableTriggerEnterDamage;
-	}
+		private MeleeWeapon weapon;
 
-	void OnDestroy()
-	{
-		eventSystem.OnBladeThrustStarted -= EnableTriggerEnterDamage;
-		eventSystem.OnBladeThrustEnded -= DisableTriggerEnterDamage;
-	}
-
-
-	void EnableTriggerEnterDamage(PlayerData data, float speed, float time, int dmg)
-	{
-		damage = dmg;
-		List<Collider2D> hits = new List<Collider2D>();
-		hitCollider.OverlapCollider(contactFilter, hits);
-		foreach (Collider2D hit in hits) {
-			hit.GetComponent<Enemy>().Damage(damage);		
-		}
-		attackEnabled = true;
-	}
-
-	void DisableTriggerEnterDamage()
-	{
-		attackEnabled = false;
-	}
-
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (!attackEnabled) {
-			return;
+		private void Start()
+		{
+			weapon = GetComponentInParent<MeleeWeapon>();
 		}
 
-		if (!(hitLayerMask == (hitLayerMask | (1 << collision.gameObject.layer)))) {
-			return;
+		private void OnTriggerEnter2D(Collider2D collision)
+		{
+			if (!weapon.ThrustActive) return;
+			if (weapon.AttackLayerMask !=
+				(weapon.AttackLayerMask | (1 << collision.gameObject.layer)))
+				return;
+			Debug.Log("Hit with Blase Thrust");
+			collision.GetComponent<IHit>()?.Hit(gameObject, weapon.ThrustDmg);
 		}
-
-		collision.GetComponent<Enemy>().Damage(damage);
 	}
 }

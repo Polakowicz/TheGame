@@ -1,29 +1,30 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Speeding : Skill
+namespace Scripts.Player
 {
-	PlayerEventSystem playerEventSystem;
-
-	[SerializeField]
-	float speedIncrease;
-	[SerializeField]
-	float skillTime;
-
-	void Start()
+	public class Speeding : Skill
 	{
-		playerEventSystem = GetComponentInParent<PlayerEventSystem>();
-	}
+		private Movement movement;
 
-	public override void UseSkill()
-	{
-		playerEventSystem.playerData.speedMultiplier += speedIncrease;
-		StartCoroutine(SkillDuration(skillTime));
-	}
+		[SerializeField] private float speedMultiplier;
+		[SerializeField] private float skillTime;
 
-	IEnumerator SkillDuration(float time)
-	{
-		yield return new WaitForSeconds(time);
-		playerEventSystem.playerData.speedMultiplier -= speedIncrease;
+		private void Start()
+		{
+			movement = GetComponentInParent<Movement>();
+		}
+
+		public override void UseSkill()
+		{
+			movement.SpeedMultiplier = speedMultiplier;
+			StartCoroutine(SkillDuration(skillTime));
+		}
+
+		private IEnumerator SkillDuration(float time)
+		{
+			yield return new WaitForSeconds(time);
+			movement.SpeedMultiplier = 1;
+		}
 	}
 }

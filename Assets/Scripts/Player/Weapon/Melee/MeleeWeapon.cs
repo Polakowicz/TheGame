@@ -1,92 +1,126 @@
-﻿using System;
+﻿using Scripts.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class MeleeWeapon : Weapon
+namespace Scripts.Player
 {
-	//Components
-	[SerializeField] PlayerEventSystem eventSystem;
-	[SerializeField] LayerMask melleWeaponLayerMask;
-	[SerializeField] Collider2D defaultRange;
-	[SerializeField] Collider2D powerupRange;
-	[SerializeField] Collider2D blockRange;
-
-	//Internal variables
-	ContactFilter2D attackContactFilter;
-	Collider2D range;
-
-	//Parameters
-	[SerializeField] int basicAttackDamage;
-
-	[SerializeField] float thrustSpeed;
-	[SerializeField] float thrustTime;
-	[SerializeField] int thrustDmg;
-
-	void Start()
+	[Serializable]
+	public class MeleeWeapon : Weapon
 	{
-		attackContactFilter = new ContactFilter2D {
-			layerMask = melleWeaponLayerMask,
-			useLayerMask = true,
-			useTriggers = true
-		};
+		private Manager player;
+		private Movement movement;
 
-		range = defaultRange;
-		eventSystem.powerUpController.OnPowerUpChanged += ChangePowerUp;
-	}
+		[Header("Attack")]
+		[SerializeField] private Collider2D defaultRange;
+		[SerializeField] private Collider2D powerupRange;
+		[SerializeField] private LayerMask attackLayerMask;
+		[SerializeField] private int basicAttackDamage = 20;
+		private ContactFilter2D attackContactFilter;
+		private Collider2D range;
+		public LayerMask AttackLayerMask { get => attackLayerMask; }
+		[Space(20)]
 
-	public override void PerformBasicAttack()
-	{
-		FindObjectOfType<AudioManager>().Play("MeleeBasicAttack");
-		List<Collider2D> hits = new List<Collider2D>();
-		range.OverlapCollider(attackContactFilter, hits);
-		foreach (Collider2D hit in hits) {
-			Debug.Log(hit.gameObject.layer);
-			if(hit.gameObject.layer == LayerMask.NameToLayer("Rock")) {
-				hit.GetComponent<PushableRock>().Push(hit.transform.position - transform.position);
-			}else {
-				hit.GetComponent<Enemy>().Damage(basicAttackDamage);
-			}
-			
-		}
-		eventSystem.OnBladeAttack?.Invoke();
-	}
+		[Header("Thrust")]
+		[SerializeField] private Collider2D thrustRange;
+		[SerializeField] private float thrustSpeed;
+		[SerializeField] private float thrustTime;
+		[SerializeField] private int thrustDmg;
+		public int ThrustDmg { get => thrustDmg; }
+		public bool ThrustActive { get; private set; }
+		[Space(20)]
 
-	public void Interact()
-	{
-		List<Collider2D> hits = new List<Collider2D>();
-		range.OverlapCollider(attackContactFilter, hits);
-		foreach (Collider2D hit in hits) {
-			if(hit.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-				hit.GetComponent<Enemy>().Finish();
-				break;
-			}
-
-		}
-	}
+		[Header("Block")]
+		[SerializeField] private Collider2D blockRange;
+		[SerializeField] private LayerMask blockLayerMask;
+		[SerializeField] private float riposetTime;
+		private ContactFilter2D blockContactFilter;
+		public LayerMask BlockLayerMask { get => blockLayerMask; }
+		public bool BlockActive { get; private set; }
+		public bool RiposteActive { get; private set; }
 	
-	public override void PerformStrongerAttack()
-	{
-		eventSystem.StartBladeThrust(thrustSpeed, thrustTime, thrustDmg);
-		//eventSystem.OnBladeAttack?.Invoke();
-	}
-	
-	public override void PerformAlternativeAttack()
-	{
-		eventSystem.StartBladeBlock();
-	}
-	public override void CancelAlternativeAttack()
-	{
-		eventSystem.EndBladeBlock();
-	}
 
-	private void ChangePowerUp(PowerUp.PowerType type, bool active)
-	{
-		if(type != PowerUp.PowerType.DoubleBlade) {
-			return;
+		private void Start()
+		{
+			player = GetComponentInParent<Manager>();
+			movement = GetComponentInParent<Movement>();
+			Type = WeaponType.Blade;
+
+			attackContactFilter = new ContactFilter2D {
+				layerMask = attackLayerMask,
+				useLayerMask = true,
+				useTriggers = true
+			};
+			blockContactFilter = new ContactFilter2D {
+				layerMask = blockLayerMask,
+				useLayerMask = true,
+				useTriggers = true
+			};
+
+			range = defaultRange;
+			player.PowerUpController.OnPowerUpChanged += ChangePowerUp;
+		}
+		private void OnDestroy()
+		{
+			player.PowerUpController.OnPowerUpChanged -= ChangePowerUp;
 		}
 
-		range = active ? powerupRange : defaultRange;
+		public override void PerformBasicAttack()
+		{
+			player.AnimationController.BladeAttack();
+			player.AudioManager.Play("MeleeBasicAttack");
+			List<Collider2D> hits = new List<Collider2D>();
+			range.OverlapCollider(attackContactFilter, hits);
+			foreach (Collider2D hit in hits) {
+				hit.GetComponent<IHit>()?.Hit(gameObject, basicAttackDamage);
+			}
+		}
+
+		public override void PerformStrongerAttack()
+		{
+			if (ThrustActive) return;
+
+			List<Collider2D> hits = new List<Collider2D>();
+			thrustRange.OverlapCollider(attackContactFilter, hits);
+			foreach (Collider2D hit in hits) {
+				Debug.Log("Thrust damage in collider");
+				hit.GetComponent<IHit>()?.Hit(gameObject, thrustDmg);
+			}
+			ThrustActive = true;
+			movement.MoveInDirection(player.AimDirection, thrustSpeed, thrustTime,
+				() => {
+					ThrustActive = false;
+				});
+		}
+
+		public override void PerformAlternativeAttack()
+		{
+			List<Collider2D> blocks = new List<Collider2D>();
+			blockRange.OverlapCollider(blockContactFilter, blocks);
+			foreach (Collider2D block in blocks) {
+				block.GetComponent<IRiposte>()?.Riposte(gameObject);
+			}
+			BlockActive = true;
+			RiposteActive = true;
+			StartCoroutine(WaitaForRiposteTime());
+		}
+		public override void CancelAlternativeAttack()
+		{
+			BlockActive = false;
+			RiposteActive = false;
+		}
+		private IEnumerator WaitaForRiposteTime()
+		{
+			yield return new WaitForSeconds(riposetTime);
+			RiposteActive = false;
+		}
+
+		private void ChangePowerUp(PowerUp.PowerType type, bool active)
+		{
+			if (type != PowerUp.PowerType.DoubleBlade) return;
+
+			range = active ? powerupRange : defaultRange;
+		}
 	}
 }

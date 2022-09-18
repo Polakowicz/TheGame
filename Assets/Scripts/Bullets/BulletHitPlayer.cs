@@ -1,23 +1,26 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using UnityEngine;
 
-public class BulletHitPlayer : MonoBehaviour
+namespace Scripts.Bullets
 {
-	[SerializeField] int damage = 5;
-
-    void OnTriggerEnter2D(Collider2D collision)
+    public class BulletHitPlayer : MonoBehaviour
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) {
-            return;
-        }
+        [SerializeField] private int damage = 5;
 
-        if (collision.isTrigger) {
-            return;
-        }
+        public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Map")) {
+                Destroy(gameObject);
+            }
 
-        PlayerEventSystem player = collision.gameObject.GetComponent<PlayerEventSystem>();
-        player.GiveDamage(damage);
-        Destroy(gameObject);
-        
+            if (collision.isTrigger) return;
+            if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+  
+            IHit player = collision.gameObject.GetComponent<IHit>();
+            player.Hit(gameObject, damage, IHit.HitWeapon.OTHER);
+            Debug.Log("Destroy bullet");
+            Destroy(gameObject);
+        }
     }
 }

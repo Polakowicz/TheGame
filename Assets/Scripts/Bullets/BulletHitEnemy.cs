@@ -1,27 +1,31 @@
-using Interfaces;
+using Scripts.Interfaces;
 using UnityEngine;
 
-public class BulletHitEnemy : MonoBehaviour
+namespace Scripts.Bullets
 {
-    [SerializeField] int damage = 5;
-    [SerializeField] bool piercing;
+    public class BulletHitEnemy : MonoBehaviour
+    {
+        [SerializeField] private int damage = 5;
+        [SerializeField] private bool piercing;
 
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.Damage(damage);
-            if (!piercing) {
-                Destroy(gameObject);
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Player")) {
+                return;
             }
-        } else if (collision.gameObject.layer == LayerMask.NameToLayer("Boss")){
-            collision.gameObject.GetComponent<IHit>()?.Hit(damage, IHit.HitWeapon.Bullet);
-            if (!piercing) {
+
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Map")) {
                 Destroy(gameObject);
+			}
+
+            Debug.Log("Bullet Hit");
+            if (collision.TryGetComponent(out IHit hit)) {
+                hit.Hit(gameObject, damage);
+				if (!piercing) {
+                    Destroy(gameObject);
+				}
             }
         }
 
-       
-		
     }
 }

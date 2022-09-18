@@ -1,57 +1,48 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AnimationController : MonoBehaviour
+namespace Scripts.Player
 {
-	[SerializeField] PlayerEventSystem eventSystem;
-	SpriteRenderer spriteRenderer;
-	Animator animator;
-	bool gun;
-
-	private void Start()
+	public class AnimationController : MonoBehaviour
 	{
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		animator = GetComponent<Animator>();
+		private Manager player;
+		private SpriteRenderer spriteRenderer;
+		private Animator animator;
 
-		eventSystem.OnBladeAttack += TriggerBladeAttackAnimation;
-		//eventSystem.OnGunFire += TriggerBlasterAttackAnimation;
-		eventSystem.OnGunChanged += ChangeGun;
-		eventSystem.OnDodge += Dodge;
-	}
-
-	private void Update()
-	{
-		if (eventSystem.playerData.aimDirection.x > 0) {
-			spriteRenderer.flipX = true;
-		} else if (eventSystem.playerData.aimDirection.x < 0) {
-			spriteRenderer.flipX = false;
+		private void Start()
+		{
+			player = GetComponentInParent<Manager>();
+			spriteRenderer = GetComponent<SpriteRenderer>();
+			animator = GetComponent<Animator>();
 		}
 
-		animator.SetFloat("Speed", eventSystem.playerData.moveDireciton.magnitude);
-	}
+		private void Update()
+		{
+			if (player.AimDirection.x > 0) {
+				spriteRenderer.flipX = true;
+			} else if (player.AimDirection.x < 0) {
+				spriteRenderer.flipX = false;
+			}
 
-	void TriggerBladeAttackAnimation()
-	{
-		animator.SetTrigger("Sword_fighting");
-	}
+			animator.SetFloat("Speed", player.MoveDirection.magnitude);
+		}
 
-	//void TriggerBlasterAttackAnimation()
-	//{
-	//	animator.SetTrigger("Gun_fighting");
-	//}
+		public void ChangeGun(Weapon.WeaponType type)
+		{
+			animator.SetBool("Blaster_equiped", type == Weapon.WeaponType.Blaster);
+		}
+		public void BladeAttack()
+		{
+			animator.SetTrigger("Sword_fighting");
+		}
 
-	void ChangeGun()
-	{
-		animator.SetBool("Blaster_equiped", eventSystem.playerData.weapon == PlayerData.Weapon.Blaster ? true : false);
-	}
+		public void Die()
+		{
+			animator.SetTrigger("Die");
+		}
 
-	void Dodge()
-	{
-		animator.SetTrigger("Dodge");
-	}
-
-	void Die()
-	{
-		//animator.SetInteger("Health", eventSystem.playerData.HP);
+		public void Dash()
+		{
+			animator.SetTrigger("Dodge");
+		}
 	}
 }

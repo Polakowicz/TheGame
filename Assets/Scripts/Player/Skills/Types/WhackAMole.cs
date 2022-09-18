@@ -1,56 +1,60 @@
-﻿using System.Collections;
+﻿using Scripts.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WhackAMole : Skill
+namespace Scripts.Player
 {
-	CircleCollider2D range;
-	LayerMask mask;
-	ContactFilter2D filter;
-
-	[SerializeField]
-	float radiusGrow;
-	[SerializeField]
-	int damage;
-	[SerializeField]
-	float stunTime;
-
-	bool charging;
-
-	void Start()
+	public class WhackAMole : Skill
 	{
-		range = GetComponent<CircleCollider2D>();
-		mask = LayerMask.GetMask("Enemy");
-		filter = new ContactFilter2D {
-			layerMask = mask,
-			useLayerMask = true,
-			useTriggers = true
-		};
+		private Manager player;
+		private CircleCollider2D range;
+		private ContactFilter2D filter;
+		private LayerMask mask;
 
-		range.radius = 0;
-		charging = false;
-	}
+		[SerializeField] private float radiusGrow;
+		[SerializeField] private int damage;
+		[SerializeField] private float stunTime;
 
-	void Update()
-	{
-		if (!charging) return;
+		private bool charging;
 
-		range.radius += radiusGrow * Time.deltaTime;
-	}
+		private void Start()
+		{
+			player = GetComponentInParent<Manager>();
+			range = GetComponent<CircleCollider2D>();
+			mask = LayerMask.GetMask("Enemy");
+			filter = new ContactFilter2D {
+				layerMask = mask,
+				useLayerMask = true
+			};
 
-	public override void StartUsingSkill()
-	{
-		charging = true;
-	}
-
-	public override void StopUsingSkill()
-	{
-		List<Collider2D> colliders = new List<Collider2D>();
-		range.OverlapCollider(filter, colliders);
-		foreach (Collider2D collider in colliders) {
-			collider.GetComponent<Enemy>().Overthrow(damage, stunTime);
+			range.radius = 0;
+			charging = false;
 		}
-		charging = false;
-		range.radius = 0;
+
+		private void Update()
+		{
+			if (!charging) return;
+			range.radius += radiusGrow * Time.deltaTime;
+		}
+
+		public override void StartUsingSkill()
+		{
+			Debug.Log("Whack-a-mole start charging");
+			charging = true;
+			player.State = Manager.PlayerState.Charging;
+		}
+		public override void StopUsingSkill()
+		{
+			Debug.Log("Whack-a-mole attck");
+			List<Collider2D> colliders = new List<Collider2D>();
+			range.OverlapCollider(filter, colliders);
+			foreach (Collider2D collider in colliders) {
+				collider.GetComponent<IHit>()?.StunHit(gameObject, damage, stunTime);
+			}
+			charging = false;
+			range.radius = 0;
+			player.State = Manager.PlayerState.Walk;
+		}
 	}
 }
