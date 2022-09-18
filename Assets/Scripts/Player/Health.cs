@@ -67,7 +67,7 @@ namespace Scripts.Player
 			if (player.PowerUpController.HitForceField()) return false;
 
 			if (meleeWeapon.RiposteActive) {
-				attacker.GetComponent<IRiposte>().Riposte();
+				attacker.GetComponent<IRiposte>().Riposte(gameObject);
 				return false;
 			}
 

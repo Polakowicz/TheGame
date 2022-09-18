@@ -17,11 +17,11 @@ namespace Scripts.Interfaces
 	}
 	public interface IInteract
 	{
-		public void Interact();
+		public void Interact(GameObject sender);
 	}
 	public interface IRiposte
 	{
-		public void Riposte();
+		public void Riposte(GameObject sender);
 	}
 	public interface IKick
 	{

@@ -9,6 +9,8 @@ namespace Scripts.Enemies
 		public SpriteRenderer SpriteRenderer { get; private set; }
 		public GameObject Player { get; private set; }
 
+
+
 		private void Start()
 		{
 			Player = GameObject.FindGameObjectWithTag("Player");

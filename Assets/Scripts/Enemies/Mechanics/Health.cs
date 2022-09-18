@@ -34,9 +34,9 @@ namespace Scripts.Enemies
 			throw new System.NotImplementedException();
 		}
 
-		public void Riposte()
+		public void Riposte(GameObject sender)
 		{
-			Debug.Log("Enemy riposeted");
+			Debug.LogError("Enemy riposeted");
 		}
 	}
 }

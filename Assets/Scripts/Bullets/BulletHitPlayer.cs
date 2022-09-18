@@ -19,6 +19,7 @@ namespace Scripts.Bullets
   
             IHit player = collision.gameObject.GetComponent<IHit>();
             player.Hit(gameObject, damage, IHit.HitWeapon.OTHER);
+            Debug.Log("Destroy bullet");
             Destroy(gameObject);
         }
     }

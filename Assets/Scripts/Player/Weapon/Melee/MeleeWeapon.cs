@@ -54,7 +54,8 @@ namespace Scripts.Player
 			};
 			blockContactFilter = new ContactFilter2D {
 				layerMask = blockLayerMask,
-				useLayerMask = true
+				useLayerMask = true,
+				useTriggers = true
 			};
 
 			range = defaultRange;
@@ -98,7 +99,7 @@ namespace Scripts.Player
 			List<Collider2D> blocks = new List<Collider2D>();
 			blockRange.OverlapCollider(blockContactFilter, blocks);
 			foreach (Collider2D block in blocks) {
-				block.GetComponent<IRiposte>()?.Riposte();
+				block.GetComponent<IRiposte>()?.Riposte(gameObject);
 			}
 			BlockActive = true;
 			RiposteActive = true;
