@@ -131,6 +131,7 @@ namespace Scripts.Player
 			if (hit.collider == null) return;
 			
 			beamHit = hit.collider.gameObject;
+			bimRenderer.positionCount = 2;
 			DrawBim();
 			bimRenderer.enabled = true;
 			
@@ -141,6 +142,7 @@ namespace Scripts.Player
 
 			beamHit = null;
 			bimRenderer.enabled = false;
+			bimRenderer.positionCount = 0;
 		}
 
 		//Pull
@@ -173,8 +175,6 @@ namespace Scripts.Player
 
 		public void ChangePowerUp(PowerUp.PowerType type, bool active)
 		{
-			//if (!active && bullet != defaultBullet) return;
-
 			if (type == PowerUp.PowerType.ShotExplosion) {
 				bullet = active ? explosiveBullet : defaultBullet;
 			} else if (type == PowerUp.PowerType.ShotPiercing) {
