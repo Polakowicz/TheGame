@@ -1,10 +1,11 @@
 ﻿using Scripts.Interfaces;
+using Scripts.Tools;
 using System.Collections;
 using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class Health : MonoBehaviour, IHit, IRiposte
+	public class Health : ExtendedMonoBehaviour, IHit, IRiposte
 	{
 		private Enemy manager;
 		[SerializeField] private int hp;
@@ -26,12 +27,19 @@ namespace Scripts.Enemies
 
 		public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
-			throw new System.NotImplementedException();
+			if(strength >= 1) {
+				manager.Animator.SetBool("Stuned", true);
+				StartCoroutine(WaitAndDo(time, () => manager.Animator.SetBool("Stuned", false)));
+			} else {
+				manager.Data.speedMultiplier -= strength;
+				StartCoroutine(WaitAndDo(time, () => manager.Data.speedMultiplier += strength));
+			}
 		}
 
 		public void StunHit(GameObject attacker, int damage, float stunTime, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
-			throw new System.NotImplementedException();
+			Hit(attacker, damage, weapon);
+			Stun(attacker, stunTime, 1, weapon);
 		}
 
 		public void Riposte(GameObject sender)

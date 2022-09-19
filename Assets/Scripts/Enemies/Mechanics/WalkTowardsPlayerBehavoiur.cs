@@ -22,7 +22,7 @@ namespace Scripts.Enemies
 			manager.SpriteRenderer.flipX = manager.Player.transform.position.x > animator.transform.position.x;
 
 			var direction = (Vector2)manager.Player.transform.position - rigidbody.position;
-			rigidbody.velocity = direction.normalized * walkSpeed;
+			rigidbody.velocity = direction.normalized * walkSpeed * manager.Data.speedMultiplier;
 		}
 
 		public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
