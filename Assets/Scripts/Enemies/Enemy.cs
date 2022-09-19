@@ -9,13 +9,19 @@ namespace Scripts.Enemies
 		public SpriteRenderer SpriteRenderer { get; private set; }
 		public GameObject Player { get; private set; }
 
-
+		public class EnemyData
+		{
+			public float speedMultiplier = 1;
+		}
+		public EnemyData Data { get; set; }
 
 		private void Start()
 		{
 			Player = GameObject.FindGameObjectWithTag("Player");
 			Animator = GetComponent<Animator>();
 			SpriteRenderer = GetComponent<SpriteRenderer>();
+
+			Data = new EnemyData();
 		}
 
 		private void Update()
