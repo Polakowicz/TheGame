@@ -18,6 +18,7 @@ namespace Scripts.Interfaces
 
 	public enum Interaction
 	{
+		None,
 		Checkpoint,
 	}
 	public interface IInteract
