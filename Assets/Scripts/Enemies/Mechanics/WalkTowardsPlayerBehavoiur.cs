@@ -6,15 +6,17 @@ namespace Scripts.Enemies
 {
 	public class WalkTowardsPlayerBehavoiur : StateMachineBehaviour
 	{
-		[SerializeField] private float walkSpeed;
-
-		private Rigidbody2D rigidbody;
 		private Enemy manager;
+		private Rigidbody2D rigidbody;
+		
+		[SerializeField] private readonly float walkSpeed;
 
 		override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
 			rigidbody = animator.GetComponent<Rigidbody2D>();
 			manager = animator.GetComponent<Enemy>();
+
+			rigidbody.bodyType = RigidbodyType2D.Dynamic;
 		}
 
 		override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,6 +30,7 @@ namespace Scripts.Enemies
 		public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
 			rigidbody.velocity = Vector2.zero;
+			rigidbody.bodyType = RigidbodyType2D.Static;
 		}
 	}
 }
