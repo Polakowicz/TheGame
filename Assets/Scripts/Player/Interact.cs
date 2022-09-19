@@ -10,11 +10,14 @@ namespace Scripts.Player
 	{
 		private PlayerInput input;
 		private InputAction interactAction;
+		private Manager manager;
 
-		[SerializeField] private Collider2D interactRange;
+		private Collider2D interactRange;
 
 		private void Start()
 		{
+			interactRange = GetComponent<Collider2D>();
+			manager = GetComponentInParent<Manager>();
 			input = GetComponentInParent<PlayerInput>();
 
 			interactAction = input.actions["Interact"];
@@ -33,9 +36,15 @@ namespace Scripts.Player
 				if (!hit.TryGetComponent<IInteract>(out var interactionInterface)) continue;
 				var result = interactionInterface.Interact(gameObject);
 				if (result == Interaction.None) continue;
-				//TODO
 
-				
+				switch (result) {
+					case Interaction.None:
+						continue;
+
+					case Interaction.Checkpoint:
+						manager.Animator.SetTrigger("Checkpoint");
+						break;
+				}
 			}
 		}
 	}

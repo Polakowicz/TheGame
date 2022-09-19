@@ -7,6 +7,7 @@ namespace Scripts.Player
         public AudioManager AudioManager { get; private set; }
         public AnimationController AnimationController { get; private set; }
         public PowerUpController PowerUpController { get; private set; }
+        public Animator Animator { get; private set; }
 
         public enum PlayerState
         {
@@ -29,6 +30,7 @@ namespace Scripts.Player
         {
             AudioManager = FindObjectOfType<AudioManager>();
             AnimationController = GetComponentInChildren<AnimationController>();
+            Animator = GetComponentInChildren<Animator>();
             
         }
     }
