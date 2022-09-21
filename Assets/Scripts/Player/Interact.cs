@@ -10,14 +10,14 @@ namespace Scripts.Player
 	{
 		private PlayerInput input;
 		private InputAction interactAction;
-		private Manager manager;
+		private PlayerManager manager;
 
 		private Collider2D interactRange;
 
 		private void Start()
 		{
 			interactRange = GetComponent<Collider2D>();
-			manager = GetComponentInParent<Manager>();
+			manager = GetComponentInParent<PlayerManager>();
 			input = GetComponentInParent<PlayerInput>();
 
 			interactAction = input.actions["Interact"];
@@ -42,7 +42,7 @@ namespace Scripts.Player
 						continue;
 
 					case Interaction.Checkpoint:
-						manager.Animator.SetTrigger("Checkpoint");
+						manager.AnimationController.Interact();
 						break;
 				}
 			}

@@ -9,7 +9,7 @@ namespace Scripts.Player
 	public class BladePlayerWeapon : PlayerWeapon
 	{
 		// Used components
-		private Manager playerManagerComponent;
+		private PlayerManager playerManagerComponent;
 		private Movement playerMovementComponent;
 
 		[Header("Basic Attack")]
@@ -63,7 +63,7 @@ namespace Scripts.Player
 		private void Awake()
 		{
 			// Get needed components
-			playerManagerComponent = GetComponentInParent<Manager>();
+			playerManagerComponent = GetComponentInParent<PlayerManager>();
 			playerMovementComponent = GetComponentInParent<Movement>();
 
 			// Set variables values

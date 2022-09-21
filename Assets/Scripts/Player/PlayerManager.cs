@@ -2,12 +2,11 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-    public class Manager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour
     {
         public AudioManager AudioManager { get; private set; }
-        public AnimationController AnimationController { get; private set; }
+        public PlayerAnimationController AnimationController { get; private set; }
         public PowerUpController PowerUpController { get; private set; }
-        public Animator Animator { get; private set; }
 
         public enum PlayerState
         {
@@ -17,6 +16,8 @@ namespace Scripts.Player
             Charging,
             Dead
         }
+
+        // Data shared between components
         [HideInInspector] public PlayerState State;
         [HideInInspector] public Vector2 AimDirection;
         [HideInInspector] public Vector2 MoveDirection;
@@ -25,8 +26,7 @@ namespace Scripts.Player
 		{
             PowerUpController = GetComponent<PowerUpController>();
 			AudioManager = FindObjectOfType<AudioManager>();
-			AnimationController = GetComponentInChildren<AnimationController>();
-			Animator = GetComponentInChildren<Animator>();
+			AnimationController = GetComponentInChildren<PlayerAnimationController>();
 		}
     }
 }

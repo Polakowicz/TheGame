@@ -8,14 +8,14 @@ namespace Scripts.Player
 {
 	public class Health : ExtendedMonoBehaviour, IHit
 	{
-		private Manager player;
+		private PlayerManager player;
 		private BladePlayerWeapon meleeWeapon;
 		[SerializeField] private int hp;
 		public int HP { get => hp; private set => hp = value; }
 
 		private void Start()
 		{
-			player = GetComponentInParent<Manager>();
+			player = GetComponentInParent<PlayerManager>();
 			meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
 		}
 
@@ -34,13 +34,13 @@ namespace Scripts.Player
 		}
 		public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
-			if(player.State == Manager.PlayerState.Stun) {
+			if(player.State == PlayerManager.PlayerState.Stun) {
 				StopAllCoroutines();
 			}
 
-			player.State = Manager.PlayerState.Stun;
+			player.State = PlayerManager.PlayerState.Stun;
 			StartCoroutine(WaitAndDo(time, () => {
-				player.State = Manager.PlayerState.Walk;
+				player.State = PlayerManager.PlayerState.Walk;
 			}));
 		}
 
@@ -63,7 +63,7 @@ namespace Scripts.Player
 		}
 		private bool IsHit(GameObject attacker)
 		{
-			if (player.State == Manager.PlayerState.Dash) return false;
+			if (player.State == PlayerManager.PlayerState.Dash) return false;
 
 			if (player.PowerUpController.HitForceField()) return false;
 

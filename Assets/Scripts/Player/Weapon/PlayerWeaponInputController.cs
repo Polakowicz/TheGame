@@ -6,7 +6,7 @@ namespace Scripts.Player
     public class PlayerWeaponInputController : MonoBehaviour
     {
         //Components
-        private Manager player;
+        private PlayerManager player;
         private PlayerInput input;
         
         //InputActions
@@ -24,7 +24,7 @@ namespace Scripts.Player
         private void Awake()
         {
             // Get components
-            player = GetComponentInParent<Manager>();
+            player = GetComponentInParent<PlayerManager>();
             input = GetComponentInParent<PlayerInput>();
             bladeWeapon = GetComponentInChildren<BladePlayerWeapon>();
             blasterWeapon = GetComponentInChildren<BlasterPlayerWeapon>();

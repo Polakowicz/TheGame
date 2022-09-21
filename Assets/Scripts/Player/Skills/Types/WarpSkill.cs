@@ -8,7 +8,7 @@ namespace Scripts.Player
 {
 	public class WarpSkill : Skill
 	{
-		private Manager playerManagerComponent;
+		private PlayerManager playerManagerComponent;
 
 		private CircleCollider2D range;
 		private LayerMask mask;
@@ -32,7 +32,7 @@ namespace Scripts.Player
 		private void Awake()
 		{
 			// Get components
-			playerManagerComponent = GetComponentInParent<Manager>();
+			playerManagerComponent = GetComponentInParent<PlayerManager>();
 			range = GetComponent<CircleCollider2D>();
 
 			// Set variables
@@ -49,7 +49,7 @@ namespace Scripts.Player
 
 		public override void StartUsingSkill()
 		{
-			playerManagerComponent.State = Manager.PlayerState.Charging;
+			playerManagerComponent.State = PlayerManager.PlayerState.Charging;
 			isCharging = true;
 		}
 		public override void StopUsingSkill()
@@ -86,7 +86,7 @@ namespace Scripts.Player
 			collider.enabled = true;
 			isInWarp = false;
 			range.radius = 0;
-			playerManagerComponent.State = Manager.PlayerState.Walk;
+			playerManagerComponent.State = PlayerManager.PlayerState.Walk;
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)

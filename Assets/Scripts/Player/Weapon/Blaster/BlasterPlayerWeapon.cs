@@ -9,7 +9,7 @@ namespace Scripts.Player
 	public class BlasterPlayerWeapon : PlayerWeapon
 	{
 		// Other need components
-		private Manager playerManagerComponent;
+		private PlayerManager playerManagerComponent;
 		private Movement playerMovementComponent;
 		private LineRenderer beamRendererComponent;
 
@@ -67,7 +67,7 @@ namespace Scripts.Player
 		private void Awake()
 		{
 			// Get components
-			playerManagerComponent = GetComponentInParent<Manager>();
+			playerManagerComponent = GetComponentInParent<PlayerManager>();
 			playerMovementComponent = GetComponentInParent<Movement>();
 			beamRendererComponent = GetComponent<LineRenderer>();
 
@@ -160,7 +160,7 @@ namespace Scripts.Player
 		public override void StartAlternativeAttack()
 		{
 			// Cant shot beam if player is not in walk state
-			if (playerManagerComponent.State != Manager.PlayerState.Walk) return;
+			if (playerManagerComponent.State != PlayerManager.PlayerState.Walk) return;
 
 			// Try to hit object with raycast
 			var hit = Physics2D.Raycast(gunBarrel.position, gunBarrel.up, beamMaxRange, beamLayerMask);

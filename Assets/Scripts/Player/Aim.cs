@@ -7,7 +7,7 @@ namespace Scripts.Player
 	{
 		[SerializeField]
 		private Transform crosshair;
-		private Manager player;
+		private PlayerManager player;
 		private PlayerInput input;
 
 		private InputAction aimAction;
@@ -16,7 +16,7 @@ namespace Scripts.Player
 
 		private void Start()
 		{
-			player = GetComponentInParent<Manager>();
+			player = GetComponentInParent<PlayerManager>();
 			input = GetComponentInParent<PlayerInput>();
 
 			aimAction = input.actions["Aim"];

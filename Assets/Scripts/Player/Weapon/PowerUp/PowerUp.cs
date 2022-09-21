@@ -25,7 +25,7 @@ namespace Scripts.Player
 			if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
 			if (collision.isTrigger) return;
 
-			collision.gameObject.GetComponent<Manager>().PowerUpController.AddPowerUp(this);
+			collision.gameObject.GetComponent<PlayerManager>().PowerUpController.AddPowerUp(this);
 			Destroy(gameObject);
 		}
 	}

@@ -7,7 +7,7 @@ namespace Scripts.Player
 {
 	public class WhackAMoleSkill : Skill
 	{
-		private Manager player;
+		private PlayerManager player;
 
 		private CircleCollider2D range;
 		private ContactFilter2D filter;
@@ -26,7 +26,7 @@ namespace Scripts.Player
 		private void Awake()
 		{
 			// Get components
-			player = GetComponentInParent<Manager>();
+			player = GetComponentInParent<PlayerManager>();
 			range = GetComponent<CircleCollider2D>();
 
 			// Set variables
@@ -49,7 +49,7 @@ namespace Scripts.Player
 		public override void StartUsingSkill()
 		{
 			isCharging = true;
-			player.State = Manager.PlayerState.Charging;
+			player.State = PlayerManager.PlayerState.Charging;
 		}
 		public override void StopUsingSkill()
 		{
@@ -61,7 +61,7 @@ namespace Scripts.Player
 			}
 			isCharging = false;
 			range.radius = 0;
-			player.State = Manager.PlayerState.Walk;
+			player.State = PlayerManager.PlayerState.Walk;
 		}
 	}
 }
