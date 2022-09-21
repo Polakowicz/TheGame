@@ -7,12 +7,12 @@ namespace Scripts.Player
 	public class ThrustAttackDealDamage : MonoBehaviour
 	{
 		// Main weapon component
-		private MeleeWeapon maleeWeapon;
+		private BladePlayerWeapon maleeWeapon;
 
 		private void Awake()
 		{
-			// Get main malee weapon component
-			maleeWeapon = GetComponentInParent<MeleeWeapon>();
+			// Get components
+			maleeWeapon = GetComponentInParent<BladePlayerWeapon>();
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)

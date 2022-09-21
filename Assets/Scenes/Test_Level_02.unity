@@ -6210,6 +6210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3653687993516305986, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_Name
+      value: Range Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 4129938975792256201, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Thrust attack range

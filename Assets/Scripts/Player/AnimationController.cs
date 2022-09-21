@@ -26,9 +26,9 @@ namespace Scripts.Player
 			animator.SetFloat("Speed", player.MoveDirection.magnitude);
 		}
 
-		public void ChangeGun(Weapon.WeaponType type)
+		public void ChangeGun(PlayerWeapon.WeaponType type)
 		{
-			animator.SetBool("Blaster_equiped", type == Weapon.WeaponType.Blaster);
+			animator.SetBool("Blaster_equiped", type == PlayerWeapon.WeaponType.Blaster);
 		}
 		public void BladeAttack()
 		{

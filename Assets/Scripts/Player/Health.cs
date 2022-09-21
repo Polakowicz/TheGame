@@ -9,14 +9,14 @@ namespace Scripts.Player
 	public class Health : ExtendedMonoBehaviour, IHit
 	{
 		private Manager player;
-		private MeleeWeapon meleeWeapon;
+		private BladePlayerWeapon meleeWeapon;
 		[SerializeField] private int hp;
 		public int HP { get => hp; private set => hp = value; }
 
 		private void Start()
 		{
 			player = GetComponentInParent<Manager>();
-			meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+			meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
 		}
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)

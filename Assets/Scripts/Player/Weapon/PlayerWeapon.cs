@@ -1,18 +1,18 @@
 using Scripts.Tools;
-using UnityEngine;
 
 namespace Scripts.Player
 {
-    public abstract class Weapon : ExtendedMonoBehaviour
+    public abstract class PlayerWeapon : ExtendedMonoBehaviour
     {
+        // Weapon types
         public enum WeaponType
         {
             Blaster,
             Blade
         }
-
         public WeaponType Type { get; protected set; }
 
+        // Weapon actions
         public virtual void PerformBasicAttack() { }
 
         public virtual void PerformStrongerAttack() { }
@@ -22,6 +22,7 @@ namespace Scripts.Player
         public virtual void PerformAlternativeAttack() { }
         public virtual void CancelAlternativeAttack() { }
 
+        // Action needed only for blaster
         public virtual void PerformBeamPullAction(float input) { }
     }
 }

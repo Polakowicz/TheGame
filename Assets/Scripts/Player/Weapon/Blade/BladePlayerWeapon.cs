@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 
 namespace Scripts.Player
 {
-	public class MeleeWeapon : Weapon
+	public class BladePlayerWeapon : PlayerWeapon
 	{
 		// Used components
 		private Manager playerManagerComponent;
@@ -16,8 +16,6 @@ namespace Scripts.Player
 		// Triggers collider to find enemies in range of basic attack
 		[SerializeField] private Collider2D basicAttackDefaultRange;
 		[SerializeField] private Collider2D basicAttackPowerUpRange;
-
-		// Currently picked range for attack
 		private Collider2D currentAttackRange;
 
 		// Layer mask for attack colliders
@@ -25,7 +23,6 @@ namespace Scripts.Player
 		public LayerMask AttackLayerMask { get => attackLayerMask; }
 		private ContactFilter2D attackContactFilter;
 
-		// Damage dealt by basic attack
 		[SerializeField] private int basicAttackDamage = 20;
 		[Space(20)]
 
@@ -34,18 +31,15 @@ namespace Scripts.Player
 		// Tigger collider to find enemies during thrust attack
 		[SerializeField] private Collider2D thrustAttackRange;
 
-		// Thrust settings
 		// How fast does player move during thrust attack
 		[SerializeField] private float thrustAttackSpeed;
 
 		// How long does player move faster
 		[SerializeField] private float thrustAttackTime;
 
-		// Damage dealt by thurst attack
 		[SerializeField] private int thrustAttackDamage;
 		public int ThrustAttackDamage { get => thrustAttackDamage; }
 
-		// Flag indicating if player is during thrust attack
 		public bool IsPlayerDuringThurstAttack { get; private set; }
 		[Space(20)]
 
@@ -59,10 +53,7 @@ namespace Scripts.Player
 		public LayerMask BlockLayerMask { get => blockLayerMask; }
 		private ContactFilter2D blockContactFilter;
 
-		// Flag indicating if block is active
 		public bool IsBlockActive { get; private set; }
-
-		// Flag indicating if player can riposte attacks
 		public bool IsRiposteActive { get; private set; }
 
 		// For how long does riposte last after initiate block
@@ -75,8 +66,9 @@ namespace Scripts.Player
 			playerManagerComponent = GetComponentInParent<Manager>();
 			playerMovementComponent = GetComponentInParent<Movement>();
 
-			// Set inherited weaopn type variable to blade
+			// Set variables values
 			Type = WeaponType.Blade;
+			currentAttackRange = basicAttackDefaultRange;
 
 			// Create contact filters for colliders
 			attackContactFilter = new ContactFilter2D {
@@ -89,18 +81,15 @@ namespace Scripts.Player
 				useLayerMask = true,
 				useTriggers = true
 			};
-
-			// Set current attack range to basic (no power up active)
-			currentAttackRange = basicAttackDefaultRange;
 		}
 		private void Start()
 		{
-			// Subscribe to get information when powerup was picked up or ended
+			// Subscribe to events
 			playerManagerComponent.PowerUpController.OnPowerUpChanged += ChangePowerUp;
 		}
 		private void OnDestroy()
 		{
-			// Unsubscribe for powerup changed info
+			// Unsubscribe events
 			playerManagerComponent.PowerUpController.OnPowerUpChanged -= ChangePowerUp;
 		}
 
@@ -113,11 +102,9 @@ namespace Scripts.Player
 			// Play sword attack sound
 			playerManagerComponent.AudioManager.Play("MeleeBasicAttack");
 
-			// Find all enemies in range of attack
+			// Deal damage to all enemies in range
 			List<Collider2D> hits = new List<Collider2D>();
 			currentAttackRange.OverlapCollider(attackContactFilter, hits);
-
-			// Deal damage to all enemies in range
 			foreach (Collider2D hit in hits)
 			{
 				var hitInterface = hit.GetComponent<IHit>();
@@ -164,7 +151,6 @@ namespace Scripts.Player
 				riposteInterface.Riposte(gameObject);
 			}
 
-			// Start Blocking
 			IsBlockActive = true;
 			IsRiposteActive = true;
 
@@ -184,7 +170,6 @@ namespace Scripts.Player
 			// Only double blade powerup is relevant to this weapon
 			if (type != PowerUp.PowerType.DoubleBlade) return;
 
-			// If powerup active set current range to powerup range, if not to default range
 			currentAttackRange = active ? basicAttackPowerUpRange : basicAttackDefaultRange;
 		}
 	}

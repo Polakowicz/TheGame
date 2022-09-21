@@ -17,17 +17,17 @@ namespace Scripts.Player
         private InputAction pullAction;
 
         //Weapons
-        private MeleeWeapon meleeWeapon;
-        private RangedWeapon rangedWeapon;
-        private Weapon equippedWeapon;
+        private BladePlayerWeapon meleeWeapon;
+        private BlasterPlayerWeapon rangedWeapon;
+        private PlayerWeapon equippedWeapon;
 
         private void Start()
         {
             player = GetComponentInParent<Manager>();
             input = GetComponentInParent<PlayerInput>();
 
-            meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-            rangedWeapon = GetComponentInChildren<RangedWeapon>();
+            meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
+            rangedWeapon = GetComponentInChildren<BlasterPlayerWeapon>();
             equippedWeapon = meleeWeapon;
 
             CreatActionInputs();
@@ -80,7 +80,7 @@ namespace Scripts.Player
         private void SwitchWeapon(InputAction.CallbackContext context)
         {
             player.AudioManager.Play("SwitchWeapon");
-            if (equippedWeapon.Type == Weapon.WeaponType.Blade) {
+            if (equippedWeapon.Type == PlayerWeapon.WeaponType.Blade) {
                 equippedWeapon = rangedWeapon;
             } else {
                 equippedWeapon = meleeWeapon;
