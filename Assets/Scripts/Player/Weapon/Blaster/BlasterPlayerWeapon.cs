@@ -210,7 +210,7 @@ namespace Scripts.Player
 
 			isPlayerPullingToOtherObject = true;
 
-			// Caulate pull varibles
+			// Caulate pull parameters
 			Vector2 direction = beamHit.transform.position - transform.position;
 			var time = direction.magnitude / beamPullSpeed;
 
@@ -228,7 +228,6 @@ namespace Scripts.Player
 		{
 			beamHit.GetComponent<IPullable>()?.Pull(beamPullSpeed);
 		}
-
 
 		public void ChangePowerUp(PowerUp.PowerType type, bool active)
 		{

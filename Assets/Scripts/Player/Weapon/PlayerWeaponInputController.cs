@@ -17,8 +17,8 @@ namespace Scripts.Player
         private InputAction pullAction;
 
         //Weapons
-        private BladePlayerWeapon meleeWeapon;
-        private BlasterPlayerWeapon rangedWeapon;
+        private BladePlayerWeapon bladeWeapon;
+        private BlasterPlayerWeapon blasterWeapon;
         private PlayerWeapon equippedWeapon;
 
         private void Awake()
@@ -26,11 +26,11 @@ namespace Scripts.Player
             // Get components
             player = GetComponentInParent<Manager>();
             input = GetComponentInParent<PlayerInput>();
-            meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
-            rangedWeapon = GetComponentInChildren<BlasterPlayerWeapon>();
+            bladeWeapon = GetComponentInChildren<BladePlayerWeapon>();
+            blasterWeapon = GetComponentInChildren<BlasterPlayerWeapon>();
 
             // Set variables
-            equippedWeapon = meleeWeapon;
+            equippedWeapon = bladeWeapon;
 
 			// Create action inputs
 			switchWeaponAction = input.actions["Switch weapon"];
@@ -75,9 +75,9 @@ namespace Scripts.Player
         {
             // Change equiped weapon 
 			if (equippedWeapon.Type == PlayerWeapon.WeaponType.Blade) {
-                equippedWeapon = rangedWeapon;
+                equippedWeapon = blasterWeapon;
             } else {
-                equippedWeapon = meleeWeapon;
+                equippedWeapon = bladeWeapon;
             }
 
 			// Play switch weapon sound
