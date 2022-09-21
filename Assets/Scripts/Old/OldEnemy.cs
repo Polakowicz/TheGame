@@ -8,7 +8,7 @@ public class OldEnemy : MonoBehaviour, IPullable
 {
 	private struct PrivateData
 	{
-		public Freeze FreezeScript;
+		public FreezeSkill FreezeScript;
 		public float FreezStrength;
 	}
 	public class SharedData
@@ -111,7 +111,7 @@ public class OldEnemy : MonoBehaviour, IPullable
 		Damage(damage);
 		Stun(stunTime);
 	}//Wack-a-mole Skill
-	public void Freez(Freeze freez, float strength)
+	public void Freez(FreezeSkill freez, float strength)
 	{
 		privateData.FreezeScript = freez;
 		privateData.FreezStrength = strength;

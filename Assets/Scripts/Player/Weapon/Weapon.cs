@@ -1,8 +1,9 @@
+using Scripts.Tools;
 using UnityEngine;
 
 namespace Scripts.Player
 {
-    public abstract class Weapon : MonoBehaviour
+    public abstract class Weapon : ExtendedMonoBehaviour
     {
         public enum WeaponType
         {

@@ -24,14 +24,9 @@ namespace Scripts.Player
 		private void Awake()
 		{
             PowerUpController = GetComponent<PowerUpController>();
-        }
-
-		private void Start()
-        {
-            AudioManager = FindObjectOfType<AudioManager>();
-            AnimationController = GetComponentInChildren<AnimationController>();
-            Animator = GetComponentInChildren<Animator>();
-            
-        }
+			AudioManager = FindObjectOfType<AudioManager>();
+			AnimationController = GetComponentInChildren<AnimationController>();
+			Animator = GetComponentInChildren<Animator>();
+		}
     }
 }

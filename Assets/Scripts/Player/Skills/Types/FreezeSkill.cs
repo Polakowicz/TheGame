@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-	public class Freeze : Skill
+	public class FreezeSkill : Skill
 	{
 		private Collider2D range;
 		private LayerMask mask;

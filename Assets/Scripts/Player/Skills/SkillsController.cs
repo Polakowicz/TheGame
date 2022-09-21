@@ -35,7 +35,7 @@ namespace Scripts.Player
 		}
 		private void CreateSkillsDictionary()
 		{
-			skills.Add(SkillType.FreezeTime, GetComponentInChildren<Freeze>());
+			skills.Add(SkillType.FreezeTime, GetComponentInChildren<FreezeSkill>());
 			skills.Add(SkillType.Warp, GetComponentInChildren<Warp>());
 			skills.Add(SkillType.WhackAMole, GetComponentInChildren<WhackAMole>());
 			skills.Add(SkillType.Speeding, GetComponentInChildren<Speeding>());

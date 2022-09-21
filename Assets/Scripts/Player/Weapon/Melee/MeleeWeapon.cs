@@ -1,52 +1,84 @@
 ﻿using Scripts.Interfaces;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Scripts.Player
 {
-	[Serializable]
 	public class MeleeWeapon : Weapon
 	{
-		private Manager player;
-		private Movement movement;
+		// Used components
+		private Manager playerManagerComponent;
+		private Movement playerMovementComponent;
 
-		[Header("Attack")]
-		[SerializeField] private Collider2D defaultRange;
-		[SerializeField] private Collider2D powerupRange;
+		[Header("Basic Attack")]
+		// Triggers collider to find enemies in range of basic attack
+		[SerializeField] private Collider2D basicAttackDefaultRange;
+		[SerializeField] private Collider2D basicAttackPowerUpRange;
+
+		// Currently picked range for attack
+		private Collider2D currentAttackRange;
+
+		// Layer mask for attack colliders
 		[SerializeField] private LayerMask attackLayerMask;
-		[SerializeField] private int basicAttackDamage = 20;
-		private ContactFilter2D attackContactFilter;
-		private Collider2D range;
 		public LayerMask AttackLayerMask { get => attackLayerMask; }
+		private ContactFilter2D attackContactFilter;
+
+		// Damage dealt by basic attack
+		[SerializeField] private int basicAttackDamage = 20;
 		[Space(20)]
 
-		[Header("Thrust")]
-		[SerializeField] private Collider2D thrustRange;
-		[SerializeField] private float thrustSpeed;
-		[SerializeField] private float thrustTime;
-		[SerializeField] private int thrustDmg;
-		public int ThrustDmg { get => thrustDmg; }
-		public bool ThrustActive { get; private set; }
+
+		[Header("Thrust Attack")]
+		// Tigger collider to find enemies during thrust attack
+		[SerializeField] private Collider2D thrustAttackRange;
+
+		// Thrust settings
+		// How fast does player move during thrust attack
+		[SerializeField] private float thrustAttackSpeed;
+
+		// How long does player move faster
+		[SerializeField] private float thrustAttackTime;
+
+		// Damage dealt by thurst attack
+		[SerializeField] private int thrustAttackDamage;
+		public int ThrustAttackDamage { get => thrustAttackDamage; }
+
+		// Flag indicating if player is during thrust attack
+		public bool IsPlayerDuringThurstAttack { get; private set; }
 		[Space(20)]
+
 
 		[Header("Block")]
+		// Trigger collider to find bullets that should be riposeted by block
 		[SerializeField] private Collider2D blockRange;
-		[SerializeField] private LayerMask blockLayerMask;
-		[SerializeField] private float riposetTime;
-		private ContactFilter2D blockContactFilter;
-		public LayerMask BlockLayerMask { get => blockLayerMask; }
-		public bool BlockActive { get; private set; }
-		public bool RiposteActive { get; private set; }
-	
 
-		private void Start()
+		// LayerMask for blocking objects
+		[SerializeField] private LayerMask blockLayerMask;
+		public LayerMask BlockLayerMask { get => blockLayerMask; }
+		private ContactFilter2D blockContactFilter;
+
+		// Flag indicating if block is active
+		public bool IsBlockActive { get; private set; }
+
+		// Flag indicating if player can riposte attacks
+		public bool IsRiposteActive { get; private set; }
+
+		// For how long does riposte last after initiate block
+		[SerializeField] private float riposetTime;
+		
+		
+		private void Awake()
 		{
-			player = GetComponentInParent<Manager>();
-			movement = GetComponentInParent<Movement>();
+			// Get needed components
+			playerManagerComponent = GetComponentInParent<Manager>();
+			playerMovementComponent = GetComponentInParent<Movement>();
+
+			// Set inherited weaopn type variable to blade
 			Type = WeaponType.Blade;
 
+			// Create contact filters for colliders
 			attackContactFilter = new ContactFilter2D {
 				layerMask = attackLayerMask,
 				useLayerMask = true,
@@ -58,69 +90,102 @@ namespace Scripts.Player
 				useTriggers = true
 			};
 
-			range = defaultRange;
-			player.PowerUpController.OnPowerUpChanged += ChangePowerUp;
+			// Set current attack range to basic (no power up active)
+			currentAttackRange = basicAttackDefaultRange;
+		}
+		private void Start()
+		{
+			// Subscribe to get information when powerup was picked up or ended
+			playerManagerComponent.PowerUpController.OnPowerUpChanged += ChangePowerUp;
 		}
 		private void OnDestroy()
 		{
-			player.PowerUpController.OnPowerUpChanged -= ChangePowerUp;
+			// Unsubscribe for powerup changed info
+			playerManagerComponent.PowerUpController.OnPowerUpChanged -= ChangePowerUp;
 		}
 
+		// Perform basic blade attack
 		public override void PerformBasicAttack()
 		{
-			player.AnimationController.BladeAttack();
-			player.AudioManager.Play("MeleeBasicAttack");
+			// Trigger blade attack animation
+			playerManagerComponent.AnimationController.BladeAttack();
+
+			// Play sword attack sound
+			playerManagerComponent.AudioManager.Play("MeleeBasicAttack");
+
+			// Find all enemies in range of attack
 			List<Collider2D> hits = new List<Collider2D>();
-			range.OverlapCollider(attackContactFilter, hits);
-			foreach (Collider2D hit in hits) {
-				hit.GetComponent<IHit>()?.Hit(gameObject, basicAttackDamage);
+			currentAttackRange.OverlapCollider(attackContactFilter, hits);
+
+			// Deal damage to all enemies in range
+			foreach (Collider2D hit in hits)
+			{
+				var hitInterface = hit.GetComponent<IHit>();
+				Assert.IsNotNull(hit);
+				hitInterface.Hit(gameObject, basicAttackDamage);
 			}
 		}
 
+		// Perform thrust attack
 		public override void PerformStrongerAttack()
 		{
-			if (ThrustActive) return;
+			// Cant do thrust attack when previous is still in progress
+			if (IsPlayerDuringThurstAttack) return;
 
+			// Find all enemies that are already in overlapping with thrust collider and deal damage to them
 			List<Collider2D> hits = new List<Collider2D>();
-			thrustRange.OverlapCollider(attackContactFilter, hits);
-			foreach (Collider2D hit in hits) {
-				Debug.Log("Thrust damage in collider");
-				hit.GetComponent<IHit>()?.Hit(gameObject, thrustDmg);
+			thrustAttackRange.OverlapCollider(attackContactFilter, hits);
+			foreach (Collider2D hit in hits)
+			{
+				var hitInterface = hit.GetComponent<IHit>();
+				Assert.IsNotNull(hit);
+				hitInterface.Hit(gameObject, thrustAttackDamage);
 			}
-			ThrustActive = true;
-			movement.MoveInDirection(player.AimDirection, thrustSpeed, thrustTime,
+
+			IsPlayerDuringThurstAttack = true;
+
+			// Perform fast movement (dash) in aiming direction and disable attack after
+			playerMovementComponent.MoveInDirection(playerManagerComponent.AimDirection, thrustAttackSpeed, thrustAttackTime,
 				() => {
-					ThrustActive = false;
+					IsPlayerDuringThurstAttack = false;
 				});
 		}
 
+		// Active block
 		public override void PerformAlternativeAttack()
 		{
+			// Riposte bullets in range
 			List<Collider2D> blocks = new List<Collider2D>();
 			blockRange.OverlapCollider(blockContactFilter, blocks);
-			foreach (Collider2D block in blocks) {
-				block.GetComponent<IRiposte>()?.Riposte(gameObject);
+			foreach (Collider2D block in blocks)
+			{
+				var riposteInterface = block.GetComponent<IRiposte>();
+				Assert.IsNotNull(riposteInterface);
+				riposteInterface.Riposte(gameObject);
 			}
-			BlockActive = true;
-			RiposteActive = true;
-			StartCoroutine(WaitaForRiposteTime());
+
+			// Start Blocking
+			IsBlockActive = true;
+			IsRiposteActive = true;
+
+			// Disable riposte after time even if block still active
+			StartCoroutine(WaitAndDo(riposetTime, () => IsRiposteActive = false));
 		}
+
+		// Disble block
 		public override void CancelAlternativeAttack()
 		{
-			BlockActive = false;
-			RiposteActive = false;
-		}
-		private IEnumerator WaitaForRiposteTime()
-		{
-			yield return new WaitForSeconds(riposetTime);
-			RiposteActive = false;
+			IsBlockActive = false;
+			IsRiposteActive = false;
 		}
 
 		private void ChangePowerUp(PowerUp.PowerType type, bool active)
 		{
+			// Only double blade powerup is relevant to this weapon
 			if (type != PowerUp.PowerType.DoubleBlade) return;
 
-			range = active ? powerupRange : defaultRange;
+			// If powerup active set current range to powerup range, if not to default range
+			currentAttackRange = active ? basicAttackPowerUpRange : basicAttackDefaultRange;
 		}
 	}
 }

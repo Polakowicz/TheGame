@@ -5642,6 +5642,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
+--- !u!60 &126767646 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1436956163, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+  m_PrefabInstance: {fileID: 416595043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &180666384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6117,6 +6122,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1436956161, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_Name
+      value: Basic attack default range
+      objectReference: {fileID: 0}
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: thrustAttackTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: thrustAttackRange
+      value: 
+      objectReference: {fileID: 1275070933}
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: thrustAttackSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: thrustAttackDamage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: basicAttackDefaultRange
+      value: 
+      objectReference: {fileID: 126767646}
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: basicAttackPowerUpRange
+      value: 
+      objectReference: {fileID: 1699380384}
+    - target: {fileID: 913683281467424584, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_Name
+      value: Melee Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995817468467714320, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_Name
+      value: Basic attack powerup range
+      objectReference: {fileID: 0}
+    - target: {fileID: 2225472237987491096, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_Name
+      value: Block range
+      objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964024, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6164,6 +6209,10 @@ PrefabInstance:
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129938975792256201, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_Name
+      value: Thrust attack range
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
@@ -13595,6 +13644,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7047493936634218612, guid: 0d2ffff0733a70d4fad10e9023693ad6, type: 3}
   m_PrefabInstance: {fileID: 1861937735}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1275070933 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8162505908868652061, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+  m_PrefabInstance: {fileID: 416595043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1320549499
 GameObject:
   m_ObjectHideFlags: 0
@@ -14639,6 +14693,11 @@ Transform:
   m_Father: {fileID: 1742618204}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1699380384 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7492179955472192783, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+  m_PrefabInstance: {fileID: 416595043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1719283686
 GameObject:
   m_ObjectHideFlags: 0

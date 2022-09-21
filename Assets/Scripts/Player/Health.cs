@@ -47,7 +47,7 @@ namespace Scripts.Player
 		private void Damage(int damage)
 		{
 			//Debug.Log($"Player damaged by {damage}; HP left: {HP}");
-			if (meleeWeapon.BlockActive) {
+			if (meleeWeapon.IsBlockActive) {
 				Debug.Log("Attack blocked");
 				HP -= damage / 2;
 			} else {
@@ -67,7 +67,7 @@ namespace Scripts.Player
 
 			if (player.PowerUpController.HitForceField()) return false;
 
-			if (meleeWeapon.RiposteActive) {
+			if (meleeWeapon.IsRiposteActive) {
 				attacker.GetComponent<IRiposte>().Riposte(gameObject);
 				return false;
 			}
