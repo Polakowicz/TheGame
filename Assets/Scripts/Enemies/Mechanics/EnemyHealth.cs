@@ -5,19 +5,18 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class Health : ExtendedMonoBehaviour, IHit, IRiposte
+	public class EnemyHealth : ExtendedMonoBehaviour, IHit, IRiposte
 	{
-		private Enemy manager;
+		private EnemyManager manager;
 		[SerializeField] private int hp;
 
-		private void Start()
+		private void Awake()
 		{
-			manager = GetComponent<Enemy>();
+			manager = GetComponent<EnemyManager>();
 		}
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
-			Debug.Log($"Enemy hp: {hp},  hit by {damage} dmg,  left hp {hp - damage}");
 			hp -= damage;
 
 			if (hp <= 0) {
@@ -28,9 +27,11 @@ namespace Scripts.Enemies
 		public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
 			if(strength >= 1) {
+				// Enemy is stuned
 				manager.Animator.SetBool("Stuned", true);
 				StartCoroutine(WaitAndDo(time, () => manager.Animator.SetBool("Stuned", false)));
 			} else {
+				// Enemy is frozen, decrease speed
 				manager.Data.speedMultiplier -= strength;
 				StartCoroutine(WaitAndDo(time, () => manager.Data.speedMultiplier += strength));
 			}
@@ -44,7 +45,7 @@ namespace Scripts.Enemies
 
 		public void Riposte(GameObject sender)
 		{
-			Debug.LogError("Enemy riposeted");
+			Debug.LogError("Enemy riposeted no implemented");
 		}
 	}
 }

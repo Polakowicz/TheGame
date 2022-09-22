@@ -10,7 +10,7 @@ namespace Scripts.Player
 	{
 		// Other need components
 		private PlayerManager playerManagerComponent;
-		private Movement playerMovementComponent;
+		private PlayerMovement playerMovementComponent;
 		private LineRenderer beamRendererComponent;
 
 		// Position (offset) in whitch bullets will be instantiate
@@ -68,7 +68,7 @@ namespace Scripts.Player
 		{
 			// Get components
 			playerManagerComponent = GetComponentInParent<PlayerManager>();
-			playerMovementComponent = GetComponentInParent<Movement>();
+			playerMovementComponent = GetComponentInParent<PlayerMovement>();
 			beamRendererComponent = GetComponent<LineRenderer>();
 
 			// Nothing is hit by beam at start

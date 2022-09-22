@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class Movement : ExtendedMonoBehaviour
+	public class PlayerMovement : ExtendedMonoBehaviour
 	{
 		//Components
 		private Rigidbody2D rb;
@@ -22,10 +22,11 @@ namespace Scripts.Player
 		[SerializeField] private float basicSpeed = 5f;
 		[SerializeField] private float dashSpeed = 30f;
 		[SerializeField] private float dashTime = 0.1f;
+
 		private Vector2 direction;
 		public float SpeedMultiplier { get; set; } = 1f;
 
-		private void Start()
+		private void Awake()
 		{
 			rb = GetComponent<Rigidbody2D>();
 			player = GetComponentInParent<PlayerManager>();
@@ -33,7 +34,9 @@ namespace Scripts.Player
 
 			moveAction = input.actions["Move"];
 			dashAction = input.actions["Dash"];
-
+		}
+		private void Start()
+		{
 			dashAction.performed += PerformDash;
 		}
 		private void OnDestroy()

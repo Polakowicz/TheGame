@@ -1,26 +1,32 @@
 ﻿using Scripts.Interfaces;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class Interact : MonoBehaviour
+	public class PlayerInteract : MonoBehaviour
 	{
+		// Components
 		private PlayerInput input;
 		private InputAction interactAction;
 		private PlayerManager manager;
 
+		// To find object to interact
 		private Collider2D interactRange;
 
-		private void Start()
+		private void Awake()
 		{
+			// Get components
 			interactRange = GetComponent<Collider2D>();
 			manager = GetComponentInParent<PlayerManager>();
 			input = GetComponentInParent<PlayerInput>();
 
-			interactAction = input.actions["Interact"];
+			// Set varibles
+			interactAction = input.actions["Interact"];	
+		}
+		private void Start()
+		{
 			interactAction.performed += PerformInteraction;
 		}
 		private void OnDestroy()
@@ -33,11 +39,13 @@ namespace Scripts.Player
 			List<Collider2D> hits = new List<Collider2D>();
 			interactRange.OverlapCollider(new ContactFilter2D().NoFilter(), hits);
 			foreach(var hit in hits) {
+				// Object must have Iinteract inteface to interact with it
 				if (!hit.TryGetComponent<IInteract>(out var interactionInterface)) continue;
+
 				var result = interactionInterface.Interact(gameObject);
-				if (result == Interaction.None) continue;
 
 				switch (result) {
+					// Objact may not be active to interacte, ther return none interaction and do nothing and go to next object
 					case Interaction.None:
 						continue;
 

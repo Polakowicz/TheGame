@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class WalkTowardsPlayerBehavoiur : StateMachineBehaviour
+	public class EnemyWalkTowardsPlayerBehavoiur : StateMachineBehaviour
 	{
-		private Enemy manager;
+		private EnemyManager manager;
 		private Rigidbody2D rigidbody;
 		
-		[SerializeField] private readonly float walkSpeed;
+		[SerializeField] private float walkSpeed;
 
 		override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
 			rigidbody = animator.GetComponent<Rigidbody2D>();
-			manager = animator.GetComponent<Enemy>();
+			manager = animator.GetComponent<EnemyManager>();
 
 			rigidbody.bodyType = RigidbodyType2D.Dynamic;
 		}

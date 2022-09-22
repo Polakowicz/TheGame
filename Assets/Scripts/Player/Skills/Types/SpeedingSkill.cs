@@ -5,14 +5,14 @@ namespace Scripts.Player
 {
 	public class SpeedingSkill : Skill
 	{
-		private Movement movementComponent;
+		private PlayerMovement movementComponent;
 
 		[SerializeField] private float speedMultiplier;
 		[SerializeField] private float skillTime;
 
 		private void Awake()
 		{
-			movementComponent = GetComponentInParent<Movement>();
+			movementComponent = GetComponentInParent<PlayerMovement>();
 		}
 
 		public override void UseSkill()

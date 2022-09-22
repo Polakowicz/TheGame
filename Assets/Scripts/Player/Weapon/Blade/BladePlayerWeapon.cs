@@ -10,7 +10,7 @@ namespace Scripts.Player
 	{
 		// Used components
 		private PlayerManager playerManagerComponent;
-		private Movement playerMovementComponent;
+		private PlayerMovement playerMovementComponent;
 
 		[Header("Basic Attack")]
 		// Triggers collider to find enemies in range of basic attack
@@ -64,7 +64,7 @@ namespace Scripts.Player
 		{
 			// Get needed components
 			playerManagerComponent = GetComponentInParent<PlayerManager>();
-			playerMovementComponent = GetComponentInParent<Movement>();
+			playerMovementComponent = GetComponentInParent<PlayerMovement>();
 
 			// Set variables values
 			Type = WeaponType.Blade;

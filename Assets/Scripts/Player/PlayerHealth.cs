@@ -6,14 +6,16 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-	public class Health : ExtendedMonoBehaviour, IHit
+	public class PlayerHealth : ExtendedMonoBehaviour, IHit
 	{
 		private PlayerManager player;
 		private BladePlayerWeapon meleeWeapon;
+
+
 		[SerializeField] private int hp;
 		public int HP { get => hp; private set => hp = value; }
 
-		private void Start()
+		private void Awake()
 		{
 			player = GetComponentInParent<PlayerManager>();
 			meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
@@ -46,9 +48,7 @@ namespace Scripts.Player
 
 		private void Damage(int damage)
 		{
-			//Debug.Log($"Player damaged by {damage}; HP left: {HP}");
 			if (meleeWeapon.IsBlockActive) {
-				Debug.Log("Attack blocked");
 				HP -= damage / 2;
 			} else {
 				HP -= damage;
@@ -61,17 +61,22 @@ namespace Scripts.Player
 				player.AnimationController.Die();
 			}
 		}
+
+
 		private bool IsHit(GameObject attacker)
 		{
+			// Player is immune to attack during dash
 			if (player.State == PlayerManager.PlayerState.Dash) return false;
 
-			if (player.PowerUpController.HitForceField()) return false;
-
-			if (meleeWeapon.IsRiposteActive) {
+			if (meleeWeapon.IsRiposteActive)
+			{
 				attacker.GetComponent<IRiposte>().Riposte(gameObject);
 				return false;
 			}
 
+			if (player.PowerUpController.HitForceField()) return false;
+
+			// Player got hit
 			return true;
 		}
 		

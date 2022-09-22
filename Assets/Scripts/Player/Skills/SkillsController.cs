@@ -75,7 +75,11 @@ namespace Scripts.Player
 		private void SelectWarpSkill(InputAction.CallbackContext context) => SelectSkill(SkillType.Warp);
 		private void SelectWhackAMoleSkill(InputAction.CallbackContext context) => SelectSkill(SkillType.WhackAMole);
 		private void SelectSpeedingSkill(InputAction.CallbackContext context) => SelectSkill(SkillType.Speeding);
-		private void SelectSkill(SkillType skill) => equipedSkill = skill;
+		private void SelectSkill(SkillType skill)
+		{
+			equipedSkill = skill;
+			Debug.Log($"Equiped skill: {equipedSkill}");
+		}
 
 		// Use skill
 		private void StartUsingSkill(InputAction.CallbackContext context) => skills[equipedSkill].StartUsingSkill();

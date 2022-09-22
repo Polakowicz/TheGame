@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class MaleeAttack : MonoBehaviour
+	public class EnemyMaleeAttack : MonoBehaviour
 	{
-		private Enemy manager;
+		private EnemyManager manager;
 
 		[SerializeField] private int range;
 		[SerializeField] private int damage;
 
-		private void Start()
+		private void Awake()
 		{
-			manager = GetComponentInParent<Enemy>();
+			manager = GetComponentInParent<EnemyManager>();
 		}
 
 		public void Attack()

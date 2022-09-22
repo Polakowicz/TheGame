@@ -5,14 +5,15 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class Blow : MonoBehaviour
+	public class EnemyBlow : MonoBehaviour
 	{
 		[SerializeField] private CircleCollider2D range;
-		[SerializeField] private int maxDamage;
 		[SerializeField] private LayerMask blowMask;
 		private ContactFilter2D blowFilter;
 
-		private void Start()
+		[SerializeField] private int maxDamage;
+
+		private void Awake()
 		{
 			blowFilter = new ContactFilter2D {
 				layerMask = blowMask,

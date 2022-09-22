@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-	public class Split : MonoBehaviour
+	public class EnemySplit : MonoBehaviour
 	{
 		[SerializeField] private GameObject minionPrefab;
 		[SerializeField] private int numberOfMinions;
