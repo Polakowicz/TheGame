@@ -1,3 +1,4 @@
+using Scripts.Game;
 using UnityEngine;
 
 namespace Scripts.Player
@@ -27,6 +28,22 @@ namespace Scripts.Player
             PowerUpController = GetComponent<PowerUpController>();
 			AudioManager = FindObjectOfType<AudioManager>();
 			AnimationController = GetComponentInChildren<PlayerAnimationController>();
+		}
+
+        private void Start()
+        {
+            if(GameEventSystem.Instance.StartType == GameEventSystem.GameStartType.LoadedGame)
+            {
+
+				transform.position = Vector3.zero;
+			}
+
+		}
+
+        private void LoadPosition()
+        {
+            Debug.Log("POSITION");
+            
 		}
     }
 }
