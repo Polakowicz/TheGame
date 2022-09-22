@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 1436956162}
   - component: {fileID: 1436956163}
   m_Layer: 21
-  m_Name: MelleRange
+  m_Name: Basic attack default range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 4135934037195639935}
   - component: {fileID: 134073437048459800}
   m_Layer: 21
-  m_Name: Melee
+  m_Name: Melee Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,16 +226,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cfca45c6d269d46b3a519d1f3ccb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultRange: {fileID: 1436956163}
-  powerupRange: {fileID: 7492179955472192783}
+  basicAttackDefaultRange: {fileID: 1436956163}
+  basicAttackPowerUpRange: {fileID: 7492179955472192783}
   attackLayerMask:
     serializedVersion: 2
     m_Bits: 65536
   basicAttackDamage: 15
-  thrustRange: {fileID: 8162505908868652061}
-  thrustSpeed: 15
-  thrustTime: 0.2
-  thrustDmg: 50
+  thrustAttackRange: {fileID: 8162505908868652061}
+  thrustAttackSpeed: 20
+  thrustAttackTime: 0.2
+  thrustAttackDamage: 30
   blockRange: {fileID: 3700359822864264953}
   blockLayerMask:
     serializedVersion: 2
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 3380846687765363776}
   - component: {fileID: 7492179955472192783}
   m_Layer: 21
-  m_Name: MeleeDoubleRange
+  m_Name: Basic attack powerup range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 7867766914167915164}
   - component: {fileID: 3700359822864264953}
   m_Layer: 21
-  m_Name: BlockRange
+  m_Name: Block range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,7 +361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 642222520876616999}
   - component: {fileID: 7566341682411984956}
-  - component: {fileID: 591988291472749318}
+  - component: {fileID: 625286276442202292}
   m_Layer: 15
   m_Name: Freeze
   m_TagString: Untagged
@@ -399,7 +399,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 7
---- !u!114 &591988291472749318
+--- !u!114 &625286276442202292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -408,10 +408,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2442637883807098470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e7264ccbffdb742aed1c42632bb2b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d57b34eeed373b49a55250cbb58c024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezTime: 3
+  freezTime: 4
   freezStrength: 0.9
 --- !u!1 &2896284848948219051
 GameObject:
@@ -537,10 +537,10 @@ GameObject:
   - component: {fileID: 2896284850009964005}
   - component: {fileID: 4652231911992384287}
   - component: {fileID: 2896284850009964027}
-  - component: {fileID: 4717716870089605577}
   - component: {fileID: 6348656884894791210}
   - component: {fileID: 2896284850009964007}
   - component: {fileID: 2015716106}
+  - component: {fileID: 203452822953121776}
   m_Layer: 15
   m_Name: Player
   m_TagString: Player
@@ -687,21 +687,6 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4717716870089605577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2896284850009964024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6ae2c9dfbaeef48945428826e9bccc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  State: 0
-  AimDirection: {x: 0, y: 0}
-  MoveDirection: {x: 0, y: 0}
 --- !u!114 &6348656884894791210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,6 +727,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 500
+--- !u!114 &203452822953121776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896284850009964024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b3cee37d5b175478bcfb3cca4a1615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  State: 0
+  AimDirection: {x: 0, y: 0}
+  MoveDirection: {x: 0, y: 0}
 --- !u!1 &2896284850258396949
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +897,7 @@ GameObject:
   - component: {fileID: 6573227749687704276}
   - component: {fileID: 2106739156}
   m_Layer: 21
-  m_Name: Range
+  m_Name: Range Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -934,18 +934,17 @@ MonoBehaviour:
   defaultBullet: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
   explosiveBullet: {fileID: 2060159463036227266, guid: e4a8e39fa29b01c4085fd0463640fdf3, type: 3}
   piercingBullet: {fileID: 6116300935966142805, guid: 12a9281e2f011544db65a78115faf54b, type: 3}
-  autoFireStartRate: 0.4
-  autoFireMaxRate: 0.1
-  autoFireRateIncrease: 0.1
+  autoFireStartDelay: 0.4
+  autoFireMinimalDelay: 0.1
+  autoFireDalayDecreaseMultiplier: 0.1
   autoFireStartDispersion: 0
   autoFireMaxDispersion: 40
-  autoFireDispersinIncrease: 0.1
+  autoFireDispersionIncreaseMultiplier: 0.1
   beamLayerMask:
     serializedVersion: 2
     m_Bits: 65536
+  beamMaxRange: 7
   beamPullSpeed: 15
-  beamRange: 7
-  beamStunTime: 1
   beamPullStunTime: 1
 --- !u!120 &2106739156
 LineRenderer:
@@ -1055,7 +1054,7 @@ GameObject:
   - component: {fileID: 8162505908868652061}
   - component: {fileID: 5870070358581918923}
   m_Layer: 21
-  m_Name: ThrustDamageRange
+  m_Name: Thrust attack range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1326,8 +1325,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiusGrowSpeed: 2
   maxEnemies: 5
-  damage: 20
   jumpDelay: 0.1
+  damage: 20
 --- !u!58 &5781230282660426172
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1389,8 +1388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusGrow: 2
-  damage: 20
   stunTime: 5
+  damage: 20
 --- !u!58 &7527550362854623186
 CircleCollider2D:
   m_ObjectHideFlags: 0
