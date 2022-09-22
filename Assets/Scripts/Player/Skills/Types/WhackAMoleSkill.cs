@@ -5,56 +5,63 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-	public class WhackAMole : Skill
+	public class WhackAMoleSkill : Skill
 	{
-		private Manager player;
+		private PlayerManager player;
+
 		private CircleCollider2D range;
 		private ContactFilter2D filter;
 		private LayerMask mask;
 
+		// How fast radius grow during charging
 		[SerializeField] private float radiusGrow;
-		[SerializeField] private int damage;
+
+		// How long enemy should be stuned after hit
 		[SerializeField] private float stunTime;
 
-		private bool charging;
+		[SerializeField] private int damage;
+		
+		private bool isCharging;
 
-		private void Start()
+		private void Awake()
 		{
-			player = GetComponentInParent<Manager>();
+			// Get components
+			player = GetComponentInParent<PlayerManager>();
 			range = GetComponent<CircleCollider2D>();
+
+			// Set variables
 			mask = LayerMask.GetMask("Enemy");
 			filter = new ContactFilter2D {
 				layerMask = mask,
 				useLayerMask = true
 			};
-
 			range.radius = 0;
-			charging = false;
+			isCharging = false;
 		}
 
 		private void Update()
 		{
-			if (!charging) return;
+			// Grow collider radius when charging skill
+			if (!isCharging) return;
 			range.radius += radiusGrow * Time.deltaTime;
 		}
 
 		public override void StartUsingSkill()
 		{
-			Debug.Log("Whack-a-mole start charging");
-			charging = true;
-			player.State = Manager.PlayerState.Charging;
+			isCharging = true;
+			player.State = PlayerManager.PlayerState.Charging;
 		}
 		public override void StopUsingSkill()
 		{
-			Debug.Log("Whack-a-mole attck");
+			// Hit all enemies in range with skill
 			List<Collider2D> colliders = new List<Collider2D>();
 			range.OverlapCollider(filter, colliders);
 			foreach (Collider2D collider in colliders) {
 				collider.GetComponent<IHit>()?.StunHit(gameObject, damage, stunTime);
 			}
-			charging = false;
+			isCharging = false;
 			range.radius = 0;
-			player.State = Manager.PlayerState.Walk;
+			player.State = PlayerManager.PlayerState.Walk;
 		}
 	}
 }

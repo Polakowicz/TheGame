@@ -6,6 +6,7 @@ namespace Scripts.Game
 {
 	public class Checkpoint : MonoBehaviour, IInteract
 	{
+		// Player respown position
 		[SerializeField] private Transform respownPostion;
 		public Transform RespownPosition { get => respownPostion; }
 

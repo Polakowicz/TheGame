@@ -6,17 +6,19 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-	public class Health : ExtendedMonoBehaviour, IHit
+	public class PlayerHealth : ExtendedMonoBehaviour, IHit
 	{
-		private Manager player;
-		private MeleeWeapon meleeWeapon;
+		private PlayerManager player;
+		private BladePlayerWeapon meleeWeapon;
+
+
 		[SerializeField] private int hp;
 		public int HP { get => hp; private set => hp = value; }
 
-		private void Start()
+		private void Awake()
 		{
-			player = GetComponentInParent<Manager>();
-			meleeWeapon = GetComponentInChildren<MeleeWeapon>();
+			player = GetComponentInParent<PlayerManager>();
+			meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
 		}
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
@@ -34,21 +36,19 @@ namespace Scripts.Player
 		}
 		public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
-			if(player.State == Manager.PlayerState.Stun) {
+			if(player.State == PlayerManager.PlayerState.Stun) {
 				StopAllCoroutines();
 			}
 
-			player.State = Manager.PlayerState.Stun;
+			player.State = PlayerManager.PlayerState.Stun;
 			StartCoroutine(WaitAndDo(time, () => {
-				player.State = Manager.PlayerState.Walk;
+				player.State = PlayerManager.PlayerState.Walk;
 			}));
 		}
 
 		private void Damage(int damage)
 		{
-			//Debug.Log($"Player damaged by {damage}; HP left: {HP}");
-			if (meleeWeapon.BlockActive) {
-				Debug.Log("Attack blocked");
+			if (meleeWeapon.IsBlockActive) {
 				HP -= damage / 2;
 			} else {
 				HP -= damage;
@@ -61,17 +61,22 @@ namespace Scripts.Player
 				player.AnimationController.Die();
 			}
 		}
+
+
 		private bool IsHit(GameObject attacker)
 		{
-			if (player.State == Manager.PlayerState.Dash) return false;
+			// Player is immune to attack during dash
+			if (player.State == PlayerManager.PlayerState.Dash) return false;
 
-			if (player.PowerUpController.HitForceField()) return false;
-
-			if (meleeWeapon.RiposteActive) {
+			if (meleeWeapon.IsRiposteActive)
+			{
 				attacker.GetComponent<IRiposte>().Riposte(gameObject);
 				return false;
 			}
 
+			if (player.PowerUpController.HitForceField()) return false;
+
+			// Player got hit
 			return true;
 		}
 		

@@ -3,28 +3,28 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-	public class Speeding : Skill
+	public class SpeedingSkill : Skill
 	{
-		private Movement movement;
+		private PlayerMovement movementComponent;
 
 		[SerializeField] private float speedMultiplier;
 		[SerializeField] private float skillTime;
 
-		private void Start()
+		private void Awake()
 		{
-			movement = GetComponentInParent<Movement>();
+			movementComponent = GetComponentInParent<PlayerMovement>();
 		}
 
 		public override void UseSkill()
 		{
-			movement.SpeedMultiplier = speedMultiplier;
+			movementComponent.SpeedMultiplier = speedMultiplier;
 			StartCoroutine(SkillDuration(skillTime));
 		}
 
 		private IEnumerator SkillDuration(float time)
 		{
 			yield return new WaitForSeconds(time);
-			movement.SpeedMultiplier = 1;
+			movementComponent.SpeedMultiplier = 1;
 		}
 	}
 }

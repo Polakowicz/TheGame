@@ -7,13 +7,15 @@ namespace Scripts.Bullets
 {
 	public class BulletExplode : MonoBehaviour
 	{
+		// Range for explosion
 		[SerializeField] private CircleCollider2D rangeCollider;
 		[SerializeField] private LayerMask hitLayerMask;
-		[SerializeField] private int damage;
-
 		private ContactFilter2D filter;
 
-		private void Start()
+		// Maximal damaga that can be dealt in other object is really close
+		[SerializeField] private int damage;
+
+		private void Awake()
 		{
 			filter = new ContactFilter2D {
 				layerMask = hitLayerMask,

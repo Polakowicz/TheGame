@@ -7,11 +7,11 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class Movement : ExtendedMonoBehaviour
+	public class PlayerMovement : ExtendedMonoBehaviour
 	{
 		//Components
 		private Rigidbody2D rb;
-		private Manager player;
+		private PlayerManager player;
 		private PlayerInput input;
 
 		//Input actions
@@ -22,18 +22,21 @@ namespace Scripts.Player
 		[SerializeField] private float basicSpeed = 5f;
 		[SerializeField] private float dashSpeed = 30f;
 		[SerializeField] private float dashTime = 0.1f;
+
 		private Vector2 direction;
 		public float SpeedMultiplier { get; set; } = 1f;
 
-		private void Start()
+		private void Awake()
 		{
 			rb = GetComponent<Rigidbody2D>();
-			player = GetComponentInParent<Manager>();
+			player = GetComponentInParent<PlayerManager>();
 			input = GetComponentInParent<PlayerInput>();
 
 			moveAction = input.actions["Move"];
 			dashAction = input.actions["Dash"];
-
+		}
+		private void Start()
+		{
 			dashAction.performed += PerformDash;
 		}
 		private void OnDestroy()
@@ -43,9 +46,9 @@ namespace Scripts.Player
 
 		private void Update()
 		{
-			if (player.State == Manager.PlayerState.Dash) return;
+			if (player.State == PlayerManager.PlayerState.Dash) return;
 
-			if(player.State == Manager.PlayerState.Walk) {
+			if(player.State == PlayerManager.PlayerState.Walk) {
 				direction = moveAction.ReadValue<Vector2>();
 				rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
 				player.MoveDirection = rb.velocity;
@@ -57,7 +60,7 @@ namespace Scripts.Player
 		//Dash
 		private void PerformDash(InputAction.CallbackContext context)
 		{
-			if (player.State != Manager.PlayerState.Walk) return;
+			if (player.State != PlayerManager.PlayerState.Walk) return;
 
 			MoveInDirection(direction, dashSpeed, dashTime, null);
 			player.AnimationController.Dash();
@@ -65,7 +68,7 @@ namespace Scripts.Player
 		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)
 		{
 			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
-			player.State = Manager.PlayerState.Dash;
+			player.State = PlayerManager.PlayerState.Dash;
 			rb.velocity = direction.normalized * speed;
 			StartCoroutine(Dashing(time, func));
 		}
@@ -73,7 +76,7 @@ namespace Scripts.Player
 		{
 			yield return new WaitForSeconds(time);
 			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
-			player.State = Manager.PlayerState.Walk;
+			player.State = PlayerManager.PlayerState.Walk;
 			after?.Invoke();
 		}
 	}

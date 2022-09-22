@@ -21,10 +21,11 @@ namespace Scripts.Player
 
 		void OnTriggerEnter2D(Collider2D collision)
 		{
+			// Only player can trigger and only by collider, not triggers
 			if (collision.gameObject.layer != LayerMask.NameToLayer("Player")) return;
 			if (collision.isTrigger) return;
 
-			collision.gameObject.GetComponent<Manager>().PowerUpController.AddPowerUp(this);
+			collision.gameObject.GetComponent<PlayerManager>().PowerUpController.AddPowerUp(this);
 			Destroy(gameObject);
 		}
 	}

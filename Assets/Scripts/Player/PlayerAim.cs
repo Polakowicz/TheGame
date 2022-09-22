@@ -3,20 +3,22 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class Aim : MonoBehaviour
+	public class PlayerAim : MonoBehaviour
 	{
 		[SerializeField]
 		private Transform crosshair;
-		private Manager player;
+		private PlayerManager playerManager;
 		private PlayerInput input;
 
 		private InputAction aimAction;
-		private bool gamepad;
+		private bool isUsingGamepad;
+
+		// Distance of crosshair form player when using gamepad
 		private float gamepadCrosshariDistance;
 
-		private void Start()
+		private void Awake()
 		{
-			player = GetComponentInParent<Manager>();
+			playerManager = GetComponentInParent<PlayerManager>();
 			input = GetComponentInParent<PlayerInput>();
 
 			aimAction = input.actions["Aim"];
@@ -26,7 +28,7 @@ namespace Scripts.Player
 		private void Update()
 		{
 			Vector2 lookDirection;
-			if (gamepad) {
+			if (isUsingGamepad) {
 				lookDirection = aimAction.ReadValue<Vector2>();
 				if (lookDirection == Vector2.zero) {
 					return;
@@ -38,14 +40,14 @@ namespace Scripts.Player
 				lookDirection = mousePos - (Vector2)transform.position;
 			}
 			transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90)); ;
-			player.AimDirection = lookDirection.normalized;
+			playerManager.AimDirection = lookDirection.normalized;
 		}
 
 		public void OnControlsChanged(PlayerInput input)
 		{
 			//To change in future. It is public and made through the inspector because onControlsChange does not work
-			gamepad = input.currentControlScheme.Equals("Gamepad");
-			if (gamepad) {
+			isUsingGamepad = input.currentControlScheme.Equals("Gamepad");
+			if (isUsingGamepad) {
 				crosshair.localPosition = (Vector2)crosshair.localPosition.normalized * gamepadCrosshariDistance;
 			}
 		}

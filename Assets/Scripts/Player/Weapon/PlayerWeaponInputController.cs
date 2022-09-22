@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-    public class WeaponInputController : MonoBehaviour
+    public class PlayerWeaponInputController : MonoBehaviour
     {
         //Components
-        private Manager player;
+        private PlayerManager player;
         private PlayerInput input;
         
         //InputActions
@@ -17,53 +17,46 @@ namespace Scripts.Player
         private InputAction pullAction;
 
         //Weapons
-        private MeleeWeapon meleeWeapon;
-        private RangedWeapon rangedWeapon;
-        private Weapon equippedWeapon;
+        private BladePlayerWeapon bladeWeapon;
+        private BlasterPlayerWeapon blasterWeapon;
+        private PlayerWeapon equippedWeapon;
 
-        private void Start()
+        private void Awake()
         {
-            player = GetComponentInParent<Manager>();
+            // Get components
+            player = GetComponentInParent<PlayerManager>();
             input = GetComponentInParent<PlayerInput>();
+            bladeWeapon = GetComponentInChildren<BladePlayerWeapon>();
+            blasterWeapon = GetComponentInChildren<BlasterPlayerWeapon>();
 
-            meleeWeapon = GetComponentInChildren<MeleeWeapon>();
-            rangedWeapon = GetComponentInChildren<RangedWeapon>();
-            equippedWeapon = meleeWeapon;
+            // Set variables
+            equippedWeapon = bladeWeapon;
 
-            CreatActionInputs();
-            SubscribeToEvents();
-        }
-        private void CreatActionInputs()
+			// Create action inputs
+			switchWeaponAction = input.actions["Switch weapon"];
+			basicAttackActinon = input.actions["Basic attack"];
+			strongerAttackAction = input.actions["Stronger attack"];
+			alternativeAttackAction = input.actions["Alternative attack"];
+			pullAction = input.actions["Scroll"];
+		}
+		private void Start()
         {
-            switchWeaponAction = input.actions["Switch weapon"];
-            basicAttackActinon = input.actions["Basic attack"];
-            strongerAttackAction = input.actions["Stronger attack"];
-            alternativeAttackAction = input.actions["Alternative attack"];
-            pullAction = input.actions["Scroll"];
-        }
-        private void SubscribeToEvents()
-        {
-            switchWeaponAction.performed += SwitchWeapon;
-
-            basicAttackActinon.performed += PerformeBasicAttack;
-
-            strongerAttackAction.canceled += CancelStrongerAttack;
-            strongerAttackAction.performed += PerformStrongerAttack;
-
-            alternativeAttackAction.started += StartAlternativeAttack;
-            alternativeAttackAction.performed += PerformAlternativeAttack;
-            alternativeAttackAction.canceled += CancelAlternativeAttack;
-        }
-
+            // Ssubscribe to events
+			switchWeaponAction.performed += SwitchWeapon;
+			basicAttackActinon.performed += PerformeBasicAttack;
+			strongerAttackAction.canceled += CancelStrongerAttack;
+			strongerAttackAction.performed += PerformStrongerAttack;
+			alternativeAttackAction.started += StartAlternativeAttack;
+			alternativeAttackAction.performed += PerformAlternativeAttack;
+			alternativeAttackAction.canceled += CancelAlternativeAttack;
+		}
         private void OnDestroy()
         {
+            // Unsubscribe events
             switchWeaponAction.performed -= SwitchWeapon;
-
             basicAttackActinon.performed -= PerformeBasicAttack;
-
             strongerAttackAction.canceled -= CancelStrongerAttack;
             strongerAttackAction.performed -= PerformStrongerAttack;
-
             alternativeAttackAction.started -= StartAlternativeAttack;
             alternativeAttackAction.performed -= PerformAlternativeAttack;
             alternativeAttackAction.canceled -= CancelAlternativeAttack;
@@ -71,6 +64,7 @@ namespace Scripts.Player
 
         private void Update()
         {
+            // Perform pull if icroll input
             var scrollInputValue = pullAction.ReadValue<float>();
             if (scrollInputValue != 0) {
                 equippedWeapon.PerformBeamPullAction(scrollInputValue);
@@ -79,19 +73,21 @@ namespace Scripts.Player
 
         private void SwitchWeapon(InputAction.CallbackContext context)
         {
-            player.AudioManager.Play("SwitchWeapon");
-            if (equippedWeapon.Type == Weapon.WeaponType.Blade) {
-                equippedWeapon = rangedWeapon;
+            // Change equiped weapon 
+			if (equippedWeapon.Type == PlayerWeapon.WeaponType.Blade) {
+                equippedWeapon = blasterWeapon;
             } else {
-                equippedWeapon = meleeWeapon;
+                equippedWeapon = bladeWeapon;
             }
 
-            player.AnimationController.ChangeGun(equippedWeapon.Type);
+			// Play switch weapon sound
+			player.AudioManager.Play("SwitchWeapon");
 
-        }
+			// Play switch weapon animation
+			player.AnimationController.ChangeGun(equippedWeapon.Type);
+		}
 
 		//Weapons attakcs
-		//===============
 		private void PerformeBasicAttack(InputAction.CallbackContext context) => equippedWeapon.PerformBasicAttack();
 
 		private void CancelStrongerAttack(InputAction.CallbackContext context) => equippedWeapon.CancelStrongerAttack();

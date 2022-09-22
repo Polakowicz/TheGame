@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts.Player
 {
-	public class Freeze : Skill
+	public class FreezeSkill : Skill
 	{
 		private Collider2D range;
 		private LayerMask mask;
@@ -13,10 +13,11 @@ namespace Scripts.Player
 		[SerializeField] private float freezTime;
 		[SerializeField] private float freezStrength;
 
-		private void Start()
+		private void Awake()
 		{
-			mask = LayerMask.GetMask("Enemy");
 			range = GetComponent<Collider2D>();
+
+			mask = LayerMask.GetMask("Enemy");
 			filter = new ContactFilter2D {
 				layerMask = mask,
 				useLayerMask = true,
@@ -26,7 +27,7 @@ namespace Scripts.Player
 
 		public override void UseSkill()
 		{
-			Debug.Log($"Used skill: {SkillsController.SkillType.FreezeTime}");
+			// Stun enemies in range
 			List<Collider2D> colliders = new List<Collider2D>();
 			range.OverlapCollider(filter, colliders);
 			foreach (Collider2D collider in colliders) {
