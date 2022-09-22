@@ -1,3 +1,4 @@
+using Scripts.Game;
 using UnityEngine;
 
 namespace Scripts.Player
@@ -27,6 +28,15 @@ namespace Scripts.Player
             PowerUpController = GetComponent<PowerUpController>();
 			AudioManager = FindObjectOfType<AudioManager>();
 			AnimationController = GetComponentInChildren<PlayerAnimationController>();
+		}
+
+        private void Start()
+        {
+			if (GameEventSystem.Instance.StartType == GameEventSystem.GameStartType.LoadedGame)
+			{
+				var checkpointName = GameEventSystem.Instance.SaveSystem.Data.checkpointName;
+				transform.position = CheckpointsPositions.Instance.GetCheckpointFromName(checkpointName).RespownPosition.position;
+			}
 		}
     }
 }

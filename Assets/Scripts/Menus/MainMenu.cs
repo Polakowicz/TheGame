@@ -1,3 +1,4 @@
+using Scripts.Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,18 +22,36 @@ public class MainMenu : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("ButtonClick");
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        if (Time.timeScale == 0.0f)
-        {
-            Time.timeScale = 1.0f;
-        }
+		// Set flag to new game
+		GameEventSystem.Instance.StartType = GameEventSystem.GameStartType.NewGame;
+
+        // Change scene
+		LoadLevel();
     }
 
     public void ResumeGame()
     {
-        // GameManager.Instance.LoadGame();
-        NewGame();
-    }
+		FindObjectOfType<AudioManager>().Play("ButtonClick");
+
+		// Load data from file
+		GameEventSystem.Instance.SaveSystem.LoadGame();
+
+        // Set flag to resume game
+        GameEventSystem.Instance.StartType = GameEventSystem.GameStartType.LoadedGame;
+
+        // Change scene
+        LoadLevel();
+	}
+
+    private void LoadLevel()
+    {
+        // Change scene
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		if (Time.timeScale == 0.0f)
+		{
+			Time.timeScale = 1.0f;
+		}
+	}
     /*
         public void GoSettings(){
             FindObjectOfType<AudioManager>().Play("ButtonClick");
