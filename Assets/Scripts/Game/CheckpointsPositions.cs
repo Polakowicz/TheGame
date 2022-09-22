@@ -21,7 +21,7 @@ namespace Scripts.Game
 			}
 		}
 
-		public Checkpoint GetCheckpointFromName(Checkpoint.CheckpointName checkpointName)
+		public Checkpoint GetCheckpointFromName(string checkpointName)
 		{
 			return allCheckpoints.AsEnumerable().Where(x => x.Name == checkpointName).Single();
 		}

@@ -1,28 +1,27 @@
 ﻿using Scripts.Interfaces;
-using System.Collections;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Scripts.Game
 {
 	public class Checkpoint : MonoBehaviour, IInteract
 	{
-		
-		public enum CheckpointName
-		{
-			Top,
-			Left
-		}
+		private readonly string defaultName = "(Name of checkpont)";
 
 		// Player respown position
 		[SerializeField] private Transform respownPostion;
 		public Transform RespownPosition { get => respownPostion; }
 
 		// Name of the checkpoint
-		[SerializeField] private CheckpointName checkpointName;
-		public CheckpointName Name { get => checkpointName; }
+		[SerializeField] private string checkpointName;
+		public string Name { get => checkpointName; }
 
+		private void Awake()
+		{
+			Assert.AreNotEqual(checkpointName, defaultName, "Change name of checkpoint");
+		}
 
+		// Activation
 		public Interaction Interact(GameObject sender)
 		{
 			GameEventSystem.Instance.OnCheckpointReached?.Invoke(this);

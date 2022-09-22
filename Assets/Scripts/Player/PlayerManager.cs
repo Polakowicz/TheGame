@@ -32,18 +32,11 @@ namespace Scripts.Player
 
         private void Start()
         {
-            if(GameEventSystem.Instance.StartType == GameEventSystem.GameStartType.LoadedGame)
-            {
-                var checkpointName = GameEventSystem.Instance.SaveSystem.Data.checkpointName;
-                transform.position = CheckpointsPositions.Instance.GetCheckpointFromName(checkpointName).RespownPosition.position;
+			if (GameEventSystem.Instance.StartType == GameEventSystem.GameStartType.LoadedGame)
+			{
+				var checkpointName = GameEventSystem.Instance.SaveSystem.Data.checkpointName;
+				transform.position = CheckpointsPositions.Instance.GetCheckpointFromName(checkpointName).RespownPosition.position;
 			}
-
-		}
-
-        private void LoadPosition()
-        {
-            Debug.Log("POSITION");
-            
 		}
     }
 }

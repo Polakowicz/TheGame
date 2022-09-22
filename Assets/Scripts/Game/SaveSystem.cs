@@ -14,21 +14,14 @@ namespace Scripts.Game
 		// Path where data will be saved
 		private string filePath; 
 
-		// List of  all checkpints
-		//[SerializeField] private Checkpoint[] allCheckpoints;
-		//[SerializeField] private GameObject playerPrefab;
-
 		// Data to save in file
 		[Serializable]
 		public class SaveData
 		{
 			public int hp;
-			public Checkpoint.CheckpointName checkpointName;
+			public string checkpointName;
 		}
 		public SaveData Data;
-
-		// Active checkpoint
-		//public Checkpoint Checkpoint { get; private set; }
 
 		private void Awake()
 		{
@@ -73,8 +66,6 @@ namespace Scripts.Game
 			}
 
 			Data = loadedData;
-
-			//Checkpoint = 
 		}
 	}
 }
