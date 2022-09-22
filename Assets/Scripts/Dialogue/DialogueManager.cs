@@ -77,7 +77,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        animator.SetBool("isOpen", false);
+        //animator.SetBool("isOpen", false);
         // Debug.Log("End of conversation.");
 
         // startDialogueButton.gameObject.SetActive(false);

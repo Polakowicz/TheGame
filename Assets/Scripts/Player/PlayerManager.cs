@@ -34,8 +34,8 @@ namespace Scripts.Player
         {
             if(GameEventSystem.Instance.StartType == GameEventSystem.GameStartType.LoadedGame)
             {
-
-				transform.position = Vector3.zero;
+                var checkpointName = GameEventSystem.Instance.SaveSystem.Data.checkpointName;
+                transform.position = CheckpointsPositions.Instance.GetCheckpointFromName(checkpointName).RespownPosition.position;
 			}
 
 		}

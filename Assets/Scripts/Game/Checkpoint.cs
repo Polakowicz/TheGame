@@ -1,14 +1,17 @@
 ﻿using Scripts.Interfaces;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Scripts.Game
 {
 	public class Checkpoint : MonoBehaviour, IInteract
 	{
+		
 		public enum CheckpointName
 		{
 			Top,
+			Left
 		}
 
 		// Player respown position

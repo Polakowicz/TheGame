@@ -74,7 +74,7 @@ namespace Scripts.Game
 
 			Data = loadedData;
 
-			//Checkpoint = allCheckpoints.AsEnumerable().Where(x => x.Name == Data.checkpointName).Single();
+			//Checkpoint = 
 		}
 	}
 }
