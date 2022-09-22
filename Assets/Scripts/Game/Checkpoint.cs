@@ -6,9 +6,19 @@ namespace Scripts.Game
 {
 	public class Checkpoint : MonoBehaviour, IInteract
 	{
+		public enum CheckpointName
+		{
+			Top,
+		}
+
 		// Player respown position
 		[SerializeField] private Transform respownPostion;
 		public Transform RespownPosition { get => respownPostion; }
+
+		// Name of the checkpoint
+		[SerializeField] private CheckpointName checkpointName;
+		public CheckpointName Name { get => checkpointName; }
+
 
 		public Interaction Interact(GameObject sender)
 		{
