@@ -1,26 +1,44 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Scripts.Enemies
 {
 	public class BossSpawningEnemies : MonoBehaviour
 	{
+		// Class nesting to display 2d array in Unity inspector
+
+		// Class represents single wave of enemies
 		[Serializable]
-		public class Spawn
+		private class Wave
 		{
-			public GameObject emenyPrefab;
-			public Transform position;
+			// All enemies in single wave
+			[SerializeField] public EnemySpawn[] enemiesInWave;
+
+			[Serializable]
+			public class EnemySpawn
+			{
+				public GameObject emenyPrefab;
+				public Transform position;
+			}
 		}
 
-		// List of all enemies to spawn in wave
-		[SerializeField] private Spawn[] enemiesInWave;
+		// List of waves
+		[SerializeField] private Wave[] allEnemyWaves;
+		private int waveNumber = 0;
 
-		public void SpawnWave()
+		public void SpawnNextWave()
 		{
-			foreach(var spawn in enemiesInWave)
+			// Make sure that not out of waves range
+			Assert.IsTrue(waveNumber < allEnemyWaves.Length);
+
+			// Spawn enemies
+			var wave = allEnemyWaves[waveNumber++];
+			foreach(var enemy in wave.enemiesInWave)
 			{
-				Instantiate(spawn.emenyPrefab, spawn.position);
+				Instantiate(enemy.emenyPrefab, enemy.position);
 			}
 		}
 	}
