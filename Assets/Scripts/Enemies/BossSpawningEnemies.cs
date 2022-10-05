@@ -38,7 +38,7 @@ namespace Scripts.Enemies
 			var wave = allEnemyWaves[waveNumber++];
 			foreach(var enemy in wave.enemiesInWave)
 			{
-				Instantiate(enemy.emenyPrefab, enemy.position);
+				Instantiate(enemy.emenyPrefab, enemy.position.position, Quaternion.identity);
 			}
 		}
 	}
