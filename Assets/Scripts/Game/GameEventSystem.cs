@@ -34,5 +34,7 @@ namespace Scripts.Game
 
 		public Action<Checkpoint> OnCheckpointReached;
 		public Action OnGameSaveLoaded;
+
+		public Action OnEnemyKilled;
 	}
 }
