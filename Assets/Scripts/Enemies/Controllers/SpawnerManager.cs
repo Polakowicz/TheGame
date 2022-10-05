@@ -1,29 +1,64 @@
 using Scripts.Game;
+using Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 namespace Scripts.Enemies
 {
-    public class SpawnerManager : MonoBehaviour
+    public class SpawnerManager : MonoBehaviour, IHit
     {
-        private Animator animator;
+        private readonly string DieTriggerAnimatorName = "Die";
+        private readonly string SpawnWaveAnimatorName = "SpawnNextWave";
+        private readonly string RestAnimatorStateName = "Rest";
 
-        private void Awake()
+		private Animator animator;
+        private BossSpawningEnemies spawningComponent;
+
+        // Helth for 1 stage,
+        [SerializeField] private int StageHealh;
+        private int healthLeft;
+
+		private void Awake()
+		{
+			animator = GetComponent<Animator>();
+			spawningComponent = GetComponent<BossSpawningEnemies>();
+
+			healthLeft = StageHealh;
+		}
+
+        public void ResetHealth() => healthLeft = StageHealh;
+   
+		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
         {
-            animator = GetComponent<Animator>();
+            // Get damage only in rest state
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName(RestAnimatorStateName)) return;
+
+			healthLeft = Mathf.Clamp(healthLeft - damage, 0, StageHealh);
+            if(healthLeft == 0)
+            {
+                if (spawningComponent.WavesLeft == 0)
+                {
+                    animator.SetTrigger(DieTriggerAnimatorName);
+                } else
+                {
+                    animator.SetTrigger(SpawnWaveAnimatorName);
+                }
+            }
         }
 
-        // Start is called before the first frame update
-        private void Start()
+        public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
         {
-            
+            // Stund does nothing to this enemy, he get hits only when he is resting
+            return;
+        }
+        public void StunHit(GameObject attacker, int damage, float stunTime, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
+        {
+            // Call only hit because stun does nothing
+            Hit(attacker, damage, weapon);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+    
     }
 }

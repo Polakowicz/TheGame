@@ -27,18 +27,23 @@ namespace Scripts.Enemies
 			}
 		}
 
+
+		private SpawnerManager spawnerManager;
+		private Animator animator;
+
 		// List of waves
 		[SerializeField] private Wave[] allEnemyWaves;
 		private int waveNumber = 0;
 
-		private Animator animator;
-
 		// Number of enemies spawned in wave that are still alive;
 		private int spawnedEnemies;
+
+		public int WavesLeft { get => allEnemyWaves.Length - waveNumber; }
 
 		private void Awake()
 		{
 			animator = GetComponent<Animator>();
+			spawnerManager = GetComponent<SpawnerManager>();
 		}
 		private void Start()
 		{
@@ -53,6 +58,8 @@ namespace Scripts.Enemies
 		{
 			// Make sure that not out of waves range
 			Assert.IsTrue(waveNumber < allEnemyWaves.Length);
+
+			spawnerManager.ResetHealth();
 
 			// Spawn enemies
 			spawnedEnemies = 0;
