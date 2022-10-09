@@ -17,7 +17,7 @@ namespace Scripts.Bullets
 		[SerializeField] protected LayerMask hitLayerMask;
 		public float Speed { get => speed; }
 
-		private void Awake()
+		protected void Awake()
 		{
 			bulletPool = GetComponentInParent<ObjectPool>();
 		}

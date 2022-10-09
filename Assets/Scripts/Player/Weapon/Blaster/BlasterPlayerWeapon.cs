@@ -1,4 +1,5 @@
-﻿using Scripts.Interfaces;
+﻿using Scripts.Bullets;
+using Scripts.Interfaces;
 using Scripts.Tools;
 using System;
 using System.Collections;
@@ -13,20 +14,17 @@ namespace Scripts.Player
 		private PlayerManager playerManagerComponent;
 		private PlayerMovement playerMovementComponent;
 		private LineRenderer beamRendererComponent;
-		private ObjectPool BulletPool;
-
+		
 		// Position (offset) in whitch bullets will be instantiate
 		[SerializeField] private Transform gunBarrel;
 
-		// Bullet prefabs for powerups
-		[Header("Bullet Types")]
-		[SerializeField] private GameObject defaultBullet;
-		[SerializeField] private GameObject explosiveBullet;
-		[SerializeField] private GameObject piercingBullet;
-		private GameObject currentlySelectedBullet;
+		// Pools of bullets of specific type
+		[Header("Bullet pools")]
+		[SerializeField] private ObjectPool basicBulletPool;
+		[SerializeField] private ObjectPool explosiveBulletPool;
+		[SerializeField] private ObjectPool piercingBulletPool;
+		private ObjectPool currentlySelectedPool;
 		[Space(20)]
-		
-
 	
 		[Header("Auto Fire Delay")]
 		// Delay between next bullet instantiainstantiate
@@ -72,14 +70,13 @@ namespace Scripts.Player
 			playerManagerComponent = GetComponentInParent<PlayerManager>();
 			playerMovementComponent = GetComponentInParent<PlayerMovement>();
 			beamRendererComponent = GetComponent<LineRenderer>();
-			BulletPool = GetComponent<ObjectPool>();
 
 			// Nothing is hit by beam at start
 			beamRendererComponent.enabled = false;
 
 			// Set default variables values
 			Type = WeaponType.Blaster;
-			currentlySelectedBullet = defaultBullet;
+			currentlySelectedPool = basicBulletPool;
 		}
 		private void Start()
 		{
@@ -122,17 +119,17 @@ namespace Scripts.Player
 			playerManagerComponent.AudioManager.Play("RangedBasicAttack");
 
 			// Get bullet from pool
-			var bullet = BulletPool.GetObject();
+			var bullet = currentlySelectedPool.GetObject();
 
 			// Set bullet position, rotation and velocity
 			bullet.transform.SetPositionAndRotation(transform.position, rotation);
 			var bulletRb = bullet.GetComponent<Rigidbody2D>();
 			bulletRb.rotation = bullet.transform.rotation.eulerAngles.z;
 			bulletRb.velocity = new Vector2(-Mathf.Sin(Mathf.Deg2Rad * bulletRb.rotation),
-				Mathf.Cos(Mathf.Deg2Rad * bulletRb.rotation)) * 10;//TODO 10
+				Mathf.Cos(Mathf.Deg2Rad * bulletRb.rotation)) * bullet.GetComponent<Bullet>().Speed;
 
 			// If explosive bullet powerup is active, decrease explosives left
-			if (currentlySelectedBullet == explosiveBullet)
+			if (currentlySelectedPool == explosiveBulletPool)
 			{
 				playerManagerComponent.PowerUpController.ShootExplosiveBullet();
 			}
@@ -242,9 +239,9 @@ namespace Scripts.Player
 		public void ChangePowerUp(PowerUp.PowerType type, bool active)
 		{
 			if (type == PowerUp.PowerType.ShotExplosion) {
-				currentlySelectedBullet = active ? explosiveBullet : defaultBullet;
+				currentlySelectedPool = active ? explosiveBulletPool : basicBulletPool;
 			} else if (type == PowerUp.PowerType.ShotPiercing) {
-				currentlySelectedBullet = active ? piercingBullet : defaultBullet;
+				currentlySelectedPool = active ? piercingBulletPool : basicBulletPool;
 			}
 		}
 	}

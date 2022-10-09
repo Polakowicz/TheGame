@@ -81,8 +81,7 @@ GameObject:
   - component: {fileID: 8956668446060569130}
   - component: {fileID: 3588603018472162588}
   - component: {fileID: 355093449135508377}
-  - component: {fileID: 785738469045776860}
-  - component: {fileID: 1516838486317593386}
+  - component: {fileID: 2983777009241437155}
   m_Layer: 0
   m_Name: Explosive Bullet
   m_TagString: Untagged
@@ -193,7 +192,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &785738469045776860
+--- !u!114 &2983777009241437155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,24 +201,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2060159463036227266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5e96cb5ee18ad4e94801cb832e2ad1, type: 3}
+  m_Script: {fileID: 11500000, guid: 537aa6111bb21e242805f6485a46afaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 50
+  isBulletPiercing: 0
   speed: 10
---- !u!114 &1516838486317593386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060159463036227266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0dc9177591099343b13d982ac528963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 65536
-  damage: 20
   rangeCollider: {fileID: 1680240498664404047}

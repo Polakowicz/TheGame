@@ -11,8 +11,9 @@ namespace Scripts.Bullets
 		[SerializeField] private CircleCollider2D rangeCollider;
 		private ContactFilter2D filter;
 
-		private void Awake()
+		protected new void Awake()
 		{
+			base.Awake();
 			filter = new ContactFilter2D {
 				layerMask = hitLayerMask,
 				useLayerMask = true,
