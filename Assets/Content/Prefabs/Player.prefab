@@ -682,6 +682,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 10bdbdb1-5500-483a-8229-ea0ea8679cbd
     m_ActionName: Gameplay/Scroll[/Mouse/scroll/y]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0a9ed127-6d3c-4dff-840c-446e4a5a7a46
+    m_ActionName: Gameplay/Use Skill[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 57f77f2d-f925-4ada-9285-8949824867f3
+    m_ActionName: Gameplay/Select Freeze Time Skill[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a0dc069c-d333-4b84-86e6-f590b124ef5d
+    m_ActionName: Gameplay/Select Warp Skill[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f95c5dfc-8cb7-4c5f-9733-58b131fc6fda
+    m_ActionName: Gameplay/Select Whack-a-mole Skill[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 01ce0992-9198-423f-9484-c52e4118c279
+    m_ActionName: Gameplay/Select Speeding Skill[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c3a23dc2-95d5-47ee-89eb-55ed529f45ff
+    m_ActionName: Gameplay/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -931,9 +955,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunBarrel: {fileID: 2896284848948219050}
-  defaultBullet: {fileID: 2962516884338115890, guid: 73894511913cb3347bc5b90845698830, type: 3}
-  explosiveBullet: {fileID: 2060159463036227266, guid: e4a8e39fa29b01c4085fd0463640fdf3, type: 3}
-  piercingBullet: {fileID: 6116300935966142805, guid: 12a9281e2f011544db65a78115faf54b, type: 3}
+  basicBulletPool: {fileID: 0}
+  explosiveBulletPool: {fileID: 0}
+  piercingBulletPool: {fileID: 0}
   autoFireStartDelay: 0.4
   autoFireMinimalDelay: 0.1
   autoFireDalayDecreaseMultiplier: 0.1

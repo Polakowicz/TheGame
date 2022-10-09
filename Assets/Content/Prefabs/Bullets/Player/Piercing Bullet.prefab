@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 6116300935966142800}
   - component: {fileID: 6116300935966142801}
   - component: {fileID: 6116300935966142802}
-  - component: {fileID: 6116300935966142803}
-  - component: {fileID: 6116300935966142804}
+  - component: {fileID: 2665957758800436058}
   m_Layer: 0
   m_Name: Piercing Bullet
   m_TagString: Untagged
@@ -123,7 +122,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &6116300935966142803
+--- !u!114 &2665957758800436058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,21 +131,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6116300935966142805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5e96cb5ee18ad4e94801cb832e2ad1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d15653e6b5b4b14cb3905b475b8aa63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 15
+  isBulletPiercing: 1
   speed: 10
---- !u!114 &6116300935966142804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6116300935966142805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3f42ecf33444b4ba152d67c9f21a88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  piercing: 1
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536
