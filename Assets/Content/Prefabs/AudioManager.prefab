@@ -46,13 +46,36 @@ MonoBehaviour:
   sounds:
   - name: ButtonClick
     clip: {fileID: 8300000, guid: df0b133ee00e5864296f20ad3cf3df0d, type: 3}
-    volume: 0.7
+    group: {fileID: 0}
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Main Menu Music
-    clip: {fileID: 8300000, guid: cece461fff666a4d6b9ffa1c405c1891, type: 3}
-    volume: 0.3
+  - name: Music
+    clip: {fileID: 8300000, guid: e023b1165d71b4edb94fca9b8106ebc1, type: 3}
+    group: {fileID: 0}
+    volume: 0.1
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: MeleeBasicAttack
+    clip: {fileID: 8300000, guid: 864aae11f76bb1c4c9a438b71e8aa8f2, type: 3}
+    group: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: RangedBasicAttack
+    clip: {fileID: 8300000, guid: 2bb80684da242b14ca000d037596ef30, type: 3}
+    group: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwitchWeapon
+    clip: {fileID: 8300000, guid: 1f02c1c3d7d27fe41ba0cb2d736d7bdd, type: 3}
+    group: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
     source: {fileID: 0}

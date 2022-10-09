@@ -1,159 +1,83 @@
-using Interfaces;
 using System;
 using System.Collections;
+using Scripts.Interfaces;
+using Scripts.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour, IKick
+namespace Scripts.Player
 {
-
-
-
-	//Components
-	Rigidbody2D rb;
-	[SerializeField] PlayerEventSystem eventSystem;
-	[SerializeField] PlayerInput playerInput;
-
-	//Input actions
-	InputAction moveAction;
-	InputAction dashAction;
-
-	//Parameters
-	[SerializeField] float basicSpeed = 5f;
-	[SerializeField] float dashSpeed = 30f;
-	[SerializeField] float dashTime = 0.1f;
-
-	//Internal variables
-	Vector2 direction;
-	bool isInDash;
-	float speed;
-
-	void Start()
+	public class PlayerMovement : ExtendedMonoBehaviour
 	{
-		rb = GetComponent<Rigidbody2D>();
-		moveAction = playerInput.actions["Move"];
-		dashAction = playerInput.actions["Dash"];
+		//Components
+		private Rigidbody2D rb;
+		private PlayerManager player;
+		private PlayerInput input;
 
-		dashAction.performed += PerformDash;
-		eventSystem.OnBladeThrustStarted += PerformThrustDash;
-		eventSystem.OnBeamPullTowardsEnemyStarted += PerformBeamPull;
-		eventSystem.OnKicked += PerformKicked;
+		//Input actions
+		private InputAction moveAction;
+		private InputAction dashAction;
 
-		speed = basicSpeed;
-	}
+		//Parameters
+		[SerializeField] private float basicSpeed = 5f;
+		[SerializeField] private float dashSpeed = 30f;
+		[SerializeField] private float dashTime = 0.1f;
 
-	void OnDestroy()
-	{
-		dashAction.performed -= PerformDash;
-		eventSystem.OnBladeThrustStarted -= PerformThrustDash;
-		eventSystem.OnBeamPullTowardsEnemyStarted -= PerformBeamPull;
-		eventSystem.OnKicked -= PerformKicked;
-	}
+		private Vector2 direction;
+		public float SpeedMultiplier { get; set; } = 1f;
 
-	void Update()
-	{
-		if (disableImput > 0) return;
+		private void Awake()
+		{
+			rb = GetComponent<Rigidbody2D>();
+			player = GetComponentInParent<PlayerManager>();
+			input = GetComponentInParent<PlayerInput>();
 
-		if (!isInDash) {
-			direction = moveAction.ReadValue<Vector2>();
+			moveAction = input.actions["Move"];
+			dashAction = input.actions["Dash"];
 		}
-	}
+		private void Start()
+		{
+			dashAction.performed += PerformDash;
+		}
+		private void OnDestroy()
+		{
+			dashAction.performed -= PerformDash;
+		}
 
-	void FixedUpdate()
-	{
-		if (disableImput > 0) return;
+		private void Update()
+		{
+			if (player.State == PlayerManager.PlayerState.Dash) return;
 
-		if (isInDash) {
+			if(player.State == PlayerManager.PlayerState.Walk) {
+				direction = moveAction.ReadValue<Vector2>();
+				rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
+				player.MoveDirection = rb.velocity;
+			} else {
+				rb.velocity = Vector2.zero;
+			}
+		}
+
+		//Dash
+		private void PerformDash(InputAction.CallbackContext context)
+		{
+			if (player.State != PlayerManager.PlayerState.Walk) return;
+
+			MoveInDirection(direction, dashSpeed, dashTime, null);
+			player.AnimationController.Dash();
+		}
+		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)
+		{
+			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
+			player.State = PlayerManager.PlayerState.Dash;
 			rb.velocity = direction.normalized * speed;
-		} else {
-			rb.velocity = direction * speed * eventSystem.playerData.speedMultiplier;
+			StartCoroutine(Dashing(time, func));
 		}
-
-		eventSystem.playerData.moveDireciton= rb.velocity;
-	}
-
-	void PerformDash(InputAction.CallbackContext context)
-	{
-		if (isInDash) {
-			return;
+		private IEnumerator Dashing(float time, Action after)
+		{
+			yield return new WaitForSeconds(time);
+			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+			player.State = PlayerManager.PlayerState.Walk;
+			after?.Invoke();
 		}
-		isInDash = true;
-		speed = dashSpeed;
-
-		eventSystem.OnDodge?.Invoke();
-		StartCoroutine(DashDelay(dashTime));
 	}
-	void PerformThrustDash(PlayerData data, float s, float t, int d)
-	{
-		direction = data.aimDirection;
-		isInDash = true;
-		speed = s;
-		StartCoroutine(TrustDelay(t));
-	}
-	void PerformBeamPull(GameObject enemy, float v, float stunTime)
-	{
-		direction = enemy.transform.position - transform.position;
-		var s = direction.magnitude;
-		speed = v;
-		var t = s / v;
-		isInDash = true;
-		StartCoroutine(BeamPullDelay(t, stunTime));
-	}
-	void PerformKicked(Vector2 direction, float v, float s)
-	{
-		var t = s / v;
-		this.direction = direction;
-		isInDash=true;
-		speed = v;
-		StartCoroutine(DashDelay(t));
-	}
-
-	IEnumerator DashDelay(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		speed = basicSpeed;
-		isInDash = false;
-	}
-	IEnumerator TrustDelay(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		speed = basicSpeed;
-		isInDash = false;
-		eventSystem.EndBladeThrust();
-	}
-	IEnumerator BeamPullDelay(float delay, float stunTime)
-	{
-		yield return new WaitForSeconds(delay);
-		speed = basicSpeed;
-		isInDash = false;
-		eventSystem.EndBeamPullTowardsEnemy(stunTime);
-	}
-
-
-
-
-
-	private delegate void VoidFunction();
-
-	private readonly float KickTime = 0.5f;
-	private int disableImput;
-
-	public void Kick(Vector2 direction)
-	{
-		rb.velocity = direction;
-		disableImput++;
-		StartCoroutine(Wait(KickTime, () => disableImput--));
-	
-	}
-	public void Kick(Vector2 direction, float force)
-	{
-		Kick(direction * force);
-	}
-
-	private IEnumerator Wait(float time, Action func)
-	{
-		yield return new WaitForSeconds(time);
-		func();
-	}
-
 }

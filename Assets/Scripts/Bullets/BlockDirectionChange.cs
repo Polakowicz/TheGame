@@ -1,17 +1,22 @@
+using Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockDirectionChange : MonoBehaviour
+namespace Scripts.Bullets
 {
-	Rigidbody2D rb;
-
-    public void Redirect()
+	public class BlockDirectionChange : MonoBehaviour, IRiposte
 	{
-		gameObject.transform.Rotate(0, 0, 180);
-		if(rb == null) {
-			rb = GetComponent<Rigidbody2D>();
+		private Rigidbody2D rb;
+
+		public void Riposte(GameObject sender)
+		{
+			if (rb == null) {
+				rb = GetComponent<Rigidbody2D>();
+			}
+			rb.velocity = (rb.position - (Vector2)sender.transform.position).normalized * rb.velocity.magnitude;
+			var newAngle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90;
+			transform.rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);
 		}
-		rb.velocity = new Vector2(-rb.velocity.x, -rb.velocity.y);
 	}
 }

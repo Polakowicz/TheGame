@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 8753997057445052537}
   - component: {fileID: -6032369475914333903}
   - component: {fileID: 5921052272362694529}
-  - component: {fileID: -1449968968670959097}
-  - component: {fileID: 2929220265915468261}
+  - component: {fileID: -5704409770311949597}
   m_Layer: 17
   m_Name: Basic Player Bullet
   m_TagString: Untagged
@@ -123,7 +122,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-1449968968670959097
+--- !u!114 &-5704409770311949597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,20 +131,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2962516884338115890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3f42ecf33444b4ba152d67c9f21a88, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d15653e6b5b4b14cb3905b475b8aa63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
---- !u!114 &2929220265915468261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962516884338115890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5e96cb5ee18ad4e94801cb832e2ad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  damage: 15
+  isBulletPiercing: 0
   speed: 10
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 65536

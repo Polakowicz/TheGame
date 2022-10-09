@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Skill : MonoBehaviour
+namespace Scripts.Player
 {
-	public virtual void StartUsingSkill() { }
-	public virtual void UseSkill() { }
-	public virtual void StopUsingSkill() { }
+	public abstract class Skill : MonoBehaviour
+	{
+		public virtual void StartUsingSkill() { }
+		public virtual void UseSkill() { }
+		public virtual void StopUsingSkill() { }
+	}
 }

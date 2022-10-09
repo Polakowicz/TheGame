@@ -1,0 +1,152 @@
+﻿using Scripts.Game;
+using Scripts.Player;
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class OldEnemy : MonoBehaviour, IPullable
+{
+	private struct PrivateData
+	{
+		public FreezeSkill FreezeScript;
+		public float FreezStrength;
+	}
+	public class SharedData
+	{
+		private GameObject gameObject;
+
+		public GameObject Player;
+		public int HP;
+		public float PullSpeed;
+		public bool Stunned;
+		public bool Pulled;
+		public float SpeedMultiplier;
+
+		public float DistanceToPlayer {
+			get {
+				return Vector2.Distance(gameObject.transform.position, Player.transform.position);
+			}
+		}
+		public Vector2 DirectionToPlayer {
+			get {
+				return Player.transform.position - gameObject.transform.position;
+			}
+		}
+
+		public SharedData(GameObject thisGameObject, int maxHP)
+		{
+			gameObject = thisGameObject;
+			HP = maxHP;
+			Player = GameObject.FindGameObjectWithTag("Player");
+			SpeedMultiplier = 1;
+		}
+	}
+
+	private PrivateData privateData;
+	public SharedData Data { get; private set; }
+
+	[SerializeField] public int MaxHP { get; private set; }
+	[SerializeField] public bool Pullable { get; private set; }
+	[SerializeField] GameObject[] PowerUps;
+
+	public Action<int> OnDamaged;
+	public Action OnDied;
+	public Action OnStuned;
+	public Action OnStunEnded;
+	public Action OnPulled;
+	public Action OnPullEnded;
+	public Action OnMeleeAttackStart;
+	public Action OnIgnited;
+
+	private void Awake()
+	{
+		Data = new SharedData(gameObject, MaxHP);
+		privateData = new PrivateData();
+	}
+	private void Start()
+	{
+		Data.Player = GameObject.FindGameObjectWithTag("Player");
+		GameEventSystem.Instance.OnPlayerDied += NullPlayerReference;
+	}
+	private void OnDestroy()
+	{
+		GameEventSystem.Instance.OnPlayerDied -= NullPlayerReference;
+	}
+
+	public void Damage(int dmg)
+	{
+		Data.HP = Mathf.Clamp(Data.HP - dmg, 0, int.MaxValue);
+
+		if (Data.HP <= 0) {
+			OnDied?.Invoke();
+			Destroy(gameObject);//Temporary
+		} else {
+			OnDamaged?.Invoke(dmg);
+		}
+	}
+	public void Stun(float time)
+	{
+		Data.Stunned = true;
+		OnStuned?.Invoke();
+		StartCoroutine(WaitForStunToEnd(time));
+	}
+	public void Pull(float speed)
+	{
+		Debug.Log("Pulled");
+		speed = 10;
+		//if (!Pullable) {
+		//	return;
+		//}
+		Data.PullSpeed = speed;
+		Data.Pulled = true;
+		OnPulled?.Invoke();
+	}
+	public void EndPull()
+	{
+		Data.Pulled = false;
+		OnPullEnded?.Invoke();
+	}
+	public void Overthrow(int damage, float stunTime)
+	{
+		Damage(damage);
+		Stun(stunTime);
+	}//Wack-a-mole Skill
+	public void Freez(FreezeSkill freez, float strength)
+	{
+		privateData.FreezeScript = freez;
+		privateData.FreezStrength = strength;
+		Data.SpeedMultiplier -= privateData.FreezStrength;
+	}
+	public void Unfreez()
+	{
+		privateData.FreezeScript = null;
+		Data.SpeedMultiplier += privateData.FreezStrength;
+	}
+	public void Finish()
+	{
+		if (!Data.Stunned) return;
+
+		OnDied?.Invoke();
+		
+
+		var i = UnityEngine.Random.Range(0, PowerUps.Length - 1);
+		Instantiate(PowerUps[i], transform.position, Quaternion.identity);
+		Destroy(gameObject);//Temporary
+	}
+
+	private void NullPlayerReference()
+	{
+		Data.Player = null;
+	}//When Player dies
+	private IEnumerator WaitForStunToEnd(float time)
+	{
+		yield return new WaitForSeconds(time);
+		Data.Stunned = false;
+		OnStunEnded?.Invoke();
+	}
+	
+
+	
+	
+	
+}
