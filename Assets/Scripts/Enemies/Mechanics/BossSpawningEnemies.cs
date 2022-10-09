@@ -32,6 +32,7 @@ namespace Scripts.Enemies
 		private Animator animator;
 
 		// List of waves
+		[SerializeField] GameObject enemiesParent;
 		[SerializeField] private Wave[] allEnemyWaves;
 		private int waveNumber = 0;
 
@@ -66,7 +67,7 @@ namespace Scripts.Enemies
 			var wave = allEnemyWaves[waveNumber++];
 			foreach(var enemy in wave.enemiesInWave)
 			{
-				Instantiate(enemy.emenyPrefab, enemy.position.position, Quaternion.identity);
+				Instantiate(enemy.emenyPrefab, enemy.position.position, Quaternion.identity, enemiesParent.transform);
 				spawnedEnemies++;
 			}
 			animator.SetInteger(spawnedEnemiesAnimatorName, spawnedEnemies);
