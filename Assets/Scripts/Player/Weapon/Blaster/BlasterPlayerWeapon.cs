@@ -1,4 +1,5 @@
 ﻿using Scripts.Interfaces;
+using Scripts.Tools;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Scripts.Player
 		private PlayerManager playerManagerComponent;
 		private PlayerMovement playerMovementComponent;
 		private LineRenderer beamRendererComponent;
+		private ObjectPool BulletPool;
 
 		// Position (offset) in whitch bullets will be instantiate
 		[SerializeField] private Transform gunBarrel;
@@ -27,7 +29,7 @@ namespace Scripts.Player
 
 	
 		[Header("Auto Fire Delay")]
-		// Delay between next bullet instantiate
+		// Delay between next bullet instantiainstantiate
 		[SerializeField] private float autoFireStartDelay = 0.4f;
 		[SerializeField] private float autoFireMinimalDelay = 0.1f;
 		private float autoFireCurrentDelay;
@@ -70,6 +72,7 @@ namespace Scripts.Player
 			playerManagerComponent = GetComponentInParent<PlayerManager>();
 			playerMovementComponent = GetComponentInParent<PlayerMovement>();
 			beamRendererComponent = GetComponent<LineRenderer>();
+			BulletPool = GetComponent<ObjectPool>();
 
 			// Nothing is hit by beam at start
 			beamRendererComponent.enabled = false;
@@ -118,8 +121,15 @@ namespace Scripts.Player
 			// Play shooting sound
 			playerManagerComponent.AudioManager.Play("RangedBasicAttack");
 
-			// Shoot bullet
-			Instantiate(currentlySelectedBullet, gunBarrel.position, rotation);
+			// Get bullet from pool
+			var bullet = BulletPool.GetObject();
+
+			// Set bullet position, rotation and velocity
+			bullet.transform.SetPositionAndRotation(transform.position, rotation);
+			var bulletRb = bullet.GetComponent<Rigidbody2D>();
+			bulletRb.rotation = bullet.transform.rotation.eulerAngles.z;
+			bulletRb.velocity = new Vector2(-Mathf.Sin(Mathf.Deg2Rad * bulletRb.rotation),
+				Mathf.Cos(Mathf.Deg2Rad * bulletRb.rotation)) * 10;//TODO 10
 
 			// If explosive bullet powerup is active, decrease explosives left
 			if (currentlySelectedBullet == explosiveBullet)

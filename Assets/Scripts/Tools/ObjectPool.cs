@@ -9,6 +9,7 @@ namespace Scripts.Tools
 		// How many objects create at start
 		[SerializeField] private int defaultNumerOfObjects;
 		[SerializeField] private GameObject objectPrefab;
+		[SerializeField] private Transform objectsParent;
 
 		Stack<GameObject> stack = new Stack<GameObject>();
 
@@ -16,8 +17,9 @@ namespace Scripts.Tools
 		{
 			for (int i = 0; i < defaultNumerOfObjects; i++)
 			{
-				var obj = Instantiate(objectPrefab);
+				var obj = Instantiate(objectPrefab, objectsParent);
 				obj.SetActive(false);
+				stack.Push(obj);
 			}
 		}
 
@@ -30,7 +32,7 @@ namespace Scripts.Tools
 				return obj;
 			} else
 			{
-				return Instantiate(objectPrefab);
+				return Instantiate(objectPrefab, objectsParent);
 			}
 		}
 
