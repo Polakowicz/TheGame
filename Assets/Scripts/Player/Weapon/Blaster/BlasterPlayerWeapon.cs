@@ -161,7 +161,6 @@ namespace Scripts.Player
 			float newRotation = UnityEngine.Random.Range(rotation - autoFireCurrentDispersion, rotation + autoFireCurrentDispersion);
 			return Quaternion.Euler(0, 0, newRotation);
 		}
-
 		
 		// Shoot beam
 		public override void StartAlternativeAttack()

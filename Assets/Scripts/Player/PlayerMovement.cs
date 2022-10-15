@@ -25,6 +25,11 @@ namespace Scripts.Player
 
 		private Vector2 direction;
 		public float SpeedMultiplier { get; set; } = 1f;
+		private bool isDashing;
+
+		// Layer masks to deactivate collisions
+		private LayerMask playerLayerMask;
+		private LayerMask enemyLayerMask;
 
 		private void Awake()
 		{
@@ -34,6 +39,9 @@ namespace Scripts.Player
 
 			moveAction = input.actions["Move"];
 			dashAction = input.actions["Dash"];
+
+			playerLayerMask = LayerMask.NameToLayer("Player");
+			enemyLayerMask = LayerMask.NameToLayer("Enemy");
 		}
 		private void Start()
 		{

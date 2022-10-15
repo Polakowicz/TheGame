@@ -36,5 +36,8 @@ namespace Scripts.Game
 		public Action OnGameSaveLoaded;
 
 		public Action OnEnemyKilled;
+
+		public Action OnCutsceneStarted;
+		public Action OnCutsceneEnded;
 	}
 }
