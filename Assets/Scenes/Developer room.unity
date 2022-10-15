@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2940462072967487106, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: basicBulletPool
       value: 
@@ -751,7 +755,7 @@ GameObject:
   - component: {fileID: 868340379}
   - component: {fileID: 868340380}
   - component: {fileID: 868340381}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: SpawnerBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}

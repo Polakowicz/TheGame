@@ -26,6 +26,10 @@ namespace Scripts.Player
 		private Vector2 direction;
 		public float SpeedMultiplier { get; set; } = 1f;
 
+		// Layer masks to deactivate collisions
+		private LayerMask playerLayerMask;
+		private LayerMask enemyLayerMask;
+
 		private void Awake()
 		{
 			rb = GetComponent<Rigidbody2D>();
@@ -34,6 +38,9 @@ namespace Scripts.Player
 
 			moveAction = input.actions["Move"];
 			dashAction = input.actions["Dash"];
+
+			playerLayerMask = LayerMask.NameToLayer("Player");
+			enemyLayerMask = LayerMask.NameToLayer("Enemy");
 		}
 		private void Start()
 		{
@@ -67,15 +74,24 @@ namespace Scripts.Player
 		}
 		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)
 		{
-			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
+			// Disable collisions with enemy
+			Physics2D.IgnoreLayerCollision(playerLayerMask, enemyLayerMask);
+
+			// Set player state to dash
 			player.State = PlayerManager.PlayerState.Dash;
+
+			// set dash
 			rb.velocity = direction.normalized * speed;
 			StartCoroutine(Dashing(time, func));
 		}
 		private IEnumerator Dashing(float time, Action after)
 		{
 			yield return new WaitForSeconds(time);
-			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+
+			// Active collisions
+			Physics2D.IgnoreLayerCollision(playerLayerMask, enemyLayerMask, false);
+
+			// Reset state
 			player.State = PlayerManager.PlayerState.Walk;
 			after?.Invoke();
 		}

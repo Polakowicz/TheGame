@@ -36,6 +36,9 @@ namespace Scripts.Player
 		}
 		public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
+			if (player.State == PlayerManager.PlayerState.Cutscene ||
+				player.State == PlayerManager.PlayerState.Dead) return;
+
 			if(player.State == PlayerManager.PlayerState.Stun) {
 				StopAllCoroutines();
 			}
