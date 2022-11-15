@@ -16,39 +16,63 @@ namespace Scripts.Game
 		private string filePath; 
 
 		// Data to save in file
+		public class SaveData
+		{
+            public int hp;
+            public string checkpointName;
+            public HashSet<PartType> collectedParts;
+
+			public SaveData()
+			{
+				// Initialize objects
+				collectedParts = new HashSet<PartType>();
+			}
+        }
 		public SaveData Data;
 
 		private void Awake()
 		{
 			DontDestroyOnLoad(gameObject);
 			filePath = Application.dataPath + "/../savedGame.xml";
-			Data = gameObject.AddComponent<SaveData>();
+			Data = new SaveData();
 		}
 		private void Start()
 		{
 			GameEventSystem.Instance.OnCheckpointReached += SaveCheckPoint;
-			
-		}
+            GameEventSystem.Instance.OnPartCollected += CollectPart;
+
+        }
 		private void OnDestroy()
 		{
 			GameEventSystem.Instance.OnCheckpointReached -= SaveCheckPoint;
-		}
+            GameEventSystem.Instance.OnPartCollected -= CollectPart;
+        }
 
+
+		// Implementation for subscribed events
 		private void SaveCheckPoint(Checkpoint checkpoint)
 		{
 			Data.checkpointName = checkpoint.Name;
 			SaveGame();
 		}
-		
+        private void CollectPart(PartType type)
+        {
+            Data.collectedParts.Add(type);
+            if (Data.collectedParts.Count == Enum.GetNames(typeof(PartType)).Length)
+            {
+                GameEventSystem.Instance.OnAllPartsCollected();
+            }
+        }
 
-		private void SaveGame()
+
+		// Save and Load data from and to file
+        private void SaveGame()
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
 			FileStream stream = new FileStream(filePath, FileMode.Create);
 			serializer.Serialize(stream, Data);
 			stream.Close();
 		}
-
 		public void LoadGame()
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
