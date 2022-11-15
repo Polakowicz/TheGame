@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using static Scripts.Game.Part;
 
 namespace Scripts.Game
 {
@@ -39,5 +40,8 @@ namespace Scripts.Game
 
 		public Action OnCutsceneStarted;
 		public Action OnCutsceneEnded;
+
+		public Action<PartType> OnPartCollected;
+		public Action OnAllPartsCollected;
 	}
 }
