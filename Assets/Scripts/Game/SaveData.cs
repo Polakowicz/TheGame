@@ -31,7 +31,6 @@ namespace Scripts.Game
             {
                 GameEventSystem.Instance.OnAllPartsCollected();
             }
-
         }
     }
 }
