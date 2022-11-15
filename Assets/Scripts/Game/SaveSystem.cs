@@ -22,7 +22,7 @@ namespace Scripts.Game
 		{
 			DontDestroyOnLoad(gameObject);
 			filePath = Application.dataPath + "/../savedGame.xml";
-			Data = new SaveData();
+			Data = gameObject.AddComponent<SaveData>();
 		}
 		private void Start()
 		{
