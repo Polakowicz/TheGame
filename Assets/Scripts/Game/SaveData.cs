@@ -13,6 +13,10 @@ namespace Scripts.Game
         public string checkpointName;
         public HashSet<PartType> collectedParts;
 
+        private void Awake()
+        {
+            collectedParts = new HashSet<PartType>();
+        }
 
         private void Start()
         {
