@@ -8,7 +8,7 @@ namespace Scripts.Tools
     {
         private void Start()
         {
-            GameEventSystem.Instance.OnAllPartsCollected += () => { Debug.Log("All parts collected"); }
+            GameEventSystem.Instance.OnAllPartsCollected += () => { Debug.Log("All parts collected"); };
         }
     }
 }
