@@ -42,5 +42,6 @@ namespace Scripts.Game
 		public Action OnCutsceneEnded;
 
 		public Action<PartType> OnPartCollected;
+		public Action OnAllPartsCollected;
 	}
 }
