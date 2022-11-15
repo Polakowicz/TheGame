@@ -17,6 +17,15 @@ namespace Scripts.Game
         [SerializeField] private PartType partType;
         public PartType Type { get => partType; }
 
+        private void Awake()
+        {
+            if (GameEventSystem.Instance.SaveSystem.Data.collectedParts.Contains(Type))
+            {
+                // This part was already collected
+                Destroy(gameObject);
+            }
+        }
+
         public Interaction Interact(GameObject sender)
         {
             GameEventSystem.Instance.OnPartCollected(Type);
