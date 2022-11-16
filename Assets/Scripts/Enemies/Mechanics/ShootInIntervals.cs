@@ -1,11 +1,13 @@
-﻿using System.Collections;
+﻿using Scripts.Bullets;
+using Scripts.Tools;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies.Mechanics
 {
     public class ShootInIntervals : MonoBehaviour
     {
-        [SerializeField] private GameObject prefab;
+        [SerializeField] private ObjectPool pool;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private float interval;
         [SerializeField] private float bulletSpeed;
@@ -24,16 +26,25 @@ namespace Assets.Scripts.Enemies.Mechanics
             }
         }
 
+        private void Awake()
+        {
+            if (active)
+            {
+                StartCoroutine(Shoot());
+            }
+        }
+
         private IEnumerator Shoot()
         {
             while (active)
             {
                 yield return new WaitForSeconds(interval);
-                var bullet = Instantiate(prefab, spawnPosition.position, transform.rotation);
-                bullet.GetComponent<Rigidbody2D>().velocity = transform.forward * bulletSpeed;
-            }
-            
+                var bullet = pool.GetObject();
 
+                bullet.transform.position = spawnPosition.position;
+                bullet.transform.rotation = transform.rotation;
+                bullet.GetComponent<Rigidbody2D>().velocity = transform.up * bullet.GetComponent<Bullet>().Speed;
+            }
 
         }
         
