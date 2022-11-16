@@ -3,7 +3,7 @@ using Scripts.Tools;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemies.Mechanics
+namespace Scripts.Enemies
 {
     public class ShootInIntervals : MonoBehaviour
     {
