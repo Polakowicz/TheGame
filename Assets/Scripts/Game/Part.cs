@@ -17,7 +17,7 @@ namespace Scripts.Game
         [SerializeField] private PartType partType;
         public PartType Type { get => partType; }
 
-        private void Awake()
+        private void Start()
         {
             if (GameEventSystem.Instance.SaveSystem.Data.collectedParts.Contains(Type))
             {
