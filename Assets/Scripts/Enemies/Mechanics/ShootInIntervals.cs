@@ -35,14 +35,16 @@ namespace Scripts.Enemies
 
         private IEnumerator Shoot()
         {
+            yield return new WaitForSeconds(interval);
+
             while (active)
             {
-                yield return new WaitForSeconds(interval);
                 var bullet = pool.GetObject();
 
-                bullet.transform.position = spawnPosition.position;
-                bullet.transform.rotation = transform.rotation;
+                bullet.transform.SetPositionAndRotation(spawnPosition.position, transform.rotation);
                 bullet.GetComponent<Rigidbody2D>().velocity = transform.up * bullet.GetComponent<Bullet>().Speed;
+
+                yield return new WaitForSeconds(interval);
             }
 
         }
