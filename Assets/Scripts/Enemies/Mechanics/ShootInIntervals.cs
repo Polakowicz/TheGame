@@ -10,7 +10,6 @@ namespace Scripts.Enemies
         [SerializeField] private ObjectPool pool;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private float interval;
-        [SerializeField] private float bulletSpeed;
 
         [SerializeField] private bool active;
         public bool Active
