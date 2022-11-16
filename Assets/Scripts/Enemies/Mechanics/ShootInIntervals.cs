@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemies.Mechanics
     public class ShootInIntervals : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
-        [SerializeField] private Vector2 spawnPosition;
+        [SerializeField] private Transform spawnPosition;
         [SerializeField] private float interval;
         [SerializeField] private float bulletSpeed;
 
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Enemies.Mechanics
             while (active)
             {
                 yield return new WaitForSeconds(interval);
-                var bullet = Instantiate(prefab, spawnPosition, transform.rotation);
+                var bullet = Instantiate(prefab, spawnPosition.position, transform.rotation);
                 bullet.GetComponent<Rigidbody2D>().velocity = transform.forward * bulletSpeed;
             }
             
