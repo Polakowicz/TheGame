@@ -1,11 +1,12 @@
 ﻿using Scripts.Game;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
-
+using static Scripts.Game.Part;
 
 namespace Scripts.Game
 {
@@ -15,12 +16,18 @@ namespace Scripts.Game
 		private string filePath; 
 
 		// Data to save in file
-		[Serializable]
 		public class SaveData
 		{
-			public int hp;
-			public string checkpointName;
-		}
+            public int hp;
+            public string checkpointName;
+            public HashSet<PartType> collectedParts;
+
+			public SaveData()
+			{
+				// Initialize objects
+				collectedParts = new HashSet<PartType>();
+			}
+        }
 		public SaveData Data;
 
 		private void Awake()
@@ -32,26 +39,40 @@ namespace Scripts.Game
 		private void Start()
 		{
 			GameEventSystem.Instance.OnCheckpointReached += SaveCheckPoint;
-		}
+            GameEventSystem.Instance.OnPartCollected += CollectPart;
+
+        }
 		private void OnDestroy()
 		{
 			GameEventSystem.Instance.OnCheckpointReached -= SaveCheckPoint;
-		}
+            GameEventSystem.Instance.OnPartCollected -= CollectPart;
+        }
 
+
+		// Implementation for subscribed events
 		private void SaveCheckPoint(Checkpoint checkpoint)
 		{
 			Data.checkpointName = checkpoint.Name;
 			SaveGame();
 		}
+        private void CollectPart(PartType type)
+        {
+            Data.collectedParts.Add(type);
+            if (Data.collectedParts.Count == Enum.GetNames(typeof(PartType)).Length)
+            {
+                GameEventSystem.Instance.OnAllPartsCollected();
+            }
+        }
 
-		private void SaveGame()
+
+		// Save and Load data from and to file
+        private void SaveGame()
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
 			FileStream stream = new FileStream(filePath, FileMode.Create);
 			serializer.Serialize(stream, Data);
 			stream.Close();
 		}
-
 		public void LoadGame()
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(SaveData));

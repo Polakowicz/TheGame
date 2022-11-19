@@ -1,5 +1,6 @@
 using Scripts.Game;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
@@ -9,17 +10,26 @@ namespace Scripts.Player
         public PlayerAnimationController AnimationController { get; private set; }
         public PowerUpController PowerUpController { get; private set; }
 
+        private PlayerInput playerInput;
+
         public enum PlayerState
         {
             Walk,
             Dash,
             Stun,
             Charging,
-            Dead
+            Dead,
+            Cutscene,
         }
 
         // Data shared between components
-        [HideInInspector] public PlayerState State;
+        private PlayerState state;
+        public PlayerState State { get => state; set {
+                // Only this script can change from and to cutscene state
+                if (value == PlayerState.Cutscene || state == PlayerState.Cutscene) return;
+
+                state = value;
+            } }
         [HideInInspector] public Vector2 AimDirection;
         [HideInInspector] public Vector2 MoveDirection;
 
@@ -28,15 +38,38 @@ namespace Scripts.Player
             PowerUpController = GetComponent<PowerUpController>();
 			AudioManager = FindObjectOfType<AudioManager>();
 			AnimationController = GetComponentInChildren<PlayerAnimationController>();
+            playerInput = GetComponent<PlayerInput>();
 		}
 
         private void Start()
         {
+            GameEventSystem.Instance.OnCutsceneStarted += SetCutsceneState;
+            GameEventSystem.Instance.OnCutsceneEnded += EndCutsceneState;
+
 			if (GameEventSystem.Instance.StartType == GameEventSystem.GameStartType.LoadedGame)
 			{
 				var checkpointName = GameEventSystem.Instance.SaveSystem.Data.checkpointName;
 				transform.position = CheckpointsPositions.Instance.GetCheckpointFromName(checkpointName).RespownPosition.position;
 			}
 		}
+
+		private void OnDestroy()
+		{
+			GameEventSystem.Instance.OnCutsceneStarted -= SetCutsceneState;
+			GameEventSystem.Instance.OnCutsceneEnded -= EndCutsceneState;
+		}
+
+		private void SetCutsceneState()
+        {
+            state = PlayerState.Cutscene;
+            playerInput.DeactivateInput();
+        }
+
+        private void EndCutsceneState()
+        {
+            state = PlayerState.Walk;
+            playerInput.ActivateInput();
+        }
+
     }
 }
