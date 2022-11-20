@@ -1,3 +1,4 @@
+using Scripts.Game;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,6 +74,9 @@ public class PointAndClick : MonoBehaviour
             }
         }else if (isSceneChanged)
         {
+            // Set flag to resume game
+            GameEventSystem.Instance.StartType = GameEventSystem.GameStartType.LoadedGame;
+
             SceneManager.LoadScene("Test_Level_02");
         }
     }
