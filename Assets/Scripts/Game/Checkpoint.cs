@@ -6,14 +6,14 @@ namespace Scripts.Game
 {
 	public class Checkpoint : MonoBehaviour, IInteract
 	{
-		private readonly string defaultName = "(Name of checkpont)";
+		protected readonly string defaultName = "(Name of checkpont)";
 
 		// Player respown position
-		[SerializeField] private Transform respownPostion;
+		[SerializeField] protected Transform respownPostion;
 		public Transform RespownPosition { get => respownPostion; }
 
 		// Name of the checkpoint
-		[SerializeField] private string checkpointName;
+		[SerializeField] protected string checkpointName;
 		public string Name { get => checkpointName; }
 
 		private void Awake()
@@ -22,7 +22,7 @@ namespace Scripts.Game
 		}
 
 		// Activation
-		public Interaction Interact(GameObject sender)
+		virtual public Interaction Interact(GameObject sender)
 		{
 			GameEventSystem.Instance.OnCheckpointReached?.Invoke(this);
 			return Interaction.Checkpoint;
