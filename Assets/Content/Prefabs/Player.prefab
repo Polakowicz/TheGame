@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d56ac14079b76947887a21cd395a544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 500
+  maxHp: 100
 --- !u!114 &203452822953121776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,7 +763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b3cee37d5b175478bcfb3cca4a1615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
   AimDirection: {x: 0, y: 0}
   MoveDirection: {x: 0, y: 0}
 --- !u!1 &2896284850258396949
