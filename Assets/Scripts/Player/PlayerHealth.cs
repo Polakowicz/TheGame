@@ -11,14 +11,21 @@ namespace Scripts.Player
 		private PlayerManager player;
 		private BladePlayerWeapon meleeWeapon;
 
-
-		[SerializeField] private int hp;
+		[SerializeField] private int maxHp;
+		private int hp;
 		public int HP { get => hp; private set => hp = value; }
 
 		private void Awake()
 		{
 			player = GetComponentInParent<PlayerManager>();
 			meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
+
+			hp = maxHp;
+		}
+
+		public void RestoreHP()
+		{
+			hp = maxHp;
 		}
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
@@ -64,7 +71,6 @@ namespace Scripts.Player
 				player.AnimationController.Die();
 			}
 		}
-
 
 		private bool IsHit(GameObject attacker)
 		{

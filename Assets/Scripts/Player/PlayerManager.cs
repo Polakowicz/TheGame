@@ -9,6 +9,7 @@ namespace Scripts.Player
         public AudioManager AudioManager { get; private set; }
         public PlayerAnimationController AnimationController { get; private set; }
         public PowerUpController PowerUpController { get; private set; }
+        public PlayerHealth PlayerHealth { get; private set; }
 
         private PlayerInput playerInput;
 
@@ -39,6 +40,7 @@ namespace Scripts.Player
 			AudioManager = FindObjectOfType<AudioManager>();
 			AnimationController = GetComponentInChildren<PlayerAnimationController>();
             playerInput = GetComponent<PlayerInput>();
+            PlayerHealth= GetComponent<PlayerHealth>();
 		}
 
         private void Start()
