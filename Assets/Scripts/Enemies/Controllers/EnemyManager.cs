@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -39,5 +40,7 @@ namespace Scripts.Enemies
 			var distance = Vector2.Distance(gameObject.transform.position, Player.transform.position);
 			Animator.SetFloat("Distance", distance);
 		}
+
+		public Action OnDamaged; 
 	}
 }

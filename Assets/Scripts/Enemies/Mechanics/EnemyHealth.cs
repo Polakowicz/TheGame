@@ -27,6 +27,9 @@ namespace Scripts.Enemies
 				// Temporary when there is no animation yet
 				Destroy(gameObject);
 			}
+			else {
+				manager.OnDamaged?.Invoke();
+			}
 		}
 
 		public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
