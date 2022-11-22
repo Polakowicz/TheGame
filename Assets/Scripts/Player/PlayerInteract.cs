@@ -51,6 +51,7 @@ namespace Scripts.Player
 
 					case Interaction.Checkpoint:
 						manager.AnimationController.Interact();
+						manager.PlayerHealth.RestoreHP();
 						break;
 				}
 			}
