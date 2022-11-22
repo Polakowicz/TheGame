@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <SaveData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <hp>0</hp>
-  <checkpointName>Space Ship</checkpointName>
-  <collectedParts />
+  <checkpointName>Top</checkpointName>
+  <collectedParts>
+    <PartType>Type3</PartType>
+  </collectedParts>
 </SaveData>
