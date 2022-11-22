@@ -18,6 +18,8 @@ namespace Scripts.Enemies
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
+			if (hp <= 0) return;
+
 			hp -= damage;
 
 			if (hp <= 0) {
