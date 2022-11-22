@@ -23,9 +23,6 @@ namespace Scripts.Enemies
 			if (hp <= 0) {
 				manager.Animator.SetTrigger("Die");
 				GameEventSystem.Instance.OnEnemyKilled?.Invoke();
-
-				// Temporary when there is no animation yet
-				Destroy(gameObject);
 			}
 			else {
 				manager.OnDamaged?.Invoke();
