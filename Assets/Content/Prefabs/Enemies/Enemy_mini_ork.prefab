@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 647448782}
   - component: {fileID: 647448788}
   - component: {fileID: 647448789}
+  - component: {fileID: 1007354295172299701}
   m_Layer: 16
   m_Name: Enemy_mini_ork
   m_TagString: Untagged
@@ -123,7 +124,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388038345511176622}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -194,6 +195,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 2
   damage: 15
+--- !u!114 &1007354295172299701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388038345511176622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5aae40f2e4b7c49aab72e354e3a590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsList:
+  - {fileID: 2179698435022389918, guid: 62b8a75dcf7d28f4f81e0b9101822c08, type: 3}
+  - {fileID: 4622951604835209452, guid: ebbfaaa281623fc47a9bfe17bad325d6, type: 3}
+  - {fileID: 8384750978492464676, guid: 0084ad87292d52146946cea85b378f4c, type: 3}
+  - {fileID: 7753718837127953338, guid: ddcac5593cd35ec4c8d6372463a0e31f, type: 3}
+  chanceToDropItem: 0.5
 --- !u!1 &8806929409370155389
 GameObject:
   m_ObjectHideFlags: 0
