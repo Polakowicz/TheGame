@@ -2504,10 +2504,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_mini_ork (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 1388038345511176628, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1388038345511176629, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -22566,10 +22562,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388038345511176629, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8806929409370155389, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
