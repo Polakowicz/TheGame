@@ -52,10 +52,11 @@ namespace Scripts.Enemies
         {
             if (state != SState.Smoking) return;
 
-            health = Mathf.Clamp(health - damage, maxHealth, 0);
+            health = Mathf.Clamp(health - damage, 0, maxHealth);
 
             if(health == 0)
             {
+                StopAllCoroutines();
                 shootingComponent.DeactivateAutoFire();
                 rotateTowardsComponent.Active = false;
 
