@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 642222520876616999}
   - component: {fileID: 7566341682411984956}
   - component: {fileID: 625286276442202292}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Freeze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,7 +1146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2966544238293562172}
   - component: {fileID: 3450211379118437946}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Speeding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,7 +1191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6750490990828167340}
   - component: {fileID: 7416197423302500384}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Skills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1314,7 +1314,7 @@ GameObject:
   - component: {fileID: 1139881749229848796}
   - component: {fileID: 8711489999734522515}
   - component: {fileID: 5781230282660426172}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Warp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1378,7 +1378,7 @@ GameObject:
   - component: {fileID: 3268028320609300608}
   - component: {fileID: 7030931203479918207}
   - component: {fileID: 7527550362854623186}
-  m_Layer: 15
+  m_Layer: 21
   m_Name: Whack-a-mole
   m_TagString: Untagged
   m_Icon: {fileID: 0}

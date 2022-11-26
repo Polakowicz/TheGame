@@ -12,6 +12,8 @@ namespace Scripts.Enemies
         
         void Update()
         {
+            if (!active) return;
+
             var direction = Target.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
