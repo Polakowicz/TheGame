@@ -7,6 +7,8 @@ namespace Scripts.Enemies
 {
     public class SmokerManager : MonoBehaviour, IHit
     {
+        private static readonly string DieAnimationTrigger = "Die";
+
         private enum SState
         {
             Waiting,
@@ -27,18 +29,16 @@ namespace Scripts.Enemies
         private int health;
         private SState state;
 
-
-
         private void Awake()
         {
             shootingComponent = GetComponentInChildren<Shooting>();
             rotateTowardsComponent = GetComponentInChildren<RotateTowards>();
 
             health = maxHealth;
-            state = SState.Attacking;
+            state = SState.Waiting;
         }
 
-        public void OnDestroy()
+        public void Destroy()
         {
             Destroy(gameObject);
         }
@@ -53,6 +53,9 @@ namespace Scripts.Enemies
             {
                 shootingComponent.DeactivateAutoFire();
                 rotateTowardsComponent.Active = false;
+
+                bodyAnimator.SetTrigger(DieAnimationTrigger);
+                headAnimator.SetTrigger(DieAnimationTrigger);
             }
         }
 
@@ -65,6 +68,12 @@ namespace Scripts.Enemies
         {
             // Stun does nothing to this enemy
             return;
+        }
+
+        public void Activate()
+        {
+            shootingComponent.ActivateAutoFire();
+            rotateTowardsComponent.Active = true;
         }
     }
 }
