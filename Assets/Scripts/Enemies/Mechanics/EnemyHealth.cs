@@ -29,6 +29,7 @@ namespace Scripts.Enemies
 			}
 			else {
 				manager.OnDamaged?.Invoke();
+				StartCoroutine(FlashingRedOnHit());
 			}
 		}
 
@@ -54,6 +55,13 @@ namespace Scripts.Enemies
 		public void Riposte(GameObject sender)
 		{
 			Debug.LogError("Enemy riposeted no implemented");
+		}
+
+		public IEnumerator FlashingRedOnHit()
+		{
+			manager.SpriteRenderer.color = Color.red;
+			yield return new WaitForSeconds(0.1f);
+			manager.SpriteRenderer.color = Color.white;
 		}
 	}
 }
