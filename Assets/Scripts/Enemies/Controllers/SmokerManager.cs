@@ -21,6 +21,7 @@ namespace Scripts.Enemies
 
 
         private Shooting shootingComponent;
+        private RotateTowards rotateTowardsComponent;
 
         [SerializeField] private int maxHealth;
         private int health;
@@ -31,6 +32,7 @@ namespace Scripts.Enemies
         private void Awake()
         {
             shootingComponent = GetComponentInChildren<Shooting>();
+            rotateTowardsComponent = GetComponentInChildren<RotateTowards>();
 
             health = maxHealth;
             state = SState.Attacking;
@@ -50,6 +52,7 @@ namespace Scripts.Enemies
             if(health == 0)
             {
                 shootingComponent.DeactivateAutoFire();
+                rotateTowardsComponent.Active = false;
             }
         }
 
