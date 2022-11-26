@@ -36,14 +36,14 @@ namespace Assets.Scripts.Enemies.Mechanics
             var bullet = pool.GetObject();
             Quaternion rotation = isDispertionActive ? GetRandomisedAccuracy(transform.rotation) : transform.rotation;
             bullet.transform.SetPositionAndRotation(spawnPosition.position, rotation);
-            bullet.GetComponent<Rigidbody2D>().velocity = transform.up * bullet.GetComponent<Bullet>().Speed;
+            bullet.GetComponent<Rigidbody2D>().velocity = bullet.transform.up * bullet.GetComponent<Bullet>().Speed;
 
             return bullet;
         }
 
         private Quaternion GetRandomisedAccuracy(Quaternion rotation)
         {
-            float newRotation = Random.Range(rotation.z - dispartion, rotation.z + dispartion);
+            float newRotation = Random.Range(rotation.eulerAngles.z - dispartion, rotation.eulerAngles.z + dispartion);
             return Quaternion.Euler(0, 0, newRotation);
         }
 

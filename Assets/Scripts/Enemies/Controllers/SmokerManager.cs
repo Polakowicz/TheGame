@@ -21,10 +21,15 @@ namespace Scripts.Enemies
         [SerializeField] private Animator headAnimator;
         [Space(20)]
 
+        [Header("Stage times")]
+        [SerializeField] private float attackingTime;
+        [SerializeField] private float smoakingTime;
+        [Space(20)]
 
         private Shooting shootingComponent;
         private RotateTowards rotateTowardsComponent;
 
+        [SerializeField] private Transform head;
         [SerializeField] private int maxHealth;
         private int health;
         private SState state;
@@ -72,8 +77,27 @@ namespace Scripts.Enemies
 
         public void Activate()
         {
+            if(state != SState.Waiting) return;
+            StartCoroutine(Attacking());
+        }
+
+        private IEnumerator Attacking()
+        {
+            state = SState.Attacking;
             shootingComponent.ActivateAutoFire();
             rotateTowardsComponent.Active = true;
+            yield return new WaitForSeconds(attackingTime);
+            StartCoroutine(Smoking());
+        }
+
+        private IEnumerator Smoking()
+        {
+            state = SState.Smoking;
+            shootingComponent.DeactivateAutoFire();
+            rotateTowardsComponent.Active = false;
+            head.rotation = Quaternion.Euler(0, 0, 180);
+            yield return new WaitForSeconds(smoakingTime);
+            StartCoroutine(Attacking());
         }
     }
 }
