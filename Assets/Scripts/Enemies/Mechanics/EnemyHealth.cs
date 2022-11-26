@@ -18,16 +18,18 @@ namespace Scripts.Enemies
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 		{
-			if (hp <= 0) return;
-
 			hp -= damage;
 
 			if (hp <= 0) {
 				manager.Animator.SetTrigger("Die");
 				GameEventSystem.Instance.OnEnemyKilled?.Invoke();
+
+				// Temporary when there is no animation yet
+				Destroy(gameObject);
 			}
 			else {
 				manager.OnDamaged?.Invoke();
+				StartCoroutine(FlashingRedOnHit());
 			}
 		}
 
@@ -53,6 +55,13 @@ namespace Scripts.Enemies
 		public void Riposte(GameObject sender)
 		{
 			Debug.LogError("Enemy riposeted no implemented");
+		}
+
+		public IEnumerator FlashingRedOnHit()
+		{
+			manager.SpriteRenderer.color = Color.red;
+			yield return new WaitForSeconds(0.1f);
+			manager.SpriteRenderer.color = Color.white;
 		}
 	}
 }

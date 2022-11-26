@@ -24,7 +24,7 @@ namespace Scripts.Enemies
 			manager.SpriteRenderer.flipX = manager.Player.transform.position.x > animator.transform.position.x;
 
 			var direction = (Vector2)manager.Player.transform.position - rigidbody.position;
-			rigidbody.velocity = manager.Data.speedMultiplier * walkSpeed * direction.normalized;
+			rigidbody.velocity = direction.normalized * walkSpeed * manager.Data.speedMultiplier;
 		}
 
 		public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
