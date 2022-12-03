@@ -147,8 +147,7 @@ namespace Scripts.Player
 			foreach (Collider2D block in blocks)
 			{
 				var riposteInterface = block.GetComponent<IRiposte>();
-				Assert.IsNotNull(riposteInterface);
-				riposteInterface.Riposte(gameObject);
+				riposteInterface?.Riposte(gameObject);
 			}
 
 			IsBlockActive = true;

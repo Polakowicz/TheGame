@@ -79,7 +79,7 @@ namespace Scripts.Player
 
 			if (meleeWeapon.IsRiposteActive)
 			{
-				attacker.GetComponent<IRiposte>().Riposte(gameObject);
+				attacker.GetComponent<IRiposte>()?.Riposte(gameObject);
 				return false;
 			}
 
