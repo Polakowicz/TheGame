@@ -4125,10 +4125,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4717716870089605577, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
-      propertyPath: playerData.MaxHP
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 6573227749687704276, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: basicBulletPool
       value: 
@@ -4574,6 +4570,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnailBossBody (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3648086335013070598, guid: b524564e42716f746895fbaf5f191c7b, type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 2015716099}
     - target: {fileID: 3648086335013070599, guid: b524564e42716f746895fbaf5f191c7b, type: 3}
       propertyPath: pool
       value: 

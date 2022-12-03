@@ -17,6 +17,7 @@ namespace Scripts.Player
 		
 		// Position (offset) in whitch bullets will be instantiate
 		[SerializeField] private Transform gunBarrel;
+		[SerializeField] private Transform crosshair;
 
 		// Pools of bullets of specific type
 		[Header("Bullet pools")]
@@ -122,14 +123,18 @@ namespace Scripts.Player
 			var bullet = currentlySelectedPool.GetObject();
 
 			// Set bullet position, rotation and velocity
-			bullet.transform.SetPositionAndRotation(transform.position, rotation);
+			bullet.transform.SetPositionAndRotation(gunBarrel.transform.position, rotation);
 			var bulletRb = bullet.GetComponent<Rigidbody2D>();
-			bulletRb.rotation = bullet.transform.rotation.eulerAngles.z;
-			bulletRb.velocity = new Vector2(-Mathf.Sin(Mathf.Deg2Rad * bulletRb.rotation),
-				Mathf.Cos(Mathf.Deg2Rad * bulletRb.rotation)) * bullet.GetComponent<Bullet>().Speed;
 
-			// If explosive bullet powerup is active, decrease explosives left
-			if (currentlySelectedPool == explosiveBulletPool)
+            // Set bullet rotation from gun barrel to crosshair position
+            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, crosshair.position - gunBarrel.position);
+
+
+            // Set bullet velocity in direction from gun barrel towards mouse poisiton
+            bulletRb.velocity = bullet.transform.up * bullet.GetComponent<Bullet>().Speed;
+
+            // If explosive bullet powerup is active, decrease explosives left
+            if (currentlySelectedPool == explosiveBulletPool)
 			{
 				playerManagerComponent.PowerUpController.ShootExplosiveBullet();
 			}
