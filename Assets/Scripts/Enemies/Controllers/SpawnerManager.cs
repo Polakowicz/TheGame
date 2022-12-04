@@ -1,5 +1,6 @@
 using Scripts.Game;
 using Scripts.Interfaces;
+using Scripts.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace Scripts.Enemies
 {
-    public class SpawnerManager : MonoBehaviour, IHit
+    public class SpawnerManager : ExtendedMonoBehaviour, IHit
     {
         private readonly string DieTriggerAnimatorName = "Die";
         private readonly string SpawnWaveAnimatorName = "SpawnNextWave";

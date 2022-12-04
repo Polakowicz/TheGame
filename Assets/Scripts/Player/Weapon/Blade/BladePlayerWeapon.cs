@@ -108,8 +108,7 @@ namespace Scripts.Player
 			foreach (Collider2D hit in hits)
 			{
 				var hitInterface = hit.GetComponent<IHit>();
-				Assert.IsNotNull(hit);
-				hitInterface.Hit(gameObject, basicAttackDamage);
+				hitInterface?.Hit(gameObject, basicAttackDamage);
 			}
 		}
 
