@@ -27,7 +27,7 @@ namespace Scripts.Enemies
 			}
 		}
 
-
+		public bool active;
 		private SpawnerManager spawnerManager;
 		private Animator animator;
 
@@ -75,7 +75,9 @@ namespace Scripts.Enemies
 
 		private void DecreaseEnemiesLeft()
 		{
-			spawnedEnemies--;
+            if (!active) return;
+            
+            spawnedEnemies--;
 			animator.SetInteger(spawnedEnemiesAnimatorName, spawnedEnemies);
 		}
 	}

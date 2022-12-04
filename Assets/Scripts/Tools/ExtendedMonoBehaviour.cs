@@ -7,10 +7,15 @@ namespace Scripts.Tools
 {
     public class ExtendedMonoBehaviour : MonoBehaviour
     {
-       protected IEnumerator WaitAndDo(float time, Action func)
-		{
+        protected IEnumerator WaitAndDo(float time, Action func)
+        {
             yield return new WaitForSeconds(time);
             func?.Invoke();
-		}
+        }
+
+        public void DestroyGameObject()
+        {
+            Destroy(gameObject);
+        }
     }
 }
