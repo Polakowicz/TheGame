@@ -3324,6 +3324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fly (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5872578589789101753, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6561274918953780509, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -3573,7 +3577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322814848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.7, y: -5.63, z: -10.508424}
+  m_LocalPosition: {x: -17.86, y: 2.07, z: -10.508424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 859225749}
@@ -4087,11 +4091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.7
+      value: -17.86
       objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.63
+      value: 2.07
       objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4224,6 +4228,10 @@ PrefabInstance:
     - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
       propertyPath: m_Name
       value: Hisser (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
@@ -4601,6 +4609,10 @@ PrefabInstance:
     - target: {fileID: 3648086334256042105, guid: b524564e42716f746895fbaf5f191c7b, type: 3}
       propertyPath: m_Name
       value: SnailBossBody (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648086334256042109, guid: b524564e42716f746895fbaf5f191c7b, type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3648086335013070598, guid: b524564e42716f746895fbaf5f191c7b, type: 3}
       propertyPath: Target
@@ -5214,6 +5226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fly (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5872578589789101753, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6561274918953780509, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -5417,6 +5433,10 @@ PrefabInstance:
     - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
       propertyPath: m_Name
       value: Hisser (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
@@ -6150,7 +6170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825007048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.58926, y: -5.5817833, z: -10.508424}
+  m_LocalPosition: {x: -15.708385, y: 2.1033502, z: -10.508424}
   m_LocalScale: {x: 1, y: 1.775, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11459,35 +11479,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3206815125663258149, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
   m_PrefabInstance: {fileID: 497717699}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &895060447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895060446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc629058716525446a2c63457ba88989, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  enemiesParent: {fileID: 878038959}
-  allEnemyWaves:
-  - enemiesInWave:
-    - emenyPrefab: {fileID: 1388038345511176622, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      position: {fileID: 1605496742}
-    - emenyPrefab: {fileID: 1388038345511176622, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      position: {fileID: 1827294992}
-    - emenyPrefab: {fileID: 1388038345511176622, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      position: {fileID: 751102406}
-  - enemiesInWave:
-    - emenyPrefab: {fileID: 1388038345511176622, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      position: {fileID: 1605496742}
-    - emenyPrefab: {fileID: 1388038345511176622, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      position: {fileID: 1827294992}
-    - emenyPrefab: {fileID: 1388038345511176622, guid: 614bef4ff47a5f745be779cfcde34919, type: 3}
-      position: {fileID: 751102406}
 --- !u!114 &895060448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18202,6 +18193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fly (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5872578589789101753, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6561274918953780509, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -18989,6 +18984,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fly (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5872578589789101753, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6561274918953780509, guid: 50a080cf8a8df164f915882b43f84b58, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -19430,6 +19429,10 @@ PrefabInstance:
     - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
       propertyPath: m_Name
       value: Hisser (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
@@ -22135,6 +22138,10 @@ PrefabInstance:
     - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
       propertyPath: m_Name
       value: Hisser
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805892244176978603, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e04a3edd060086b44b6863d8cb0b9c9a, type: 3}
