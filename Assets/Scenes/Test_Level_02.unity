@@ -3573,7 +3573,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322814848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.03, y: -28.66, z: -10.508424}
+  m_LocalPosition: {x: -18.7, y: -5.63, z: -10.508424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 859225749}
@@ -4087,11 +4087,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.03
+      value: -18.7
       objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -28.66
+      value: -5.63
       objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964026, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4234,6 +4234,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1742618204}
     m_Modifications:
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: enemiesParent
+      value: 
+      objectReference: {fileID: 878038959}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[0].enemiesInWave.Array.data[0].position
+      value: 
+      objectReference: {fileID: 1605496742}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[0].enemiesInWave.Array.data[1].position
+      value: 
+      objectReference: {fileID: 1827294992}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[0].enemiesInWave.Array.data[2].position
+      value: 
+      objectReference: {fileID: 751102406}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[1].enemiesInWave.Array.data[0].position
+      value: 
+      objectReference: {fileID: 1605496742}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[1].enemiesInWave.Array.data[1].position
+      value: 
+      objectReference: {fileID: 1827294992}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[1].enemiesInWave.Array.data[2].position
+      value: 
+      objectReference: {fileID: 751102406}
     - target: {fileID: 1849988807665337144, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
       propertyPath: m_Controller
       value: 
@@ -6122,7 +6150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825007048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.03, y: -28.66, z: -10.508424}
+  m_LocalPosition: {x: -15.58926, y: -5.5817833, z: -10.508424}
   m_LocalScale: {x: 1, y: 1.775, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
