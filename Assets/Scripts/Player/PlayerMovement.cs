@@ -30,6 +30,9 @@ namespace Scripts.Player
 		private LayerMask playerLayerMask;
 		private LayerMask enemyLayerMask;
 
+		// [whereistheguru]
+		public static bool playerControlsEnabled = true;
+
 		private void Awake()
 		{
 			rb = GetComponent<Rigidbody2D>();
@@ -53,14 +56,17 @@ namespace Scripts.Player
 
 		private void Update()
 		{
-			if (player.State == PlayerManager.PlayerState.Dash) return;
+			// [whereistheguru]
+			if(playerControlsEnabled){
+				if (player.State == PlayerManager.PlayerState.Dash) return;
 
-			if(player.State == PlayerManager.PlayerState.Walk) {
-				direction = moveAction.ReadValue<Vector2>();
-				rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
-				player.MoveDirection = rb.velocity;
-			} else {
-				rb.velocity = Vector2.zero;
+				if(player.State == PlayerManager.PlayerState.Walk) {
+					direction = moveAction.ReadValue<Vector2>();
+					rb.velocity = basicSpeed * SpeedMultiplier * direction.normalized;
+					player.MoveDirection = rb.velocity;
+				} else {
+					rb.velocity = Vector2.zero;
+				}
 			}
 		}
 

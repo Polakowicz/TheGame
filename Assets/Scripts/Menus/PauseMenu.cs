@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 {
     // private float fixedDeltaTime;
     public GameObject pauseMenu;
+    public GameObject healthbar;
     public AudioMixer musicMixer;
 
     public static bool GameIsPaused = false;
@@ -44,6 +45,7 @@ public class PauseMenu : MonoBehaviour
     {
         musicMixer.SetFloat("musicVolume", tempVolume);
         pauseMenu.SetActive(false);
+        healthbar.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -53,6 +55,7 @@ public class PauseMenu : MonoBehaviour
         musicMixer.GetFloat("musicVolume", out tempVolume);
         musicMixer.SetFloat("musicVolume", -80);
         pauseMenu.SetActive(true);
+        healthbar.SetActive(false);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
