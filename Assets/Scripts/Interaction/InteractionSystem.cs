@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Scripts.Player;
 using System;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class InteractionSystem : MonoBehaviour
 {
@@ -118,8 +119,7 @@ public class InteractionSystem : MonoBehaviour
         PlayerMovement.playerControlsEnabled = false;
         dialogueWindow.SetActive(true);
         StartCoroutine(ShowDialogue(item));
-        // PlayerMovement.playerControlsEnabled = true;
-        // dialogueWindow.SetActive(false);
+        
         if (item.hasTask)
         {
             changeTask(item);
@@ -128,25 +128,18 @@ public class InteractionSystem : MonoBehaviour
 
     private IEnumerator ShowDialogue(Item item)
     {
+        yield return null;
         foreach (string i in item.dialogueLines)
         {
             dialogueTMP.SetText(i);
-            // yield return new WaitForSeconds(3);
-            yield return StartCoroutine(WaitForKeyDown(KeyCode.E));
-        }
-    }
-
-    private IEnumerator WaitBecauseFuckIt()
-    {
-        yield return new WaitForSeconds(3);
-    }
-
-    private IEnumerator WaitForKeyDown(KeyCode keyCode)
-    {
-        while (!Input.GetKeyDown(keyCode))
-        {
+            while (!Input.GetKeyDown(KeyCode.E))
+            {
+                yield return null;
+            }
             yield return null;
         }
+        PlayerMovement.playerControlsEnabled = true;
+        dialogueWindow.SetActive(false);
     }
 
     private IEnumerator WindowHider(GameObject window)
