@@ -3,11 +3,21 @@ using Scripts.Interfaces;
 using Scripts.Tools;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts.Player
 {
 	public class PlayerHealth : ExtendedMonoBehaviour, IHit
 	{
+		// [whereistheguru]
+		// It's a "Filled" Image Type, so full health's value equals 1, while e.g. 65% is 0.65
+		public Image healthbarFill;
+		public Image heartIcon;
+		private float hp_bar;
+		// UI elements to disable/re-enable when Player dies/revives.
+		public GameObject healthbar;
+		public GameObject lowHealthPanel;
+		
 		private PlayerManager player;
 		private BladePlayerWeapon meleeWeapon;
 
@@ -21,11 +31,20 @@ namespace Scripts.Player
 			meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
 
 			hp = maxHp;
+			// [whereistheguru]
+			healthbarFill.fillAmount = 1;
+			heartIcon.color = new Color32(255, 255, 255, 255);
+			healthbar.SetActive(true);
+			lowHealthPanel.SetActive(false);
 		}
 
 		public void RestoreHP()
 		{
 			hp = maxHp;
+			// [whereistheguru]
+			healthbarFill.fillAmount = 1;
+			heartIcon.color = new Color32(255, 255, 255, 255);
+			lowHealthPanel.SetActive(false);
 		}
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
@@ -60,15 +79,30 @@ namespace Scripts.Player
 		{
 			if (meleeWeapon.IsBlockActive) {
 				HP -= damage / 2;
+				// [whereistheguru]
+				hp_bar = HP;
+				healthbarFill.fillAmount = hp_bar / 100;
 			} else {
 				HP -= damage;
+				// [whereistheguru]
+				hp_bar = HP;
+				healthbarFill.fillAmount = hp_bar / 100;
 			}
 
 			HP = HP < 0 ? 0 : HP;
 			GameEventSystem.Instance.OnPlayerHPChanged?.Invoke(HP);
 
+			// [whereistheguru]
+			if (HP < 30){
+				lowHealthPanel.SetActive(true);
+				heartIcon.color = new Color32(75, 0, 0, 255);
+			}
+
 			if (HP == 0) {
 				player.AnimationController.Die();
+				// [whereistheguru]
+				healthbar.SetActive(false);
+				PlayerMovement.playerControlsEnabled = false;
 			}
 		}
 
