@@ -5160,6 +5160,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1742618204}
     m_Modifications:
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[0].enemiesInWave.Array.data[0].position
+      value: 
+      objectReference: {fileID: 1605496742}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[0].enemiesInWave.Array.data[1].position
+      value: 
+      objectReference: {fileID: 1827294992}
+    - target: {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
+      propertyPath: allEnemyWaves.Array.data[0].enemiesInWave.Array.data[2].position
+      value: 
+      objectReference: {fileID: 751102406}
     - target: {fileID: 1849988807665337144, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
       propertyPath: m_Controller
       value: 
@@ -5212,7 +5224,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 895060447, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 94257e63bc27c254ea9f99a95300e56d, type: 3}
 --- !u!1 &504864602
 GameObject:
