@@ -41,6 +41,14 @@ namespace Assets.Scripts.Enemies.Mechanics
             return bullet;
         }
 
+        public GameObject Shoot2()
+        {
+            var bullet = pool.GetObject();
+            bullet.transform.SetPositionAndRotation(spawnPosition.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().velocity = (target.transform.position - bullet.transform.position) * bullet.GetComponent<Bullet>().Speed;
+            return bullet;   
+        }
+
         private Quaternion GetRandomisedAccuracy(Quaternion rotation)
         {
             float newRotation = Random.Range(rotation.eulerAngles.z - dispartion, rotation.eulerAngles.z + dispartion);
