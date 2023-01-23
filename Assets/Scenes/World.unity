@@ -2111,7 +2111,7 @@ GameObject:
   - component: {fileID: 21804168}
   - component: {fileID: 21804167}
   - component: {fileID: 21804166}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fallen_tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2566,7 +2566,7 @@ GameObject:
   - component: {fileID: 70244732}
   - component: {fileID: 70244733}
   - component: {fileID: 70244735}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Part4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3023,7 +3023,7 @@ PrefabInstance:
       objectReference: {fileID: 2015716099}
     - target: {fileID: 5313783340937147696, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7803566968879905097, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_RootOrder
@@ -3075,7 +3075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803566968879905102, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
@@ -3265,7 +3265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179399459}
   - component: {fileID: 179399460}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Carrot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3585,7 +3585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 242110180}
   - component: {fileID: 242110181}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: MiniMap_background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3800,7 +3800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271470428}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Spawn position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4197,7 +4197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1648687288380188041, guid: e567dbdc9985c704b9bf05e7b29ffe1e, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5089164537599263058, guid: e567dbdc9985c704b9bf05e7b29ffe1e, type: 3}
       propertyPath: m_RootOrder
@@ -5238,7 +5238,7 @@ GameObject:
   - component: {fileID: 504864603}
   - component: {fileID: 504864605}
   - component: {fileID: 504864604}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TriggerField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5580,7 +5580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 580776006}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Spawn position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6134,7 +6134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1648687288380188041, guid: e567dbdc9985c704b9bf05e7b29ffe1e, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5089164537599263058, guid: e567dbdc9985c704b9bf05e7b29ffe1e, type: 3}
       propertyPath: m_RootOrder
@@ -6531,7 +6531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 694782853}
   - component: {fileID: 694782854}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SwampDeco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6900,7 +6900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 765713487}
   - component: {fileID: 765713488}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SwampBush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7288,7 +7288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 848376567}
   - component: {fileID: 848376566}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7400,7 +7400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 850314144}
   - component: {fileID: 850314145}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Big_chunky_map_water_deco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12639,7 +12639,7 @@ PrefabInstance:
       objectReference: {fileID: 2015716099}
     - target: {fileID: 5313783340937147696, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7803566968879905097, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_RootOrder
@@ -12691,7 +12691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803566968879905102, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
@@ -17962,7 +17962,7 @@ GameObject:
   - component: {fileID: 993039811}
   - component: {fileID: 993039810}
   - component: {fileID: 993039813}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Checkpoint top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18383,7 +18383,7 @@ GameObject:
   - component: {fileID: 1009125032}
   - component: {fileID: 1009125034}
   - component: {fileID: 1009125033}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pile_of_carrots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18548,7 +18548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1029648243}
   - component: {fileID: 1029648244}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SwampBush (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20402,7 +20402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1244040214}
   - component: {fileID: 1244040215}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Carrot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20714,7 +20714,7 @@ GameObject:
   - component: {fileID: 1320549501}
   - component: {fileID: 1320549502}
   - component: {fileID: 1320549504}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Part1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21178,7 +21178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1648687288380188041, guid: e567dbdc9985c704b9bf05e7b29ffe1e, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5089164537599263058, guid: e567dbdc9985c704b9bf05e7b29ffe1e, type: 3}
       propertyPath: m_RootOrder
@@ -21757,7 +21757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1441503162}
   - component: {fileID: 1441503163}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Checkpoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21809,7 +21809,7 @@ PrefabInstance:
       objectReference: {fileID: 2015716099}
     - target: {fileID: 5313783340937147696, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7803566968879905097, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_RootOrder
@@ -21861,7 +21861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803566968879905102, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34a5325ae913b8d4cb4e76d0ae70271b, type: 3}
@@ -22041,7 +22041,7 @@ GameObject:
   - component: {fileID: 1470183790}
   - component: {fileID: 1470183789}
   - component: {fileID: 1470183794}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Checkpoint middle left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22849,7 +22849,7 @@ GameObject:
   - component: {fileID: 1598841491}
   - component: {fileID: 1598841493}
   - component: {fileID: 1598841492}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TriggerField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22947,7 +22947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1599177013}
   - component: {fileID: 1599177014}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23126,7 +23126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1628805336}
   - component: {fileID: 1628805337}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Signs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23923,7 +23923,7 @@ GameObject:
   - component: {fileID: 1760990518}
   - component: {fileID: 1760990519}
   - component: {fileID: 1760990521}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Part3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24300,7 +24300,7 @@ GameObject:
   - component: {fileID: 1790917414}
   - component: {fileID: 1790917415}
   - component: {fileID: 1790917417}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Part2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24783,7 +24783,7 @@ GameObject:
   - component: {fileID: 1869848058}
   - component: {fileID: 1869848059}
   - component: {fileID: 1869848060}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24969,7 +24969,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885614008}
   - component: {fileID: 1885614009}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SwampBush (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26145,7 +26145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064768146}
   - component: {fileID: 2064768147}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26458,7 +26458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110128335}
   - component: {fileID: 2110128336}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Flower_deco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26744,7 +26744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5003583821291268195, guid: 8f05456f70f523f499eb9007289f3747, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f05456f70f523f499eb9007289f3747, type: 3}
@@ -26862,7 +26862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6592771181127518621, guid: 7393d4bb7eb8a2b41af27ac1265f4068, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7393d4bb7eb8a2b41af27ac1265f4068, type: 3}
