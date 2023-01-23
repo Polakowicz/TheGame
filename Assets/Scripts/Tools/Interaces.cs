@@ -8,7 +8,9 @@ namespace Scripts.Interfaces
     {
 		public enum HitWeapon
 		{
-			OTHER
+			OTHER,
+            Rock,
+            Bullet
 		}
 
 		public void Hit(GameObject attacker, int damage, HitWeapon weapon = HitWeapon.OTHER);

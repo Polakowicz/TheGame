@@ -45,15 +45,15 @@ public class Goblin : MonoBehaviour, IHit
 
 	public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
 	{
-		//switch (weapon) {
-		//	case IHit.HitWeapon.Bullet:
-		//		hp--;
-		//		break;
-		//	case IHit.HitWeapon.Rock:
-		//		hp -= RockDamage;
-		//		break;
-		//}
-		hp--;
+		switch (weapon)
+		{
+			case IHit.HitWeapon.OTHER:
+				hp--;
+				break;
+			case IHit.HitWeapon.Rock:
+				hp -= RockDamage;
+				break;
+		}
 
 		hp = Mathf.Clamp(hp, 0, MaxHP);
 		if (hp == 0) {

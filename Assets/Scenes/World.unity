@@ -4711,6 +4711,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2015716106, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: maxHp
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015716106, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: minimap
       value: 
       objectReference: {fileID: 0}
@@ -4730,6 +4734,10 @@ PrefabInstance:
       propertyPath: lowHealthPanel
       value: 
       objectReference: {fileID: 410523945}
+    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
+      propertyPath: attackLayerMask.m_Bits
+      value: 327680
+      objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964024, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Player
@@ -7197,7 +7205,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 10453111
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -23367,7 +23375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1651488799
 Animator:
   serializedVersion: 3
