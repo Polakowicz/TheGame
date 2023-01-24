@@ -41,7 +41,7 @@ public class PointAndClick : MonoBehaviour
         highlight.color = color;
         switchedOff = true;
         switchedOn = false;
-        FindObjectOfType<AudioManager>().Play("MenuMusic");
+        FindObjectOfType<AudioManager>().Play("CapsuleMusic");
     }
 
     private void OnMouseEnter()
