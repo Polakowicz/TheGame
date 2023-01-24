@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
         }
         */
 
-        Play("Music");
+        // Play("Music");
     }
 
     public void Play(string sound)

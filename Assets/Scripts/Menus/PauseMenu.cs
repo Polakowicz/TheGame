@@ -15,6 +15,11 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     float tempVolume;
 
+    void Start()
+    {
+        FindObjectOfType<AudioManager>().Play("Music");
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

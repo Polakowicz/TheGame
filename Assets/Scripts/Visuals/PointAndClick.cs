@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class PointAndClick : MonoBehaviour
 {
+    // [whereistheguru] Adding sound effects.
+    public enum ObjectType { NONE, Couch, Switch, Maps, Plant, Toilet, Door, Computer, Radio, Books }
+    public ObjectType type;
     private SpriteRenderer highlight;
     private Animator animator;
     private Color color;
@@ -38,6 +41,7 @@ public class PointAndClick : MonoBehaviour
         highlight.color = color;
         switchedOff = true;
         switchedOn = false;
+        FindObjectOfType<AudioManager>().Play("MenuMusic");
     }
 
     private void OnMouseEnter()
@@ -78,6 +82,41 @@ public class PointAndClick : MonoBehaviour
             GameEventSystem.Instance.StartType = GameEventSystem.GameStartType.LoadedGame;
 
             SceneManager.LoadScene("Test_Level_02");
+        }
+
+        // [whereistheguru] Adding sound effects.
+        switch (type)
+        {
+            case ObjectType.Couch:
+                FindObjectOfType<AudioManager>().Play("Sleeping");
+                break;
+            case ObjectType.Switch:
+                FindObjectOfType<AudioManager>().Play("LightSwitch");
+                break;
+            case ObjectType.Maps:
+                FindObjectOfType<AudioManager>().Play("Maps");
+                break;
+            case ObjectType.Plant:
+                FindObjectOfType<AudioManager>().Play("Plant");
+                break;
+            case ObjectType.Toilet:
+                FindObjectOfType<AudioManager>().Play("Toilet");
+                break;
+            case ObjectType.Door:
+                FindObjectOfType<AudioManager>().Play("ExitDoor");
+                break;
+            case ObjectType.Computer:
+                FindObjectOfType<AudioManager>().Play("Computer");
+                break;
+            case ObjectType.Radio:
+                FindObjectOfType<AudioManager>().Play("Radio");
+                break;
+            case ObjectType.Books:
+                FindObjectOfType<AudioManager>().Play("Books");
+                break;
+            default:
+                Debug.Log("NO TYPE");
+                break;
         }
     }
 }

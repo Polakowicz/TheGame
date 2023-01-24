@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
         // mainScreen.gameObject.SetActive(true);
         // optionsScreen.gameObject.SetActive(false);
         // creditsScreen.gameObject.SetActive(false);
+        FindObjectOfType<AudioManager>().Play("MenuMusic");
     }
 
     public void NewGame()
