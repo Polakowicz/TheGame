@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 153321455382526364}
   - component: {fileID: 3489779482464297774}
   m_Layer: 17
-  m_Name: Basic Enemy Bullet
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6695976794642740978}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 3.488, y: -1.3566, z: 0}
   m_LocalScale: {x: 0.6993352, y: 0.83456284, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &6695976794642740876
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 35ad4babde846fd4f87ec2aa350a2c6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5251d1eb591c90b45a3e5d22d8da5173, type: 3}
   m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  isBulletPiercing: 1
+  isBulletPiercing: 0
   speed: 2
   hitLayerMask:
     serializedVersion: 2

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PushableRock : MonoBehaviour
+public class PushableRock : MonoBehaviour, IHit
 {
 	private Rigidbody2D rb;
 	private Collider2D col;
@@ -52,9 +52,24 @@ public class PushableRock : MonoBehaviour
 		if (!pushed) return;
 
 		if(collision.gameObject.layer == LayerMask.NameToLayer("Boss")) {
-			collision.gameObject.GetComponent<IHit>().Hit(gameObject, 1);
+			collision.gameObject.GetComponent<IHit>().Hit(gameObject, 1, IHit.HitWeapon.Rock);
 		}
 
 		Destroy(gameObject);
 	}
+
+    public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
+    {
+		Push(transform.position - attacker.transform.position);
+    }
+
+    public void StunHit(GameObject attacker, int damage, float stunTime, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
+    {
+        Hit(attacker, damage, weapon);
+    }
+
+    public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
+    {
+        
+    }
 }
