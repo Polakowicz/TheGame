@@ -21,9 +21,11 @@ namespace Scripts.Enemies
             if (hp <= 0) return;
 
             hp -= damage;
+			FindObjectOfType<AudioManager>().Play("MinecraftDamage");
 
 			if (hp <= 0) {
 				manager.Animator.SetTrigger("Die");
+				FindObjectOfType<AudioManager>().Play("LukeDeath");
 				GameEventSystem.Instance.OnEnemyKilled?.Invoke();
 
 				// Temporary when there is no animation yet

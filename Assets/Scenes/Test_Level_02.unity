@@ -2565,8 +2565,8 @@ GameObject:
   - component: {fileID: 70244731}
   - component: {fileID: 70244732}
   - component: {fileID: 70244733}
-  - component: {fileID: 70244735}
-  m_Layer: 0
+  - component: {fileID: 70244734}
+  m_Layer: 23
   m_Name: Part4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2664,7 +2664,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &70244735
+--- !u!114 &70244734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2673,10 +2673,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 70244730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Script: {fileID: 11500000, guid: 21d00176941dddd4a89d7e74c39ae319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: 3
+  type: 1
+  commentText: 
+  dialogueLines: []
+  hasTask: 0
+  taskText: 
 --- !u!1001 &72194388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6404,7 +6408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2962, y: -1574}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &671295786
@@ -20713,8 +20717,8 @@ GameObject:
   - component: {fileID: 1320549500}
   - component: {fileID: 1320549501}
   - component: {fileID: 1320549502}
-  - component: {fileID: 1320549504}
-  m_Layer: 0
+  - component: {fileID: 1320549503}
+  m_Layer: 23
   m_Name: Part1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20812,7 +20816,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1320549504
+--- !u!114 &1320549503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20821,10 +20825,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1320549499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Script: {fileID: 11500000, guid: 21d00176941dddd4a89d7e74c39ae319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: 0
+  type: 1
+  commentText: 
+  dialogueLines: []
+  hasTask: 0
+  taskText: 
 --- !u!1 &1328789046
 GameObject:
   m_ObjectHideFlags: 0
@@ -20840,7 +20848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1328789047
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23922,8 +23930,8 @@ GameObject:
   - component: {fileID: 1760990517}
   - component: {fileID: 1760990518}
   - component: {fileID: 1760990519}
-  - component: {fileID: 1760990521}
-  m_Layer: 0
+  - component: {fileID: 1760990520}
+  m_Layer: 23
   m_Name: Part3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24021,7 +24029,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1760990521
+--- !u!114 &1760990520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24030,10 +24038,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1760990516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Script: {fileID: 11500000, guid: 21d00176941dddd4a89d7e74c39ae319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: 2
+  type: 1
+  commentText: 
+  dialogueLines: []
+  hasTask: 0
+  taskText: 
 --- !u!1001 &1776647107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24227,8 +24239,8 @@ GameObject:
   - component: {fileID: 1790917413}
   - component: {fileID: 1790917414}
   - component: {fileID: 1790917415}
-  - component: {fileID: 1790917417}
-  m_Layer: 0
+  - component: {fileID: 1790917416}
+  m_Layer: 23
   m_Name: Part2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24326,7 +24338,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1790917417
+--- !u!114 &1790917416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24335,10 +24347,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1790917412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Script: {fileID: 11500000, guid: 21d00176941dddd4a89d7e74c39ae319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: 1
+  type: 1
+  commentText: 
+  dialogueLines: []
+  hasTask: 0
+  taskText: 
 --- !u!1001 &1800552987
 PrefabInstance:
   m_ObjectHideFlags: 0

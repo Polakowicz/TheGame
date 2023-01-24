@@ -59,21 +59,21 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: MeleeBasicAttack
-    clip: {fileID: 8300000, guid: 864aae11f76bb1c4c9a438b71e8aa8f2, type: 3}
+    clip: {fileID: 8300000, guid: e59ce0bd3af20cd42a5cb783e05773f8, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: RangedBasicAttack
-    clip: {fileID: 8300000, guid: 2bb80684da242b14ca000d037596ef30, type: 3}
+    clip: {fileID: 8300000, guid: fc099bdf12d8a34409597895f14c8c4c, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: SwitchWeapon
-    clip: {fileID: 8300000, guid: 1f02c1c3d7d27fe41ba0cb2d736d7bdd, type: 3}
+    clip: {fileID: 8300000, guid: f48dc233b2c5dfb4cb446e5da2820909, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
@@ -113,4 +113,39 @@ MonoBehaviour:
     volume: 0.1
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: ItemPickup
+    clip: {fileID: 8300000, guid: 0c0c331a7fe95d340bed8f666971cf9b, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MinecraftDamage
+    clip: {fileID: 8300000, guid: 303a52f6d51e2e946a5403f36992c218, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MinecraftHurt
+    clip: {fileID: 8300000, guid: 903e7c0c634b81743bbf8a2f08e4dd76, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LukeDeath
+    clip: {fileID: 8300000, guid: 7467cf6714a34454d800274829dd2a25, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: YodaDeath
+    clip: {fileID: 8300000, guid: c75b81722aa3d484f9fab011c04f899e, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
