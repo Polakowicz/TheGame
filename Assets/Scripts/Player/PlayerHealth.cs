@@ -103,8 +103,14 @@ namespace Scripts.Player
 				// [whereistheguru]
 				healthbar.SetActive(false);
 				PlayerMovement.playerControlsEnabled = false;
+                
 			}
 		}
+
+		public void PlayerDied() {
+            GameEventSystem.Instance.RestartGame();
+        }
+
 
 		private bool IsHit(GameObject attacker)
 		{

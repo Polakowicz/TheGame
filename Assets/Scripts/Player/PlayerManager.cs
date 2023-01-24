@@ -51,7 +51,13 @@ namespace Scripts.Player
 			if (GameEventSystem.Instance.StartType == GameEventSystem.GameStartType.LoadedGame)
 			{
 				var checkpointName = GameEventSystem.Instance.SaveSystem.Data.checkpointName;
-				transform.position = CheckpointsPositions.Instance.GetCheckpointFromName(checkpointName).RespownPosition.position;
+                //var ins = CheckpointsPositions.Instance;
+                var position = CheckpointsPositions.Instance.GetCheckpointFromName(checkpointName);
+
+                if(position != null)
+                {
+                    transform.position = position.RespownPosition.position;
+                }
 			}
 		}
 
