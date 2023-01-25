@@ -275,3 +275,17 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Blooper
+    clip: {fileID: 8300000, guid: 77b6c4e1f4733d3408bf34dd60f7857f, type: 3}
+    group: {fileID: 24300002, guid: c362aacd615be0e449354cd0082ec1f4, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: AmperSong
+    clip: {fileID: 8300000, guid: 1672cdd7c47109f4eb0627f916166132, type: 3}
+    group: {fileID: 24300002, guid: c4a2607bdead4d84997531e8d5f4cd33, type: 2}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
