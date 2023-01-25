@@ -58,14 +58,14 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: MeleeBasicAttack
+  - name: SwordSwing
     clip: {fileID: 8300000, guid: e59ce0bd3af20cd42a5cb783e05773f8, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: RangedBasicAttack
+  - name: BlasterFire
     clip: {fileID: 8300000, guid: fc099bdf12d8a34409597895f14c8c4c, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
@@ -121,29 +121,99 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: MinecraftDamage
-    clip: {fileID: 8300000, guid: 303a52f6d51e2e946a5403f36992c218, type: 3}
+  - name: EnemyDamage
+    clip: {fileID: 8300000, guid: 2c3023b2f00c0b749b50c4c82a7c5c0e, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: MinecraftHurt
+  - name: PlayerDamage
     clip: {fileID: 8300000, guid: 903e7c0c634b81743bbf8a2f08e4dd76, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: LukeDeath
+  - name: EnemyDeath
     clip: {fileID: 8300000, guid: 7467cf6714a34454d800274829dd2a25, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: YodaDeath
-    clip: {fileID: 8300000, guid: c75b81722aa3d484f9fab011c04f899e, type: 3}
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: c40032989f539ed4587517a21c9759c1, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordBlock
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordThrust
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Respawn
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Checkpoint
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LightSwitch
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sleeping
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Snoring
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerStun
+    clip: {fileID: 8300000, guid: 0c612875ad94f2143904e094ebc6f48f, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BossDeath
+    clip: {fileID: 8300000, guid: 1a8023951d518a740bd0aef00dcecd54, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
