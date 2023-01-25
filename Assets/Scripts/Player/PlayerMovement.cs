@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Player
 {
-	public class PlayerMovement : ExtendedMonoBehaviour
+	public class PlayerMovement : ExtendedMonoBehaviour, IKick
 	{
 		//Components
 		private Rigidbody2D rb;
@@ -106,5 +106,10 @@ namespace Scripts.Player
 			player.State = PlayerManager.PlayerState.Walk;
 			after?.Invoke();
 		}
-	}
+
+        public void Kick(Vector2 direction, int damage)
+        {
+			MoveInDirection(direction, dashSpeed, dashTime, null);
+        }
+    }
 }

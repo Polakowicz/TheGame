@@ -58,7 +58,9 @@ namespace Scripts.Player
                 {
                     transform.position = position.RespownPosition.position;
                 }
-			}
+
+                AudioManager.Play("Respawn");
+            }
 		}
 
 		private void OnDestroy()

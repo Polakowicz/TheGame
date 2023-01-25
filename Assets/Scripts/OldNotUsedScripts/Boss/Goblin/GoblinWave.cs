@@ -40,7 +40,7 @@ public class GoblinWave : MonoBehaviour
 			y += transform.position.y;
 			spawnPos.y += rockYdistance;
 			var pos = new Vector2(x, y + rockYdistance);
-			Instantiate(rock, spawnPos, Quaternion.identity);
+			Instantiate(rock, pos, Quaternion.identity);
 		}
 	}
 

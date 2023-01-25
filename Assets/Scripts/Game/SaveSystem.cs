@@ -73,7 +73,7 @@ namespace Scripts.Game
 			serializer.Serialize(stream, Data);
 			stream.Close();
 		}
-		public void LoadGame()
+		public bool LoadGame()
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
 			FileStream stream = new FileStream(filePath, FileMode.Open);
@@ -82,11 +82,11 @@ namespace Scripts.Game
 
 			if(loadedData == null)
 			{
-				Debug.LogError("Unable to laod saved game");
-				return;
+				return false;
 			}
 
 			Data = loadedData;
+			return true;
 		}
 	}
 }

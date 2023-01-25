@@ -76,7 +76,7 @@ public class Goblin : MonoBehaviour, IHit
 	private void Kick()
 	{
 		var direction = Player.transform.position - transform.position;
-		Player.GetComponent<IKick>()?.Kick(direction.normalized * KickForce, 0);
+		Player.GetComponent<IKick>().Kick(direction.normalized * KickForce, 0);
 	}
 	private void CreateWave()
 	{
