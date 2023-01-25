@@ -10,6 +10,8 @@ namespace Scripts.Game
 	{
 		public static GameEventSystem Instance;
 
+        public bool isCutsceneActive;
+
 		public SaveSystem SaveSystem { get; private set; }
 
 		public enum GameStartType
@@ -28,8 +30,11 @@ namespace Scripts.Game
 			} else
 			{
 				Destroy(gameObject);
-			}		
-		}
+			}
+
+            OnCutsceneStarted += () => isCutsceneActive = true;
+            OnCutsceneEnded += () => isCutsceneActive = false;
+        }
 
 		public void RestartGame()
 		{ 
