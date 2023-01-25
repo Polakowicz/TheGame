@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 2582230054303877599}
   - component: {fileID: 172042371269933543}
   - component: {fileID: 9006668601642570258}
+  - component: {fileID: 775496829}
+  - component: {fileID: 775496830}
   m_Layer: 16
   m_Name: Enemy_goblin
   m_TagString: Untagged
@@ -179,6 +181,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09d8354c97f4744d8038fbe3c91cbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &775496829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582230054303877596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c519c5b4c3193144b0aeebe5e898c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: {fileID: 0}
+  target: {fileID: 0}
+  spawnPosition: {fileID: 1443665823299137150}
+  isDispertionActive: 0
+  minDispartion: 0
+  maxDispartion: 0
+  isAutofireActive: 0
+  autoFireDeley: 1
+--- !u!114 &775496830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582230054303877596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c9574578a73744ab2762baeb9d87f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 2
+  damage: 15
 --- !u!1 &3146235699780664549
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +225,6 @@ GameObject:
   m_Component:
   - component: {fileID: 499943177041936830}
   - component: {fileID: 8860423076599386282}
-  - component: {fileID: 1440044077996216982}
   m_Layer: 16
   m_Name: Rotation
   m_TagString: Untagged
@@ -227,26 +262,6 @@ MonoBehaviour:
   Target: {fileID: 0}
   active: 1
   plusAngle: 0
---- !u!114 &1440044077996216982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3146235699780664549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c519c5b4c3193144b0aeebe5e898c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pool: {fileID: 0}
-  target: {fileID: 0}
-  spawnPosition: {fileID: 0}
-  isDispertionActive: 0
-  minDispartion: 0
-  maxDispartion: 0
-  isAutofireActive: 0
-  autoFireDeley: 1
 --- !u!1 &3334882885006537822
 GameObject:
   m_ObjectHideFlags: 0

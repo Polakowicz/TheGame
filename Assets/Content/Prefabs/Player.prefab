@@ -115,7 +115,7 @@ MonoBehaviour:
   basicAttackPowerUpRange: {fileID: 7492179955472192783}
   attackLayerMask:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 33882112
   basicAttackDamage: 15
   thrustAttackRange: {fileID: 8162505908868652061}
   thrustAttackSpeed: 20
@@ -488,7 +488,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010530949, y: 0.05287099}
+  m_Offset: {x: 0.010530949, y: -0.5340027}
   m_SpriteTilingProperty:
     border: {x: 1.5625, y: 0.875, z: 1.40625, w: 1.6875}
     pivot: {x: 0.5, y: 0.5}
@@ -499,7 +499,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.77275753, y: 1.3214374}
+  m_Size: {x: 0.77275753, y: 1.045725}
   m_EdgeRadius: 0
 --- !u!114 &2896284850009964027
 MonoBehaviour:
@@ -766,7 +766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2896284850258396949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.559, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2896284849141417200}

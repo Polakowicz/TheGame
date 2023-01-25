@@ -4738,10 +4738,6 @@ PrefabInstance:
       propertyPath: lowHealthPanel
       value: 
       objectReference: {fileID: 410523945}
-    - target: {fileID: 134073437048459800, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
-      propertyPath: attackLayerMask.m_Bits
-      value: 327680
-      objectReference: {fileID: 0}
     - target: {fileID: 2896284850009964024, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: m_Name
       value: Player
@@ -21502,7 +21498,7 @@ GameObject:
   - component: {fileID: 1391201176}
   m_Layer: 0
   m_Name: Rocks Pool
-  m_TagString: Untagged
+  m_TagString: Rocks
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
