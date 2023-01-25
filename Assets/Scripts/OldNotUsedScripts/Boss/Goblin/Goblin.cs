@@ -45,6 +45,7 @@ public class Goblin : MonoBehaviour, IHit
 
 	public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
 	{
+		FindObjectOfType<AudioManager>().Play("EnemyDamage");
 		switch (weapon)
 		{
 			case IHit.HitWeapon.OTHER:
@@ -57,6 +58,7 @@ public class Goblin : MonoBehaviour, IHit
 
 		hp = Mathf.Clamp(hp, 0, MaxHP);
 		if (hp == 0) {
+			FindObjectOfType<AudioManager>().Play("BossDeath");
 			Die();
 		} else if (active) {
 			animator.SetTrigger("HitGround");

@@ -54,11 +54,15 @@ namespace Scripts.Enemies
 
             health = Mathf.Clamp(health - damage, 0, maxHealth);
 
+            FindObjectOfType<AudioManager>().Play("EnemyDamage");
+
             if(health == 0)
             {
                 StopAllCoroutines();
                 shootingComponent.DeactivateAutoFire();
                 rotateTowardsComponent.Active = false;
+
+                FindObjectOfType<AudioManager>().Play("BossDeath");
 
                 bodyAnimator.SetTrigger(DieAnimationTrigger);
                 headAnimator.SetTrigger(DieAnimationTrigger);
