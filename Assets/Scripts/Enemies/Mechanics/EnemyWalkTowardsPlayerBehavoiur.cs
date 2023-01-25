@@ -22,7 +22,7 @@ namespace Scripts.Enemies
 
 		override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
-			if (!GameEventSystem.Instance.isCutsceneActive)
+			if (GameEventSystem.Instance.isCutsceneActive)
 			{
 				return;
 			}

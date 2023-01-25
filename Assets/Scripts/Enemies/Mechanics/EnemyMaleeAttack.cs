@@ -1,4 +1,5 @@
-﻿using Scripts.Interfaces;
+﻿using Scripts.Game;
+using Scripts.Interfaces;
 using UnityEngine;
 
 namespace Scripts.Enemies
@@ -17,6 +18,11 @@ namespace Scripts.Enemies
 
 		public void Attack()
 		{
+			if (GameEventSystem.Instance.isCutsceneActive)
+			{
+				return;
+			}
+
 			var distance = Vector2.Distance(manager.Player.transform.position, gameObject.transform.position);
 			if (distance > range) return;
 

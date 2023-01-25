@@ -10,7 +10,7 @@ namespace Scripts.Game
 	{
 		public static GameEventSystem Instance;
 
-        public bool isCutsceneActive;
+        public bool isCutsceneActive = false;
 
 		public SaveSystem SaveSystem { get; private set; }
 
