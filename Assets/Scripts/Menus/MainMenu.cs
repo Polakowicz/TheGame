@@ -64,4 +64,14 @@ public class MainMenu : MonoBehaviour
             Application.Quit();
         }
     }
+
+    public void Noonwraith()
+    {
+        audioManager.Play("Blooper");
+    }
+
+    public void Intruder()
+    {
+        audioManager.Play("AmperSong");
+    }
 }

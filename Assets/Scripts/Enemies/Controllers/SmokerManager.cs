@@ -7,6 +7,7 @@ namespace Scripts.Enemies
 {
     public class SmokerManager : MonoBehaviour, IHit
     {
+        private AudioManager audioManager;
         private static readonly string DieAnimationTrigger = "Die";
 
         private enum SState
@@ -15,6 +16,9 @@ namespace Scripts.Enemies
             Smoking,
             Attacking
         }
+
+        public SpriteRenderer spriteRendererHead;
+        private SpriteRenderer spriteRendererBody;
 
         [Header("Animators")]
         [SerializeField] private Animator bodyAnimator;
@@ -39,8 +43,13 @@ namespace Scripts.Enemies
             shootingComponent = GetComponentInChildren<Shooting>();
             rotateTowardsComponent = GetComponentInChildren<RotateTowards>();
 
+            //spriteRendererHead = GetComponentInChildren<SpriteRenderer>();
+            spriteRendererBody = GetComponent<SpriteRenderer>();
+
             health = maxHealth;
             state = SState.Waiting;
+
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         public void Destroy()
@@ -54,15 +63,16 @@ namespace Scripts.Enemies
 
             health = Mathf.Clamp(health - damage, 0, maxHealth);
 
-            FindObjectOfType<AudioManager>().Play("EnemyDamage");
+            audioManager.Play("EnemyDamage");
+            StartCoroutine(FlashingRedOnHit());
 
-            if(health == 0)
+            if (health == 0)
             {
                 StopAllCoroutines();
                 shootingComponent.DeactivateAutoFire();
                 rotateTowardsComponent.Active = false;
 
-                FindObjectOfType<AudioManager>().Play("BossDeath");
+                audioManager.Play("SmokerDeath");
 
                 bodyAnimator.SetTrigger(DieAnimationTrigger);
                 headAnimator.SetTrigger(DieAnimationTrigger);
@@ -103,6 +113,15 @@ namespace Scripts.Enemies
             head.rotation = Quaternion.Euler(0, 0, 180);
             yield return new WaitForSeconds(smoakingTime);
             StartCoroutine(Attacking());
+        }
+        
+        public IEnumerator FlashingRedOnHit()
+        {
+            spriteRendererHead.color = Color.red;
+            spriteRendererBody.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            spriteRendererHead.color = Color.white;
+            spriteRendererBody.color = Color.white;
         }
     }
 }

@@ -10,7 +10,14 @@ namespace Scripts.Enemies
         [SerializeField] private float plusAngle;
         public bool Active { get => active; set => active = value; }
 
-        
+        private void Awake()
+        {
+            if (Target == null)
+            {
+                Target = GameObject.FindGameObjectWithTag("Player");
+            }
+        }
+
         void Update()
         {
             if (!active) return;

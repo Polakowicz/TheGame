@@ -29,8 +29,18 @@ namespace Assets.Scripts.Enemies.Mechanics
         private void Awake()
         {
             dispartion = minDispartion;
-        }
+            
+            if(target == null)
+            {
+                target = GameObject.FindGameObjectWithTag("Player").transform;
+            }
 
+            if (pool == null)
+            {
+                pool = GameObject.FindGameObjectWithTag("Rocks").GetComponent<ObjectPool>();
+            }
+        }
+        
         public GameObject Shoot()
         {
             var bullet = pool.GetObject();

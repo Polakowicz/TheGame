@@ -130,6 +130,9 @@ namespace Scripts.Player
 
 			IsPlayerDuringThurstAttack = true;
 
+			// Play sword thrust sound
+			playerManagerComponent.AudioManager.Play("SwordThrust");
+
 			// Perform fast movement (dash) in aiming direction and disable attack after
 			playerMovementComponent.MoveInDirection(playerManagerComponent.AimDirection, thrustAttackSpeed, thrustAttackTime,
 				() => {

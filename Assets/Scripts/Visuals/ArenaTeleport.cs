@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class ArenaTeleport : MonoBehaviour
 {
+    private AudioManager audioManager;
     private SpriteRenderer _spriteRenderer;
     private int numberOfTriggers;
 
@@ -33,6 +34,7 @@ public class ArenaTeleport : MonoBehaviour
         _confiner = _camera.GetComponent<CinemachineConfiner>();
         _cameraBoundsCollider = _cameraBounds.GetComponent<Collider2D>();
         numberOfTriggers = 0;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -48,10 +50,12 @@ public class ArenaTeleport : MonoBehaviour
             switch (numberOfTriggers)
             {
                 case 0:
+                    audioManager.Play("CaveHole");
                     _spriteRenderer.sprite = _sprites[0];
                     numberOfTriggers += 1;
                     break;
                 case 1:
+                    audioManager.Play("CaveHole");
                     _spriteRenderer.sprite = _sprites[1];
                     numberOfTriggers += 1;
                     if (!hasPlayed)
@@ -61,6 +65,7 @@ public class ArenaTeleport : MonoBehaviour
                         timeline.Play();
                     }
                     StartCoroutine(Teleport());
+                    audioManager.Play("CaveFall");
                     break;
                 case 2:
                     _spriteRenderer.sprite = _sprites[2];
