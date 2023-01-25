@@ -23,7 +23,8 @@ public class MainMenu : MonoBehaviour
 		GameEventSystem.Instance.StartType = GameEventSystem.GameStartType.NewGame;
 
         // Change scene
-		LoadLevel();
+        SceneManager.LoadScene("OpeningCutscene");
+		// LoadLevel();
     }
 
     public void ResumeGame()
