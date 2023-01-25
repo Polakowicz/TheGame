@@ -10,10 +10,12 @@ namespace Scripts.Enemies
 	{
 		private EnemyManager manager;
 		[SerializeField] private int hp;
+		private AudioManager audioManager;
 
 		private void Awake()
 		{
 			manager = GetComponent<EnemyManager>();
+			audioManager = FindObjectOfType<AudioManager>();
 		}
 
 		public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
@@ -21,11 +23,11 @@ namespace Scripts.Enemies
             if (hp <= 0) return;
 
             hp -= damage;
-			FindObjectOfType<AudioManager>().Play("EnemyDamage");
+			audioManager.Play("EnemyDamage");
 
 			if (hp <= 0) {
 				manager.Animator.SetTrigger("Die");
-				FindObjectOfType<AudioManager>().Play("EnemyDeath");
+				audioManager.Play("EnemyDeath");
 				GameEventSystem.Instance.OnEnemyKilled?.Invoke();
 
 				// Temporary when there is no animation yet

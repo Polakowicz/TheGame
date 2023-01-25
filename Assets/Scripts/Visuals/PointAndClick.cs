@@ -3,13 +3,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class PointAndClick : MonoBehaviour
 {
-    // [whereistheguru] Adding sound effects.
+    // [whereistheguru] Adding sound effects & hiding notes.
+    private AudioManager audioManager;
     public enum ObjectType { NONE, Couch, Switch, Maps, Plant, Toilet, Door, Computer, Radio, Books }
     public ObjectType type;
+    public AudioMixer musicMixer;
+    public static bool RadioIsOn = true;
+    float tempVolume;
+    public GameObject notes;
+    // ends here
     private SpriteRenderer highlight;
     private Animator animator;
     private Color color;
@@ -31,6 +38,9 @@ public class PointAndClick : MonoBehaviour
 
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.Play("CapsuleMusic");
+        
         highlight = GetComponent<SpriteRenderer>();
         if (GetComponent<Animator>())
         {
@@ -41,7 +51,6 @@ public class PointAndClick : MonoBehaviour
         highlight.color = color;
         switchedOff = true;
         switchedOn = false;
-        FindObjectOfType<AudioManager>().Play("CapsuleMusic");
     }
 
     private void OnMouseEnter()
@@ -88,31 +97,40 @@ public class PointAndClick : MonoBehaviour
         switch (type)
         {
             case ObjectType.Couch:
-                FindObjectOfType<AudioManager>().Play("Sleeping");
+                audioManager.Play("Sleeping");
                 break;
             case ObjectType.Switch:
-                FindObjectOfType<AudioManager>().Play("LightSwitch");
+                audioManager.Play("LightSwitch");
                 break;
             case ObjectType.Maps:
-                FindObjectOfType<AudioManager>().Play("Maps");
+                audioManager.Play("Maps");
                 break;
             case ObjectType.Plant:
-                FindObjectOfType<AudioManager>().Play("Plant");
+                audioManager.Play("Plant");
                 break;
             case ObjectType.Toilet:
-                FindObjectOfType<AudioManager>().Play("Toilet");
+                audioManager.Play("Toilet");
                 break;
             case ObjectType.Door:
-                FindObjectOfType<AudioManager>().Play("ExitDoor");
+                audioManager.Play("ExitDoor");
                 break;
             case ObjectType.Computer:
-                FindObjectOfType<AudioManager>().Play("Computer");
+                audioManager.Play("Computer");
                 break;
             case ObjectType.Radio:
-                FindObjectOfType<AudioManager>().Play("Radio");
+                if (RadioIsOn) {
+                    musicMixer.GetFloat("musicVolume", out tempVolume);
+                    musicMixer.SetFloat("musicVolume", -80);
+                    RadioIsOn = false;
+                    notes.SetActive(false);
+                } else {
+                    musicMixer.SetFloat("musicVolume", tempVolume);
+                    RadioIsOn = true;
+                    notes.SetActive(true);
+                }
                 break;
             case ObjectType.Books:
-                FindObjectOfType<AudioManager>().Play("Books");
+                audioManager.Play("Books");
                 break;
             default:
                 Debug.Log("NO TYPE");

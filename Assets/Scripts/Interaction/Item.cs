@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Item : MonoBehaviour
 {
+    private AudioManager audioManager;
     // Determines what kind of interaction is needed from the object.
     public enum InteractionType { NONE, PickUp, Comment, Dialogue }
     public InteractionType type;
@@ -20,6 +21,10 @@ public class Item : MonoBehaviour
     public bool hasTask;
     public string taskText;
 
+    private void Start(){
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
     // Make sure that created BoxCollider2D component has "Is Trigger" value set to true, as well as its layer set to "Interactable".
     private void Reset()
     {
@@ -33,7 +38,7 @@ public class Item : MonoBehaviour
         {
             case InteractionType.PickUp:
                 // Add the object to the picked up items list
-                FindObjectOfType<AudioManager>().Play("ItemPickup");
+                audioManager.Play("ItemPickup");
                 FindObjectOfType<InteractionSystem>().PickUp(this);
                 // Disable the object (destroying will result in Missing Object on the list)
                 gameObject.SetActive(false);

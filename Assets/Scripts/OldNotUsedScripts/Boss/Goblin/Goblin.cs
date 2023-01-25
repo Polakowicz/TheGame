@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Goblin : MonoBehaviour, IHit
 {
+	private AudioManager audioManager;
 	private readonly int MaxHP = 10000;
 	private readonly int RockHitsResilience = 3;
 	private readonly float KickDistance = 2.5f;
@@ -30,6 +31,7 @@ public class Goblin : MonoBehaviour, IHit
 		Player = GameObject.FindGameObjectWithTag("Player");
 
 		hp = MaxHP;
+		audioManager = FindObjectOfType<AudioManager>();
 	}
 
 	private void Update()
@@ -45,7 +47,7 @@ public class Goblin : MonoBehaviour, IHit
 
 	public void Hit(GameObject attacker, int damage, IHit.HitWeapon weapon)
 	{
-		FindObjectOfType<AudioManager>().Play("EnemyDamage");
+		audioManager.Play("EnemyDamage");
 		switch (weapon)
 		{
 			case IHit.HitWeapon.OTHER:
@@ -58,7 +60,7 @@ public class Goblin : MonoBehaviour, IHit
 
 		hp = Mathf.Clamp(hp, 0, MaxHP);
 		if (hp == 0) {
-			FindObjectOfType<AudioManager>().Play("BossDeath");
+			audioManager.Play("BossDeath");
 			Die();
 		} else if (active) {
 			animator.SetTrigger("HitGround");
