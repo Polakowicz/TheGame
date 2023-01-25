@@ -32,6 +32,7 @@ namespace Scripts.Player
 
 		// [whereistheguru]
 		public static bool playerControlsEnabled = true;
+		private AudioManager audioManager;
 
 		private void Awake()
 		{
@@ -49,6 +50,7 @@ namespace Scripts.Player
 		}
 		private void Start()
 		{
+			audioManager = FindObjectOfType<AudioManager>();
 			dashAction.performed += PerformDash;
 		}
 		private void OnDestroy()
@@ -78,6 +80,7 @@ namespace Scripts.Player
 			if (player.State != PlayerManager.PlayerState.Walk) return;
 
 			MoveInDirection(direction, dashSpeed, dashTime, null);
+			audioManager.Play("Dash"); // [whereistheguru]
 			player.AnimationController.Dash();
 		}
 		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)

@@ -10,6 +10,7 @@ namespace Scripts.Player
 	public class PlayerHealth : ExtendedMonoBehaviour, IHit
 	{
 		// [whereistheguru]
+		private AudioManager audioManager;
 		// It's a "Filled" Image Type, so full health's value equals 1, while e.g. 65% is 0.65
 		public Image healthbarFill;
 		public Image heartIcon;
@@ -36,6 +37,7 @@ namespace Scripts.Player
 			heartIcon.color = new Color32(255, 255, 255, 255);
 			healthbar.SetActive(true);
 			lowHealthPanel.SetActive(false);
+			audioManager = FindObjectOfType<AudioManager>();
 		}
 
 		public void RestoreHP()
@@ -84,7 +86,7 @@ namespace Scripts.Player
 				healthbarFill.fillAmount = hp_bar / 100;
 			} else {
 				HP -= damage;
-				FindObjectOfType<AudioManager>().Play("PlayerDamage");
+				audioManager.Play("PlayerDamage");
 				// [whereistheguru]
 				hp_bar = HP;
 				healthbarFill.fillAmount = hp_bar / 100;
@@ -102,7 +104,7 @@ namespace Scripts.Player
 			if (HP == 0) {
 				player.AnimationController.Die();
 				// [whereistheguru]
-				FindObjectOfType<AudioManager>().Play("PlayerDeath");
+				audioManager.Play("PlayerDeath");
 				healthbar.SetActive(false);
 				PlayerMovement.playerControlsEnabled = false;
                 

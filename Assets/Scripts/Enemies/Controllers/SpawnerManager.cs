@@ -11,6 +11,7 @@ namespace Scripts.Enemies
 {
     public class SpawnerManager : ExtendedMonoBehaviour, IHit
     {
+        private AudioManager audioManager;
         private readonly string DieTriggerAnimatorName = "Die";
         private readonly string SpawnWaveAnimatorName = "SpawnNextWave";
         private readonly string RestAnimatorStateName = "Rest";
@@ -30,6 +31,8 @@ namespace Scripts.Enemies
 			spawningComponent = GetComponent<BossSpawningEnemies>();
 
 			healthLeft = StageHealh;
+
+            audioManager = FindObjectOfType<AudioManager>();
 		}
 
         public void ResetHealth() => healthLeft = StageHealh;
@@ -40,11 +43,13 @@ namespace Scripts.Enemies
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName(RestAnimatorStateName)) return;
 
 			healthLeft = Mathf.Clamp(healthLeft - damage, 0, StageHealh);
+            audioManager.Play("EnemyDamage");
             StartCoroutine(FlashingRedOnHit());
-            if(healthLeft == 0)
+            if (healthLeft == 0)
             {
                 if (spawningComponent.WavesLeft == 0)
                 {
+                    audioManager.Play("DjinnDeath");
                     animator.SetTrigger(DieTriggerAnimatorName);
                 } else
                 {

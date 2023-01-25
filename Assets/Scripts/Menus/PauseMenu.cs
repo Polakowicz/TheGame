@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    private AudioManager audioManager;
     // private float fixedDeltaTime;
     public GameObject pauseMenu;
     public GameObject healthbar;
@@ -17,7 +18,8 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        FindObjectOfType<AudioManager>().Play("Music");
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.Play("Music");
     }
 
     void Update()
@@ -37,11 +39,10 @@ public class PauseMenu : MonoBehaviour
 
     public void GoMenu()
     {
-        FindObjectOfType<AudioManager>().Play("ButtonClick");
+        audioManager.Play("ButtonClick");
         musicMixer.SetFloat("musicVolume", tempVolume);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        // TO DO
         // SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(0).buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }

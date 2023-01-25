@@ -150,35 +150,35 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: SwordBlock
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9ddf0a97240fe4b498fe7d1dc0a7e282, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: SwordThrust
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6571f493fb5c4fe4297a6cdc993c0ea4, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Dash
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: addeab21769a5b640b9a3c17b9439d78, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Respawn
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: e42f7cb6826ac02459e0ba4438a31b45, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Checkpoint
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0f6b86295c8fbe24cbfcc3d7f65da4dc, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1
@@ -212,8 +212,64 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: BossDeath
-    clip: {fileID: 8300000, guid: 1a8023951d518a740bd0aef00dcecd54, type: 3}
+  - name: OgreDeath
+    clip: {fileID: 8300000, guid: 66f0079344abf3f4baa1120deb108fc1, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DjinnDeath
+    clip: {fileID: 8300000, guid: 617270ca0e63700478530b591eefa48a, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnterPortal
+    clip: {fileID: 8300000, guid: 2b62844146b7c0840bf92fb30931d79c, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ExitPortal
+    clip: {fileID: 8300000, guid: 8d46979195cb2f748ada4fb16eb93288, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Toilet
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Maps
+    clip: {fileID: 0}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SmokerDeath
+    clip: {fileID: 8300000, guid: 8efdf4f4a565af24a8f705283acacaaa, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CaveHole
+    clip: {fileID: 8300000, guid: 83056e034cb6e1546b72f04b33269331, type: 3}
+    group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CaveFall
+    clip: {fileID: 8300000, guid: 5cddb504a47c1f342a5ffa0a51a014ed, type: 3}
     group: {fileID: 24300002, guid: 366ed31b6b8669f40a8bb225fd8656ab, type: 2}
     volume: 0.5
     pitch: 1

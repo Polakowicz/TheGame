@@ -24,6 +24,7 @@ namespace Scripts.Game
 		// Activation
 		virtual public Interaction Interact(GameObject sender)
 		{
+			FindObjectOfType<AudioManager>().Play("Checkpoint");
 			GameEventSystem.Instance.OnCheckpointReached?.Invoke(this);
 			return Interaction.Checkpoint;
 		}
