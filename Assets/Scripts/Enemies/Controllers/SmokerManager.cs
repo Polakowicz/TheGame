@@ -17,6 +17,9 @@ namespace Scripts.Enemies
             Attacking
         }
 
+        public SpriteRenderer spriteRendererHead;
+        private SpriteRenderer spriteRendererBody;
+
         [Header("Animators")]
         [SerializeField] private Animator bodyAnimator;
         [SerializeField] private Animator headAnimator;
@@ -40,6 +43,9 @@ namespace Scripts.Enemies
             shootingComponent = GetComponentInChildren<Shooting>();
             rotateTowardsComponent = GetComponentInChildren<RotateTowards>();
 
+            //spriteRendererHead = GetComponentInChildren<SpriteRenderer>();
+            spriteRendererBody = GetComponent<SpriteRenderer>();
+
             health = maxHealth;
             state = SState.Waiting;
 
@@ -58,8 +64,9 @@ namespace Scripts.Enemies
             health = Mathf.Clamp(health - damage, 0, maxHealth);
 
             audioManager.Play("EnemyDamage");
+            StartCoroutine(FlashingRedOnHit());
 
-            if(health == 0)
+            if (health == 0)
             {
                 StopAllCoroutines();
                 shootingComponent.DeactivateAutoFire();
@@ -106,6 +113,15 @@ namespace Scripts.Enemies
             head.rotation = Quaternion.Euler(0, 0, 180);
             yield return new WaitForSeconds(smoakingTime);
             StartCoroutine(Attacking());
+        }
+        
+        public IEnumerator FlashingRedOnHit()
+        {
+            spriteRendererHead.color = Color.red;
+            spriteRendererBody.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            spriteRendererHead.color = Color.white;
+            spriteRendererBody.color = Color.white;
         }
     }
 }

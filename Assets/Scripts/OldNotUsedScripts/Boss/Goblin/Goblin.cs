@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Visuals;
 
 public class Goblin : MonoBehaviour, IHit
 {
@@ -14,6 +15,8 @@ public class Goblin : MonoBehaviour, IHit
 	private int RockDamage => MaxHP / RockHitsResilience + 1;
 
 	private Animator animator;
+	private SpriteRenderer spriteRenderer;
+
 	public GameObject Player { get; private set; }
 
 
@@ -28,6 +31,8 @@ public class Goblin : MonoBehaviour, IHit
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
+
 		Player = GameObject.FindGameObjectWithTag("Player");
 
 		hp = MaxHP;
@@ -65,6 +70,7 @@ public class Goblin : MonoBehaviour, IHit
 		} else if (active) {
 			animator.SetTrigger("HitGround");
 		}
+		StartCoroutine(FlashingRedOnHit());
 	}
 
 	private void Kick()
@@ -98,5 +104,12 @@ public class Goblin : MonoBehaviour, IHit
 	public void Stun(GameObject attacker, float time, float strength = 1, IHit.HitWeapon weapon = IHit.HitWeapon.OTHER)
 	{
 		throw new NotImplementedException();
+	}
+	
+	public IEnumerator FlashingRedOnHit()
+	{
+		spriteRenderer.color = Color.red;
+		yield return new WaitForSeconds(0.1f);
+		spriteRenderer.color = Color.white;
 	}
 }

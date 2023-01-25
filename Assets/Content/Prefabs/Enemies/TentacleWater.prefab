@@ -130,6 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
-  range: 10
+  range: 1
   cooldown: 5
   animationDelay: 5
