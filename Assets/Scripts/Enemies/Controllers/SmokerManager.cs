@@ -7,6 +7,7 @@ namespace Scripts.Enemies
 {
     public class SmokerManager : MonoBehaviour, IHit
     {
+        private AudioManager audioManager;
         private static readonly string DieAnimationTrigger = "Die";
 
         private enum SState
@@ -41,6 +42,8 @@ namespace Scripts.Enemies
 
             health = maxHealth;
             state = SState.Waiting;
+
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         public void Destroy()
@@ -54,7 +57,7 @@ namespace Scripts.Enemies
 
             health = Mathf.Clamp(health - damage, 0, maxHealth);
 
-            FindObjectOfType<AudioManager>().Play("EnemyDamage");
+            audioManager.Play("EnemyDamage");
 
             if(health == 0)
             {
@@ -62,7 +65,7 @@ namespace Scripts.Enemies
                 shootingComponent.DeactivateAutoFire();
                 rotateTowardsComponent.Active = false;
 
-                FindObjectOfType<AudioManager>().Play("BossDeath");
+                audioManager.Play("SmokerDeath");
 
                 bodyAnimator.SetTrigger(DieAnimationTrigger);
                 headAnimator.SetTrigger(DieAnimationTrigger);

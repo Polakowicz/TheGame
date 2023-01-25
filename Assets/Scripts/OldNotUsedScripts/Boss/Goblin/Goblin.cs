@@ -60,7 +60,7 @@ public class Goblin : MonoBehaviour, IHit
 
 		hp = Mathf.Clamp(hp, 0, MaxHP);
 		if (hp == 0) {
-			audioManager.Play("BossDeath");
+			audioManager.Play("OgreDeath");
 			Die();
 		} else if (active) {
 			animator.SetTrigger("HitGround");
