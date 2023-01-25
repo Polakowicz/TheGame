@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -23,7 +24,16 @@ namespace Scripts.Game
 
 		public Checkpoint GetCheckpointFromName(string checkpointName)
 		{
-			return allCheckpoints.AsEnumerable().Where(x => x.Name == checkpointName).Single();
+            foreach (var checkpoint in allCheckpoints)
+            {
+                if (checkpoint.name == checkpointName)
+                {
+                    return checkpoint;
+                }
+            }
+
+			return null;
+            //return allCheckpoints.AsEnumerable().Where(x => x.Name == checkpointName).Single();
 		}
 
 	}

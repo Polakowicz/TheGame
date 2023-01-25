@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Scripts.Game.Part;
 
 namespace Scripts.Game
@@ -30,7 +31,15 @@ namespace Scripts.Game
 			}		
 		}
 
-		public Action OnPlayerDied;
+		public void RestartGame()
+		{ 
+			StartType = string.IsNullOrEmpty(SaveSystem.Data.checkpointName) ?
+				GameStartType.LoadedGame : GameStartType.NewGame;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public Action OnPlayerDied;
 		public Action<int> OnPlayerHPChanged;
 
 		public Action<Checkpoint> OnCheckpointReached;

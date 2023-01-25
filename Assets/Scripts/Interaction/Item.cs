@@ -33,6 +33,7 @@ public class Item : MonoBehaviour
         {
             case InteractionType.PickUp:
                 // Add the object to the picked up items list
+                FindObjectOfType<AudioManager>().Play("ItemPickup");
                 FindObjectOfType<InteractionSystem>().PickUp(this);
                 // Disable the object (destroying will result in Missing Object on the list)
                 gameObject.SetActive(false);

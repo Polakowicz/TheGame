@@ -117,7 +117,7 @@ namespace Scripts.Player
 		private void ShootBullet(Quaternion rotation)
 		{
 			// Play shooting sound
-			playerManagerComponent.AudioManager.Play("RangedBasicAttack");
+			playerManagerComponent.AudioManager.Play("BlasterFire");
 
 			// Get bullet from pool
 			var bullet = currentlySelectedPool.GetObject();

@@ -84,6 +84,7 @@ namespace Scripts.Player
 				healthbarFill.fillAmount = hp_bar / 100;
 			} else {
 				HP -= damage;
+				FindObjectOfType<AudioManager>().Play("PlayerDamage");
 				// [whereistheguru]
 				hp_bar = HP;
 				healthbarFill.fillAmount = hp_bar / 100;
@@ -101,10 +102,17 @@ namespace Scripts.Player
 			if (HP == 0) {
 				player.AnimationController.Die();
 				// [whereistheguru]
+				FindObjectOfType<AudioManager>().Play("PlayerDeath");
 				healthbar.SetActive(false);
 				PlayerMovement.playerControlsEnabled = false;
+                
 			}
 		}
+
+		public void PlayerDied() {
+            GameEventSystem.Instance.RestartGame();
+        }
+
 
 		private bool IsHit(GameObject attacker)
 		{

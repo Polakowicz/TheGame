@@ -100,7 +100,7 @@ namespace Scripts.Player
 			playerManagerComponent.AnimationController.BladeAttack();
 
 			// Play sword attack sound
-			playerManagerComponent.AudioManager.Play("MeleeBasicAttack");
+			playerManagerComponent.AudioManager.Play("SwordSwing");
 
 			// Deal damage to all enemies in range
 			List<Collider2D> hits = new List<Collider2D>();
