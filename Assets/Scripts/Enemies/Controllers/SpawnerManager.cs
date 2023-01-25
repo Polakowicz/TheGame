@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using Visuals;
 
 namespace Scripts.Enemies
 {
@@ -15,15 +16,17 @@ namespace Scripts.Enemies
         private readonly string RestAnimatorStateName = "Rest";
 
 		private Animator animator;
+        private SpriteRenderer spriteRenderer;
         private BossSpawningEnemies spawningComponent;
 
         // Helth for 1 stage,
         [SerializeField] private int StageHealh;
         private int healthLeft;
 
-		private void Awake()
+        private void Awake()
 		{
 			animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
 			spawningComponent = GetComponent<BossSpawningEnemies>();
 
 			healthLeft = StageHealh;
@@ -37,6 +40,7 @@ namespace Scripts.Enemies
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName(RestAnimatorStateName)) return;
 
 			healthLeft = Mathf.Clamp(healthLeft - damage, 0, StageHealh);
+            StartCoroutine(FlashingRedOnHit());
             if(healthLeft == 0)
             {
                 if (spawningComponent.WavesLeft == 0)
@@ -59,7 +63,13 @@ namespace Scripts.Enemies
             // Call only hit because stun does nothing
             Hit(attacker, damage, weapon);
         }
-
-    
+        
+        public IEnumerator FlashingRedOnHit()
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = Color.white;
+        }
+        
     }
 }
