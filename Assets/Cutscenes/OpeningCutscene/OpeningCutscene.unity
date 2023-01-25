@@ -2282,6 +2282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introCutscene: {fileID: 541357632}
+  scene: Test_Level_02
 --- !u!1 &2072586482
 GameObject:
   m_ObjectHideFlags: 0
