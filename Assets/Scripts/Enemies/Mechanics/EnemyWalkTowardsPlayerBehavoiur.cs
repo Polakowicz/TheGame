@@ -1,3 +1,4 @@
+using Scripts.Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,11 @@ namespace Scripts.Enemies
 
 		override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
+			if (!GameEventSystem.Instance.isCutsceneActive)
+			{
+				return;
+			}
+
 			manager.SpriteRenderer.flipX = manager.Player.transform.position.x > animator.transform.position.x;
 
 			var direction = (Vector2)manager.Player.transform.position - rigidbody.position;

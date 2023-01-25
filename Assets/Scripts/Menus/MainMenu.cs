@@ -8,11 +8,15 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     private AudioManager audioManager;
+    public Button resumeButton;
 
     void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.Play("MenuMusic");
+        if(GameEventSystem.Instance.SaveSystem.LoadGame()){
+            resumeButton.interactable = true;
+        }
     }
 
     public void NewGame()
@@ -32,7 +36,7 @@ public class MainMenu : MonoBehaviour
 		audioManager.Play("ButtonClick");
 
 		// Load data from file
-		GameEventSystem.Instance.SaveSystem.LoadGame();
+		// GameEventSystem.Instance.SaveSystem.LoadGame();
 
         // Set flag to resume game
         GameEventSystem.Instance.StartType = GameEventSystem.GameStartType.LoadedGame;

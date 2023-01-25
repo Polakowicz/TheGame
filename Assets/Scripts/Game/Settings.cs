@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public Dropdown resolutionDropdown;
+    public TMPro.TMP_Dropdown resolutionDropdown;
+    // public Dropdown resolutionDropdown;
     Resolution[] resolutions;
     public Slider volumeSlider;
     public Slider effectsVolumeSlider;

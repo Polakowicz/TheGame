@@ -17,13 +17,10 @@ public class GoblinWave : MonoBehaviour
 	[SerializeField] private int waveDamage;
 	private int RocksToSpawn = 1;
 
-	private static readonly float spawnRange = 5;
-	private Vector2 bottomLeftSpawn = new Vector2(-spawnRange, spawnRange);
-	private Vector2 topRightSpawn = new Vector2(spawnRange, -spawnRange);
-
 
 	private void Start()
 	{
+
 		spawnPos = GameObject.FindGameObjectWithTag("Player").transform.position;
 		waveCollider = GetComponent<CircleCollider2D>();
 		waveCollider.radius = 0;
@@ -34,12 +31,7 @@ public class GoblinWave : MonoBehaviour
 	private void SpawnRocks()
 	{
 		for (int i = 0; i < RocksToSpawn; i++) {
-			var x = Random.Range(bottomLeftSpawn.x, topRightSpawn.x);
-			x += transform.position.x;
-			var y = Random.Range(bottomLeftSpawn.y, topRightSpawn.y);
-			y += transform.position.y;
 			spawnPos.y += rockYdistance;
-			var pos = new Vector2(x, y + rockYdistance);
 			Instantiate(rock, spawnPos, Quaternion.identity);
 		}
 	}
