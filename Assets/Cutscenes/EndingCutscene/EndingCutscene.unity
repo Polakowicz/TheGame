@@ -1380,6 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introCutscene: {fileID: 541357632}
+  scene: Menu
 --- !u!1 &1824634070
 GameObject:
   m_ObjectHideFlags: 0
