@@ -78,6 +78,7 @@ namespace Scripts.Player
 			if (player.State != PlayerManager.PlayerState.Walk) return;
 
 			MoveInDirection(direction, dashSpeed, dashTime, null);
+			FindObjectOfType<AudioManager>().Play("Dash"); // [whereistheguru]
 			player.AnimationController.Dash();
 		}
 		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)

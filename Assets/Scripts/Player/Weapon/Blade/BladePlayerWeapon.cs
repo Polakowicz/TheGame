@@ -145,6 +145,7 @@ namespace Scripts.Player
 			blockRange.OverlapCollider(blockContactFilter, blocks);
 			foreach (Collider2D block in blocks)
 			{
+				FindObjectOfType<AudioManager>().Play("SwordBlock");
 				var riposteInterface = block.GetComponent<IRiposte>();
 				riposteInterface?.Riposte(gameObject);
 			}
