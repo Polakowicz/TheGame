@@ -21378,6 +21378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 1136016389674538561, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 6497108575329712201, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
       propertyPath: m_SortingOrder
       value: 2
