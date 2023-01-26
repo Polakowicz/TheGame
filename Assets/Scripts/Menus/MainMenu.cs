@@ -8,6 +8,10 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     private AudioManager audioManager;
+    public GameObject youSureMenu;
+    public GameObject page1;
+    public GameObject page2;
+    public GameObject page3;
     public Button resumeButton;
 
     void Start()
@@ -16,6 +20,15 @@ public class MainMenu : MonoBehaviour
         audioManager.Play("MenuMusic");
         if(GameEventSystem.Instance.SaveSystem.LoadGame()){
             resumeButton.interactable = true;
+        }
+    }
+
+    public void TryNewGame()
+    {
+        if (GameEventSystem.Instance.SaveSystem.LoadGame()) {
+            youSureMenu.SetActive(true);
+        } else {
+            NewGame();
         }
     }
 
@@ -60,6 +73,21 @@ public class MainMenu : MonoBehaviour
         audioManager.Play("ButtonClick");
         Debug.Log("Można teraz bezpiecznie wyłączyć komputer.");
         Application.Quit();
+    }
+
+    public void SwitchPage()
+    {
+        audioManager.Play("ButtonClick");
+        if (page1.active == true) {
+            page1.SetActive(false);
+            page2.SetActive(true);
+        } else if (page2.active == true) {
+            page2.SetActive(false);
+            page3.SetActive(true);
+        } else {
+            page3.SetActive(false);
+            page1.SetActive(true);
+        }
     }
 
     public void Noonwraith()
