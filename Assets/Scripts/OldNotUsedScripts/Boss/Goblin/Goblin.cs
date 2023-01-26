@@ -92,6 +92,7 @@ public class Goblin : MonoBehaviour, IHit
 		alive = false;
 		animator.SetTrigger("Die");
 		teleport.GetComponent<Collider2D>().enabled = true;
+		teleport.GetComponent<SpriteRenderer>().enabled = true;
 	}
 	private void Destroy()
 	{

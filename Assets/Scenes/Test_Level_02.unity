@@ -3112,6 +3112,22 @@ MonoBehaviour:
   cameraBounds: {fileID: 1740858911}
   space: {fileID: 1049351913}
   player: {fileID: 2015716099}
+--- !u!70 &112836048
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112836042}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.017101288, y: 0.1655283}
+  m_Size: {x: 2.1991043, y: 2.3073215}
+  m_Direction: 0
 --- !u!1001 &134527318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21327,8 +21343,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1740858911}
     - target: {fileID: 29628682624608177, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1132565
+      objectReference: {fileID: 0}
+    - target: {fileID: 29628682624608177, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 29628682624608177, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.141118
       objectReference: {fileID: 0}
     - target: {fileID: 100078872468322439, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
       propertyPath: m_RootOrder
@@ -21380,7 +21404,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1136016389674538561, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
       propertyPath: m_Layer
-      value: 23
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497108575329712201, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6497108575329712201, guid: 1bdecd4fa865d6c419b111eeb482f23b, type: 3}
       propertyPath: m_SortingOrder
