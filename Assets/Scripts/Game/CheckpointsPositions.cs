@@ -26,7 +26,7 @@ namespace Scripts.Game
 		{
             foreach (var checkpoint in allCheckpoints)
             {
-                if (checkpoint.name == checkpointName)
+                if (checkpoint.Name == checkpointName)
                 {
                     return checkpoint;
                 }

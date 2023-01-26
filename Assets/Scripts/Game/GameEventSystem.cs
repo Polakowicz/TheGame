@@ -19,7 +19,7 @@ namespace Scripts.Game
 			NewGame,
 			LoadedGame,
 		}
-		public GameStartType StartType { get; set; }
+		public GameStartType StartType { get; set; } = GameStartType.LoadedGame;
 
 		private void Awake()
 		{
@@ -32,14 +32,14 @@ namespace Scripts.Game
 				Destroy(gameObject);
 			}
 
-            OnCutsceneStarted += () => isCutsceneActive = true;
-            OnCutsceneEnded += () => isCutsceneActive = false;
+			OnCutsceneStarted += SetCutsceneTrue;
+			OnCutsceneEnded += SetCutsceneFalse;
         }
 
 		public void RestartGame()
 		{ 
 			StartType = string.IsNullOrEmpty(SaveSystem.Data.checkpointName) ?
-				GameStartType.LoadedGame : GameStartType.NewGame;
+				GameStartType.NewGame : GameStartType.LoadedGame;
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -57,5 +57,15 @@ namespace Scripts.Game
 
 		public Action<PartType> OnPartCollected;
 		public Action OnAllPartsCollected;
-	}
+
+        private void SetCutsceneTrue()
+		{
+			isCutsceneActive = true;
+		}
+
+        private void SetCutsceneFalse()
+        {
+            isCutsceneActive = false;
+        }
+    }
 }

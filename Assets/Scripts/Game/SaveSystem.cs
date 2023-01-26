@@ -75,6 +75,11 @@ namespace Scripts.Game
 		}
 		public bool LoadGame()
 		{
+			if (!File.Exists(filePath))
+			{
+				return false;
+			}
+
 			XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
 			FileStream stream = new FileStream(filePath, FileMode.Open);
 			SaveData loadedData = serializer.Deserialize(stream) as SaveData;

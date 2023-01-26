@@ -4079,6 +4079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 329804037}
   - component: {fileID: 329804036}
+  - component: {fileID: 329804038}
   m_Layer: 0
   m_Name: OpeningScene
   m_TagString: Untagged
@@ -4096,7 +4097,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: f60c4426d0cac7e468280e053ee08eba, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -4131,6 +4132,19 @@ Transform:
   m_Father: {fileID: 454932627}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &329804038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329804035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a90a24caa404f644a8c90ff7edd4e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 329804036}
 --- !u!1001 &331025641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4724,7 +4738,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2015716106, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: maxHp
-      value: 100000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2015716106, guid: fde203b3e4dde024a90af516e7c94283, type: 3}
       propertyPath: minimap
