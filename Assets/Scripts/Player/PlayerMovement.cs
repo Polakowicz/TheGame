@@ -34,6 +34,10 @@ namespace Scripts.Player
 		public static bool playerControlsEnabled = true;
 		private AudioManager audioManager;
 
+		// Dash cooldown
+		float cooldownTime = 2;
+		bool dashCooldown;
+
 		private void Awake()
 		{
 			playerControlsEnabled = true;
@@ -77,11 +81,16 @@ namespace Scripts.Player
 		//Dash
 		private void PerformDash(InputAction.CallbackContext context)
 		{
+			if (dashCooldown) return;
+			
 			if (player.State != PlayerManager.PlayerState.Walk) return;
 
 			MoveInDirection(direction, dashSpeed, dashTime, null);
 			audioManager.Play("Dash"); // [whereistheguru]
 			player.AnimationController.Dash();
+
+			dashCooldown = true;
+			StartCoroutine(WaitAndDo(cooldownTime, () => dashCooldown = false));
 		}
 		public void MoveInDirection(Vector2 direction, float speed, float time, Action func)
 		{
