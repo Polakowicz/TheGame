@@ -276,7 +276,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Blooper
-    clip: {fileID: 8300000, guid: 77b6c4e1f4733d3408bf34dd60f7857f, type: 3}
+    clip: {fileID: 8300000, guid: 99be2f61286ea0c4a83a4c3d2f952fcc, type: 3}
     group: {fileID: 24300002, guid: c362aacd615be0e449354cd0082ec1f4, type: 2}
     volume: 0.8
     pitch: 1
