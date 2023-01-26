@@ -11,7 +11,7 @@ namespace Scripts.Game
 
         public override Interaction Interact(GameObject sender)
         {
-            if (FindObjectOfType<InteractionSystem>().pickedItems.Count == 5) {
+            if (GameEventSystem.Instance.SaveSystem.Data.collectedParts.Count == 5) {
                     SceneManager.LoadScene("EndingCutscene");
                     return Interaction.None;
                 } else {

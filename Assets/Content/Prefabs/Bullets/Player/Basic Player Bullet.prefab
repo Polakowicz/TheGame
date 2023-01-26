@@ -139,4 +139,4 @@ MonoBehaviour:
   speed: 10
   hitLayerMask:
     serializedVersion: 2
-    m_Bits: 589824
+    m_Bits: 34144256

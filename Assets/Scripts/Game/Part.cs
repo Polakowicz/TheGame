@@ -8,6 +8,7 @@ namespace Scripts.Game
     {
         public enum PartType
         {
+            Generator,
             Type1,
             Type2,
             Type3,

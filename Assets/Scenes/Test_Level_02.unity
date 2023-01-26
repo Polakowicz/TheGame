@@ -2566,6 +2566,7 @@ GameObject:
   - component: {fileID: 70244732}
   - component: {fileID: 70244733}
   - component: {fileID: 70244734}
+  - component: {fileID: 70244735}
   m_Layer: 23
   m_Name: Part4
   m_TagString: Untagged
@@ -2681,6 +2682,19 @@ MonoBehaviour:
   dialogueLines: []
   hasTask: 0
   taskText: 
+--- !u!114 &70244735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70244730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partType: 4
 --- !u!1001 &72194388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5506,6 +5520,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1742618204}
     m_Modifications:
+    - target: {fileID: 3648086333929482642, guid: b524564e42716f746895fbaf5f191c7b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3648086333929482645, guid: b524564e42716f746895fbaf5f191c7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.32
@@ -20880,6 +20898,7 @@ GameObject:
   - component: {fileID: 1320549501}
   - component: {fileID: 1320549502}
   - component: {fileID: 1320549503}
+  - component: {fileID: 1320549504}
   m_Layer: 23
   m_Name: Part1
   m_TagString: Untagged
@@ -20995,6 +21014,19 @@ MonoBehaviour:
   dialogueLines: []
   hasTask: 0
   taskText: 
+--- !u!114 &1320549504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320549499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partType: 1
 --- !u!1 &1328789046
 GameObject:
   m_ObjectHideFlags: 0
@@ -24114,6 +24146,7 @@ GameObject:
   - component: {fileID: 1760990518}
   - component: {fileID: 1760990519}
   - component: {fileID: 1760990520}
+  - component: {fileID: 1760990521}
   m_Layer: 23
   m_Name: Part3
   m_TagString: Untagged
@@ -24229,6 +24262,19 @@ MonoBehaviour:
   dialogueLines: []
   hasTask: 0
   taskText: 
+--- !u!114 &1760990521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760990516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partType: 3
 --- !u!1001 &1776647107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24423,6 +24469,7 @@ GameObject:
   - component: {fileID: 1790917414}
   - component: {fileID: 1790917415}
   - component: {fileID: 1790917416}
+  - component: {fileID: 1790917417}
   m_Layer: 23
   m_Name: Part2
   m_TagString: Untagged
@@ -24538,6 +24585,19 @@ MonoBehaviour:
   dialogueLines: []
   hasTask: 0
   taskText: 
+--- !u!114 &1790917417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790917412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partType: 2
 --- !u!1001 &1800552987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24914,6 +24974,7 @@ GameObject:
   - component: {fileID: 1869848058}
   - component: {fileID: 1869848059}
   - component: {fileID: 1869848060}
+  - component: {fileID: 1869848061}
   m_Layer: 23
   m_Name: Generator
   m_TagString: Untagged
@@ -25029,6 +25090,19 @@ MonoBehaviour:
   dialogueLines: []
   hasTask: 1
   taskText: You just saw a PICK UP object. Go to the guy with fishing rod.
+--- !u!114 &1869848061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869848056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e80b4db81030a458c9d001afb59949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partType: 0
 --- !u!1001 &1875350245
 PrefabInstance:
   m_ObjectHideFlags: 0

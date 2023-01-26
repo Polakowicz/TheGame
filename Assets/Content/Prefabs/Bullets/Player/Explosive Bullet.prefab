@@ -209,5 +209,5 @@ MonoBehaviour:
   speed: 10
   hitLayerMask:
     serializedVersion: 2
-    m_Bits: 65536
+    m_Bits: 589824
   rangeCollider: {fileID: 1680240498664404047}
