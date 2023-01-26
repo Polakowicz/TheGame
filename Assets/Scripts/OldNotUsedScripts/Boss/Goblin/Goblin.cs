@@ -16,6 +16,7 @@ public class Goblin : MonoBehaviour, IHit
 
 	private Animator animator;
 	private SpriteRenderer spriteRenderer;
+	public GameObject teleport;
 
 	public GameObject Player { get; private set; }
 
@@ -90,6 +91,7 @@ public class Goblin : MonoBehaviour, IHit
 	{
 		alive = false;
 		animator.SetTrigger("Die");
+		teleport.GetComponent<Collider2D>().enabled = true;
 	}
 	private void Destroy()
 	{

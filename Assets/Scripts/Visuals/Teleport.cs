@@ -17,11 +17,8 @@ namespace Visuals
 
         void Start()
         {
-            if (_confiner)
-            {
-                _confiner = camera.GetComponent<CinemachineConfiner>();
-                _cameraBoundsCollider = cameraBounds.GetComponent<Collider2D>();
-            }
+            _confiner = camera.GetComponent<CinemachineConfiner>();
+            _cameraBoundsCollider = cameraBounds.GetComponent<Collider2D>();
         }
     
         private void OnTriggerEnter2D(Collider2D collider2D)
@@ -34,13 +31,11 @@ namespace Visuals
     
         IEnumerator TeleportPlayer()
         {
-            yield return new WaitForSeconds(0);
+            yield return new WaitForSeconds(1f);
             player.transform.position = space.transform.position;
-            if (_confiner)
-            {
-                _confiner.m_BoundingShape2D = _cameraBoundsCollider;
-                _confiner.m_Damping = 0;
-            }
+            _confiner.m_BoundingShape2D = _cameraBoundsCollider;
+            _confiner.m_Damping = 0;
+
         }
     }
 }
