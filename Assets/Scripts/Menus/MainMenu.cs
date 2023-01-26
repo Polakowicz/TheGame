@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
     private void LoadLevel()
     {
         // Change scene
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		SceneManager.LoadScene("Test_Level_02");
 		if (Time.timeScale == 0.0f)
 		{
 			Time.timeScale = 1.0f;
@@ -60,14 +60,6 @@ public class MainMenu : MonoBehaviour
         audioManager.Play("ButtonClick");
         Debug.Log("Można teraz bezpiecznie wyłączyć komputer.");
         Application.Quit();
-        if (UnityEditor.EditorApplication.isPlaying == true)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            Application.Quit();
-        }
     }
 
     public void Noonwraith()

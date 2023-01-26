@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShipInside.unity
     guid: 1af67181af51a3443a88128d5f8ebb82
+  - enabled: 1
+    path: Assets/Cutscenes/EndingCutscene/EndingCutscene.unity
+    guid: d8e4d825427e75842a846346e9a98cce
   m_configObjects: {}
