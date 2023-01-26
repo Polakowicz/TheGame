@@ -2842,7 +2842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 322814849}
-  _cameraBounds: {fileID: 1070779864}
+  _cameraBounds: {fileID: 1740858911}
   timeline: {fileID: 90673559}
   cutscene: {fileID: 11400000, guid: 5dc57c4cc78cf41489cf3d4676348846, type: 2}
   hasPlayed: 0
@@ -7256,7 +7256,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.39607847, g: 0.427451, b: 0.4431373, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -23932,7 +23932,10 @@ PolygonCollider2D:
       - {x: -0.5013597, y: 0.6221026}
       - {x: -0.4859272, y: -0.61965793}
       - {x: 0.50689006, y: -0.6236626}
-      - {x: 0.5018245, y: 0.6184026}
+      - {x: 0.507404, y: 0.33034292}
+      - {x: 0.8611128, y: 0.32757324}
+      - {x: 0.8634412, y: 0.63730663}
+      - {x: 0.50517935, y: 0.63463885}
 --- !u!4 &1740858913
 Transform:
   m_ObjectHideFlags: 0
