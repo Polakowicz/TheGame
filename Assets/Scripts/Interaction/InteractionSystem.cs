@@ -44,7 +44,6 @@ public class InteractionSystem : MonoBehaviour
     {
         taskWindow.SetActive(true);
         StartCoroutine(WindowHider(taskWindow));
-        // DontDestroyOnLoad(gameObject);
     }
 
     void Update()

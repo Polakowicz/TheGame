@@ -115,13 +115,7 @@ public class PointAndClick : MonoBehaviour
                 audioManager.Play("ExitDoor");
                 break;
             case ObjectType.Computer:
-                /*
-                if (FindObjectOfType<InteractionSystem>().pickedItems.Count == 5) {
-                    SceneManager.LoadScene("EndingCutscene");
-                } else {
-                    audioManager.Play("Computer");
-                }
-                */
+                audioManager.Play("Computer");
                 break;
             case ObjectType.Radio:
                 if (RadioIsOn) {

@@ -11,9 +11,14 @@ namespace Scripts.Game
 
         public override Interaction Interact(GameObject sender)
         {
-            GameEventSystem.Instance.OnCheckpointReached?.Invoke(this);
-            SceneManager.LoadScene(spaceShipSceneName);
-            return Interaction.None;
+            if (FindObjectOfType<InteractionSystem>().pickedItems.Count == 5) {
+                    SceneManager.LoadScene("EndingCutscene");
+                    return Interaction.None;
+                } else {
+                    GameEventSystem.Instance.OnCheckpointReached?.Invoke(this);
+                    SceneManager.LoadScene(spaceShipSceneName);
+                    return Interaction.None;
+                }
         }
     }
 }
