@@ -18,6 +18,7 @@ namespace Scripts.Player
 		// UI elements to disable/re-enable when Player dies/revives.
 		public GameObject healthbar;
 		public GameObject lowHealthPanel;
+		private SpriteRenderer spriteRenderer;
 		
 		private PlayerManager player;
 		private BladePlayerWeapon meleeWeapon;
@@ -30,7 +31,8 @@ namespace Scripts.Player
 		{
 			player = GetComponentInParent<PlayerManager>();
 			meleeWeapon = GetComponentInChildren<BladePlayerWeapon>();
-
+			spriteRenderer = GetComponent<SpriteRenderer>();
+			
 			hp = maxHp;
 			// [whereistheguru]
 			healthbarFill.fillAmount = 1;
@@ -53,6 +55,7 @@ namespace Scripts.Player
 		{
 			if (IsHit(attacker)) {
 				Damage(damage);
+				StartCoroutine(FlashingRedOnHit());
 			}
 		}
 		public void StunHit(GameObject attacker, int damage, float stunTime, IHit.HitWeapon weapon)
@@ -131,6 +134,12 @@ namespace Scripts.Player
 
 			// Player got hit
 			return true;
+		}
+		public IEnumerator FlashingRedOnHit()
+		{
+			spriteRenderer.color = Color.red;
+			yield return new WaitForSeconds(0.1f);
+			spriteRenderer.color = Color.white;
 		}
 		
 	}
