@@ -122,12 +122,13 @@ namespace Scripts.Player
 			// Get bullet from pool
 			var bullet = currentlySelectedPool.GetObject();
 
+			var newRotation = Quaternion.Euler(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z + 90);
 			// Set bullet position, rotation and velocity
-			bullet.transform.SetPositionAndRotation(gunBarrel.transform.position, rotation);
+			bullet.transform.SetPositionAndRotation(gunBarrel.transform.position, newRotation);
 			var bulletRb = bullet.GetComponent<Rigidbody2D>();
 
             // Set bullet rotation from gun barrel to crosshair position
-            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, crosshair.position - gunBarrel.position);
+            //bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, crosshair.position - gunBarrel.position);
 
 
             // Set bullet velocity in direction from gun barrel towards mouse poisiton
@@ -164,6 +165,7 @@ namespace Scripts.Player
 		{
 			var rotation = gunBarrel.rotation.eulerAngles.z;
 			float newRotation = UnityEngine.Random.Range(rotation - autoFireCurrentDispersion, rotation + autoFireCurrentDispersion);
+			Debug.Log(newRotation);
 			return Quaternion.Euler(0, 0, newRotation);
 		}
 		

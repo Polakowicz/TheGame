@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Scripts.Game;
 using Scripts.Interfaces;
 using Scripts.Tools;
 using UnityEngine;
@@ -56,11 +57,14 @@ namespace Scripts.Player
 		{
 			audioManager = FindObjectOfType<AudioManager>();
 			dashAction.performed += PerformDash;
-		}
+			GameEventSystem.Instance.OnPlayerDied += DesibleMovemnt;
+
+        }
 		private void OnDestroy()
 		{
 			dashAction.performed -= PerformDash;
-		}
+            GameEventSystem.Instance.OnPlayerDied -= DesibleMovemnt;
+        }
 
 		private void Update()
 		{
@@ -120,5 +124,9 @@ namespace Scripts.Player
         {
 			MoveInDirection(direction, dashSpeed, dashTime, null);
         }
+
+		private void DesibleMovemnt() {
+			rb.velocity = Vector2.zero;
+		}
     }
 }

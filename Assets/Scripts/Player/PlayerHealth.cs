@@ -105,7 +105,8 @@ namespace Scripts.Player
 			}
 
 			if (HP == 0) {
-				player.AnimationController.Die();
+                GameEventSystem.Instance.OnPlayerDied?.Invoke();
+                player.AnimationController.Die();
 				// [whereistheguru]
 				audioManager.Play("PlayerDeath");
 				healthbar.SetActive(false);
